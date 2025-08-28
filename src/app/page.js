@@ -165,7 +165,7 @@ export default function branches() {
     }, [])
 
     useEffect(() => {
-        fetch('http://food99api.onrender.com/api/menu')
+        fetch('https://food99api.onrender.com/api/menu')
             .then(res => res.json())
             .then(data => {
                 set_menu___i(data);
@@ -606,7 +606,7 @@ export default function branches() {
                                                                         justifySelf: 'center',
                                                                         background: 'white'
                                                                     }}>                                                    <Image
-                                                                            src={"http://127.0.0.1:8000"+menu_items.image}
+                                                                            src={"https://res.cloudinary.com/dbe8vybbp/"+menu_items.image}
                                                                             alt="iphone 15"
                                                                             width={122}
                                                                             height={120}
