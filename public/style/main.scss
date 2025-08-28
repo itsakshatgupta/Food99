@@ -1,0 +1,56 @@
+@use 'root' as *;
+@use 'seq_ui' as *;
+@use 'ui' as *;
+
+.fx0 {
+  flex: 0 !important;
+}
+
+.fx1 {
+  flex: 1 !important;
+}
+
+.fxw {
+  flex-wrap: wrap;
+}
+
+.fxnw {
+  flex-wrap: nowrap;
+}
+
+.font-sm {
+  font-size: var(--text-sm);
+}
+
+.font-md {
+  font-size: var(--text-md);
+}
+
+.font-lg {
+  font-size: var(--text-lg);
+}
+
+
+
+
+
+// // Optional branding color styles
+// .webing-name span:nth-child(2) {
+//   color: #ea4335;
+// }
+
+// .webing-name span:nth-child(3) {
+//   color: #fbbc05;
+// }
+
+// .webing-name span:nth-child(4) {
+//   color: #4285f4;
+// }
+
+// .webing-name span:nth-child(5) {
+//   color: #34a853;
+// }
+
+// .webing-name span:nth-child(6) {
+//   color: #ea4335;
+// }

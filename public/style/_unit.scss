@@ -1,0 +1,39 @@
+$unit_rem:(
+  // Base units (in rem)
+  "0": 0rem,
+  "01": 0.1rem,
+  "02": 0.2rem,
+  "03": 0.3rem,
+  "04": 0.4rem,
+  "05": 0.5rem,
+  "06": 0.6rem,
+  "07": 0.7rem,
+  "08": 0.8rem,
+  "09": 0.9rem,
+  "1": 1rem,
+  "2": 2rem,
+  "3": 3rem,
+  "4": 4rem,
+  "5": 5rem,
+  "6": 6rem,
+  "7": 7rem,
+  "8": 8rem,
+  "9": 9rem,
+  "10": 10rem
+);
+
+
+$unit_px:(
+  //demimal unit (in px)
+  --u1x0: 1.0px,
+  --u1x1: 1.1px,
+  --u1x2: 1.2px,
+  --u1x3: 1.3px,
+  --u1x4: 1.4px,
+  --u1x5: 1.5px,
+  --u1x6: 1.6px,
+  --u1x7: 1.7px,
+  --u1x8: 1.8px,
+  --u1x9: 1.9px,
+  --u2x0: 2.0px,
+);

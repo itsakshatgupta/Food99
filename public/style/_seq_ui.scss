@@ -1,0 +1,106 @@
+// ============================
+// SCSS Utility Generators
+// ============================
+@use 'unit' as *;
+
+
+// Generate margin and padding utilities
+@each $key, $val in $unit_rem {
+  .mgt#{$key} {
+    margin-top: $val !important;
+  }
+
+  .mgb#{$key} {
+    margin-bottom: $val !important;
+  }
+
+  .mgl#{$key} {
+    margin-left: $val !important;
+  }
+
+  .mgr#{$key} {
+    margin-right: $val !important;
+  }
+
+  .mgx#{$key} {
+    margin-inline: $val !important;
+  }
+
+  .mgy#{$key} {
+    margin-block: $val !important;
+  }
+
+  .mg#{$key} {
+    margin: $val !important;
+  }
+
+  .pdt#{$key} {
+    padding-top: $val !important;
+  }
+
+  .pdb#{$key} {
+    padding-bottom: $val !important;
+  }
+
+  .pdl#{$key} {
+    padding-left: $val !important;
+  }
+
+  .pdr#{$key} {
+    padding-right: $val !important;
+  }
+
+  .pdx#{$key} {
+    padding-inline: $val !important;
+  }
+
+  .pdy#{$key} {
+    padding-block: $val !important;
+  }
+
+  .pd#{$key} {
+    padding: $val !important;
+  }
+
+  .w#{$key} {
+    width: $val !important;
+  }
+
+  .font#{$key} {
+    font-size: $val !important;
+  }
+
+  .gap#{$key} {
+    gap: $val !important;
+  }
+}
+
+@each $key, $val in $unit_px {
+  .bd#{$key} {
+    border: $val solid m !important;
+  }
+
+  .bdt#{$key} {
+    border-top: $val solid m !important;
+  }
+
+  .bdb#{$key} {
+    border-bottom: $val solid m !important;
+  }
+
+  .bdr#{$key} {
+    border-right: $val solid m !important;
+  }
+
+  .bdl#{$key} {
+    border-left: $val solid m !important;
+  }
+
+  .bdy#{$key} {
+    border-block: $val solid m !important;
+  }
+
+  .bdx#{$key} {
+    border-inline: $val solid m !important;
+  }
+}

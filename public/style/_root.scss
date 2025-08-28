@@ -1,0 +1,172 @@
+// ============================
+// CSS Variables & Themes
+// ============================
+
+:root {
+  // Font sizes
+  --text-xs: 0.75rem;
+  /* 12px */
+  --text-sm: 0.875rem;
+  /* 14px */
+  --text-md: 1rem;
+  /* 16px (Base) */
+  --text-lg: 1.125rem;
+  /* 18px */
+  --text-xl: 1.25rem;
+  /* 20px */
+  --text-2xl: 1.5rem;
+  /* 24px */
+  --text-3xl: 2rem;
+  /* 32px */
+  --spacing: 0.25rem;
+
+  //Font Weight
+  --font-weight-100: 100;
+  --font-weight-200: 200;
+  --font-weight-300: 300;
+
+
+  // Base units (in rem)
+  --u01: 0.1rem;
+  --u02: 0.2rem;
+  --u03: 0.3rem;
+  --u04: 0.4rem;
+  --u05: 0.5rem;
+  --u06: 0.6rem;
+  --u07: 0.7rem;
+  --u08: 0.8rem;
+  --u09: 0.9rem;
+  --u1: 1rem;
+  --u2: 2rem;
+  --u3: 3rem;
+  --u4: 4rem;
+  --u5: 5rem;
+  --u6: 6rem;
+  --u7: 7rem;
+  --u8: 8rem;
+  --u9: 9rem;
+  --u10: 10rem;
+
+
+  // Dark theme
+  --dark-bg: #121212;
+  --dark-fg: #ffffff;
+  --dark-bd-color: #1f1f1f;
+  --dark-bd-color-2: #2b2b2b;
+  --dark-text-color: #e0e0e0;
+  --dark-bg-button-hover-color: rgb(54, 54, 54);
+  --dark-bg-native-button-hover-color: #e4e4e4;
+  --dark-button-primary-color: #1a73e8;
+  --dark-button-secondary-color: #3c4043;
+  --dark-button-hover-color: #1a73e8;
+  --dark-button-secondary-hover-color: #5f6368;
+  --dark-button-active-color: #1a73e8;
+  --dark-button-secondary-active-color: #5f6368;
+  --dark-button-disabled-color: #3c4043;
+  --dark-button-secondary-disabled-color: #5f6368;
+  --dark-selector-bg-color: dodgerblue;
+  --dark-selector-text-color: #e0e0e0;
+  --dark-link-color: #1a73e8;
+  --dark-link-hover-color: #1a73e8;
+  --dark-link-active-color: #1a73e8;
+  --dark-link-disabled-color: #5f6368;
+  --dark-input-bg-color: #1f1f1f;
+  --dark-icon-color: #e0e0e0;
+  --dark-icon-hover-color: #1a73e8;
+  --dark-icon-active-color: #1a73e8;
+  --dark-icon-disabled-color: #5f6368;
+  --dark-icon-bg: #1f1f1f;
+
+  // Light theme
+  --light-bg: #ffffff;
+  --light-fg: #f5f5f5;
+  --light-text-color: #000000;
+  // --light-bd-color: #e0e0e0;#eaeaea
+  --light-bd-color:#eaeaea;
+  --light-bd-color-2: #e0e0e0;
+  --light-bg-button-hover-color: #e4e4e4;
+  --light-bg-native-button-hover-color: rgb(54, 54, 54);
+  --light-button-primary-color: #0070f3;
+  --light-button-secondary-color: #6c757d;
+  --light-bg-button-hover-color: #ededed;
+  --light-button-hover-color: #6c757d4a;
+  --light-button-secondary-hover-color: #5a6268;
+  --light-button-active-color: #004085;
+  --light-button-secondary-active-color: #545b62;
+  --light-button-disabled-color: #6c757d;
+  --light-button-secondary-disabled-color: #adb5bd;
+  --light-selector-bg-color: lightgray;
+  --light-selector-text-color: #212121;
+  --light-link-color: #0070f3;
+  --light-link-hover-color: #005bb5;
+  --light-link-active-color: #004085;
+  --light-link-disabled-color: #adb5bd;
+  --light-input-bg-color: #dcecff;
+  --light-icon-color: #212121;
+  --light-icon-hover-color: #0070f3;
+  --light-icon-active-color: #005bb5;
+  --light-icon-disabled-color: #adb5bd;
+  --light-icon-bg: #f8f9fa;
+
+  [data-theme='dark'] {
+    color: white;
+    --bg-color: var(--dark-bg);
+    --fg-color: var(--dark-fg);
+    --text-color: var(--dark-text-color);
+    --border-color: var(--dark-bd-color);
+    --border-color-2: var(--dark-bd-color-2);
+    --bg-native-btn-hover-color: var(--light-bg-native-button-hover-color);
+    --bg-btn-hover-color: var(--light-bg-button-hover-color);
+    --button-primary-color: var(--dark-button-primary-color);
+    --button-secondary-color: var(--dark-button-secondary-color);
+    --button-hover-color: var(--dark-button-hover-color);
+    --button-secondary-hover-color: var(--dark-button-secondary-hover-color);
+    --button-active-color: var(--dark-button-active-color);
+    --button-secondary-active-color: var(--dark-button-secondary-active-color);
+    --button-disabled-color: var(--dark-button-disabled-color);
+    --button-secondary-disabled-color: var(--dark-button-secondary-disabled-color);
+    --selector-bg-color: var(--dark-selector-bg-color);
+    --selector-text-color: var(--dark-selector-text-color);
+    --link-color: var(--dark-link-color);
+    --link-hover-color: var(--dark-link-hover-color);
+    --link-active-color: var(--dark-link-active-color);
+    --link-disabled-color: var(--dark-link-disabled-color);
+    --input-bg-color: var(--dark-input-bg-color);
+    --icon-bg: var(--dark-icon-bg);
+    --icon-color: var(--dark-icon-color);
+    --icon-hover-color: var(--dark-icon-hover-color);
+    --icon-active-color: var(--dark-icon-active-color);
+    --icon-disabled-color: var(--dark-icon-disabled-color);
+  }
+
+  [data-theme='light'] {
+    color: black;
+    --bg-color: var(--light-bg);
+    --fg-color: var(--light-fg);
+    --text-color: var(--light-text-color);
+    --border-color: var(--light-bd-color);
+    --border-color-2: var(--light-bd-color-2);
+    --bg-native-btn-hover-color: var(--light-bg-native-button-hover-color);
+    --bg-btn-hover-color: var(--light-bg-button-hover-color);
+    --button-primary-color: var(--light-button-primary-color);
+    --button-secondary-color: var(--light-button-secondary-color);
+    --button-hover-color: var(--light-button-hover-color);
+    --button-secondary-hover-color: var(--light-button-secondary-hover-color);
+    --button-active-color: var(--light-button-active-color);
+    --button-secondary-active-color: var(--light-button-secondary-active-color);
+    --button-disabled-color: var(--light-button-disabled-color);
+    --button-secondary-disabled-color: var(--light-button-secondary-disabled-color);
+    --selector-bg-color: var(--light-selector-bg-color);
+    --selector-text-color: var(--light-selector-text-color);
+    --link-color: var(--light-link-color);
+    --link-hover-color: var(--light-link-hover-color);
+    --link-active-color: var(--light-link-active-color);
+    --link-disabled-color: var(--light-link-disabled-color);
+    --input-bg-color: var(--light-input-bg-color);
+    --icon-bg: var(--light-icon-bg);
+    --icon-color: var(--light-icon-color);
+    --icon-hover-color: var(--light-icon-hover-color);
+    --icon-active-color: var(--light-icon-active-color);
+    --icon-disabled-color: var(--light-icon-disabled-color);
+  }
+}
