@@ -165,7 +165,7 @@ export default function branches() {
     }, [])
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/menu')
+        fetch('http://food99api.onrender.com/api/menu')
             .then(res => res.json())
             .then(data => {
                 set_menu___i(data);
