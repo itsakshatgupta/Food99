@@ -26,7 +26,7 @@ export default function Login() {
       localStorage.setItem('refresh_token', data.refresh);
       alert('Logged in!');
       setDone(true)
-      setTimeout(()=>window.location.href="/",2000)
+      // setTimeout(()=>window.location.href="/",2000)
       // router.push('/')
     } else {
       alert('Login failed: ' + JSON.stringify(data));
@@ -36,26 +36,34 @@ export default function Login() {
   return (
     <>
       {Done ?
+        <>
+        <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #f3f3f3 100px)}`}</style>
         <div className="fd-c" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-              <DotLottieReact
-      src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
-      loop={false}
-      autoplay={true}
-      dotLottieRefCallback={(instance) => {
+          <div style={{height:'500px', width:'500px'}}>
+
+          <DotLottieReact
+            src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
+            loop={false}
+            autoplay={true}
+            dotLottieRefCallback={(instance) => {
               if (instance) {
                 instance.addEventListener("play", () => {
                   // redirect when animation completes
-                  setDoneStatus('Login Sucessfull');
+                  setDoneStatus('Login Sucessful!');
                 });
                 instance.addEventListener("complete", () => {
                   // redirect when animation completes
-                  router.push("/");
+                  // router.push("/");
                 });
               }
             }}
-     
-    /><div>{DoneStatus}</div>
-        </div> :
+
+          />
+            </div>
+          <div className='pR font600' style={{top:'-100px', fontSize:'x-large'}}>{DoneStatus}</div>
+        </div> 
+        </>
+        :
         <div className={styles.container}>
           <div className={styles.card}>
             <div className={`${styles.logo} df aic jcc font900 font-lg`} style={{ color: 'white' }}>Food99</div>
