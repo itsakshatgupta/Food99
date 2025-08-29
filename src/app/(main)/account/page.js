@@ -1,12 +1,28 @@
 'use client'
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { dynamic_ } from "@/components/main-context";
 import Link from "next/link";
 import { BadgeHelpIcon, HandHeart, IdCard, LogOut, LucideMapPinHouse, Shield, ShieldUser, User2} from 'lucide-react';
 import dynamic from "next/dynamic";
 import Image from "next/image";
+
+
 export default function Account() {
     const { device } = useContext(dynamic_);
+    const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (!token) return;
+
+    fetch('https://food99api.onrender.com/api/api/me/', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(data => setUser(data))
+    .catch(err => console.error(err));
+  }, []);
+
 
     const backBtn = <span className="df pd03 bdrds" style={{ background: 'rgb(182 182 182)' }} onClickCapture={() => set_content(null)}>
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span>
@@ -91,7 +107,7 @@ export default function Account() {
                 <h1>'1'</h1>
             }
 
-            {device === 'mobile' &&
+            {device === 'mobile' && user &&
                 <div className={`${device === 'mobile' && 'hfp df fd-c'}`} >
                     {content === null || device === 'pc' ? <>
                         <div className={`${device === 'mobile' && 'pdy05 pdx1'} df aic pdy1 xbg pR`} style={{ boxShadow: '0px 1px 9px 1px #e6e6e6' }}>
@@ -100,13 +116,19 @@ export default function Account() {
                                 <span className="font-sm font600 df aic gap02"><LogOut />Logout</span>
                             </div>
                         </div>
+                            <div>
+      {/* <h1>Welcome, </h1>
+      <p>Email: {user.email}</p>
+      <p>Phone: {user.phone_number}</p> */}
+      {/* {user.profile_image && <img src={user.profile_image} alt="Profile" width={100} />} */}
+    </div>
                         <div className="df fd-c gap1 bdr pd1 fx1" style={{ background: '#f7f7f7ff' }}>
                             <div className="df  mgt05 pdx1 pdy1 gap1 xbg bdrds bd aic"><span className="bdrds oh df" style={{background: 'rgb(240, 239, 239)',alignContent: 'center',color: 'rgb(120, 58, 223)',boxShadow: '2px 4px 10px 1px #cdcdcd'}}><Image
                                                             alt="offer"
-                                                            src="/food_img/k.jpg"
+                                                            src={`https://res.cloudinary.com/dbe8vybbp/${user.profile_image}`}
                                                             width={100}
                                                             height={100}
-                                                        /></span><div className="fx1 df fd-c jcsb pd03 gap05" style={{color:' rgb(50, 50, 50)'}}><span className="mg0 font-lg font700 bdb pdb05"><b>Hi, </b>Akshat Gupta</span><div className="mg0 font-md df aic font900 pdx1 gap2" style={{justifyContent:'space-around', color:'#3f51b5'}}>
+                                                        /></span><div className="fx1 df fd-c jcsb pd03 gap05" style={{color:' rgb(50, 50, 50)'}}><span className="mg0 font-lg font700 bdb pdb05"><b>Hi, </b>{user.username}</span><div className="mg0 font-md df aic font900 pdx1 gap2" style={{justifyContent:'space-around', color:'#3f51b5'}}>
                                 <div className="df fd-c aic gap01"><span>Orders</span><span>10+</span></div>
                                 <div className="df fd-c aic gap01"><span>Save</span><span>$1250+</span></div>
 
