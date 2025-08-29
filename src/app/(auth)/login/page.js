@@ -4,10 +4,13 @@ import styles from './Login.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 export default function Login() {
-
-    const [username, set_username] = useState('');
+  const router = useRouter();
+  const [username, set_username] = useState('');
   const [password, setPassword] = useState('');
+  const [Done, setDone] = useState(false);
 
   const handleLogin = async () => {
     const res = await fetch('https://food99api.onrender.com/api/api/token/', {
@@ -21,41 +24,56 @@ export default function Login() {
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
       alert('Logged in!');
+      setDone(true)
+      setTimeout(()=>window.location.href="food99.vercel.app",2000)
+      // router.push('/')
     } else {
       alert('Login failed: ' + JSON.stringify(data));
     }
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={`${styles.logo} df aic jcc font900 font-lg`} style={{color:'white'}}>Food99</div>
-        <div className={styles.subtitle}>Now Think To Eat Not Budget!</div>
-        <h2 className={styles.heading}>Sign in to Food99</h2>
-        <input type="name" placeholder="Username" className={styles.input} value={username} onChange={e => set_username(e.target.value)} />
-        <input type="password" placeholder="Password" className={styles.input} value={password} onChange={e => setPassword(e.target.value)} />
-        <button className={styles.buttonPrimary} onClick={handleLogin} >Continue</button>
+    <>
+      {Done ?
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+              <DotLottieReact
+      src="https://lottie.host/4b26bee6-4a0c-4e04-b3c1-e09dbf64de53/v6YX5XmiYo.lottie"
+      loop={false}
+      autoplay={true}
+    />
+        </div> :
+        <div className={styles.container}>
+          <div className={styles.card}>
+            <div className={`${styles.logo} df aic jcc font900 font-lg`} style={{ color: 'white' }}>Food99</div>
+            <div className={styles.subtitle}>Now Think To Eat Not Budget!</div>
+            <h2 className={styles.heading}>Sign in to Food99</h2>
+            <input type="name" placeholder="Username" className={styles.input} value={username} onChange={e => set_username(e.target.value)} />
+            <input type="password" placeholder="Password" className={styles.input} value={password} onChange={e => setPassword(e.target.value)} />
+            <button className={styles.buttonPrimary} onClick={handleLogin} >Continue</button>
 
-        <div className={styles.divider}>
-          <span></span>
-          <span className={styles.dividerText}>or</span>
-          <span></span>
+            <div className={styles.divider}>
+              <span></span>
+              <span className={styles.dividerText}>or</span>
+              <span></span>
+            </div>
+
+            <button className={`${styles.buttonSecondary} ${styles.googleButton}`}>
+              Continue with Google
+            </button>
+            <button className={`${styles.buttonSecondary} ${styles.facebookButton}`}>
+              Continue with Facebook
+            </button>
+
+            <p className={styles.signupText}>
+              Don’t have an account?
+              <Link href="/signup" className={styles.signupLink}>
+                Sign up
+              </Link>
+            </p>
+          </div>
         </div>
 
-        <button className={`${styles.buttonSecondary} ${styles.googleButton}`}>
-          Continue with Google
-        </button>
-        <button className={`${styles.buttonSecondary} ${styles.facebookButton}`}>
-          Continue with Facebook
-        </button>
-
-        <p className={styles.signupText}>
-          Don’t have an account?
-          <Link href="/signup" className={styles.signupLink}>
-            Sign up
-          </Link>
-        </p>
-      </div>
-    </div>
+      }
+    </>
   );
 }
