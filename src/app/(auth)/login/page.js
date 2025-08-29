@@ -11,7 +11,7 @@ export default function Login() {
   const [username, set_username] = useState('');
   const [password, setPassword] = useState('');
   const [Done, setDone] = useState(false);
-  const [DoneStatus, setDoneStatus] = useState('null');
+  const [DoneStatus, setDoneStatus] = useState(null);
 
   const handleLogin = async () => {
     const res = await fetch('https://food99api.onrender.com/api/api/token/', {
@@ -37,7 +37,7 @@ export default function Login() {
     <>
       {Done ?
         <>
-        <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #f3f3f3 100px)}`}</style>
+        <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #fafafaff 100px)}`}</style>
         <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
           <div style={{height:'500px', width:'500px'}}>
 
