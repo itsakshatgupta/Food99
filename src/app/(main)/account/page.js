@@ -125,7 +125,7 @@ export default function Account() {
                         <div className="df fd-c gap1 bdr pd1 fx1" style={{ background: '#f7f7f7ff' }}>
                             <div className="df  mgt05 pdx1 pdy1 gap1 xbg bdrds bd aic"><span className="bdrds oh df" style={{background: 'rgb(240, 239, 239)',alignContent: 'center',color: 'rgb(120, 58, 223)',boxShadow: '2px 4px 10px 1px #cdcdcd'}}><Image
                                                             alt="offer"
-                                                            src={`https://res.cloudinary.com/dbe8vybbp/${user.profile_image}`}
+                                                            src={user.profile_image}
                                                             width={100}
                                                             height={100}
                                                         /></span><div className="fx1 df fd-c jcsb pd03 gap05" style={{color:' rgb(50, 50, 50)'}}><span className="mg0 font-lg font700 bdb pdb05"><b>Hi, </b>{user.username}</span><div className="mg0 font-md df aic font900 pdx1 gap2" style={{justifyContent:'space-around', color:'#3f51b5'}}>
