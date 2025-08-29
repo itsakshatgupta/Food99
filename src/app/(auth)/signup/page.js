@@ -15,7 +15,7 @@ export default function Signup() {
     formData.append('phone_number', phone);
     if(profileImage) formData.append('profile_image', profileImage);
 
-    const res = await fetch('https://your-django-domain.com/api/signup/', {
+    const res = await fetch('https://https://food99api.onrender.com/api/signup/', {
       method: 'POST',
       body: formData
     });
