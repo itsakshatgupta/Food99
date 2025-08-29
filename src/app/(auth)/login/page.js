@@ -39,7 +39,7 @@ export default function Login() {
         <>
         <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #f3f3f3 100px)}`}</style>
         <div className="fd-c" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-          <div style={{height:'500px', width:'500px'}}>
+          <div style={{height:'500px', width:'500px', marginBottom:'2rem'}}>
 
           <DotLottieReact
             src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
