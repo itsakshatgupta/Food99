@@ -25,7 +25,7 @@ export default function Login() {
       localStorage.setItem('refresh_token', data.refresh);
       alert('Logged in!');
       setDone(true)
-      setTimeout(()=>window.location.href="food99.vercel.app",2000)
+      setTimeout(()=>window.location.href="/",2000)
       // router.push('/')
     } else {
       alert('Login failed: ' + JSON.stringify(data));
