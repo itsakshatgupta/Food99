@@ -35,11 +35,12 @@ export default function Login() {
   return (
     <>
       {Done ?
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <div className="fd-c" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
               <DotLottieReact
-      src="https://lottie.host/4b26bee6-4a0c-4e04-b3c1-e09dbf64de53/v6YX5XmiYo.lottie"
+      src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
       loop={false}
       autoplay={true}
+     
     />
         </div> :
         <div className={styles.container}>
