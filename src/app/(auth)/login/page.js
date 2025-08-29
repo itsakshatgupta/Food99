@@ -38,7 +38,7 @@ export default function Login() {
       {Done ?
         <>
         <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #f3f3f3 100px)}`}</style>
-        <div className="fd-c pdb5" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+        <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
           <div style={{height:'500px', width:'500px'}}>
 
           <DotLottieReact
@@ -60,7 +60,7 @@ export default function Login() {
 
           />
             </div>
-          <div className='pR font600' style={{top:'-100px', fontSize:'x-large'}}>{DoneStatus}</div>
+          <div className='pR font600' style={{top:'-115px', fontSize:'x-large'}}>{DoneStatus}</div>
         </div> 
         </>
         :
