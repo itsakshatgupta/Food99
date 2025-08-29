@@ -49,7 +49,7 @@ export default function MainContext({ device, children }) {
     const [floaters, set_floaters] = useState(null);
 
 
-    const noLayoutOnPages = ['login', 'signup']
+    const noLayoutOnPages = ['loginl', 'signup']
 
     const floaterRef = useRef(null);
     const mainRef = useRef(null);
