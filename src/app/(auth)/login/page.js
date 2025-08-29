@@ -11,6 +11,7 @@ export default function Login() {
   const [username, set_username] = useState('');
   const [password, setPassword] = useState('');
   const [Done, setDone] = useState(false);
+  const [DoneStatus, setDoneStatus] = useState(null);
 
   const handleLogin = async () => {
     const res = await fetch('https://food99api.onrender.com/api/api/token/', {
@@ -42,6 +43,10 @@ export default function Login() {
       autoplay={true}
       dotLottieRefCallback={(instance) => {
               if (instance) {
+                instance.addEventListener("play", () => {
+                  // redirect when animation completes
+                  setDoneStatus('Login Sucessfull');
+                });
                 instance.addEventListener("complete", () => {
                   // redirect when animation completes
                   router.push("/");
@@ -49,7 +54,7 @@ export default function Login() {
               }
             }}
      
-    />
+    />{DoneStatus}
         </div> :
         <div className={styles.container}>
           <div className={styles.card}>
