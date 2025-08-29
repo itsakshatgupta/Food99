@@ -40,6 +40,14 @@ export default function Login() {
       src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
       loop={false}
       autoplay={true}
+      dotLottieRefCallback={(instance) => {
+              if (instance) {
+                instance.addEventListener("complete", () => {
+                  // redirect when animation completes
+                  router.push("/");
+                });
+              }
+            }}
      
     />
         </div> :
