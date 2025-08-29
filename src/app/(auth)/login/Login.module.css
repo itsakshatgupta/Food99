@@ -126,10 +126,3 @@
   text-decoration: none;
   margin-left: 5px;
 }
-
-/* Responsive background */
-@media (max-width: 720px) {
-  body {
-    background: red;
-  }
-}
