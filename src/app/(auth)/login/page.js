@@ -53,7 +53,7 @@ export default function Login() {
                 });
                 instance.addEventListener("complete", () => {
                   // redirect when animation completes
-                  // router.push("/");
+                  router.push("/");
                 });
               }
             }}
