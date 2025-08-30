@@ -19,29 +19,55 @@ export default function Signup() {
 
 
   const handleSignup = async (e) => {
-    let a = e.target.textContent;
-    e.target.textContent = 'loading.. ' + a;
+  e.preventDefault();
+  let button = e.target;
+  let originalText = button.textContent;
+  button.textContent = 'Loading...';
+
+  try {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('email', email);
     formData.append('password', password);
     formData.append('phone_number', phone);
-    if (profileImage) formData.append('profile_image', profileImage);
+    if (profileImage) {
+      formData.append('profile_image', profileImage);
+    }
 
     const res = await fetch('https://food99api.onrender.com/api/api/signup/', {
       method: 'POST',
-      body: formData
+      body: formData,
     });
 
     const data = await res.json();
+
     if (res.ok) {
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.access);
-      setDone(true)
+      // ✅ user created, now request JWT tokens
+      const tokenRes = await fetch('https://food99api.onrender.com/api/api/token/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const tokens = await tokenRes.json();
+
+      if (tokenRes.ok) {
+        localStorage.setItem('access', tokens.access);
+        localStorage.setItem('refresh', tokens.refresh);
+        setDone(true);
+      } else {
+        alert('Signup worked, but login failed: ' + JSON.stringify(tokens));
+      }
     } else {
       alert('Signup failed: ' + JSON.stringify(data));
     }
-  };
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong');
+  } finally {
+    button.textContent = originalText;
+  }
+};
 
   return (
     <>
