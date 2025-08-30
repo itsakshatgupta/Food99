@@ -34,7 +34,7 @@ const handleSignup = async (e) => {
       formData.append('profile_image', profileImage);
     }
 
-    const res = await fetch('https://food99api.onrender.com/api/signup/', {
+    const res = await fetch('https://food99api.onrender.com/api/api/signup/', {
       method: 'POST',
       body: formData,
     });
@@ -43,7 +43,7 @@ const handleSignup = async (e) => {
 
     if (res.ok) {
       // ✅ user created, now request JWT tokens
-      const tokenRes = await fetch('https://food99api.onrender.com/api/token/', {
+      const tokenRes = await fetch('https://food99api.onrender.com/api/api/token/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
