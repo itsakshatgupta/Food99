@@ -15,6 +15,7 @@ export default function Signup() {
   const [profileImage, setProfileImage] = useState(null);
   const [Done, setDone] = useState(false);
   const [DoneStatus, setDoneStatus] = useState(null);
+  const [loading, setloading] = useState(false);
 
   // 🔹 compress image when selected
   const handleImageChange = async (e) => {
@@ -41,6 +42,8 @@ export default function Signup() {
   // 🔹 handle form submit
   const handleSignup = async (e) => {
     e.preventDefault();
+    setloading(true);
+
 
     const formData = new FormData();
     formData.append("username", username);
@@ -62,35 +65,50 @@ export default function Signup() {
       if (res.ok) {
         localStorage.setItem("access", data.access);
         localStorage.setItem("refresh", data.refresh);
+        setloading(false);
         setDone(true);
       } else {
+        setloading(false);
         alert("Signup failed: " + JSON.stringify(data));
       }
     } catch (err) {
       console.error(err);
+      setloading(false);
       alert("Something went wrong");
     }
   };
 
   return (
     <>
-      {Done ? (
+      {loading ? <h1>loading</h1> : <>{Done ? (
         // ✅ success animation
-        <div className="flex items-center justify-center h-screen">
-          <DotLottieReact
-            src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
-            loop={false}
-            autoplay
-            dotLottieRefCallback={(instance) => {
-              if (instance) {
-                instance.addEventListener("complete", () => {
-                  router.push("/");
-                });
-              }
-            }}
-          />
-          <p className="text-xl font-semibold mt-4">{DoneStatus || "Signup done!"}</p>
-        </div>
+        <>
+          <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #fafafaff 100px)}`}</style>
+          <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+            <div style={{ height: '500px', width: '500px' }}>
+
+              <DotLottieReact
+                src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
+                loop={false}
+                autoplay={true}
+                dotLottieRefCallback={(instance) => {
+                  if (instance) {
+                    instance.addEventListener("play", () => {
+                      // redirect when animation completes
+                      setDoneStatus('Signup done!');
+                    });
+                    instance.addEventListener("complete", () => {
+                      // redirect when animation completes
+                      router.push("/");
+                    });
+                  }
+                }}
+
+              />
+            </div>
+            <div className='pR font600' style={{ top: '-115px', fontSize: 'x-large' }}>{DoneStatus}</div>
+          </div>
+        </>
       ) : (
         <div className={styles.container}>
           <div className={styles.card}>
@@ -139,7 +157,7 @@ export default function Signup() {
             </form>
           </div>
         </div>
-      )}
+      )}</>}
     </>
   );
 }
