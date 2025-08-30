@@ -24,10 +24,7 @@ export default function Login() {
     if (res.ok) {
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
-      alert('Logged in!');
       setDone(true)
-      // setTimeout(()=>window.location.href="/",2000)
-      // router.push('/')
     } else {
       alert('Login failed: ' + JSON.stringify(data));
     }

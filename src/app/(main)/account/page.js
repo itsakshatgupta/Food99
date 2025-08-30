@@ -130,10 +130,9 @@ export default function Account() {
                     {/* Profile Card */}
                     <div className="df fd-c gap1 bdr pd1 fx1" style={{ background: '#f7f7f7ff' }}>
                         <div className="df mgt05 pdx1 pdy1 gap1 xbg bdrds bd aic">
-                            <span className="bdrds oh df"
+                            <span className="oh df"
                                 style={{
-                                    background: '#f0efef',
-                                    boxShadow: '2px 4px 10px 1px #cdcdcd',
+                                    background: '#f0efef',                                    borderRadius:'100%'
                                 }}>
                                 <Image
                                     alt="profile"
@@ -146,7 +145,7 @@ export default function Account() {
                                 <span className="mg0 font-lg font700 bdb pdb05">
                                     <b>Hi, </b>{user.username}
                                 </span>
-                                <div className="mg0 font-md df aic font900 pdx1 gap2" style={{ justifyContent: 'space-around', color: '#3f51b5' }}>
+                                <div className="mg0 font-sm df aic font900 pdx1 gap2" style={{ justifyContent: 'space-around', color: '#414141ff' }}>
                                     <div className="df fd-c aic gap01"><span>Orders</span><span>10+</span></div>
                                     <div className="df fd-c aic gap01"><span>Save</span><span>$1250+</span></div>
                                 </div>
