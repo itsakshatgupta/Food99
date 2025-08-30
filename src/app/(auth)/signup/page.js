@@ -41,8 +41,8 @@ export default function Signup() {
 
   // 🔹 handle form submit
   const handleSignup = async (e) => {
-    e.preventDefault();
     setloading(true);
+    e.preventDefault();
 
 
     const formData = new FormData();
@@ -80,84 +80,94 @@ export default function Signup() {
 
   return (
     <>
-      {loading ? <h1>loading</h1> : <>{Done ? (
-        // ✅ success animation
-        <>
-          <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #fafafaff 100px)}`}</style>
-          <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-            <div style={{ height: '500px', width: '500px' }}>
-
-              <DotLottieReact
-                src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
-                loop={false}
-                autoplay={true}
-                dotLottieRefCallback={(instance) => {
-                  if (instance) {
-                    instance.addEventListener("play", () => {
-                      // redirect when animation completes
-                      setDoneStatus('Signup done!');
-                    });
-                    instance.addEventListener("complete", () => {
-                      // redirect when animation completes
-                      router.push("/");
-                    });
-                  }
-                }}
-
-              />
-            </div>
-            <div className='pR font600' style={{ top: '-115px', fontSize: 'x-large' }}>{DoneStatus}</div>
-          </div>
-        </>
-      ) : (
-        <div className={styles.container}>
-          <div className={styles.card}>
-            <h2 className={styles.heading}>Sign up to Food99</h2>
-
-            {/* 🔹 use form + onSubmit */}
-            <form onSubmit={handleSignup} encType="multipart/form-data">
-              <input
-                type="text"
-                placeholder="Username"
-                className={styles.input}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className={styles.input}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className={styles.input}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <input
-                type="tel"
-                placeholder="Phone number"
-                className={styles.input}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-              />
-
-              <input type="file" accept="image/*" onChange={handleImageChange} />
-
-              <button type="submit" className={styles.buttonPrimary}>
-                Continue
-              </button>
-            </form>
+      {loading ?
+        <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+          <div style={{ height: '500px', width: '500px' }}>
+            <DotLottieReact
+              src="https://lottie.host/15693c09-7a07-44d0-8459-975870f8db5d/hWy9tPQUfe.lottie"
+              loop
+              autoplay
+            />
           </div>
         </div>
-      )}</>}
+        : <>{Done ? (
+          // ✅ success animation
+          <>
+            <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #fafafaff 100px)}`}</style>
+            <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+              <div style={{ height: '500px', width: '500px' }}>
+
+                <DotLottieReact
+                  src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
+                  loop={false}
+                  autoplay={true}
+                  dotLottieRefCallback={(instance) => {
+                    if (instance) {
+                      instance.addEventListener("play", () => {
+                        // redirect when animation completes
+                        setDoneStatus('Signup done!');
+                      });
+                      instance.addEventListener("complete", () => {
+                        // redirect when animation completes
+                        router.push("/");
+                      });
+                    }
+                  }}
+
+                />
+              </div>
+              <div className='pR font600' style={{ top: '-115px', fontSize: 'x-large' }}>{DoneStatus}</div>
+            </div>
+          </>
+        ) : (
+          <div className={styles.container}>
+            <div className={styles.card}>
+              <h2 className={styles.heading}>Sign up to Food99</h2>
+
+              {/* 🔹 use form + onSubmit */}
+              <form onSubmit={handleSignup} encType="multipart/form-data">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className={styles.input}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className={styles.input}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className={styles.input}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone number"
+                  className={styles.input}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
+
+                <input type="file" accept="image/*" onChange={handleImageChange} />
+
+                <button type="submit" className={styles.buttonPrimary}>
+                  Continue
+                </button>
+              </form>
+            </div>
+          </div>
+        )}</>}
     </>
   );
 }
