@@ -40,13 +40,10 @@ export default function Signup() {
       const compressedFile = await imageCompression(file, options);
       console.log("Original:", file.size / 1024, "KB");
       console.log("Compressed:", compressedFile.size / 1024, "KB");
-
-      const base64 = await fileToBase64(compressedFile);
-      setProfileImage(base64);
+      setProfileImage(compressedFile);
     } catch (err) {
       console.error("Compression error:", err);
-      const base64 = await fileToBase64(file);
-      setProfileImage(base64);
+
     }
   };
 
