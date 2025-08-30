@@ -17,15 +17,6 @@ export default function Signup() {
   const [loading, setloading] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  // 🔹 Convert file → Base64
-  const fileToBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
   // 🔹 Compress image then convert
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -129,7 +120,7 @@ export default function Signup() {
         <div className={styles.container}>
           <div className={styles.card}>
             <h2 className={styles.heading}>Sign up to Food99</h2>
-            <form onSubmit={handleSignup}>
+            <form action="/api/signup">
               <input
                 type="text"
                 placeholder="Username"
