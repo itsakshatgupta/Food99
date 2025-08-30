@@ -5,7 +5,7 @@ import Link from "next/link";
 import { BadgeHelpIcon, HandHeart, IdCard, LogOut, LucideMapPinHouse, Shield, ShieldUser, User2 } from 'lucide-react';
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { apiFetch } from "@/app/calling/api";
+import { apiFetch } from "@/app/(api)/api";
 
 export default function Account() {
     const { device } = useContext(dynamic_);
