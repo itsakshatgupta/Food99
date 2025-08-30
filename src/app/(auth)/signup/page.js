@@ -18,56 +18,41 @@ export default function Signup() {
 
 
 
-  const handleSignup = async (e) => {
+  async function handleSignup(e) {
   e.preventDefault();
-  let button = e.target;
-  let originalText = button.textContent;
-  button.textContent = 'Loading...';
+
+  const formData = new FormData();
+  formData.append("username", e.target.username.value);
+  formData.append("email", e.target.email.value);
+  formData.append("password", e.target.password.value);
+
+  // ✅ Add image only if selected
+  if (e.target.image.files[0]) {
+    formData.append("image", e.target.image.files[0]);
+  }
 
   try {
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('phone_number', phone);
-    if (profileImage) {
-      formData.append('profile_image', profileImage);
-    }
-
-    const res = await fetch('https://food99api.onrender.com/api/api/signup/', {
-      method: 'POST',
-      body: formData,
+    const res = await fetch("http://your-django-server.com/api/api/signup/", {
+      method: "POST",
+      body: formData, // ✅ No JSON.stringify here
+      // ❌ Do not set Content-Type → fetch will auto set it to multipart/form-data
     });
 
-    const data = await res.json();
-
-    if (res.ok) {
-      // ✅ user created, now request JWT tokens
-      const tokenRes = await fetch('https://food99api.onrender.com/api/api/token/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const tokens = await tokenRes.json();
-
-      if (tokenRes.ok) {
-        localStorage.setItem('access', tokens.access);
-        localStorage.setItem('refresh', tokens.refresh);
-        setDone(true);
-      } else {
-        alert('Signup worked, but login failed: ' + JSON.stringify(tokens));
-      }
-    } else {
-      alert('Signup failed: ' + JSON.stringify(data));
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Signup error:", errorData);
+      alert("Something went wrong: " + JSON.stringify(errorData));
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    alert('Something went wrong');
-  } finally {
-    button.textContent = originalText;
+
+    const data = await res.json();
+    console.log("Signup success:", data);
+    alert("Signup successful!");
+  } catch (error) {
+    console.error("Network error:", error);
+    alert("Something went wrong. Please try again.");
   }
-};
+}
 
   return (
     <>
