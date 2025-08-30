@@ -71,7 +71,7 @@ export default function Signup() {
       }
     } catch (err) {
       console.error(err);
-      alert('Something went wrong');
+      alert('Something went wrong', err);
     } finally {
       button.textContent = originalText;
     }
