@@ -43,21 +43,10 @@ const handleSignup = async (e) => {
 
     if (res.ok) {
       // ✅ user created, now request JWT tokens
-      const tokenRes = await fetch('https://food99api.onrender.com/api/api/token/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const tokens = await tokenRes.json();
-
-      if (tokenRes.ok) {
-        localStorage.setItem('access', tokens.access);
-        localStorage.setItem('refresh', tokens.refresh);
+        localStorage.setItem('access', data.access);
+        localStorage.setItem('refresh', data.refresh);
         setDone(true);
-      } else {
-        alert('Signup worked, but login failed: ' + JSON.stringify(tokens));
-      }
+
     } else {
       alert('Signup failed: ' + JSON.stringify(data));
     }
