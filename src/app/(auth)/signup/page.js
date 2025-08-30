@@ -16,6 +16,8 @@ export default function Signup() {
   const [Done, setDone] = useState(false);
   const [DoneStatus, setDoneStatus] = useState(null);
   const [loading, setloading] = useState(false);
+const [progress, setProgress] = useState(0);
+
 
   // 🔹 compress image when selected
   const handleImageChange = async (e) => {
@@ -40,56 +42,69 @@ export default function Signup() {
   };
 
   // 🔹 handle form submit
-  const handleSignup = async (e) => {
-    setloading(true);
-    e.preventDefault();
 
+const handleSignup = async (e) => {
+  e.preventDefault();
+  setloading(true);
+  setProgress(0);
 
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("phone_number", phone);
-    if (profileImage) {
-      formData.append("profile_image", profileImage);
-    }
+  const formData = new FormData();
+  formData.append("username", username);
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("phone_number", phone);
+  if (profileImage) {
+    formData.append("profile_image", profileImage);
+  }
 
-    try {
-      const res = await fetch("https://food99api.onrender.com/api/api/signup/", {
-        method: "POST",
-        body: formData,
-      });
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://food99api.onrender.com/api/api/signup/");
 
-      const data = await res.json();
-
-      if (res.ok) {
-        localStorage.setItem("access", data.access);
-        localStorage.setItem("refresh", data.refresh);
-        setloading(false);
-        setDone(true);
-      } else {
-        setloading(false);
-        alert("Signup failed: " + JSON.stringify(data));
-      }
-    } catch (err) {
-      console.error(err);
-      setloading(false);
-      alert("Something went wrong");
+  // track upload progress
+  xhr.upload.onprogress = (event) => {
+    if (event.lengthComputable) {
+      const percent = Math.round((event.loaded / event.total) * 100);
+      setProgress(percent);
     }
   };
+
+  xhr.onload = () => {
+    setloading(false);
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+      setDone(true);
+    } else {
+      alert("Signup failed: " + xhr.responseText);
+    }
+  };
+
+  xhr.onerror = () => {
+    setloading(false);
+    alert("Network error while uploading");
+  };
+
+  xhr.send(formData);
+};
+
 
   return (
     <>
       {loading ?
-        <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-          <div style={{ height: '500px', width: '500px' }}>
-            <DotLottieReact
-              src="https://lottie.host/15693c09-7a07-44d0-8459-975870f8db5d/hWy9tPQUfe.lottie"
-              loop
-              autoplay
-            />
-          </div>
-        </div>
+      <>
+      <p>Uploading... {progress}%</p>
+    <progress value={progress} max="100"></progress>
+      </>
+        // <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+        //   <div style={{ height: '500px', width: '500px' }}>
+        //     <DotLottieReact
+        //       src="https://lottie.host/15693c09-7a07-44d0-8459-975870f8db5d/hWy9tPQUfe.lottie"
+        //       loop
+        //       autoplay
+        //     />
+        //   </div>
+        // </div>
         : <>{Done ? (
           // ✅ success animation
           <>
