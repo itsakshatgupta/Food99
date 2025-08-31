@@ -30,7 +30,7 @@ export async function apiFetch(url, options = {}) {
 
         if (refreshResponse.ok) {
           const data = await refreshResponse.json();
-          localStorage.setItem("access", data.access);
+          localStorage.setItem("access_token", data.access);
 
           // retry original request with new token
           headers["Authorization"] = `Bearer ${data.access}`;
