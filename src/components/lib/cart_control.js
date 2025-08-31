@@ -56,7 +56,7 @@ export function Cart_Control_Indirect({ item }) {
                     set_cart_quantity_indirect(newQty);
                     updateCartItem(item.id, newQty);
                 } else {
-                    removeCartItem(getCI_id);
+                    removeCartItem(CartItem_id);
                     set_cart_quantity_indirect("ADD");
                 }
             }}
