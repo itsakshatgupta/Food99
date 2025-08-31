@@ -428,6 +428,7 @@ export default function branches() {
 
 
                     { cart__i!==null&&menu___i?.map((categories) => {
+                        console.log('ccc', cart__i)
                         if (categories.items.length >= 1) {
                             return (
 
