@@ -427,7 +427,7 @@ export default function branches() {
                 }}>
 
 
-                    {cart__i !== null && menu___i?.map((categories) => {
+                    { cart__i!==null&&menu___i?.map((categories) => {
                         console.log('ccc', cart__i)
                         if (categories.items.length >= 1) {
                             return (
@@ -501,11 +501,13 @@ export default function branches() {
                                                                     <Cart_Control_Indirect
                                                                         item={{
                                                                             id: menu_items.id,
-                                                                            quantity: () => {
-                                                                                const cartItem = cart__i.items.find((v) => v.menu_item.id === menu_items.id);
-                                                                                const quantity = cartItem ? cartItem.quantity : null;
-                                                                                return quantity
-                                                                            },
+                                                                            quantity:cart__i.items.map((v, i) => {
+                                                                                
+                                                                                if (v.menu_item.id === menu_items.id) {
+                                                                                    console.log('yes')
+                                                                                    return v.quantity, v.id;
+                                                                                }
+                                                                            }),
                                                                             name: menu_items.name,
                                                                             price: menu_items.price,
                                                                             image: menu_items.image
