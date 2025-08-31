@@ -427,7 +427,7 @@ export default function branches() {
                 }}>
 
 
-                    {menu___i?.map((categories) => {
+                    {menu___i && cart__i ?.map((categories) => {
                         if (categories.items.length >= 1) {
                             return (
 
