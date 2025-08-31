@@ -46,6 +46,7 @@ export function Cart_Control_Direct({ item }) {
 export function Cart_Control_Indirect({ item }) {
 
     const [cart_quantity_indirect, set_cart_quantity_indirect] = useState("ADD");
+    const [CartItem_id, set_CartItem_id] = useState(null);
 
     return (<>
         <div className="pA add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
@@ -55,7 +56,7 @@ export function Cart_Control_Indirect({ item }) {
                     set_cart_quantity_indirect(newQty);
                     updateCartItem(item.id, newQty);
                 } else {
-                    removeCartItem(item.id);
+                    removeCartItem(getCI_id);
                     set_cart_quantity_indirect("ADD");
                 }
             }}
@@ -67,7 +68,8 @@ export function Cart_Control_Indirect({ item }) {
                     updateCartItem(item.id, newQty);
                 } else {
                     set_cart_quantity_indirect(1);
-                    addToCart(item.id, 1);
+                    const getCI_id = addToCart(item.id, 1);
+                    set_CartItem_id(getCI_id.id)
                 }
             }}
         ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
