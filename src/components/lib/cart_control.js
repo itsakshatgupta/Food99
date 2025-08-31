@@ -49,23 +49,23 @@ export function Cart_Control_Indirect({ item }) {
     const [CartItem_id, set_CartItem_id] = useState(null);
 
       const handleAdd = async () => {
-    if (cart_quantity === "ADD") {
+    if (cart_quantity_indirect === "ADD") {
       // first add to cart
       const response = await addToCart(item.id, 1); // menu_item.id
       set_CartItem_id(response.id); // store cartItem.id
       set_cart_quantity_indirect(1);
     } else {
       // update existing
-      const newQty = cart_quantity + 1;
+      const newQty = cart_quantity_indirect + 1;
       await updateCartItem(CartItem_id, newQty);
       set_cart_quantity_indirect(newQty);
     }
   };
 
   const handleRemove = async () => {
-    if (cart_quantity > 1) {
+    if (cart_quantity_indirect > 1) {
       const newQty = cart_quantity - 1;
-      await updateCartItem(CartItem_id, newQty);
+      await updateCartItem(cart_quantity_indirect, newQty);
       set_cart_quantity_indirect(newQty);
     } else {
       await removeCartItem(CartItem_id);
