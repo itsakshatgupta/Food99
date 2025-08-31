@@ -70,12 +70,9 @@ export function Cart_Control_Direct({ item }) {
 
 export function Cart_Control_Indirect({ item }) {
 
-    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState("ADD");
+    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(item.quantity||"ADD");
     const [CartItem_id, set_CartItem_id] = useState(null);
     const [timer, set_timer] = useState(null);
-    if(item.quantity){
-        set_cart_quantity_indirect(item.quantity)
-    }
     const handleAdd = async () => {
         if (cart_quantity_indirect === "ADD") {
             // first add to cart
