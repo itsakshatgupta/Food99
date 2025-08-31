@@ -504,6 +504,7 @@ export default function branches() {
                                                                             quantity:cart__i.items.map((v, i) => {
                                                                                 console.log(cart__i.items.quantity)
                                                                                 if (v.menu_item.id === menu_items.id) {
+                                                                                    console.log('yes')
                                                                                     return v.quantity;
                                                                                 }
                                                                             }),
