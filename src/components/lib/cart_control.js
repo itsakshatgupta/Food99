@@ -13,8 +13,8 @@ export function Cart_Control_Direct({ item }) {
             try {
                 // update existing
                 const newQty = cart_quantity_direct + 1;
-                await updateCartItem(item.id, newQty);
                 set_cart_quantity_direct(newQty);
+                await updateCartItem(item.id, newQty);
             } catch (err) {
                 set_cart_quantity_direct(11);
             }
@@ -25,8 +25,8 @@ export function Cart_Control_Direct({ item }) {
         if (cart_quantity_direct > 1) {
             try {
                 const newQty = cart_quantity_direct - 1;
-                await updateCartItem(item.id, newQty);
                 set_cart_quantity_direct(newQty);
+                await updateCartItem(item.id, newQty);
             } catch (err) {
                 set_cart_quantity_direct(11);
             }
