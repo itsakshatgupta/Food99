@@ -189,7 +189,7 @@ export default function Cart() {
                             {device === 'pc' && <h3 className="mg0 pdx07 pdy01 bdrds bd" style={{ background: '#403b3b', color: 'white' }}>x</h3>}
                         </div>
                         <div className="df fd-c gap1 mgx1 mgy05">
-                            <div className="pdy05 pdl06 pdr08 bd df fd-c gap08" style={{
+                            <div className="pdy05 pdl06 pdr08 bd df fd-c gap08" id="product-container" style={{
                                 borderRadius: '5px',
                                 background: 'white'
                             }}
@@ -198,7 +198,7 @@ export default function Cart() {
                                     <div className="fx1 df gap05 font-sm font600" >
                                         <Image
                                             alt="iphone 15"
-                                            src={o.menu_item.image||'/default_user.png'}
+                                            src={o.menu_item.image || '/default_user.png'}
                                             width={55}
                                             height={58}
                                             style={{ borderRadius: '5px' }}
@@ -209,10 +209,11 @@ export default function Cart() {
                                         </div>
                                     </div>
                                     <Cart_Control_Indirect
-                                        Cart_Item_No={o.id}
-                                        Cart_Item_Qn={o.quantity}
+                                        item={{
+                                            id: o.id,
+                                            quantity: o.quantity,
+                                        }}
                                         redirect_to_home_on_Nothing={true}
-                                        mode={'cart_manager_direct'}
                                     />
 
                                 </div>))}
