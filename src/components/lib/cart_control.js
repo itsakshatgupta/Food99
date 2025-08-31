@@ -52,14 +52,18 @@ export function Cart_Control_Indirect({ item }) {
     if (cart_quantity_indirect === "ADD") {
       // first add to cart
       const response = await addToCart(item.id, 1); // menu_item.id
-      console.log(123, response, response.json())
-      set_CartItem_id(response.id); // store cartItem.id
-      set_cart_quantity_indirect(1);
+      if(response.ok){
+          console.log(123, response, response.json())
+          set_CartItem_id(response.id); // store cartItem.id
+          set_cart_quantity_indirect(1);
+      }
     } else {
       // update existing
       const newQty = cart_quantity_indirect + 1;
-      await updateCartItem(CartItem_id, newQty);
+      const response =await updateCartItem(CartItem_id, newQty);
+          if(response.ok){
       set_cart_quantity_indirect(newQty);
+          }
     }
   };
 
