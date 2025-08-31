@@ -501,7 +501,7 @@ export default function branches() {
                                                                         item={{
                                                                             id: menu_items.id,
                                                                             quantity: () => cart__i.items.map((v, i) => {
-                                                                                if (v.menu_item.id === item.id) {
+                                                                                if (v.menu_item.id === menu_items.id) {
                                                                                     return cart__i.items.quantity;
                                                                                 }
                                                                             }),
