@@ -68,11 +68,12 @@ export function Cart_Control_Direct({ item }) {
 }
 
 
-export function Cart_Control_Indirect({ item }) {
-    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(item.quantity!==undefined||null||NaN?parseInt(item.quantity):"ADD");
+export function Cart_Control_Indirect({ cart_detail, item }) {
+    const {quantity, cart_item_id} = cart_detail();
+    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(quantity!==null?parseInt(item.quantity):"ADD");
     console.log(item.quantity)
     console.log('iq', item.quantity, cart_quantity_indirect)
-    const [CartItem_id, set_CartItem_id] = useState(null);
+    const [CartItem_id, set_CartItem_id] = useState(cart_item_id||null);
     const [timer, set_timer] = useState(null);
     const handleAdd = async () => {
         if (cart_quantity_indirect === "ADD") {

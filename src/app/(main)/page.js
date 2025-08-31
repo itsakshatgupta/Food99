@@ -427,7 +427,7 @@ export default function branches() {
                 }}>
 
 
-                    { cart__i!==null&&menu___i?.map((categories) => {
+                    {cart__i !== null && menu___i?.map((categories) => {
                         console.log('ccc', cart__i)
                         if (categories.items.length >= 1) {
                             return (
@@ -499,16 +499,16 @@ export default function branches() {
                                                                     /></div>
 
                                                                     <Cart_Control_Indirect
+                                                                    cart_detail = {() => {
+                                                                                const cartItem = cart__i.items.find((v) => v.menu_item.id === menu_items.id);
+
+                                                                                return {
+                                                                                    quantity: cartItem ? cartItem.quantity : 0,
+                                                                                    cart_item_id: cartItem ? cartItem.id : null,
+                                                                                };
+                                                                            }}
                                                                         item={{
                                                                             id: menu_items.id,
-                                                                            quantity:cart__i.items.map((v, i) => {
-                                                                                
-                                                                                if (v.menu_item.id === menu_items.id) {
-                                                                                    console.log('yes')
-                                                                                    return v.quantity, v.id;
-                                                                                }
-                                                                                return
-                                                                            }),
                                                                             name: menu_items.name,
                                                                             price: menu_items.price,
                                                                             image: menu_items.image
