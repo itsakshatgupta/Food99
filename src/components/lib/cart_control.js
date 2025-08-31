@@ -19,6 +19,7 @@ export function Cart_Control_Direct({ item }) {
                 } else {
                     removeCartItem(item.id);
                     document.getElementById(item.id).remove()
+                    console.log('hi')
                     if (document.getElementById('product-container').hasChildNodes() === false) {
                         return window.location.href = "/"
                     }
@@ -32,11 +33,7 @@ export function Cart_Control_Direct({ item }) {
                     set_cart_quantity_direct(newQty);
                     updateCartItem(item.id, newQty);
                 } else {
-                    removeCartItem(item.id);
-                    document.getElementById(item.id).remove()
-                    if (document.getElementById('product-container').hasChildNodes === false) {
-                        return window.location.href = "/"
-                    }
+                        return window.location.href = "/"                 
                 }
             }}>
                 <svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
