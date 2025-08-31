@@ -139,6 +139,7 @@ const mobile_banner = <>
 export default function branches() {
     const { device } = useContext(dynamic_);
     const [menu___i, set_menu___i] = useState(null);
+    const [cart__i, set_cart__i] = useState(null);
 
     const { dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, floaters, set_floaters } = useContext(dynamic_);
 
@@ -166,7 +167,16 @@ export default function branches() {
     }, [])
 
     useEffect(() => {
-            async function fetchCart() {
+        async function fetchCart() {
+            try {
+                const res = await apiFetch("/cart"); // Django cart API
+                const data = await res.json();
+                set_cart__i(data);
+            } catch (error) {
+                console.error("Error fetching cart:", error);
+            }
+        }
+        async function fetchMenu() {
             try {
                 const res = await apiFetch("/menu"); // Django cart API
                 const data = await res.json();
@@ -176,6 +186,7 @@ export default function branches() {
             }
         }
         fetchCart();
+        fetchMenu();
     }, []);
     const d = (fall_ctg_, n, p, d) => {
         return (<>
@@ -489,10 +500,16 @@ export default function branches() {
                                                                     <Cart_Control_Indirect
                                                                         item={{
                                                                             id: menu_items.id,
+                                                                            quantity: () => cart__i.items.map((v, i) => {
+                                                                                if (v.menu_item.id === item.id) {
+                                                                                    return cart__i.items.quantity;
+                                                                                }
+                                                                            }),
                                                                             name: menu_items.name,
                                                                             price: menu_items.price,
                                                                             image: menu_items.image
                                                                         }}
+
                                                                     />
                                                                 </div>
 
