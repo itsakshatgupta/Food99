@@ -427,7 +427,7 @@ export default function branches() {
                 }}>
 
 
-                    {menu___i && cart__i ?.map((categories) => {
+                    { cart__i!==null&&menu___i?.map((categories) => {
                         if (categories.items.length >= 1) {
                             return (
 
@@ -500,11 +500,12 @@ export default function branches() {
                                                                     <Cart_Control_Indirect
                                                                         item={{
                                                                             id: menu_items.id,
-                                                                            quantity:async()=>{ await cart__i.items.map((v, i) => {
+                                                                            quantity:cart__i.items.map((v, i) => {
+                                                                                console.log(cart__i.items.quantity)
                                                                                 if (v.menu_item.id === menu_items.id) {
                                                                                     return cart__i.items.quantity;
                                                                                 }
-                                                                            })},
+                                                                            }),
                                                                             name: menu_items.name,
                                                                             price: menu_items.price,
                                                                             image: menu_items.image
