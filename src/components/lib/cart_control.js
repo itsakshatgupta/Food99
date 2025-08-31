@@ -104,11 +104,17 @@ export function Cart_Control_Indirect({ item }) {
     const handleRemove = async () => {
         if (cart_quantity_indirect > 1) {
             const newQty = cart_quantity_indirect - 1;
-            const response = await updateCartItem(CartItem_id, newQty);
-            if (response.ok) {
-                set_cart_quantity_indirect(newQty);
-            }
             set_cart_quantity_indirect(newQty);
+            if (timer) clearTimeout(timer)
+            const newtimer = setTimeout(async () => {
+                try {
+                    await updateCartItem(CartItem_id, newQty);
+                } catch (err) {
+                    set_cart_quantity_indirect(11);
+                }
+            }, 1500)
+            set_timer(newtimer)
+ 
         } else {
             set_cart_quantity_indirect("ADD");
             set_CartItem_id(null);
