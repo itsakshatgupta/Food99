@@ -6,7 +6,7 @@ const BASE_URL = production_url;
 
 export async function apiFetch(url, options = {}) {
   // --- add access token ---
-  const access = localStorage.getItem("access");
+  const access = localStorage.getItem("access_token");
   const headers = {
     ...(options.headers || {}),
     "Content-Type": "application/json",
