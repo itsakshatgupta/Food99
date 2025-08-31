@@ -6,9 +6,10 @@ import Portal_ from "@/components/main_portal/main_protral";
 import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
 import Image from 'next/image';
-import { Cart_Control_Indirect } from '@/components/lib/cart_control';
+import { Cart_Control_Direct, Cart_Control_Indirect } from '@/components/lib/cart_control';
 import Topbar_ from '@/components/topbar_/topbar';
 import { BookOpen } from 'lucide-react';
+import { apiFetch } from '../(api)/api';
 const banner_ = <>
     <div className="df jcsb wfp hfp" style={{ background: '#f1f8e9' }}>
         <div className="pdx1" style={{ justifyItems: 'center' }}>
@@ -145,7 +146,7 @@ export default function branches() {
         if (cart_) {
             set_floaters(<div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                 <span className='xbg oh mg05 mgx07 font07 font600 df fd-c aic jcc bd gap01' style={{ borderRadius: '100%', height: '3.8rem', width: '3.8rem', background: '#9970faff', color: '#ffffffff', border: '1px solid black' }}>
-                    <BookOpen/>
+                    <BookOpen />
                     Menu
                 </span>
 
@@ -165,13 +166,16 @@ export default function branches() {
     }, [])
 
     useEffect(() => {
-        fetch('https://food99api.onrender.com/api/menu')
-            .then(res => res.json())
-            .then(data => {
+            async function fetchCart() {
+            try {
+                const res = await apiFetch("/menu"); // Django cart API
+                const data = await res.json();
                 set_menu___i(data);
-                console.log('Fetched menu:', data);
-            })
-            .catch(err => console.error('Menu fetch error:', err));
+            } catch (error) {
+                console.error("Error fetching cart:", error);
+            }
+        }
+        fetchCart();
     }, []);
     const d = (fall_ctg_, n, p, d) => {
         return (<>
@@ -382,138 +386,8 @@ export default function branches() {
         </style>
 
 
-        {/* for pc */}
-        {device === 'pc' && <div className="hfp oh pR df bdt">
 
-            <div className="pdx1 pdt1 bdr df fd-c jcsb fxw" style={{ background: '#f8f8f8', width: 'calc(200px + 2rem + 1px)' }}>
-                <div className="container-A  xs:dn xs:dn df fd-c fxn font-md" style={{ overflow: "hidden", width: '200px', fontWeight: "var(--font-weight-300)", zIndex: '1', borderRadius: '10px' }}>
-                    <ContainerAContents />
-                </div>
-                <div className="tac font-sm font300"><span>Terms and Conditions | Privacy Policy</span></div>
-            </div>
-            <div className="fx1 df fd-c pR oh">
-                <div className={`df gap03 fx1 oh`}>
-
-                    <div className="fx1 oy" style={{
-                        scrollbarColor: '#f8f8f8 white',
-                        scrollbarWidth: 'thin'
-                    }}>
-                        <div className="df fd-c pdy1" style={{ position: 'sticky', top: '0' }}>
-                            <div className="df jcc aic">
-                                <div className="bd bdrds oh" style={{
-                                    width: '75%',
-                                    height: '11rem',
-                                    borderColor: 'black'
-                                }}>{banner_}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="df aic jcsb bdb pdx1 pdy06 xbg gap3 ox" style={{
-                                scrollbarColor: '#f8f8f8 white',
-                                scrollbarWidth: 'none'
-                            }}><div className="df aic gap1 fx1">
-                                    <span className="df aic gap02 font08 pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font900">Trending</span></span>
-                                    <span className="df aic gap02 font08 bd xfg bdrds pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg><span className="font900">Recommended</span></span>
-                                    <span className="df aic gap02 font08 bd xfg bdrds pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font900">Trending</span></span>
-                                    <span className="df"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#000000"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z" /></svg></span></div>
-                            </div>
-                            {menu__.map((ctg, i) => (
-
-                                <div className="pdy1" key={i}>
-                                    <h2 className="mg0 pdx1 pdy08">{ctg.main_ctg__}</h2>
-                                    <div className={` catg df ${device === 'pc' && 'aic'} pdy1 pdx1 gap2l fxw ${device === 'mobile' && 'fd-c'}`} style={{ gap: '1.5rem' }}>
-                                        {ctg.items_list__.map((v, i) => (
-                                            <div key={i}>
-                                                {device === 'pc' &&
-                                                    <>
-                                                        <div className="pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} onMouseOut={(e) => { e.currentTarget.children[1].style.display = "none" }}><div className="bd" onClick={() => set_dynamics_portal_main(<Portal_ content={d(ctg.main_ctg__, v.item_name__, v.item_price__)} />)} style={{
-                                                            width: '110px',
-                                                            height: "120px",
-                                                            borderRadius: '10px',
-                                                            justifySelf: 'center',
-                                                            background: 'white'
-                                                        }}></div> <div className="pA add_cart_control_ICart_Control_Indirect oh" style={{ display: 'none', bottom: '-10px' }}><span className="df aic fx1 tac jcc CKEFT" onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo">0</span><span className="df aic fx1 tac jcc CKEFT" onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div></div>
-                                                        <div className="font-sm" style={{ justifySelf: 'center', marginTop: '13px' }}>{v.item_name__}</div>
-                                                        <div className="font07 pdx05 bdrds" style={{ justifySelf: 'center', background: 'beige' }}>{v.item_price__}</div>
-                                                    </>
-                                                }
-                                                {device === 'mobile' &&
-                                                    <>
-                                                        <style>
-                                                            {`              
-                                                .lowscreen-portal{
-                                                  animation:a_lowscreen-porta_ 0.15s linear ;
-                                                }
-                                                @keyframes a_lowscreen-porta_{
-                                                0%{
-                                                bottom:-100%;
-                                                }
-                                                100%{
-                                                bottom:0;
-                                                }
-                                                }`}
-                                                        </style>
-                                                        <div className="bd bdrds xbg df jcsb pd1 pdb2">
-                                                            <div className="pdr06">
-                                                                <div className="df" style={{ alignItems: 'flex-start' }}>
-                                                                    <h3 className="mg0">{v.item_name__}</h3>
-                                                                    <span className="pdx04 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
-                                                                </div>
-                                                                <div className="df aic pdt02 pdx02 gap02">
-                                                                    <span className="pdx04 pdy02 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.75rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
-                                                                <div className="font-sm pdt05">{v.item_description__}</div>
-                                                            </div>
-                                                            <div>
-                                                                <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd" onClick={() => set_dynamics_portal_main(
-                                                                    <div className="lowscreen-portal pA wfp df fd-c oh" style={{
-                                                                        background: 'white', bottom: 0,
-                                                                        borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
-                                                                    }}>
-                                                                        <div className="pdy05 pdx1 font600 bdb">{v.item_name__}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-                                                                        <div className="xfg" style={{ height: '200px' }}>Hii</div>
-                                                                        {/* <div>{v.item_price__}</div> */}
-
-                                                                    </div>
-                                                                )} style={{
-                                                                    width: '110px',
-                                                                    height: "120px",
-                                                                    borderRadius: '10px',
-                                                                    justifySelf: 'center',
-                                                                    background: 'white'
-                                                                }}></div> <div className="pA add_cart_control_ICart_Control_Indirect oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  " onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>ADD</span><span className="df aic fx1 tac jcc CKEFT " onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div></div>
-
-                                                            </div>
-                                                        </div>
-                                                    </>
-                                                }
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )
-                            )}
-                        </div>
-
-                    </div>
-                    {device === 'pc' && dynamic_portal_main}
-                </div>
-                {device === 'mobile' && cart_ && <div className="pA pd05l jcsb wfp bdt bdr bdl bdTrds xbg oh" style=
-                    {{ bottom: 0, borderColor: 'black' }}><div className="pd03 font600 bdb" style={{ background: 'lavender', color: 'wlhite' }}><span className='font-sm'>Add item worth 99 and get 50% flat discout</span></div>
-                    <div className="df aic jcsb gap05 bdtl pdy06 pdx05" style={{ borderColor: 'black' }}><span>FI</span>
-                        <span style={{
-                            background: 'green',
-                            color: 'white',
-                            borderRadius: '10px',
-                        }}
-                            className="pd05 xfg df aic pdy07"><span className='df'><Icon.Cart_ c='white' s='24' /></span>Checkout</span>
-                    </div>
-                </div>}
-                {device === 'mobile' && dynamic_portal_main}
-            </div>
-        </div>}
-
-        {device === 'mobile' &&
+        {device === 'mobile' && menu___i &&
             <>
                 <div className="pS xbg" style={{ top: 0, zIndex: 1 }}>
                     <Topbar_ />
@@ -545,18 +419,18 @@ export default function branches() {
                     {menu___i?.map((categories) => {
                         if (categories.items.length >= 1) {
                             return (
-                             
 
-                                    <div className="bdrds mgx05 mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
-                                        <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
-                                        <div className={` catg df fd-c fxw`} style={{ gap: '1.2rem' }}>
 
-                                            {categories.items.map((menu_items, i) =>
-                                                <div key={i}>
-                                                    {device === 'mobile' &&
-                                                        <>
-                                                            <style>
-                                                                {`              
+                                <div className="bdrds mgx05 mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
+                                    <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
+                                    <div className={` catg df fd-c fxw`} style={{ gap: '1.2rem' }}>
+
+                                        {categories.items.map((menu_items, i) =>
+                                            <div key={i}>
+                                                {device === 'mobile' &&
+                                                    <>
+                                                        <style>
+                                                            {`              
                                                 .lowscreen-portal{
                                                   animation:a_lowscreen-porta_ 0.15s linear ;
                                                 }
@@ -568,65 +442,69 @@ export default function branches() {
                                                 bottom:0;
                                                 }
                                                 }`}
-                                                            </style>
-                                                            <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
-                                                                <div className="pdr06">
-                                                                    <div className="df" style={{ alignItems: 'flex-start' }}>
-                                                                        <span className="mgl01 font-lg font700">{menu_items.name}</span>
-                                                                        <span className="pdx02 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
-                                                                    </div>
-                                                                    <div className="df aic pdt02 pdx02 gap02">
-                                                                        <span className="pdx03 pdy01 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.7rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 -960 960 960" width="0.8rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
-                                                                    <div className="font-sm font500 pdt05">{menu_items.description}</div>
+                                                        </style>
+                                                        <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
+                                                            <div className="pdr06">
+                                                                <div className="df" style={{ alignItems: 'flex-start' }}>
+                                                                    <span className="mgl01 font-lg font700">{menu_items.name}</span>
+                                                                    <span className="pdx02 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
                                                                 </div>
-                                                                <div>
-                                                                    <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
-                                                                        <div className="lowscreen-portal wfp df fd-c oh" style={{
-                                                                            background: 'white',
-                                                                            borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
-                                                                        }}>
-                                                                            <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-                                                                            <div className="xfg" style={{ height: '200px' }}>
-                                                                                {/* Hii */}
-                                                                                <Image
-                                                                                    src={"http://127.0.0.1:8000"+menu_items.image}
-                                                                                    alt="iphone 15"
-                                                                                    width={400}
-                                                                                    height={200}
-                                                                                />
-                                                                            </div>
-                                                                            {/* <div>{menu_items.item_price__}</div> */}
-
-                                                                        </div>
-                                                                    )} style={{
-                                                                        width: '121px',
-                                                                        height: "120px",
-                                                                        borderRadius: '10px',
-                                                                        justifySelf: 'center',
-                                                                        background: 'white'
-                                                                    }}>                                                    <Image
-                                                                            src={"https://res.cloudinary.com/dbe8vybbp/"+menu_items.image}
-                                                                            alt="iphone 15"
-                                                                            width={122}
-                                                                            height={120}
-                                                                        /></div>
-                                                                        {/* <div className="pA add_cart_control_ICart_Control_Indirect oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  " onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>ADD</span><span className="df aic fx1 tac jcc CKEFT " onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div> */}
-                                                                        <Cart_Control_Indirect item_name={menu_items.name}
-
-                                                                        />
-
-                                                                    </div>
-
-                                                                </div>
+                                                                <div className="df aic pdt02 pdx02 gap02">
+                                                                    <span className="pdx03 pdy01 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.7rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 -960 960 960" width="0.8rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
+                                                                <div className="font-sm font500 pdt05">{menu_items.description}</div>
                                                             </div>
-                                                        </>
-                                                    }
-                                                </div>
-                                            )}
-                                        </div>
+                                                            <div>
+                                                                <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
+                                                                    <div className="lowscreen-portal wfp df fd-c oh" style={{
+                                                                        background: 'white',
+                                                                        borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
+                                                                    }}>
+                                                                        <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
+                                                                        <div className="xfg" style={{ height: '200px' }}>
+                                                                            {/* Hii */}
+                                                                            <Image
+                                                                                src={"http://127.0.0.1:8000" + menu_items.image}
+                                                                                alt="iphone 15"
+                                                                                width={400}
+                                                                                height={200}
+                                                                            />
+                                                                        </div>
+                                                                        {/* <div>{menu_items.item_price__}</div> */}
+
+                                                                    </div>
+                                                                )} style={{
+                                                                    width: '121px',
+                                                                    height: "120px",
+                                                                    borderRadius: '10px',
+                                                                    justifySelf: 'center',
+                                                                    background: 'white'
+                                                                }}>                                                    <Image
+                                                                        src={"https://res.cloudinary.com/dbe8vybbp/" + menu_items.image}
+                                                                        alt="iphone 15"
+                                                                        width={122}
+                                                                        height={120}
+                                                                    /></div>
+
+                                                                    <Cart_Control_Indirect
+                                                                        item={{
+                                                                            id: menu_items.id,
+                                                                            name: menu_items.name,
+                                                                            price: menu_items.price,
+                                                                            image: menu_items.image
+                                                                        }}
+                                                                    />
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </div>
+                                        )}
                                     </div>
-                              
+                                </div>
+
                             )
                         }
 
@@ -635,17 +513,7 @@ export default function branches() {
                     )}
 
                 </div>
-                {/* {cart_ && set_floaters(<div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
-                    {{ bottom: 0, borderColor: 'blac1k' }}><div className="pdy02 pdx05 font700 " style={{ background: 'linen', color: '#503232ff', backdropFilter: 'blur(2px)' }}><span className='font08 font700'>Add item worth 99 and get 50% flat discount</span></div>
-                    <div className="df aic jcsb gap05 pdy06 pdx05 bdt xbg" style={{ boxShadow: '0 0 6px 5px #000000ff' }}><span>21 Items</span>
-                        <Link href='/cart' style={{
-                            background: '#9970faff',
-                            color: 'white',
-                            borderRadius: '10px',
-                        }}
-                            className="pdx2 xfg df aic pdy1 font700 font-md"><span className='df'><Icon.Cart_ c='white' s='20' /></span>Checkout</Link>
-                    </div>
-                </div>)} */}
+
                 {/* {device === 'mobile' && dynamic_portal_main} */}
             </>
         }
@@ -653,3 +521,133 @@ export default function branches() {
 
     </>)
 }
+{/* for pc */ }
+// {device === 'pc' && <div className="hfp oh pR df bdt">
+
+//     <div className="pdx1 pdt1 bdr df fd-c jcsb fxw" style={{ background: '#f8f8f8', width: 'calc(200px + 2rem + 1px)' }}>
+//         <div className="container-A  xs:dn xs:dn df fd-c fxn font-md" style={{ overflow: "hidden", width: '200px', fontWeight: "var(--font-weight-300)", zIndex: '1', borderRadius: '10px' }}>
+//             <ContainerAContents />
+//         </div>
+//         <div className="tac font-sm font300"><span>Terms and Conditions | Privacy Policy</span></div>
+//     </div>
+//     <div className="fx1 df fd-c pR oh">
+//         <div className={`df gap03 fx1 oh`}>
+
+//             <div className="fx1 oy" style={{
+//                 scrollbarColor: '#f8f8f8 white',
+//                 scrollbarWidth: 'thin'
+//             }}>
+//                 <div className="df fd-c pdy1" style={{ position: 'sticky', top: '0' }}>
+//                     <div className="df jcc aic">
+//                         <div className="bd bdrds oh" style={{
+//                             width: '75%',
+//                             height: '11rem',
+//                             borderColor: 'black'
+//                         }}>{banner_}</div>
+//                     </div>
+//                 </div>
+//                 <div>
+//                     <div className="df aic jcsb bdb pdx1 pdy06 xbg gap3 ox" style={{
+//                         scrollbarColor: '#f8f8f8 white',
+//                         scrollbarWidth: 'none'
+//                     }}><div className="df aic gap1 fx1">
+//                             <span className="df aic gap02 font08 pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font900">Trending</span></span>
+//                             <span className="df aic gap02 font08 bd xfg bdrds pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg><span className="font900">Recommended</span></span>
+//                             <span className="df aic gap02 font08 bd xfg bdrds pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font900">Trending</span></span>
+//                             <span className="df"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#000000"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z" /></svg></span></div>
+//                     </div>
+//                     {menu__.map((ctg, i) => (
+
+//                         <div className="pdy1" key={i}>
+//                             <h2 className="mg0 pdx1 pdy08">{ctg.main_ctg__}</h2>
+//                             <div className={` catg df ${device === 'pc' && 'aic'} pdy1 pdx1 gap2l fxw ${device === 'mobile' && 'fd-c'}`} style={{ gap: '1.5rem' }}>
+//                                 {ctg.items_list__.map((v, i) => (
+//                                     <div key={i}>
+//                                         {device === 'pc' &&
+//                                             <>
+//                                                 <div className="pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} onMouseOut={(e) => { e.currentTarget.children[1].style.display = "none" }}><div className="bd" onClick={() => set_dynamics_portal_main(<Portal_ content={d(ctg.main_ctg__, v.item_name__, v.item_price__)} />)} style={{
+//                                                     width: '110px',
+//                                                     height: "120px",
+//                                                     borderRadius: '10px',
+//                                                     justifySelf: 'center',
+//                                                     background: 'white'
+//                                                 }}></div> <div className="pA add_cart_control_ICart_Control_Indirect oh" style={{ display: 'none', bottom: '-10px' }}><span className="df aic fx1 tac jcc CKEFT" onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo">0</span><span className="df aic fx1 tac jcc CKEFT" onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div></div>
+//                                                 <div className="font-sm" style={{ justifySelf: 'center', marginTop: '13px' }}>{v.item_name__}</div>
+//                                                 <div className="font07 pdx05 bdrds" style={{ justifySelf: 'center', background: 'beige' }}>{v.item_price__}</div>
+//                                             </>
+//                                         }
+//                                         {device === 'mobile' &&
+//                                             <>
+//                                                 <style>
+//                                                     {`
+//                                         .lowscreen-portal{
+//                                           animation:a_lowscreen-porta_ 0.15s linear ;
+//                                         }
+//                                         @keyframes a_lowscreen-porta_{
+//                                         0%{
+//                                         bottom:-100%;
+//                                         }
+//                                         100%{
+//                                         bottom:0;
+//                                         }
+//                                         }`}
+//                                                 </style>
+//                                                 <div className="bd bdrds xbg df jcsb pd1 pdb2">
+//                                                     <div className="pdr06">
+//                                                         <div className="df" style={{ alignItems: 'flex-start' }}>
+//                                                             <h3 className="mg0">{v.item_name__}</h3>
+//                                                             <span className="pdx04 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
+//                                                         </div>
+//                                                         <div className="df aic pdt02 pdx02 gap02">
+//                                                             <span className="pdx04 pdy02 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.75rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
+//                                                         <div className="font-sm pdt05">{v.item_description__}</div>
+//                                                     </div>
+//                                                     <div>
+//                                                         <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd" onClick={() => set_dynamics_portal_main(
+//                                                             <div className="lowscreen-portal pA wfp df fd-c oh" style={{
+//                                                                 background: 'white', bottom: 0,
+//                                                                 borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
+//                                                             }}>
+//                                                                 <div className="pdy05 pdx1 font600 bdb">{v.item_name__}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
+//                                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
+//                                                                 <div className="xfg" style={{ height: '200px' }}>Hii</div>
+//                                                                 {/* <div>{v.item_price__}</div> */}
+
+//                                                             </div>
+//                                                         )} style={{
+//                                                             width: '110px',
+//                                                             height: "120px",
+//                                                             borderRadius: '10px',
+//                                                             justifySelf: 'center',
+//                                                             background: 'white'
+//                                                         }}></div> <div className="pA add_cart_control_ICart_Control_Indirect oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  " onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>ADD</span><span className="df aic fx1 tac jcc CKEFT " onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div></div>
+
+//                                                     </div>
+//                                                 </div>
+//                                             </>
+//                                         }
+//                                     </div>
+//                                 ))}
+//                             </div>
+//                         </div>
+//                     )
+//                     )}
+//                 </div>
+
+//             </div>
+//             {device === 'pc' && dynamic_portal_main}
+//         </div>
+//         {device === 'mobile' && cart_ && <div className="pA pd05l jcsb wfp bdt bdr bdl bdTrds xbg oh" style=
+//             {{ bottom: 0, borderColor: 'black' }}><div className="pd03 font600 bdb" style={{ background: 'lavender', color: 'wlhite' }}><span className='font-sm'>Add item worth 99 and get 50% flat discout</span></div>
+//             <div className="df aic jcsb gap05 bdtl pdy06 pdx05" style={{ borderColor: 'black' }}><span>FI</span>
+//                 <span style={{
+//                     background: 'green',
+//                     color: 'white',
+//                     borderRadius: '10px',
+//                 }}
+//                     className="pd05 xfg df aic pdy07"><span className='df'><Icon.Cart_ c='white' s='24' /></span>Checkout</span>
+//             </div>
+//         </div>}
+//         {device === 'mobile' && dynamic_portal_main}
+//     </div>
+// </div>}

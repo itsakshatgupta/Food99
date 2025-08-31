@@ -3,11 +3,14 @@ import { useState, useContext, useEffect } from "react";
 import { dynamic_ } from "@/components/main-context";
 import { Icon } from "@/components/lib/icons";
 import Image from "next/image";
-import { Cart_Control_Direct } from "@/components/lib/cart_control";
+import { Cart_Control_Direct, Cart_Control_Indirect } from "@/components/lib/cart_control";
 import { cart, orders } from "@/components/dummy_data";
+import { apiFetch } from "@/app/(api)/api";
 
 export default function Cart() {
     const { device, set_floaters } = useContext(dynamic_);
+    const [cartItems, setCartItems] = useState(null);
+
     const orderList = [
 
         {
@@ -65,6 +68,20 @@ export default function Cart() {
             </>
         )
     }, [])
+
+    // Fetch cart from backend API
+    useEffect(() => {
+        async function fetchCart() {
+            try {
+                const res = await apiFetch("/cart"); // Django cart API
+                const data = await res.json();
+                setCartItems(data);
+            } catch (error) {
+                console.error("Error fetching cart:", error);
+            }
+        }
+        fetchCart();
+    }, []);
 
     return (
         <>
@@ -154,7 +171,7 @@ export default function Cart() {
                     </div>
                 </div>
             </div>}
-            {device === 'mobile' && <>
+            {device === 'mobile' && cartItems && <>
                 <div className={`hfp df fd-c gap1 jcsb ${device === 'pc' && 'pdx1'}`} style={{
                     background: 'whitesmoke',
                     scrollbarWidth: 'none',
@@ -177,22 +194,22 @@ export default function Cart() {
                                 background: 'white'
                             }}
                             >
-                                {cart.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.item_no}>
+                                {cartItems.items.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.menu_item.id}>
                                     <div className="fx1 df gap05 font-sm font600" >
                                         <Image
                                             alt="iphone 15"
-                                            src={o.img_src}
+                                            src={o.menu_item.image||'/default_user.png'}
                                             width={55}
                                             height={58}
                                             style={{ borderRadius: '5px' }}
                                         />
                                         <div className="fx1">
-                                            <div className="font-sm">{o.item_name}</div>
-                                            <div className="font08 pdt02">${o.price}</div>
+                                            <div className="font-sm">{o.menu_item.name}</div>
+                                            <div className="font08 pdt02">${o.menu_item.price}</div>
                                         </div>
                                     </div>
-                                    <Cart_Control_Direct
-                                        Cart_Item_No={o.item_no}
+                                    <Cart_Control_Indirect
+                                        Cart_Item_No={o.id}
                                         Cart_Item_Qn={o.quantity}
                                         redirect_to_home_on_Nothing={true}
                                         mode={'cart_manager_direct'}

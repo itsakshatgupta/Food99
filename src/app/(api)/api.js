@@ -1,6 +1,8 @@
 // utils/apiFetch.js
+const production_url = "https://food99api.onrender.com/api"
+const dev_url = "http://localhost:8000/api" 
 
-const BASE_URL = "https://food99api.onrender.com/api";
+const BASE_URL = dev_url;
 
 export async function apiFetch(url, options = {}) {
   // --- add access token ---
