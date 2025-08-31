@@ -464,7 +464,7 @@ export default function branches() {
                                                                         <div className="xfg" style={{ height: '200px' }}>
                                                                             {/* Hii */}
                                                                             <Image
-                                                                                src={"http://127.0.0.1:8000" + menu_items.image}
+                                                                                src={menu_items.image}
                                                                                 alt="iphone 15"
                                                                                 width={400}
                                                                                 height={200}
