@@ -38,8 +38,8 @@ export function Cart_Control_Direct({ item }) {
                         return window.location.href = "/"
                     }
                 }
-            }}
-        ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
+            }}>
+                <svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
     </>)
 }
 
@@ -70,6 +70,8 @@ export function Cart_Control_Indirect({ item }) {
                     set_cart_quantity_indirect(1);
                     const getCI_id = addToCart(item.id, 1);
                     set_CartItem_id(getCI_id.id)
+                    console.log('cartitem_id:' , getCI_id)
+                    console.log('item_id:' , item.id)
                 }
             }}
         ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
