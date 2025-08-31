@@ -62,7 +62,7 @@ export function Cart_Control_Indirect({ item }) {
     } else {
       // update existing
       const newQty = cart_quantity_indirect + 1;
-      const response =await updateCartItem(CartItem_id, newQty);
+      const response =await updateCartItem(cart_quantity_indirect, newQty);
           if(response.ok){
       set_cart_quantity_indirect(newQty);
           }
