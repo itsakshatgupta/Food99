@@ -72,7 +72,7 @@ export function Cart_Control_Indirect({ item }) {
   const handleRemove = async () => {
     if (cart_quantity_indirect > 1) {
       const newQty = cart_quantity - 1;
-      await updateCartItem(cart_quantity_indirect, newQty);
+      await updateCartItem(CartItem_id, newQty);
       set_cart_quantity_indirect(newQty);
     } else {
       await removeCartItem(CartItem_id);
