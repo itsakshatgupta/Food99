@@ -208,7 +208,7 @@ export default function Cart() {
                                             <div className="font08 pdt02">${o.menu_item.price}</div>
                                         </div>
                                     </div>
-                                    <Cart_Control_Indirect
+                                    <Cart_Control_Direct
                                         item={{
                                             id: o.id,
                                             quantity: o.quantity,
