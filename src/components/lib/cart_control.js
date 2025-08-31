@@ -53,12 +53,12 @@ export function Cart_Control_Indirect({ item }) {
       // first add to cart
       const response = await addToCart(item.id, 1); // menu_item.id
       set_CartItem_id(response.id); // store cartItem.id
-      setCart_quantity(1);
+      set_cart_quantity_indirect(1);
     } else {
       // update existing
       const newQty = cart_quantity + 1;
       await updateCartItem(CartItem_id, newQty);
-      set_cart_quantity(newQty);
+      set_cart_quantity_indirect(newQty);
     }
   };
 
@@ -66,10 +66,10 @@ export function Cart_Control_Indirect({ item }) {
     if (cart_quantity > 1) {
       const newQty = cart_quantity - 1;
       await updateCartItem(CartItem_id, newQty);
-      set_cart_quantity(newQty);
+      set_cart_quantity_indirect(newQty);
     } else {
       await removeCartItem(CartItem_id);
-      set_cart_quantity("ADD");
+      set_cart_quantity_indirect("ADD");
       set_CartItem_id(null);
     }
   };
