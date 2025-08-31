@@ -19,7 +19,7 @@ export function Cart_Control_Direct({ item }) {
                 } else {
                     removeCartItem(item.id);
                     document.getElementById(item.id).remove()
-                    if (document.getElementById('product-container').hasChildNodes === false) {
+                    if (document.getElementById('product-container').hasChildNodes() === false) {
                         return window.location.href = "/"
                     }
                 }

@@ -194,7 +194,7 @@ export default function Cart() {
                                 background: 'white'
                             }}
                             >
-                                {cartItems.items.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.menu_item.id}>
+                                {cartItems.items.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.id}>
                                     <div className="fx1 df gap05 font-sm font600" >
                                         <Image
                                             alt="iphone 15"
