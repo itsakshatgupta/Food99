@@ -71,6 +71,8 @@ export function Cart_Control_Indirect({ item }) {
 
     const [cart_quantity_indirect, set_cart_quantity_indirect] = useState("ADD");
     const [CartItem_id, set_CartItem_id] = useState(null);
+    const [timer, set_timer] = useState(null);
+
 
     const handleAdd = async () => {
         if (cart_quantity_indirect === "ADD") {
@@ -86,10 +88,16 @@ export function Cart_Control_Indirect({ item }) {
         } else {
             // update existing
             const newQty = cart_quantity_indirect + 1;
-            const response = await updateCartItem(CartItem_id, newQty);
-            if (response.ok) {
-                set_cart_quantity_indirect(newQty);
-            }
+            set_cart_quantity_indirect(newQty);
+            if (timer) clearTimeout(timer)
+            const newtimer = setTimeout(async () => {
+                try {
+                    await updateCartItem(CartItem_id, newQty);
+                } catch (err) {
+                    set_cart_quantity_indirect(11);
+                }
+            }, 1500)
+            set_timer(newtimer)
         }
     };
 
@@ -102,9 +110,20 @@ export function Cart_Control_Indirect({ item }) {
             }
             set_cart_quantity_indirect(newQty);
         } else {
-            await removeCartItem(CartItem_id);
             set_cart_quantity_indirect("ADD");
             set_CartItem_id(null);
+
+            if (timer) clearTimeout(timer)
+            const newtimer = setTimeout(async () => {
+                try {
+                    await removeCartItem(CartItem_id);
+                } catch (err) {
+                    set_cart_quantity_indirect(11);
+                }
+            }, 1500)
+            set_timer(newtimer)
+
+
         }
     };
 

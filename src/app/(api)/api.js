@@ -19,7 +19,7 @@ export async function apiFetch(url, options = {}) {
 
   // --- if unauthorized, try refresh ---
   if (response.status === 401) {
-    const refresh = localStorage.getItem("refresh");
+    const refresh = localStorage.getItem("refresh_token");
     if (refresh) {
       try {
         const refreshResponse = await fetch(BASE_URL + "/api/token/refresh/", {
@@ -37,8 +37,8 @@ export async function apiFetch(url, options = {}) {
           response = await fetch(BASE_URL + url, { ...options, headers });
         } else {
           // refresh failed → logout
-          localStorage.removeItem("access");
-          localStorage.removeItem("refresh");
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
           window.location.href = "/login";
         }
       } catch (err) {
