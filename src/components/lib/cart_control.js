@@ -9,45 +9,50 @@ export function Cart_Control_Direct({ item }) {
     const [cart_quantity_direct, set_cart_quantity_direct] = useState(item.quantity);
 
     const handleAdd = async () => {
-        if(cart_quantity_direct >= 1) {
-            // update existing
-            const newQty = cart_quantity_direct + 1;
-            const response = await updateCartItem(item.id, newQty);
-            if (response.ok) {
+        if (cart_quantity_direct >= 1) {
+            try {
+                // update existing
+                const newQty = cart_quantity_direct + 1;
+                await updateCartItem(item.id, newQty);
                 set_cart_quantity_direct(newQty);
+            } catch (err) {
+                set_cart_quantity_direct(11);
             }
         }
     };
 
     const handleRemove = async () => {
         if (cart_quantity_direct > 1) {
-            const newQty = cart_quantity_direct - 1;
-            const response = await updateCartItem(item.id, newQty);
-            if (response.ok) {
+            try {
+                const newQty = cart_quantity_direct - 1;
+                await updateCartItem(item.id, newQty);
                 set_cart_quantity_direct(newQty);
+            } catch (err) {
+                set_cart_quantity_direct(11);
             }
-            set_cart_quantity_direct(newQty);
         } else {
-            const response = await removeCartItem(item.id);
-            if (response.ok) {
-            document.getElementById(item.id).remove()
-            console.log('hi')
-            if (document.getElementById('product-container').hasChildNodes() === false) {
-                return window.location.href = "/"
-            }
+            try {
+                await removeCartItem(item.id);
+                document.getElementById(item.id).remove()
+                if (document.getElementById('product-container').hasChildNodes() === false) {
+                    return window.location.href = "/"
+                }
+            } catch (err) {
+                console.log('hi error', err)
             }
         }
-    };
+    }
+};
 
-    return (<>
-        <div className="add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
+return (<>
+    <div className="add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
 
-            onClickCapture={handleRemove}
+        onClickCapture={handleRemove}
 
-        ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>{cart_quantity_direct}</span><span className="df aic fx1 tac jcc CKEFT "
-            onClickCapture={handleAdd}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
-    </>)
+    ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>{cart_quantity_direct}</span><span className="df aic fx1 tac jcc CKEFT "
+        onClickCapture={handleAdd}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
+</>)
 }
 
 
