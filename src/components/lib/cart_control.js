@@ -48,38 +48,41 @@ export function Cart_Control_Indirect({ item }) {
     const [cart_quantity_indirect, set_cart_quantity_indirect] = useState("ADD");
     const [CartItem_id, set_CartItem_id] = useState(null);
 
-      const handleAdd = async () => {
-    if (cart_quantity_indirect === "ADD") {
-      // first add to cart
-      const response = await addToCart(item.id, 1); // menu_item.id
-      if(response.ok){
-        let r = await response.json()
-        console.log('r', r)
-          console.log(123, response, response.json())
-          set_CartItem_id(r.id); // store cartItem.id
-          set_cart_quantity_indirect(1);
-      }
-    } else {
-      // update existing
-      const newQty = cart_quantity_indirect + 1;
-      const response =await updateCartItem(CartItem_id, newQty);
-          if(response.ok){
-      set_cart_quantity_indirect(newQty);
-          }
-    }
-  };
+    const handleAdd = async () => {
+        if (cart_quantity_indirect === "ADD") {
+            // first add to cart
+            const response = await addToCart(item.id, 1); // menu_item.id
+            if (response.ok) {
+                let r = await response.json()
+                console.log('r', r)
+                console.log(123, response, response.json())
+                set_CartItem_id(r.id); // store cartItem.id
+                set_cart_quantity_indirect(1);
+            }
+        } else {
+            // update existing
+            const newQty = cart_quantity_indirect + 1;
+            const response = await updateCartItem(CartItem_id, newQty);
+            if (response.ok) {
+                set_cart_quantity_indirect(newQty);
+            }
+        }
+    };
 
-  const handleRemove = async () => {
-    if (cart_quantity_indirect > 1) {
-      const newQty = cart_quantity - 1;
-      await updateCartItem(CartItem_id, newQty);
-      set_cart_quantity_indirect(newQty);
-    } else {
-      await removeCartItem(CartItem_id);
-      set_cart_quantity_indirect("ADD");
-      set_CartItem_id(null);
-    }
-  };
+    const handleRemove = async () => {
+        if (cart_quantity_indirect > 1) {
+            const newQty = cart_quantity_indirect - 1;
+            const response = await updateCartItem(CartItem_id, newQty);
+            if (response.ok) {
+                set_cart_quantity_indirect(newQty);
+            }
+            set_cart_quantity_indirect(newQty);
+        } else {
+            await removeCartItem(CartItem_id);
+            set_cart_quantity_indirect("ADD");
+            set_CartItem_id(null);
+        }
+    };
 
     return (<>
         <div className="pA add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
