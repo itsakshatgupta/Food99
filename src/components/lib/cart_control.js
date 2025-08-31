@@ -54,7 +54,7 @@ export function Cart_Control_Indirect({ item }) {
       const response = await addToCart(item.id, 1); // menu_item.id
       if(response.ok){
         let r = await response.json()
-        console('r', r)
+        console.log('r', r)
           console.log(123, response, response.json())
           set_CartItem_id(response.id); // store cartItem.id
           set_cart_quantity_indirect(1);
