@@ -500,11 +500,11 @@ export default function branches() {
                                                                     <Cart_Control_Indirect
                                                                         item={{
                                                                             id: menu_items.id,
-                                                                            quantity: cart__i.items.map((v, i) => {
+                                                                            quantity:async()=>{ await cart__i.items.map((v, i) => {
                                                                                 if (v.menu_item.id === menu_items.id) {
                                                                                     return cart__i.items.quantity;
                                                                                 }
-                                                                            }),
+                                                                            })},
                                                                             name: menu_items.name,
                                                                             price: menu_items.price,
                                                                             image: menu_items.image
