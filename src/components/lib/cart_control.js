@@ -42,7 +42,6 @@ export function Cart_Control_Direct({ item }) {
             }
         }
     }
-};
 
 return (<>
     <div className="add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
