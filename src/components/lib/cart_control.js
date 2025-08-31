@@ -45,27 +45,7 @@ export function Cart_Control_Direct({ item }) {
 
 export function Cart_Control_Indirect({ item }) {
 
-    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState("ADD")
-    useEffect(() => {
-
-        if (cart_quantity_indirect < 1) {
-            // remove item to server's cart database
-            removeCartItem(item.id)
-
-        }
-        // else {
-        //     if (cart_quantity_indirect === 1) {
-        //         // remove item to server's cart database
-        //         addToCart(item.id, cart_quantity_indirect)
-
-        //     } else {
-        //         // send quantity to server's cart database
-        //         updateCartItem(item.id, cart_quantity_indirect)
-        //     }
-        // }
-
-
-    }, [cart_quantity_indirect])
+    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState("ADD");
 
     return (<>
         <div className="pA add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
