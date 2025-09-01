@@ -492,7 +492,7 @@ export default function branches() {
                                                                     justifySelf: 'center',
                                                                     background: 'white'
                                                                 }}>                                                    <Image
-                                                                        src={"https://res.cloudinary.com/dbe8vybbp/" + menu_items.image}
+                                                                        src={menu_items.image}
                                                                         alt="iphone 15"
                                                                         width={122}
                                                                         height={120}
