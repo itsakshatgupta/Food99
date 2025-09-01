@@ -503,7 +503,7 @@ export default function branches() {
                                                                                 const cartItem = cart__i.items.find((v) => v.menu_item.id === menu_items.id);
 
                                                                                 return {
-                                                                                    quantity: cartItem ? cartItem.quantity : 0,
+                                                                                    quantity: cartItem ? cartItem.quantity : null,
                                                                                     cart_item_id: cartItem ? cartItem.id : null,
                                                                                 };
                                                                             }}
