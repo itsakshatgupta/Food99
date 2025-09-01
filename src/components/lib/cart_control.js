@@ -70,7 +70,7 @@ export function Cart_Control_Direct({ item }) {
 
 export function Cart_Control_Indirect({ cart_detail, item }) {
     const {quantity, cart_item_id} = cart_detail();
-    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(quantity!==null||NaN?parseInt(quantity):"ADD");
+    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(quantity!==null?quantity:"ADD");
     console.log(quantity)
     console.log('iq',   quantity, cart_quantity_indirect)
     const [CartItem_id, set_CartItem_id] = useState(cart_item_id||null);
