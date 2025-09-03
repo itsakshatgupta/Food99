@@ -190,6 +190,7 @@ export default function branches() {
         fetchCart();
         fetchMenu();
     }, []);
+    
     const d = (fall_ctg_, n, p, d) => {
         return (<>
             <style>

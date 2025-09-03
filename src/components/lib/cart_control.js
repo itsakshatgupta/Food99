@@ -94,13 +94,13 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
     const handleAdd = async () => {
         if (cart_quantity_indirect === "ADD") {
             // first add to cart
+            set_cart_quantity_indirect(1);
             const response = await addToCart(item.id, 1); // menu_item.id
             if (response.ok) {
                 let r = await response.json()
                 console.log('r', r)
                 console.log(123, response, response.json())
                 set_CartItem_id(r.id); // store cartItem.id
-                set_cart_quantity_indirect(1);
             }
         } else {
             // update existing
