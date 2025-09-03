@@ -12,7 +12,10 @@ export function Cart_Control_Direct({ item }) {
     const [cart_quantity_direct, set_cart_quantity_direct] = useState(item.quantity);
     const [timer, set_timer] = useState(null);
 
-
+    useEffect(()=>{
+        updatecartprice();
+    },[])
+    
     async function updatecartprice() {
         try {
             const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
@@ -25,7 +28,6 @@ export function Cart_Control_Direct({ item }) {
         }
     }
     
-
     const handleAdd = () => {
         if (cart_quantity_direct >= 1) {
             // update existing

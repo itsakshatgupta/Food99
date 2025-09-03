@@ -1,5 +1,5 @@
 'use client'
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, createContext } from "react";
 import { dynamic_ } from "@/components/main-context";
 import { Icon } from "@/components/lib/icons";
 import Image from "next/image";
@@ -14,44 +14,6 @@ export default function Cart() {
     const [cartItems, setCartItems] = useState(null);
     const [total_amount__i, set_total_amount__i] = useState('loading');
 
-    const orderList = [
-
-        {
-            item_name: 'marherita',
-            item_no: 'Lx2202gh0',
-            quantity: 2,
-            price: 86,
-            img_src: "/food_img/b.jpg"
-        },
-        {
-            item_name: 'marherita',
-            item_no: 'K430RTNBV',
-            quantity: 2,
-            price: 99,
-            img_src: "/food_img/c.jpg"
-        },
-        {
-            item_name: 'marherita',
-            item_no: 'QFVBTHGD23',
-            quantity: 2,
-            price: 120,
-            img_src: "/food_img/g.jpg"
-        },
-        {
-            item_name: 'marherita',
-            item_no: 'ANBIFMX6JZ',
-            quantity: 2,
-            price: 115,
-            img_src: "/food_img/d.jpeg"
-        },
-        {
-            item_name: 'marherita',
-            item_no: 'GBKIOE45V21ZSR',
-            quantity: 2,
-            price: 109,
-            img_src: "/food_img/c.jpg"
-        }
-    ]
     useEffect(() => {
 
         set_floaters(
