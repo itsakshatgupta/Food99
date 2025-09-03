@@ -48,9 +48,7 @@ export default function Cart() {
         fetchCart();
     }, []);
 
-    useEffect(() => {
-        updatecartprice();
-    }, [])
+    
     const updatecartprice = async () => {
         try {
             const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
@@ -61,6 +59,10 @@ export default function Cart() {
             console.error("Error fetching cart:", error);
         }
     }
+    
+    useEffect(() => {
+        updatecartprice();
+    }, [])
 
     return (
         <>
