@@ -81,7 +81,7 @@ export default function Cart() {
             }
 
             // 2. Initialize Cashfree
-            const cashfree = new window.Cashfree({ mode: "sandbox" });
+            const cashfree = new window.Cashfree({ mode: "production" });
 
             // 3. Open Embedded Checkout
             await cashfree.checkout({
