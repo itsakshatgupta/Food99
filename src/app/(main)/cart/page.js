@@ -7,9 +7,11 @@ import { Cart_Control_Direct, Cart_Control_Indirect } from "@/components/lib/car
 import { cart, orders } from "@/components/dummy_data";
 import { apiFetch } from "@/app/(api)/api";
 
+
 export default function Cart() {
     const { device, set_floaters } = useContext(dynamic_);
     const [cartItems, setCartItems] = useState(null);
+    const [total_amount__i, set_total_amount__i] = useState('loading');
 
     const orderList = [
 
@@ -62,16 +64,25 @@ export default function Cart() {
                             color: 'white',
                             borderRadius: '10px',
                         }}
-                            className="pdx3 xfg df xfg aic pdy1 font900">Pay $486</span>
+                            className="pdx3 xfg df xfg aic pdy1 font900">Pay ${total_amount__i.total}</span>
                     </div>
                 </div>
             </>
         )
-    }, [])
+    }, [total_amount__i])
 
     // Fetch cart from backend API
     useEffect(() => {
         async function fetchCart() {
+            try {
+                const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
+                const data2 = await res2.json();
+                console.log('mycart', data2)
+                set_total_amount__i(data2)
+                
+            } catch (error) {
+                console.error("Error fetching cart:", error);
+            }
             try {
                 const res = await apiFetch("/cart"); // Django cart API
                 const data = await res.json();
@@ -476,7 +487,7 @@ export default function Cart() {
                                         <span className="font600" style={{
                                             float: 'right',
                                             color: 'green'
-                                        }}>$486</span>
+                                        }}>${total_amount__i.total}</span>
                                     </div>
                                 </div>
                             </div>

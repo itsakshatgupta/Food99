@@ -172,6 +172,7 @@ export default function branches() {
                 const res = await apiFetch("/cart"); // Django cart API
                 const data = await res.json();
                 set_cart__i(data);
+
             } catch (error) {
                 console.error("Error fetching cart:", error);
             }
@@ -499,14 +500,14 @@ export default function branches() {
                                                                     /></div>
 
                                                                     <Cart_Control_Indirect
-                                                                    cart_detail = {() => {
-                                                                                const cartItem = cart__i.items.find((v) => v.menu_item.id === menu_items.id);
+                                                                        cart_detail={() => {
+                                                                            const cartItem = cart__i.items.find((v) => v.menu_item.id === menu_items.id);
 
-                                                                                return {
-                                                                                    quantity: cartItem ? cartItem.quantity : null,
-                                                                                    cart_item_id: cartItem ? cartItem.id : null,
-                                                                                };
-                                                                            }}
+                                                                            return {
+                                                                                quantity: cartItem ? cartItem.quantity : null,
+                                                                                cart_item_id: cartItem ? cartItem.id : null,
+                                                                            };
+                                                                        }}
                                                                         item={{
                                                                             id: menu_items.id,
                                                                             name: menu_items.name,
