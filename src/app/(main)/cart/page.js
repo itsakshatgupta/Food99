@@ -48,6 +48,20 @@ export default function Cart() {
         fetchCart();
     }, []);
 
+    // useEffect(() => {
+    //     updatecartprice();
+    // }, [])
+    const updatecartprice = async () => {
+        try {
+            const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
+            const data2 = await res2.json();
+            console.log('mycart', data2)
+            set_total_amount__i(data2)
+        } catch (error) {
+            console.error("Error fetching cart:", error);
+        }
+    }
+
     return (
         <>
             <style>{`#cart{background:#f0c9ab; border-color:black}`}</style>
@@ -159,21 +173,23 @@ export default function Cart() {
                                 background: 'white'
                             }}
                             >
-                                {cartItems.items.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.id}>
-                                    <div className="fx1 df gap05 font-sm font600" >
-                                        <Image
-                                            alt="iphone 15"
-                                            src={o.menu_item.image || '/default_user.png'}
-                                            width={55}
-                                            height={58}
-                                            style={{ borderRadius: '5px' }}
-                                        />
-                                        <div className="fx1">
-                                            <div className="font-sm">{o.menu_item.name}</div>
-                                            <div className="font08 pdt02">${o.menu_item.price}</div>
+                                <cartprice.Provider value={{ total_amount__i, set_total_amount__i, updatecartprice }}>
+
+                                    {cartItems.items.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.id}>
+                                        <div className="fx1 df gap05 font-sm font600" >
+                                            <Image
+                                                alt="iphone 15"
+                                                src={o.menu_item.image || '/default_user.png'}
+                                                width={55}
+                                                height={58}
+                                                style={{ borderRadius: '5px' }}
+                                            />
+                                            <div className="fx1">
+                                                <div className="font-sm">{o.menu_item.name}</div>
+                                                <div className="font08 pdt02">${o.menu_item.price}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <cartprice.Provider value={{ total_amount__i, set_total_amount__i }}>
+
                                         <Cart_Control_Direct
                                             item={{
                                                 id: o.id,
@@ -181,9 +197,10 @@ export default function Cart() {
                                             }}
                                             redirect_to_home_on_Nothing={true}
                                         />
-                                    </cartprice.Provider>
 
-                                </div>))}
+
+                                    </div>))}
+                                </cartprice.Provider>
                             </div>
 
                             <div className="df fd-c gap03 pd1 bd bdrds xbg">

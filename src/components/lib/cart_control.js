@@ -8,25 +8,21 @@ import { cartprice } from "@/app/(main)/cart/page";
 
 export function Cart_Control_Direct({ item }) {
 
-    const { set_total_amount__i } = useContext(cartprice);
+    const { set_total_amount__i, updatecartprice } = useContext(cartprice);
     const [cart_quantity_direct, set_cart_quantity_direct] = useState(item.quantity);
     const [timer, set_timer] = useState(null);
 
-    useEffect(()=>{
-        updatecartprice();
-    },[])
     
-    async function updatecartprice() {
-        try {
-            const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
-            const data2 = await res2.json();
-            console.log('mycart', data2)
-            set_total_amount__i(data2)
-
-        } catch (error) {
-            console.error("Error fetching cart:", error);
-        }
-    }
+    // async function updatecartprice() {
+    //     try {
+    //         const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
+    //         const data2 = await res2.json();
+    //         console.log('mycart', data2)
+    //         set_total_amount__i(data2)
+    //     } catch (error) {
+    //         console.error("Error fetching cart:", error);
+    //     }
+    // }
     
     const handleAdd = () => {
         if (cart_quantity_direct >= 1) {
