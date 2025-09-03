@@ -6,7 +6,7 @@ const BASE_URL = production_url;
 
 export async function apiFetch(url, options = {}) {
   // --- add access token ---
-  const access = localStorage.getItem("access_token");
+  const access = localStorage.getItem("access");
   const headers = {
     ...(options.headers || {}),
     "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function apiFetch(url, options = {}) {
 
   // --- if unauthorized, try refresh ---
   if (response.status === 401) {
-    const refresh = localStorage.getItem("refresh_token");
+    const refresh = localStorage.getItem("refresh");
     if (refresh) {
       try {
         const refreshResponse = await fetch(BASE_URL + "/api/token/refresh/", {
@@ -30,15 +30,15 @@ export async function apiFetch(url, options = {}) {
 
         if (refreshResponse.ok) {
           const data = await refreshResponse.json();
-          localStorage.setItem("access_token", data.access);
+          localStorage.setItem("access", data.access);
 
           // retry original request with new token
           headers["Authorization"] = `Bearer ${data.access}`;
           response = await fetch(BASE_URL + url, { ...options, headers });
         } else {
           // refresh failed → logout
-          localStorage.removeItem("access_token");
-          localStorage.removeItem("refresh_token");
+          localStorage.removeItem("access");
+          localStorage.removeItem("refresh");
           window.location.href = "/login";
         }
       } catch (err) {

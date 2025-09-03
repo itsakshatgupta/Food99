@@ -143,6 +143,21 @@ export default function branches() {
 
     const { dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, floaters, set_floaters } = useContext(dynamic_);
 
+
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        const socket = new WebSocket(`ws://food99api.onrender.com/api/ws/orders/21/`);
+
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            setMessages((prev) => [...prev, data.message]);
+        };
+
+        return () => socket.close();
+    }, []);
+
+
     useEffect(() => {
         if (cart_) {
             set_floaters(<div className='df fd-c' style={{ alignItems: 'flex-end' }}>
@@ -426,6 +441,14 @@ export default function branches() {
                     background: 'whitesmoke',
                     paddingBlockEnd: `${floaters ? '150px' : 0}`
                 }}>
+                    <div>
+                        <h2>Order Tracking for #21</h2>
+                        <ul>
+                            {messages.map((msg, i) => (
+                                <li key={i}>{msg}</li>
+                            ))}
+                        </ul>
+                    </div>
 
 
                     {cart__i !== null && menu___i?.map((categories) => {
