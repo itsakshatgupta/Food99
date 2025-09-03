@@ -11,7 +11,6 @@
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.15.2",
     "browser-image-compression": "^2.0.2",
-    "cashfree-dropjs": "^1.1.5",
     "handsontable": "^16.0.1",
     "jspreadsheet-ce": "^5.0.2",
     "lucide-react": "^0.542.0",

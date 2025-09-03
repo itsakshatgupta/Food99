@@ -1,4 +1,5 @@
 'use client'
+import Script from "next/script";
 import { useState, useContext, useEffect, createContext } from "react";
 import { dynamic_ } from "@/components/main-context";
 import { Icon } from "@/components/lib/icons";
@@ -27,7 +28,7 @@ export default function Cart() {
                             color: 'white',
                             borderRadius: '10px',
                         }}
-                            className="pdx3 xfg df xfg aic pdy1 font900">Pay ${total_amount__i.total}</span>
+                            className="pdx3 xfg df xfg aic pdy1 font900" onClick={handlePayment}>Pay ${total_amount__i.total}</span>
                     </div>
                 </div>
             </>
@@ -48,7 +49,7 @@ export default function Cart() {
         fetchCart();
     }, []);
 
-    
+
     const updatecartprice = async () => {
         try {
             const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
@@ -64,24 +65,48 @@ export default function Cart() {
         updatecartprice();
     }, [])
 
-      async function handlePayment() {
-    // Get order token from Django backend
-    const res = await fetch("/api/create-order");
+ async function handlePayment() {
+    alert('hi')
+  try {
+    // Call Django backend to create Cashfree order
+    const res = await apiFetch(`/api/payment/create-order/`, {
+    method: "POST",
+    body: JSON.stringify({ amount: total_amount__i.total }),
+  });
+    
     const data = await res.json();
-    const orderToken = data.order_token;
+    if (!data.order_token) {
+      alert("Failed to get payment token");
+      return;
+    }
 
-    const cashfree = new window.Cashfree({
-      mode: "sandbox", // change to "production" later
-    });
+    // Initialize Cashfree
+    const cashfree = new window.Cashfree({ mode: "sandbox" }); // use "production" later
 
-    cashfree.checkout({
-      paymentSessionId: orderToken,
-      redirectTarget: "_self", // stays on same page
-    });
+    cashfree
+      .checkout({
+        paymentSessionId: data.order_token,
+        redirectTarget: "_self", // stays inside app
+      })
+      .then((result) => {
+        console.log("Payment result:", result);
+        if (result.error) {
+          alert("Payment failed: " + result.error.message);
+        } else {
+          alert("Payment success!");
+          // 🔹 Call Django verify endpoint with order_id here
+        }
+      });
+  } catch (err) {
+    console.error(err);
+    alert("Payment failed. Try again!");
   }
+}
+
 
     return (
         <>
+            <Script src="https://sdk.cashfree.com/js/v3/cashfree.js" strategy="afterInteractive" />
             <style>{`#cart{background:#f0c9ab; border-color:black}`}</style>
             {device === 'pc' && <div className={`hfp df fd-c gap1 jcsb ${device === 'pc' && 'pdx1'}`} style={{
                 background: 'white',
@@ -475,28 +500,15 @@ export default function Cart() {
                                     </div>
                                     <div className="pdy2  font-sm" style={{ borderTop: '1px dashed #b3b3b3' }}>
                                         <span className="font600">Total</span>
-                                        <span className="font600" style={{
+                                        <button className="font600" style={{
                                             float: 'right',
                                             color: 'green'
-                                        }} onClickCapture={handlepayment}>${total_amount__i.total}</span>
+                                        }} >${total_amount__i.total}</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/* set_floaters(
-                    <div className="pS pdt05 jcsb wfp oh" style=
-                        {{ bottom: 0 }}>
-                        <div className="df aic jcsb gap05 bdtl pdy06 pdx07 bdTrds xbg" style={{ borderColor: 'black', boxShadow: '0 0 6px 1px #eeeeeeff' }}>
-                            <div className="df fd-c pdx05 gap01"><div className="df aic gap03"><span className="bd pdy04 pdx04 xfg"></span><span className="font-sm font500" style={{fontVariant: 'all-petite-caps', color:'GrayText'}}>Pay Using</span></div><span className="mgl03 font-sm font700">Google Pay</span></div>
-                            <span href='/cart' style={{
-                                background: '#9970faff',
-                                color: 'white',
-                                borderRadius: '10px',
-                            }}
-                                className="pdx3 xfg df xfg aic pdy1 font900">Pay $486</span>
-                        </div>
-                    </div>) */}
                 </div>
 
             </>}
