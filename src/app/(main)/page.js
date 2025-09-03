@@ -428,7 +428,7 @@ export default function branches() {
                     paddingBlockEnd: `${floaters ? '150px' : 0}`
                 }}>
 
-                    {cart__i !== null && menu___i?.map((categories) => {
+                    {menu___i?.map((categories) => {
                         console.log('ccc', cart__i)
                         if (categories.items.length >= 1) {
                             return (
@@ -501,7 +501,7 @@ export default function branches() {
 
                                                                     <Cart_Control_Indirect
                                                                         cart_detail={() => {
-                                                                            const cartItem = cart__i.items.find((v) => v.menu_item.id === menu_items.id);
+                                                                            const cartItem = cart__i?.items.find((v) => v.menu_item.id === menu_items.id);
 
                                                                             return {
                                                                                 quantity: cartItem ? cartItem.quantity : null,
