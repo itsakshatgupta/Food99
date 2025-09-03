@@ -48,9 +48,9 @@ export default function Cart() {
         fetchCart();
     }, []);
 
-    // useEffect(() => {
-    //     updatecartprice();
-    // }, [])
+    useEffect(() => {
+        updatecartprice();
+    }, [])
     const updatecartprice = async () => {
         try {
             const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
