@@ -1,14 +1,30 @@
 'use client';
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { cart } from "../dummy_data";
 import { addToCart, removeCartItem, updateCartItem } from "./cart_api";
 import { apiFetch } from "@/app/(api)/api";
+import { cartprice } from "@/app/(main)/cart/page";
 
 export function Cart_Control_Direct({ item }) {
 
+    const { set_total_amount__i } = useContext(cartprice);
     const [cart_quantity_direct, set_cart_quantity_direct] = useState(item.quantity);
     const [timer, set_timer] = useState(null);
+
+
+    async function updatecartprice() {
+        try {
+            const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
+            const data2 = await res2.json();
+            console.log('mycart', data2)
+            set_total_amount__i(data2)
+
+        } catch (error) {
+            console.error("Error fetching cart:", error);
+        }
+    }
+    
 
     const handleAdd = () => {
         if (cart_quantity_direct >= 1) {
@@ -20,6 +36,7 @@ export function Cart_Control_Direct({ item }) {
             const newtimer = setTimeout(async () => {
                 try {
                     await updateCartItem(item.id, newQty);
+                    updatecartprice();
                 } catch (err) {
                     set_cart_quantity_direct(11);
                 }
@@ -37,6 +54,7 @@ export function Cart_Control_Direct({ item }) {
             const newtimer = setTimeout(async () => {
                 try {
                     await updateCartItem(item.id, newQty);
+                    updatecartprice();
                 } catch (err) {
                     set_cart_quantity_direct(11);
                 }
@@ -69,11 +87,11 @@ export function Cart_Control_Direct({ item }) {
 
 
 export function Cart_Control_Indirect({ cart_detail, item }) {
-    const {quantity, cart_item_id} = cart_detail();
-    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(quantity!==null?quantity:"ADD");
+    const { quantity, cart_item_id } = cart_detail();
+    const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(quantity !== null ? quantity : "ADD");
     console.log(quantity)
-    console.log('iq',   quantity, cart_quantity_indirect)
-    const [CartItem_id, set_CartItem_id] = useState(cart_item_id||null);
+    console.log('iq', quantity, cart_quantity_indirect)
+    const [CartItem_id, set_CartItem_id] = useState(cart_item_id || null);
     const [timer, set_timer] = useState(null);
     const handleAdd = async () => {
         if (cart_quantity_indirect === "ADD") {
@@ -115,7 +133,7 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
                 }
             }, 1500)
             set_timer(newtimer)
- 
+
         } else {
             set_cart_quantity_indirect("ADD");
             set_CartItem_id(null);

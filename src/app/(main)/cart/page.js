@@ -7,6 +7,7 @@ import { Cart_Control_Direct, Cart_Control_Indirect } from "@/components/lib/car
 import { cart, orders } from "@/components/dummy_data";
 import { apiFetch } from "@/app/(api)/api";
 
+export const cartprice = createContext();
 
 export default function Cart() {
     const { device, set_floaters } = useContext(dynamic_);
@@ -74,15 +75,6 @@ export default function Cart() {
     // Fetch cart from backend API
     useEffect(() => {
         async function fetchCart() {
-            try {
-                const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
-                const data2 = await res2.json();
-                console.log('mycart', data2)
-                set_total_amount__i(data2)
-                
-            } catch (error) {
-                console.error("Error fetching cart:", error);
-            }
             try {
                 const res = await apiFetch("/cart"); // Django cart API
                 const data = await res.json();
@@ -219,13 +211,15 @@ export default function Cart() {
                                             <div className="font08 pdt02">${o.menu_item.price}</div>
                                         </div>
                                     </div>
-                                    <Cart_Control_Direct
-                                        item={{
-                                            id: o.id,
-                                            quantity: o.quantity,
-                                        }}
-                                        redirect_to_home_on_Nothing={true}
-                                    />
+                                    <cartprice.Provider value={{ total_amount__i, set_total_amount__i }}>
+                                        <Cart_Control_Direct
+                                            item={{
+                                                id: o.id,
+                                                quantity: o.quantity,
+                                            }}
+                                            redirect_to_home_on_Nothing={true}
+                                        />
+                                    </cartprice.Provider>
 
                                 </div>))}
                             </div>
