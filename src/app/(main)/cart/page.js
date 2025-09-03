@@ -69,7 +69,7 @@ export default function Cart() {
     alert('hi')
   try {
     // Call Django backend to create Cashfree order
-    const res = await apiFetch(`/api/payment/create-order/`, {
+    const res = await apiFetch(`/api/payments/create-order/`, {
     method: "POST",
     body: JSON.stringify({ amount: total_amount__i.total }),
   });
