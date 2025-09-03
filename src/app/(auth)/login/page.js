@@ -22,8 +22,8 @@ export default function Login() {
 
     const data = await res.json();
     if (res.ok) {
-      localStorage.setItem('access_token', data.access);
-      localStorage.setItem('refresh_token', data.refresh);
+      localStorage.setItem('access', data.access);
+      localStorage.setItem('refresh', data.refresh);
       setDone(true)
     } else {
       alert('Login failed: ' + JSON.stringify(data));
