@@ -59,10 +59,26 @@ export default function Cart() {
             console.error("Error fetching cart:", error);
         }
     }
-    
+
     useEffect(() => {
         updatecartprice();
     }, [])
+
+      async function handlePayment() {
+    // Get order token from Django backend
+    const res = await fetch("/api/create-order");
+    const data = await res.json();
+    const orderToken = data.order_token;
+
+    const cashfree = new window.Cashfree({
+      mode: "sandbox", // change to "production" later
+    });
+
+    cashfree.checkout({
+      paymentSessionId: orderToken,
+      redirectTarget: "_self", // stays on same page
+    });
+  }
 
     return (
         <>
@@ -462,7 +478,7 @@ export default function Cart() {
                                         <span className="font600" style={{
                                             float: 'right',
                                             color: 'green'
-                                        }}>${total_amount__i.total}</span>
+                                        }} onClickCapture={handlepayment}>${total_amount__i.total}</span>
                                     </div>
                                 </div>
                             </div>
