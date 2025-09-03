@@ -65,44 +65,73 @@ export default function Cart() {
         updatecartprice();
     }, [])
 
- async function handlePayment() {
-    alert('hi')
-  try {
-    // Call Django backend to create Cashfree order
-    const res = await apiFetch(`/api/payments/create-order/`, {
-    method: "POST",
-    body: JSON.stringify({ amount: total_amount__i.total }),
-  });
-    
-    const data = await res.json();
-    if (!data.order_token) {
-      alert("Failed to get payment token");
-      return;
+    // -------------------------------------------------------------
+    // START: MODIFIED PAYMENT-RELATED CODE
+    // -------------------------------------------------------------
+
+    async function handlePayment() {
+        try {
+            // 1. Ask backend to create order
+            const res = await apiFetch(`/api/payments/create-order/`, { method: "POST" });
+            const data = await res.json();
+
+            if (!data.payment_session_id || !data.order_id) {
+                alert("Payment session missing. Try again.");
+                return;
+            }
+
+            // 2. Initialize Cashfree
+            const cashfree = new window.Cashfree({ mode: "sandbox" });
+
+            // 3. Open Embedded Checkout
+            await cashfree.checkout({
+                paymentSessionId: data.payment_session_id,
+                redirectTarget: "_modal",   // ✅ embed inside app
+
+            }).then(result => {
+                if (result?.error) {
+                    console.error("Payment failed:", result.error.message);
+                    alert("Payment failed. Please try again.");
+                } else {
+                    handlePaymentSuccess(data.order_id); // verify with backend
+                }
+            });
+
+        } catch (err) {
+            console.error("Payment initiation failed:", err);
+            alert("Something went wrong. Try again later.");
+        }
     }
 
-    // Initialize Cashfree
-    const cashfree = new window.Cashfree({ mode: "sandbox" }); // use "production" later
+    // A separate function to handle what happens after a successful payment.
+    async function handlePaymentSuccess(orderId) {
+        try {
+            // Call the Django backend to verify the payment status.
+            const res = await apiFetch(`/api/payments/verify/`, {
+                method: "POST",
+                body: JSON.stringify({ order_id: orderId }),
+            });
 
-    cashfree
-      .checkout({
-        paymentSessionId: data.order_token,
-        redirectTarget: "_self", // stays inside app
-      })
-      .then((result) => {
-        console.log("Payment result:", result);
-        if (result.error) {
-          alert("Payment failed: " + result.error.message);
-        } else {
-          alert("Payment success!");
-          // 🔹 Call Django verify endpoint with order_id here
+            const data = await res.json();
+
+            if (data.status === 'COMPLETED' || data.status === 'PAID') {
+                // The payment is verified. You can now clear the cart and update the UI.
+                setCartItems([]);
+                set_total_amount__i({ total: 0 });
+                // You can also add navigation here, e.g., router.push('/order-history');
+            } else {
+                alert("Payment status is still pending or failed. Please check your order history.");
+            }
+
+        } catch (err) {
+            console.error("Payment verification failed:", err);
+            alert("Could not verify payment status. Please check your order history.");
         }
-      });
-  } catch (err) {
-    console.error(err);
-    alert("Payment failed. Try again!");
-  }
-}
+    }
 
+    // -------------------------------------------------------------
+    // END: MODIFIED PAYMENT-RELATED CODE
+    // -------------------------------------------------------------
 
     return (
         <>
