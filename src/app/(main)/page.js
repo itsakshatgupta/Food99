@@ -180,7 +180,7 @@ export default function branches() {
         }
         async function fetchMenu() {
             try {
-                const res = await apiFetch("/menu"); // Django cart API
+                const res = await apiFetch("/menu/"); // Django cart API
                 const data = await res.json();
                 set_menu___i(data);
             } catch (error) {
