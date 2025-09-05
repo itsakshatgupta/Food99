@@ -118,7 +118,7 @@ export default function Account() {
             }
 
             {device === 'mobile' && user && (
-                <div className="hfp df fd-c">
+                <div className="hfp df fd-c xbg">
                     {/* Header */}
                     <div className="pdy05 pdx1 df aic jcsb xbg" style={{ boxShadow: '0px 1px 9px 1px #e6e6e6' }}>
                         <h3 className="mg0">Account</h3>
@@ -128,40 +128,40 @@ export default function Account() {
                     </div>
 
                     {/* Profile Card */}
-                    <div className="df fd-c gap1 bdr pd1 fx1" style={{ background: '#f7f7f7ff' }}>
-                        <div className="df mgt05 pdx1 pdy1 gap1 xbg bdrds bd aic">
-                            <span className="oh df"
-                                style={{
-                                    background: '#f0efef',                                    borderRadius:'100%'
-                                }}>
-                                <Image
-                                    alt="profile"
-                                    src={user.profile_image || "/default_user.png"} // ✅ fallback
-                                    width={100}
-                                    height={100}
-                                />
-                            </span>
-                            <div className="fx1 df fd-c jcsb pd03 gap05" style={{ color: 'rgb(50, 50, 50)' }}>
-                                <span className="mg0 font-lg font700 bdb pdb05">
-                                    <b>Hi, </b>{user.username}
-                                </span>
-                                <div className="mg0 font-sm df aic font900 pdx1 gap2" style={{ justifyContent: 'space-around', color: '#414141ff' }}>
-                                    <div className="df fd-c aic gap01"><span>Orders</span><span>10+</span></div>
-                                    <div className="df fd-c aic gap01"><span>Save</span><span>$1250+</span></div>
-                                </div>
-                            </div>
-                        </div>
 
-                        {/* Menu Links */}
-                        <div className="df fd-c pd08 xbg bdrds" style={{ boxShadow: '0px -1px 9px 1px #e6e6e6' }}>
-                            <Link href='/account/profile' className="__menu_items mg0 gap03 font500 pdy1"><User2 />Profile</Link>
-                            <Link href='/account/address_book' className="__menu_items mg0 gap03 font500 pdy1"><LucideMapPinHouse />Address Book</Link>
-                            <Link href='/account/help&support' className="__menu_items mg0 gap03 font500 pdy1"><BadgeHelpIcon />Help & Support</Link>
-                            <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><ShieldUser />Security</Link>
-                            <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><HandHeart />About Us</Link>
-                            <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><IdCard />Legal & Licences</Link>
+                    <div className="df pdx1 pdy1 gap1 xbg aic">
+                        <span className="oh df"
+                            style={{
+                                background: '#f0efef', borderRadius: '100%'
+                            }}>
+                            <Image
+                                alt="profile"
+                                src={user.profile_image || "/default_user.png"} // ✅ fallback
+                                width={100}
+                                height={100}
+                            />
+                        </span>
+                        <div className="fx1 df fd-c jcsb pd03 gap05" style={{ color: 'rgb(50, 50, 50)' }}>
+                            <span className="mg0 font-lg font700 pdb05">
+                                <b>Hi, </b>{user.username}
+                            </span>
                         </div>
                     </div>
+                    <div className="mg0 font-sm df aic font900 pdx1 gap2 pd05" style={{ justifyContent: 'space-around', color: '#ffffffff', background: 'rebeccapurple' }}>
+                        <div className="df aic gap01"><span>Orders</span><span>10+</span></div>
+                        <div className="df aic gap01"><span>Save</span><span>$1250+</span>
+                        </div>
+                    </div>
+                    {/* Menu Links */}
+                    <div className="df fd-c pd08 xbg">
+                        <Link href='/account/profile' className="__menu_items mg0 gap03 font500 pdy1"><User2 />Profile</Link>
+                        <Link href='/account/address_book' className="__menu_items mg0 gap03 font500 pdy1"><LucideMapPinHouse />Address Book</Link>
+                        <Link href='/account/help&support' className="__menu_items mg0 gap03 font500 pdy1"><BadgeHelpIcon />Help & Support</Link>
+                        <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><ShieldUser />Security</Link>
+                        <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><HandHeart />About Us</Link>
+                        <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><IdCard />Legal & Licences</Link>
+                    </div>
+
 
                     <div className="tac font-sm mgb1 font08 font600" style={{ color: '#babbbbff' }}>
                         Terms of use | Privacy Policy
