@@ -2,7 +2,7 @@
 import { useState, useContext, useEffect } from "react";
 import { dynamic_ } from "@/components/main-context";
 import Link from "next/link";
-import { BadgeHelpIcon, HandHeart, IdCard, LogOut, LucideMapPinHouse, Shield, ShieldUser, User2 } from 'lucide-react';
+import { BadgeHelpIcon, ChevronRight, ChevronRightCircle, HandHeart, IdCard, LogOut, LucideMapPinHouse, Shield, ShieldUser, User2 } from 'lucide-react';
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { apiFetch } from "@/app/(api)/api";
@@ -122,7 +122,7 @@ export default function Account() {
                     {/* Header */}
                     <div className="pdy05 pdx1 df aic jcsb xbg" style={{ boxShadow: '0px 1px 9px 1px #e6e6e6' }}>
                         <h3 className="mg0">Account</h3>
-                        <span onClick={handleLogout} className="cursor-pointer font-sm font600 df aic gap02" style={{color:'red'}}>
+                        <span onClick={handleLogout} className="cursor-pointer font-sm font600 df aic gap02" style={{ color: 'red' }}>
                             <LogOut /> Logout
                         </span>
                     </div>
@@ -153,17 +153,36 @@ export default function Account() {
                         </div>
                     </div>
                     {/* Menu Links */}
+                    <style>{`.__menu_items{align-items:flex-start !important;}`}</style>
                     <div className="df fd-c pd08 xbg">
-                        <Link href='/account/profile' className="__menu_items mg0 gap03 font500 pdy1"><User2 />Profile</Link>
-                        <Link href='/account/address_book' className="__menu_items mg0 gap03 font500 pdy1"><LucideMapPinHouse />Address Book</Link>
-                        <Link href='/account/help&support' className="__menu_items mg0 gap03 font500 pdy1"><BadgeHelpIcon />Help & Support</Link>
-                        <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><ShieldUser />Security</Link>
-                        <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><HandHeart />About Us</Link>
+                        <Link href='/account/profile' className="__menu_items mg0 gap03 font500 pdy1 bdb"><User2 />
+                            <div className="df fd-c gap2 fx1"><span className="font600 pdx02 pdy02">Profile</span><div><span className="font08">Add, Edit and Manage your Personal Details</span></div>
+                            </div>
+                            <ChevronRight />
+                        </Link>
+                        <Link href='/account/address_book' className="__menu_items mg0 bdb gap03 font500 pdy1"><LucideMapPinHouse />
+                            <div className="df fd-c gap2 fx1"><span className="font600 pdx02 pdy02">Address Book</span><div><span className="font08">Manage your Multiple Devilery Address</span></div>
+                            </div>
+                            <ChevronRight />
+                        </Link>
+                        <Link href='/account/help&support' className="__menu_items mg0 bdb gap03 font500 pdy1"><BadgeHelpIcon />
+                            <div className="df fd-c gap2 fx1"><span className="font600 pdx02 pdy02">Help & Support</span><div><span className="font08">Get help 24x7 of your quires </span></div>
+                            </div>
+                            <ChevronRight />
+                        </Link>
+                        <Link href='/account/aboutus' className="__menu_items mg0 bdb gap03 font500 pdy1"><ShieldUser />
+                            <div className="df fd-c gap2 fx1"><span className="font600 pdx02 pdy02">Security</span><div><span className="font08">Manage your Account Security</span></div>
+                            </div>
+                            <ChevronRight />
+                        </Link>
+                        <Link href='/account/aboutus' className="__menu_items mg0 bdb gap03 font500 pdy1"><HandHeart /><div className="fx1">About Us</div>
+                            <ChevronRight />
+                        </Link>
                         <Link href='/account/aboutus' className="__menu_items mg0 gap03 font500 pdy1"><IdCard />Legal & Licences</Link>
                     </div>
 
 
-                    <div className="tac font-sm mgb1 font08 font600 hfp mgb1" style={{ color: '#babbbbff',alignContent:'flex-end' }}>
+                    <div className="tac font-sm mgb1 font08 font600 hfp mgb1" style={{ color: '#babbbbff', alignContent: 'flex-end' }}>
                         Terms of use | Privacy Policy
                     </div>
                 </div>
