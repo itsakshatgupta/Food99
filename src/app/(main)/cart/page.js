@@ -7,13 +7,15 @@ import Image from "next/image";
 import { Cart_Control_Direct, Cart_Control_Indirect } from "@/components/lib/cart_control";
 import { cart, orders } from "@/components/dummy_data";
 import { apiFetch } from "@/app/(api)/api";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 
 export const cartprice = createContext();
 
 export default function Cart() {
     const { device, set_floaters } = useContext(dynamic_);
     const [cartItems, setCartItems] = useState(null);
-    const [total_amount__i, set_total_amount__i] = useState('loading');
+    const [total_amount__i, set_total_amount__i] = useState(null);
 
     useEffect(() => {
 
@@ -23,12 +25,8 @@ export default function Cart() {
                     {{ bottom: 0 }}>
                     <div className="df aic jcsb gap05 bdtl pdy06 pdx07 bdTrds xbg" style={{ borderColor: 'black', boxShadow: '0 0 6px 1px #eeeeeeff' }}>
                         <div className="df fd-c pdx05 gap01"><div className="df aic gap03"><span className="bd pdy04 pdx04 xfg"></span><span className="font-sm font500" style={{ fontVariant: 'all-petite-caps', color: 'GrayText' }}>Pay Using</span></div><span className="mgl03 font-sm font700">Google Pay</span></div>
-                        <span href='/cart' style={{
-                            background: '#9970faff',
-                            color: 'white',
-                            borderRadius: '10px',
-                        }}
-                            className="pdx3 xfg df xfg aic pdy1 font900" onClick={handlePayment}>Pay ${total_amount__i.total}</span>
+
+                        {total_amount__i}
                     </div>
                 </div>
             </>
@@ -52,10 +50,29 @@ export default function Cart() {
 
     const updatecartprice = async () => {
         try {
+            set_total_amount__i(
+                <span style={{
+                    background: '#9970faff',
+                    color: 'white',
+                    borderRadius: '10px',
+                }}
+                    className="pdx3 xfg df xfg aic font900">
+                    <span style={{ width: '57px', height: '57px' }}><DotLottieReact
+                        src="https://lottie.host/d4411d1a-96f8-46d4-9027-5655f21d9d7f/vJjJKUGwPT.lottie"
+                        loop
+                        autoplay
+                    /></span></span>)
             const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
             const data2 = await res2.json();
             console.log('mycart', data2)
-            set_total_amount__i(data2)
+            set_total_amount__i(<span style={{
+                background: '#9970faff',
+                color: 'white',
+                borderRadius: '10px',
+            }}
+                className="pdx3 xfg df xfg aic pdy1 font900" onClick={handlePayment}>
+                {data2.total}</span>)
+
         } catch (error) {
             console.error("Error fetching cart:", error);
         }
@@ -529,10 +546,10 @@ export default function Cart() {
                                     </div>
                                     <div className="pdy2  font-sm" style={{ borderTop: '1px dashed #b3b3b3' }}>
                                         <span className="font600">Total</span>
-                                        <button className="font600" style={{
+                                        <span className="font600" style={{
                                             float: 'right',
                                             color: 'green'
-                                        }} >${total_amount__i.total}</button>
+                                        }} >${total_amount__i?.total}</span>
                                     </div>
                                 </div>
                             </div>

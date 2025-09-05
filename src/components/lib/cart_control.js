@@ -5,14 +5,21 @@ import { cart } from "../dummy_data";
 import { addToCart, removeCartItem, updateCartItem } from "./cart_api";
 import { apiFetch } from "@/app/(api)/api";
 import { cartprice } from "@/app/(main)/cart/page";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 
 export function Cart_Control_Direct({ item }) {
 
     const { set_total_amount__i, updatecartprice } = useContext(cartprice);
     const [cart_quantity_direct, set_cart_quantity_direct] = useState(item.quantity);
     const [timer, set_timer] = useState(null);
+    const [loading, set_loading] = useState([false,     <DotLottieReact
+      src="https://lottie.host/d4411d1a-96f8-46d4-9027-5655f21d9d7f/vJjJKUGwPT.lottie"
+      loop
+      autoplay
+    />]);
 
-    
+
     // async function updatecartprice() {
     //     try {
     //         const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
@@ -23,7 +30,7 @@ export function Cart_Control_Direct({ item }) {
     //         console.error("Error fetching cart:", error);
     //     }
     // }
-    
+
     const handleAdd = () => {
         if (cart_quantity_direct >= 1) {
             // update existing
@@ -31,15 +38,21 @@ export function Cart_Control_Direct({ item }) {
             set_cart_quantity_direct(newQty);
             if (timer) clearTimeout(timer)
 
-            const newtimer = setTimeout(async () => {
-                try {
-                    await updateCartItem(item.id, newQty);
-                    updatecartprice();
-                } catch (err) {
-                    set_cart_quantity_direct(11);
-                }
-            }, 1500)
-            set_timer(newtimer)
+                const newtimer = setTimeout(async () => {
+                    try {
+                        set_loading((pr)=>[true, pr[1]])
+                        await updateCartItem(item.id, newQty);
+                        updatecartprice();
+                        
+                    } catch (err) {
+                        set_loading((pr)=>[false, pr[1]])
+                        set_cart_quantity_direct(11);
+                    }
+                    finally {
+                        set_loading((pr)=>[false, pr[1]])
+                    }
+                }, 1500)
+                set_timer(newtimer)
         }
     };
 
@@ -51,10 +64,16 @@ export function Cart_Control_Direct({ item }) {
             if (timer) clearTimeout(timer)
             const newtimer = setTimeout(async () => {
                 try {
+                    set_loading((pr)=>[true, pr[1]])
                     await updateCartItem(item.id, newQty);
                     updatecartprice();
                 } catch (err) {
+                    set_loading((pr)=>[false, pr[1]])
+
                     set_cart_quantity_direct(11);
+                }
+                finally {
+                    set_loading((pr)=>[false, pr[1]])
                 }
             }, 1500)
             set_timer(newtimer)
@@ -77,7 +96,7 @@ export function Cart_Control_Direct({ item }) {
 
             onClickCapture={handleRemove}
 
-        ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>{cart_quantity_direct}</span><span className="df aic fx1 tac jcc CKEFT "
+        ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>{loading[0] ? loading[1] : cart_quantity_direct}</span><span className="df aic fx1 tac jcc CKEFT "
             onClickCapture={handleAdd}>
                 <svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div>
     </>)
