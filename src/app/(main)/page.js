@@ -545,7 +545,7 @@ export default function branches() {
       src="https://lottie.host/ae3002b6-0032-483e-befc-5bef572881dc/Eu5RhsnUUn.lottie"
       loop
       autoplay
-    /></span><span className='font08 font600' style={{color:'#8a8a8a'}}>Loading..</span></div></div>}
+    /></span><span className='font600' style={{color:'#8a8a8a'}}>Loading..</span></div></div>}
 
 
     </>)
