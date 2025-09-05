@@ -167,6 +167,8 @@ export default function branches() {
                 </div>
             </div>)
         }
+
+        return()=>set_floaters(null)
     }, [menu___i])
 
     useEffect(() => {
