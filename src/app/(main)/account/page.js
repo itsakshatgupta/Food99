@@ -122,7 +122,7 @@ export default function Account() {
                     {/* Header */}
                     <div className="pdy05 pdx1 df aic jcsb xbg" style={{ boxShadow: '0px 1px 9px 1px #e6e6e6' }}>
                         <h3 className="mg0">Account</h3>
-                        <span onClick={handleLogout} className="cursor-pointer font-sm font600 df aic gap02" style={{ color: 'red' }}>
+                        <span onClick={handleLogout} className="cursor-pointer font08 font600 df aic gap02" style={{ color: 'red' }}>
                             <LogOut /> Logout
                         </span>
                     </div>
@@ -153,7 +153,7 @@ export default function Account() {
                         </div>
                     </div>
                     {/* Menu Links */}
-                    <style>{`.__menu_items{align-items:flex-start !important;}`}</style>
+                    <style>{`.__menu_items{align-items:flex-start !important;border-radius:unset}`}</style>
                     <div className="df fd-c pd08 xbg">
                         <Link href='/account/profile' className="__menu_items mg0 gap03 font500 pdy1 bdb"><User2 />
                             <div className="df fd-c gap2 fx1"><span className="font600 pdx02 pdy02">Profile</span><div><span className="font08">Add, Edit and Manage your Personal Details</span></div>
