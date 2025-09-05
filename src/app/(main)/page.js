@@ -541,11 +541,11 @@ export default function branches() {
 
                 {/* {device === 'mobile' && dynamic_portal_main} */}
             </>
-        :    <div className="hfp wfp df aic jcc"><div className="df fd-c gap05 aic"><span style={{height:'200px', width:'200px'}}><DotLottieReact
+        :    <div className="hfp wfp df aic jcc"><div className="df fd-c aic"><span style={{height:'200px', width:'200px'}}><DotLottieReact
       src="https://lottie.host/ae3002b6-0032-483e-befc-5bef572881dc/Eu5RhsnUUn.lottie"
       loop
       autoplay
-    /></span><span>Loading..</span></div></div>}
+    /></span><span className='font08 font600' style={{color:'#8a8a8a'}}>Loading..</span></div></div>}
 
 
     </>)
