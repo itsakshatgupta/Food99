@@ -163,7 +163,7 @@ export default function Account() {
                     </div>
 
 
-                    <div className="tac font-sm mgb1 font08 font600 hfp mgb1" style={{ color: '#babbbbff',justifyContent:'flex-end' }}>
+                    <div className="tac font-sm mgb1 font08 font600 hfp mgb1" style={{ color: '#babbbbff',alignContent:'flex-end' }}>
                         Terms of use | Privacy Policy
                     </div>
                 </div>
