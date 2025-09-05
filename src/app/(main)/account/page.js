@@ -122,7 +122,7 @@ export default function Account() {
                     {/* Header */}
                     <div className="pdy05 pdx1 df aic jcsb xbg" style={{ boxShadow: '0px 1px 9px 1px #e6e6e6' }}>
                         <h3 className="mg0">Account</h3>
-                        <span onClick={handleLogout} className="cursor-pointer font-sm font600 df aic gap02">
+                        <span onClick={handleLogout} className="cursor-pointer font-sm font600 df aic gap02" style={{color:'red'}}>
                             <LogOut /> Logout
                         </span>
                     </div>
@@ -163,7 +163,7 @@ export default function Account() {
                     </div>
 
 
-                    <div className="tac font-sm mgb1 font08 font600" style={{ color: '#babbbbff' }}>
+                    <div className="tac font-sm mgb1 font08 font600 hfp mgb1" style={{ color: '#babbbbff',justifyContent:'flex-end' }}>
                         Terms of use | Privacy Policy
                     </div>
                 </div>
