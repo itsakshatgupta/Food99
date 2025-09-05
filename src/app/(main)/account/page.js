@@ -161,7 +161,10 @@ export default function Account() {
                             <ChevronRight />
                         </Link>
                         <Link href='/account/address_book' className="__menu_items mg0 bdb gap03 font500 pdy1"><LucideMapPinHouse />
-                            <div className="df fd-c gap2 fx1"><span className="font600 pdx02 pdy02">Address Book</span><div><span className="font08">Manage your Multiple Devilery Address</span></div>
+                            <div className="df fd-c gap2 fx1"><span className="font600 pdx02 pdy02">Address Book</span><div><div class="font08 pdb1"><span class="pdx05 pdy02 bdrds" style={{
+    background: '#f6f1ff',
+    color: '#9C27B0'
+}}>Home: Manduadhi varanasi</span></div><span className="font08">Manage your Multiple Devilery Address</span></div>
                             </div>
                             <ChevronRight />
                         </Link>
