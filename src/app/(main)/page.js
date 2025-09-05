@@ -10,6 +10,8 @@ import { Cart_Control_Direct, Cart_Control_Indirect } from '@/components/lib/car
 import Topbar_ from '@/components/topbar_/topbar';
 import { BookOpen } from 'lucide-react';
 import { apiFetch } from '../(api)/api';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 const banner_ = <>
     <div className="df jcsb wfp hfp" style={{ background: '#f1f8e9' }}>
         <div className="pdx1" style={{ justifyItems: 'center' }}>
@@ -145,7 +147,7 @@ export default function branches() {
 
 
     useEffect(() => {
-        if (cart_) {
+        if (cart_ && menu___i) {
             set_floaters(<div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                 <span className='xbg oh mg05 mgx07 font07 font600 df fd-c aic jcc bd gap01' style={{ borderRadius: '100%', height: '3.8rem', width: '3.8rem', background: '#9970faff', color: '#ffffffff', border: '1px solid black' }}>
                     <BookOpen />
@@ -165,7 +167,7 @@ export default function branches() {
                 </div>
             </div>)
         }
-    }, [])
+    }, [menu___i])
 
     useEffect(() => {
         async function fetchCart() {
@@ -401,7 +403,7 @@ export default function branches() {
 
 
 
-        {device === 'mobile' && menu___i &&
+        {device === 'mobile' && menu___i ?
             <>
                 <div className="pS xbg" style={{ top: 0, zIndex: 1 }}>
                     <Topbar_ />
@@ -539,7 +541,11 @@ export default function branches() {
 
                 {/* {device === 'mobile' && dynamic_portal_main} */}
             </>
-        }
+        :    <div className="hfp wfp df aic jcc"><div className="df fd-c gap05 aic"><span style={{height:'200px', width:'200px'}}><DotLottieReact
+      src="https://lottie.host/ae3002b6-0032-483e-befc-5bef572881dc/Eu5RhsnUUn.lottie"
+      loop
+      autoplay
+    /></span><span>Loading..</span></div></div>}
 
 
     </>)
