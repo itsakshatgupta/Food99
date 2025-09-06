@@ -78,7 +78,8 @@ export default function MainContext({ device, children }) {
                 mainRef.current.style.paddingBottom = `${floaterHeight}px`;
             }
         }
-        check_floaters()
+        check_floaters();
+        return () => set_floaters(null);
     }, [floaters]);
 
     return (
