@@ -152,6 +152,8 @@ export default function branches() {
 
     const { dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, floaters, set_floaters } = useContext(dynamic_);
 
+    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher);
+    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher);
 
     useEffect(() => {
         if (cart_ && menu___i) {
@@ -176,8 +178,6 @@ export default function branches() {
             return () => set_floaters(null);
         }
     }, [menu___i])
-    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher);
-    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher);
     // useEffect(() => {
     //     async function fetchCart() {
     //         try {
@@ -509,8 +509,8 @@ export default function branches() {
                                                                         alt="iphone 15"
                                                                         width={122}
                                                                         height={120}
-                                                                    /></div>
-
+                                                                    />
+                                                                </div>
                                                                     <Cart_Control_Indirect
                                                                         cart_detail={() => {
                                                                             const cartItem = cart__i?.items.find((v) => v.menu_item.id === menu_items.id);
