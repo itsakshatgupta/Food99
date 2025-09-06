@@ -11,6 +11,13 @@ import Topbar_ from '@/components/topbar_/topbar';
 import { BookOpen } from 'lucide-react';
 import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import useSWR from "swr";
+
+// ✅ one shared fetcher
+const fetcher = async (url) => {
+    const res = await apiFetch(url);
+    return res.json();
+};
 
 const banner_ = <>
     <div className="df jcsb wfp hfp" style={{ background: '#f1f8e9' }}>
@@ -140,8 +147,8 @@ const mobile_banner = <>
 
 export default function branches() {
     const { device } = useContext(dynamic_);
-    const [menu___i, set_menu___i] = useState(null);
-    const [cart__i, set_cart__i] = useState(null);
+    const [menu___i_, set_menu___i] = useState(null);
+    const [cart__i_, set_cart__i] = useState(null);
 
     const { dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, floaters, set_floaters } = useContext(dynamic_);
 
@@ -169,30 +176,31 @@ export default function branches() {
             return () => set_floaters(null);
         }
     }, [menu___i])
+    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher);
+    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher);
+    // useEffect(() => {
+    //     async function fetchCart() {
+    //         try {
+    //             const res = await apiFetch("/cart"); // Django cart API
+    //             const data = await res.json();
+    //             set_cart__i(data);
 
-    useEffect(() => {
-        async function fetchCart() {
-            try {
-                const res = await apiFetch("/cart"); // Django cart API
-                const data = await res.json();
-                set_cart__i(data);
-
-            } catch (error) {
-                console.error("Error fetching cart:", error);
-            }
-        }
-        async function fetchMenu() {
-            try {
-                const res = await apiFetch("/menu/"); // Django cart API
-                const data = await res.json();
-                set_menu___i(data);
-            } catch (error) {
-                console.error("Error fetching cart:", error);
-            }
-        }
-        fetchCart();
-        fetchMenu();
-    }, []);
+    //         } catch (error) {
+    //             console.error("Error fetching cart:", error);
+    //         }
+    //     }
+    //     async function fetchMenu() {
+    //         try {
+    //             const res = await apiFetch("/menu/"); // Django cart API
+    //             const data = await res.json();
+    //             set_menu___i(data);
+    //         } catch (error) {
+    //             console.error("Error fetching cart:", error);
+    //         }
+    //     }
+    //     fetchCart();
+    //     fetchMenu();
+    // }, []);
 
     const d = (fall_ctg_, n, p, d) => {
         return (<>
