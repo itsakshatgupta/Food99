@@ -79,7 +79,6 @@ export default function MainContext({ device, children }) {
             }
         }
         check_floaters();
-        return () => set_floaters(null);
     }, [floaters]);
 
     return (

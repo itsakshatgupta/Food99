@@ -165,7 +165,8 @@ export default function branches() {
                             className="pdx2 xfg df aic pdy1 font700 font-md"><span className='df'><Icon.Cart_ c='white' s='20' /></span>Checkout</Link>
                     </div>
                 </div>
-            </div>)
+            </div>);
+            return () => set_floaters(null);
         }
     }, [menu___i])
 
@@ -192,7 +193,7 @@ export default function branches() {
         fetchCart();
         fetchMenu();
     }, []);
-    
+
     const d = (fall_ctg_, n, p, d) => {
         return (<>
             <style>
@@ -541,11 +542,11 @@ export default function branches() {
 
                 {/* {device === 'mobile' && dynamic_portal_main} */}
             </>
-        :    <div className="hfp wfp df aic jcc"><div className="df fd-c aic"><span style={{height:'200px', width:'200px'}}><DotLottieReact
-      src="https://lottie.host/ae3002b6-0032-483e-befc-5bef572881dc/Eu5RhsnUUn.lottie"
-      loop
-      autoplay
-    /></span><span className='font600' style={{color:'#8a8a8a'}}>Loading...</span></div></div>}
+            : <div className="hfp wfp df aic jcc"><div className="df fd-c aic"><span style={{ height: '200px', width: '200px' }}><DotLottieReact
+                src="https://lottie.host/ae3002b6-0032-483e-befc-5bef572881dc/Eu5RhsnUUn.lottie"
+                loop
+                autoplay
+            /></span><span className='font600' style={{ color: '#8a8a8a' }}>Loading...</span></div></div>}
 
 
     </>)

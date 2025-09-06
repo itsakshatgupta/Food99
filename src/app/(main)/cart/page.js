@@ -30,7 +30,8 @@ export default function Cart() {
                     </div>
                 </div>
             </>
-        )
+        );
+        return () => set_floaters(null);
     }, [total_amount__i])
 
     // Fetch cart from backend API
