@@ -72,7 +72,7 @@ export default function MainContext({ device, children }) {
 
     });
 
-    const { data: usr, error: usrError } = useSWR("/me", fetcher, {
+    const { data: usr, error: usrError } = useSWR("/me/", fetcher, {
         revalidateOnFocus: false,      // Don't refresh when window gains focus
         revalidateOnReconnect: false,  // Don't refresh when internet reconnects
         refreshInterval: 0,             // Don't refresh automatically at intervals

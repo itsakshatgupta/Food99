@@ -11,6 +11,7 @@ import BuyAgain from "./buyAgain";
 import Address from "./address";
 import Cart from "./cart";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 export default function Topbar_() {
     const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr } = useContext(dynamic_);
     const [search_mode, set_search_mode] = useState(false)
@@ -150,11 +151,11 @@ export default function Topbar_() {
                                     {usr?<span className="df aic fx1 oh font-sm gap02  bdrds bd" style={{ color: 'black' }}>
                                         <span className="pdl05 pdr03 pdt02 xfg"><MapPinHouse/></span>
                                         <span className="oh font08 font600" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}><span className="font900">Home:</span> Sigra abc colony, Varanasi 221010</span>
-                                    </span>:<span className="df aic oh font-sm bdrds bd " style={{ color: 'black'}}>
-                                        <span className="pdl05 pdr03 pdt02 xfg"><User2 fill=' #4CAF50'/></span>
-                                        <span className="oh font600 pdx05">Login</span></span>}
+                                    </span>:<Link href="/login"><span className="df aic oh font-sm bdrds bd pdx05" style={{ color: 'black'}}>
+                                        <span className="pdt02 pdr02"><User2 size={21}/></span>
+                                        <span className="oh font600">Login</span></span></Link>}
 
-                                    {search_mode === false && <span className="df aic xfg pdx02 pdy02 bd bdrds" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search/></span>}
+                                    {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search/></span>}
                                     </div>
                                 </div>
                             </>
