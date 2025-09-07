@@ -6,6 +6,8 @@ import { addToCart, removeCartItem, updateCartItem } from "./cart_api";
 import { apiFetch } from "@/app/(api)/api";
 import { cartprice } from "@/app/(main)/cart/page";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { mutate } from 'swr';
+
 
 
 export function Cart_Control_Direct({ item }) {
@@ -18,6 +20,9 @@ export function Cart_Control_Direct({ item }) {
         loop
         autoplay
     />]);
+        useEffect(() => {
+            set_cart_quantity_direct(item.quantity)
+    }, [item])
 
 
     // async function updatecartprice() {

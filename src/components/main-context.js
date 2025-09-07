@@ -1,7 +1,7 @@
 'use client'
 // import "./globals.css";
 import { createContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import {Box, Home, Shapes, UserCircle2} from 'lucide-react';
+import { Box, Home, Shapes, UserCircle2 } from 'lucide-react';
 import SettingsPanel from '@/components/setting/settingPannel';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -11,9 +11,14 @@ import Topbar from '@/components/topbar/bar';
 import Topbar_ from '@/components/topbar_/topbar';
 import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
+import useSWR from "swr";
+import { apiFetch } from '@/app/(api)/api';
 
-
-
+// ✅ one shared fetcher
+const fetcher = async (url) => {
+    const res = await apiFetch(url);
+    return res.json();
+};
 
 export const dynamic_ = createContext();
 export const Menu = [
@@ -60,7 +65,28 @@ export default function MainContext({ device, children }) {
     const panel = searchParams.get('panel');
     console.log(searchParams.get('page'), typeof (searchParams.get('page')), searchParams.get('page') in ['login', 'signup'], noLayoutOnPages)
 
+    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0,             // Don't refresh automatically at intervals
 
+    });
+
+    const { data: usr, error: usrError } = useSWR("/me", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0,             // Don't refresh automatically at intervals
+        shouldRetryOnError:false
+    });
+
+    // const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
+    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
+    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+    //     refreshInterval: 0,             // Don't refresh automatically at intervals
+    //     shouldRetryOnError:false
+
+    // });
+    const cart__i = null
     useEffect(() => {
         console.log('check run')
         if (['/', '/cart'].includes(pathname) === false) {
@@ -108,7 +134,7 @@ export default function MainContext({ device, children }) {
 
 
             {device === 'mobile' && <>
-                <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, dynamic_portal_ab, set_dynamics_portal_ab, floaters, set_floaters }}>
+                <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, dynamic_portal_ab, set_dynamics_portal_ab, floaters, set_floaters, menu___i, cart__i, usr }}>
                     <div className="hfp wfp  df fd-c" style={{ alignContent: 'space-between' }}>
 
                         <main className="main fx1"
@@ -129,7 +155,7 @@ export default function MainContext({ device, children }) {
                             </div>
 
                             <lowscreen-nav className="df jcsb aic gap05 xfg font-sm pdy05 bdt" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(1rem + 3vmin)' }}>
-                                <Link href='/' className="df fd-c aic gap02"><Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02"><Shapes/><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02"><Box/><span>Orders</span></Link><Link href='/cart' className="df fd-c aic gap02"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02"><UserCircle2 /><span>Account</span></Link></lowscreen-nav>
+                                <Link href='/' className="df fd-c aic gap02"><Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02"><Shapes /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02"><Box /><span>Orders</span></Link><Link href='/cart' className="df fd-c aic gap02"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02"><UserCircle2 /><span>Account</span></Link></lowscreen-nav>
                         </div>
 
                     </div>

@@ -12,6 +12,8 @@ import { BookOpen } from 'lucide-react';
 import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
+import { mutate } from 'swr';
+
 
 // ✅ one shared fetcher
 const fetcher = async (url) => {
@@ -146,24 +148,14 @@ const mobile_banner = <>
 </>
 
 export default function branches() {
-    const { device } = useContext(dynamic_);
+    const { device, menu___i, cart__i } = useContext(dynamic_);
     const [menu___i_, set_menu___i] = useState(null);
     const [cart__i_, set_cart__i] = useState(null);
 
     const { dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, floaters, set_floaters } = useContext(dynamic_);
-
-    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
-        revalidateOnFocus: false,      // Don't refresh when window gains focus
-        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-        refreshInterval: 0             // Don't refresh automatically at intervals
-    });
-    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
-        revalidateOnFocus: false,      // Don't refresh when window gains focus
-        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-        refreshInterval: 0             // Don't refresh automatically at intervals
-    });
-
+    
     useEffect(() => {
+        console.log(menu___i)
         if (cart_ && menu___i) {
             set_floaters(<div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                 <span className='xbg oh mg05 mgx07 font07 font600 df fd-c aic jcc bd gap01' style={{ borderRadius: '100%', height: '3.8rem', width: '3.8rem', background: '#9970faff', color: '#ffffffff', border: '1px solid black' }}>
@@ -183,7 +175,11 @@ export default function branches() {
                     </div>
                 </div>
             </div>);
-            return () => set_floaters(null);
+            return () => {
+                set_floaters(null)
+                // This runs when the component is unmounted
+                // mutate("/cart"); // Refresh the cart data when leaving
+            };
         }
     }, [menu___i])
     // useEffect(() => {
@@ -419,7 +415,7 @@ export default function branches() {
         </style>
 
 
-
+                {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
                 <div className="pS xbg" style={{ top: 0, zIndex: 1 }}>
@@ -521,7 +517,7 @@ export default function branches() {
                                                                 </div>
                                                                     <Cart_Control_Indirect
                                                                         cart_detail={() => {
-                                                                            const cartItem = cart__i?.items.find((v) => v.menu_item.id === menu_items.id);
+                                                                            const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
 
                                                                             return {
                                                                                 quantity: cartItem ? cartItem.quantity : null,
@@ -534,7 +530,6 @@ export default function branches() {
                                                                             price: menu_items.price,
                                                                             image: menu_items.image
                                                                         }}
-
                                                                     />
                                                                 </div>
 
@@ -558,6 +553,7 @@ export default function branches() {
 
                 {/* {device === 'mobile' && dynamic_portal_main} */}
             </>
+
             : <div className="hfp wfp df aic jcc"><div className="df fd-c aic"><span style={{ height: '200px', width: '200px' }}><DotLottieReact
                 src="https://lottie.host/ae3002b6-0032-483e-befc-5bef572881dc/Eu5RhsnUUn.lottie"
                 loop

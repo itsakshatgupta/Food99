@@ -8,12 +8,13 @@ import { Cart_Control_Direct, Cart_Control_Indirect } from "@/components/lib/car
 import { cart, orders } from "@/components/dummy_data";
 import { apiFetch } from "@/app/(api)/api";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { mutate } from 'swr';
 
 
 export const cartprice = createContext();
 
 export default function Cart() {
-    const { device, set_floaters } = useContext(dynamic_);
+    const { device, set_floaters, cart__i } = useContext(dynamic_);
     const [cartItems, setCartItems] = useState(null);
     const [total_amount__i, set_total_amount__i] = useState(null);
 
@@ -38,17 +39,16 @@ export default function Cart() {
     useEffect(() => {
         async function fetchCart() {
             try {
-                const res = await apiFetch("/cart"); // Django cart API
-                const data = await res.json();
-                setCartItems(data);
+                // const res = await apiFetch("/cart"); // Django cart API
+                // const data = await res.json();
+                setCartItems(cart__i);
             } catch (error) {
                 console.error("Error fetching cart:", error);
             }
         }
         fetchCart();
     }, []);
-
-
+    
     const updatecartprice = async () => {
         try {
             set_total_amount__i(
@@ -81,7 +81,7 @@ export default function Cart() {
 
     useEffect(() => {
         updatecartprice();
-    }, [])
+    }, [cart__i])
 
     // -------------------------------------------------------------
     // START: MODIFIED PAYMENT-RELATED CODE
@@ -240,7 +240,7 @@ export default function Cart() {
                     </div>
                 </div>
             </div>}
-            {device === 'mobile' && cartItems && <>
+            {device === 'mobile' && cart__i && <>
                 <div className={`hfp df fd-c gap1 jcsb ${device === 'pc' && 'pdx1'}`} style={{
                     background: 'whitesmoke',
                     scrollbarWidth: 'none',
@@ -265,7 +265,7 @@ export default function Cart() {
                             >
                                 <cartprice.Provider value={{ total_amount__i, set_total_amount__i, updatecartprice }}>
 
-                                    {cartItems.items.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.id}>
+                                    {cart__i.items.map((o, i) => (<div className="df aic ITEMS" key={i} id={o.id}>
                                         <div className="fx1 df gap05 font-sm font600" >
                                             <Image
                                                 alt="iphone 15"

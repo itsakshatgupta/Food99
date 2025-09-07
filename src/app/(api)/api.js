@@ -18,7 +18,10 @@ export async function apiFetch(url, options = {}) {
   let response = await fetch(BASE_URL + url, { ...options, headers });
 
   // --- if unauthorized, try refresh ---
+    console.log(1111)
+  
   if (response.status === 401) {
+    console.log(111)
     const refresh = localStorage.getItem("refresh");
     if (refresh) {
       try {
@@ -46,6 +49,7 @@ export async function apiFetch(url, options = {}) {
       }
     }
   }
+    console.log(1112)
 
   return response;
 }
