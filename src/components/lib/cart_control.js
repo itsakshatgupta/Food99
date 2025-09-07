@@ -75,6 +75,7 @@ export function Cart_Control_Direct({ item }) {
                     set_loading((pr) => [false, pr[1]])
                 }
             }, 1500)
+            
             set_timer(newtimer)
         }
         else {

@@ -152,8 +152,16 @@ export default function branches() {
 
     const { dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, floaters, set_floaters } = useContext(dynamic_);
 
-    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher);
-    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher);
+    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0             // Don't refresh automatically at intervals
+    });
+    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0             // Don't refresh automatically at intervals
+    });
 
     useEffect(() => {
         if (cart_ && menu___i) {
