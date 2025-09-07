@@ -384,6 +384,19 @@ export default function branches() {
     return (<>
         {/* <style>{`#topbar{box-shadow: 0px 3px 4px 0px #eaeaea82;}`}</style> */}
         <style>{`
+        #home{
+            background: #E8F5E9;
+            padding-inline: 5px;
+            border-radius: 10px;
+            padding-block: 3px;
+            font-weight: bold;
+        }
+        #home svg .fill-portion-shine{
+            fill:#8BC34A;
+        }
+        #home svg .fill-portion-glossy{
+            fill:#568c30;
+        }
         .add_cart_control_ICart_Control_Indirect{    
             display: flex;
             background: #ffffff;

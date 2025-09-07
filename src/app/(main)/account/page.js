@@ -117,6 +117,23 @@ export default function Account() {
                 <h1>'1'</h1>
             }
 
+                <style>
+                    {`
+                    #account{
+            background: #E8F5E9;
+            padding-inline: 5px;
+            border-radius: 10px;
+            padding-block: 3px;
+            font-weight: bold;
+        }
+        #account svg .fill-portion-shine{
+            fill:#8BC34A;
+        }
+        #account svg .fill-portion-glossy{
+            fill:#568c30;
+        }
+                    `}
+                </style>
             {device === 'mobile' && user && (
                 <div className="hfp df fd-c xbg">
                     {/* Header */}

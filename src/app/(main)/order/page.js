@@ -241,6 +241,20 @@ export default function Order() {
     ]
     return (
         <>
+        <style>
+            {`
+                    #orders{
+            background: #E8F5E9;
+            padding-inline: 5px;
+            border-radius: 10px;
+            padding-block: 3px;
+            font-weight: bold;
+        }
+        #orders svg{
+            fill:#8BC34A;
+        }
+            `}
+        </style>
 
             <div className="pdb1" style={{ background: 'whitesmokel' }}>
                 <div className="df aic jcsb pS pdx1 xbg bdb" style={{ top: 0 }}>

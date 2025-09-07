@@ -154,7 +154,7 @@ export default function Cart() {
     return (
         <>
             <Script src="https://sdk.cashfree.com/js/v3/cashfree.js" strategy="afterInteractive" />
-            <style>{`#cart{background:#f0c9ab; border-color:black}`}</style>
+            {/* <style>{`#cart{background:#f0c9ab; border-color:black}`}</style> */}
             {device === 'pc' && <div className={`hfp df fd-c gap1 jcsb ${device === 'pc' && 'pdx1'}`} style={{
                 background: 'white',
                 scrollbarWidth: 'none',
@@ -241,6 +241,20 @@ export default function Cart() {
                 </div>
             </div>}
             {device === 'mobile' && cart__i && <>
+            <style>
+                {`
+                        #cart{
+            background: #E8F5E9;
+            padding-inline: 5px;
+            border-radius: 10px;
+            padding-block: 3px;
+            font-weight: bold;
+        }
+        #cart svg{
+            fill:#8BC34A;
+        }
+                `}
+            </style>
                 <div className={`hfp df fd-c gap1 jcsb ${device === 'pc' && 'pdx1'}`} style={{
                     background: 'whitesmoke',
                     scrollbarWidth: 'none',
