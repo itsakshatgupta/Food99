@@ -148,7 +148,7 @@ export default function Topbar_() {
                                     `}</style>
 
                                     <div className="df aic wfp gap05" style={{justifyContent:'flex-end' }}>
-                                    {usr?<span className="df aic fx1 oh font-sm gap02  bdrds bd" style={{ color: 'black' }}>
+                                    {usr.username?<span className="df aic fx1 oh font-sm gap02  bdrds bd" style={{ color: 'black' }}>
                                         <span className="pdl05 pdr03 pdt02 xfg"><MapPinHouse/></span>
                                         <span className="oh font08 font600" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}><span className="font900">Home:</span> Sigra abc colony, Varanasi 221010</span>
                                     </span>:<Link href="/login"><span className="df aic oh font-sm bdrds bd pdx05" style={{ color: 'black'}}>
