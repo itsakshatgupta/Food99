@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { Suspense, useContext, useEffect, useState } from "react";
-import {Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2} from 'lucide-react';
+import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2 } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -15,6 +15,7 @@ import Link from "next/link";
 export default function Topbar_() {
     const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr } = useContext(dynamic_);
     const [search_mode, set_search_mode] = useState(false)
+    const [top_bar_, set_top_bar_] = useState(null)
     const pathname = usePathname()
 
     const topbarBtn = {
@@ -109,29 +110,16 @@ export default function Topbar_() {
                 </div>)
         } else { set_dynamics_portal_ab(null) }
 
+        set_top_bar_(<Topbar
+            l={
+                <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Food<span>99</span></h4>
+            }
 
+            r={
+                <>
 
-    }, [device, search_mode, pathname])
-
-    return (
-        <>
-            {device === "mobile" &&
-
-
-                <div className="df fd-c pdy09 pdx1 gap1"
-                // style={{ background: '#b1261cff', color:'white' }}  
-
-                >
-                    <Topbar
-                        l={
-                            <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Food<span>99</span></h4>
-                        }
-
-                        r={
-                            <>
-
-                                <div className="df aic gap05 wfp">
-                                    <style>{`
+                    <div className="df aic gap05 wfp">
+                        <style>{`
                                     .dropdowneffect{
                                     overflow:hidden;
                                     transition:all 1s;
@@ -147,20 +135,32 @@ export default function Topbar_() {
                                     }
                                     `}</style>
 
-                                    <div className="df aic wfp gap05" style={{justifyContent:'flex-end' }}>
-                                    {usr?.username?<span className="df aic fx1 oh font-sm gap02  bdrds bd" style={{ color: 'black' }}>
-                                        <span className="pdl05 pdr03 pdt02 xfg"><MapPinHouse/></span>
-                                        <span className="oh font08 font600" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}><span className="font900">Home:</span> Sigra abc colony, Varanasi 221010</span>
-                                    </span>:<Link href="/login"><span className="df aic oh font-sm bdrds bd pdx05" style={{ color: 'black'}}>
-                                        <span className="pdt02 pdr02"><User2 size={21}/></span>
-                                        <span className="oh font600">Login</span></span></Link>}
+                        <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
+                            {usr?.username ? <span className="df aic fx1 oh font-sm gap02  bdrds bd" style={{ color: 'black' }}>
+                                <span className="pdl05 pdr03 pdt02 xfg"><MapPinHouse /></span>
+                                <span className="oh font08 font600" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}><span className="font900">Home:</span> Sigra abc colony, Varanasi 221010</span>
+                            </span> : <Link href="/login"><span className="df aic oh font-sm bdrds bd pdx05" style={{ color: 'black' }}>
+                                <span className="pdt02 pdr02"><User2 size={21} /></span>
+                                <span className="oh font600">Login</span></span></Link>}
 
-                                    {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search/></span>}
-                                    </div>
-                                </div>
-                            </>
-                        }
-                    />
+                            {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search /></span>}
+                        </div>
+                    </div>
+                </>
+            }
+        />)
+
+    }, [device, search_mode, pathname, usr])
+
+    return (
+        <>
+            {device === "mobile" &&
+
+
+                <div className="df fd-c pdy09 pdx1 gap1"
+                // style={{ background: '#b1261cff', color:'white' }}  
+                >
+                    {top_bar_}
                 </div>
 
             }

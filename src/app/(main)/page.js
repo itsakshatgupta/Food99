@@ -178,7 +178,7 @@ export default function branches() {
             return () => {
                 set_floaters(null)
                 // This runs when the component is unmounted
-                // mutate("/cart"); // Refresh the cart data when leaving
+                mutate("/cart"); // Refresh the cart data when leaving
             };
         }
     }, [menu___i])
@@ -508,7 +508,7 @@ export default function branches() {
                                                                             <Image
                                                                                 src={menu_items.image}
                                                                                 alt="iphone 15"
-                                                                                width={400}
+                                                                                width={202}
                                                                                 height={200}
                                                                             />
                                                                         </div>

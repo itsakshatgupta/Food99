@@ -51,6 +51,7 @@ export default function MainContext({ device, children }) {
 
     const [dynamic_portal_ab, set_dynamics_portal_ab] = useState(null)
     const [cart_, set_cart] = useState(10);
+    // const [cart__i, set_cart__i] = useState(null);
     const [floaters, set_floaters] = useState(null);
 
 
@@ -65,13 +66,7 @@ export default function MainContext({ device, children }) {
     const panel = searchParams.get('panel');
     console.log(searchParams.get('page'), typeof (searchParams.get('page')), searchParams.get('page') in ['login', 'signup'], noLayoutOnPages)
 
-    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
-        revalidateOnFocus: false,      // Don't refresh when window gains focus
-        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-        refreshInterval: 0,             // Don't refresh automatically at intervals
-
-    });
-
+    
     const { data: usr, error: usrError } = useSWR("/api/me/", fetcher, {
         revalidateOnFocus: false,      // Don't refresh when window gains focus
         revalidateOnReconnect: false,  // Don't refresh when internet reconnects
@@ -79,14 +74,22 @@ export default function MainContext({ device, children }) {
         shouldRetryOnError:false
     });
 
-    // const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
-    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
-    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-    //     refreshInterval: 0,             // Don't refresh automatically at intervals
-    //     shouldRetryOnError:false
+    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0,             // Don't refresh automatically at intervals
 
-    // });
-    const cart__i = null
+    });
+
+    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0,             // Don't refresh automatically at intervals
+        shouldRetryOnError:false
+
+    });
+    // if (usr) {set_cart__i(cart__i_)}
+    
     useEffect(() => {
         console.log('check run')
         if (['/', '/cart'].includes(pathname) === false) {
