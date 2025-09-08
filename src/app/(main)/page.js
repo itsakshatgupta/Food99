@@ -511,8 +511,8 @@ export default function branches() {
                                                                                 width={202}
                                                                                 height={200}
                                                                             />
-                                                                            <div className="df fd-c gap08 mgt05 fx1 pdr05"><div className="df gap05 fd-c"><span>$120</span>
-                                                                            <div className="pR pd1 df">
+                                                                            <div className="df aic jcsb mgt05 fx1 pdr05"><div className="df gap05 fd-c"><span>$120</span>
+                                                                            <div className="pR df">
 
                                                                             <Cart_Control_Indirect cart_detail={() => {
                                                                                 const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
@@ -529,7 +529,7 @@ export default function branches() {
                                                                             image: menu_items.image
                                                                         }} />
                                                                         </div>
-                                                                            </div><div className="fx1 bdt pdt05 mgt08">Delicious Sweet Lassi from Beverages cuisine</div></div>
+                                                                            </div><div className="fx1 bdt pdt05 mgt08 font08">Delicious Sweet Lassi from Beverages cuisine</div></div>
                                                                         </div>
                                                                         {/* <div>{menu_items.item_price__}</div> */}
 
