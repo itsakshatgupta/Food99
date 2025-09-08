@@ -13,6 +13,7 @@ import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
 import { mutate } from 'swr';
+import { menu } from '@/components/dummy_data';
 
 
 // ✅ one shared fetcher
@@ -512,8 +513,8 @@ export default function branches() {
                                                                                 height={200}
                                                                             />
                                                                             <div className="df fd-c gap08 mgt05 fx1 pdr05">
-                                                                                <div className="df aic jcsb"><span>$120</span>
-                                                                            <div className="pR df">
+                                                                                <div className="df aic jcsb"><span>{'$'+menu_items.price}</span>
+                                                                            <div className="pR df" sttyle={{width:'100px'}}>
 
                                                                             <Cart_Control_Indirect cart_detail={() => {
                                                                                 const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
@@ -532,7 +533,7 @@ export default function branches() {
                                                                         </div>
                                                                             </div>
                                                                             
-                                                                            <div className="fx1 bdt pdt05 mgt08 font08">Delicious Sweet Lassi from Beverages cuisine</div></div>
+                                                                            <div className="fx1 bdt pdt05 font08">{menu_items.description}</div></div>
                                                                         </div>
                                                                         {/* <div>{menu_items.item_price__}</div> */}
 
