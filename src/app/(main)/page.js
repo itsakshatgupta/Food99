@@ -514,7 +514,7 @@ export default function branches() {
                                                                             />
                                                                             <div className="df fd-c gap08 mgt05 fx1 pdr05">
                                                                                 <div className="df aic jcsb"><span>{'$'+menu_items.price}</span>
-                                                                            <div className="pR df" sttyle={{width:'100px'}}>
+                                                                            <div className="pR df" style={{width:'100px'}}>
 
                                                                             <Cart_Control_Indirect cart_detail={() => {
                                                                                 const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
