@@ -503,7 +503,7 @@ export default function branches() {
                                                                     }}>
                                                                         <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
                                                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-                                                                        <div className="xfg" style={{ height: '200px' }}>
+                                                                        <div className="wfp df gap05" style={{ height: '200px' }}>
                                                                             {/* Hii */}
                                                                             <Image
                                                                                 src={menu_items.image}
@@ -511,6 +511,25 @@ export default function branches() {
                                                                                 width={202}
                                                                                 height={200}
                                                                             />
+                                                                            <div className="df fd-c gap08 mgt05 fx1 pdr05"><div className="df gap05 fd-c"><span>$120</span>
+                                                                            <div className="pR pd1 df">
+
+                                                                            <Cart_Control_Indirect cart_detail={() => {
+                                                                                const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
+
+                                                                            return {
+                                                                                quantity: cartItem ? cartItem.quantity : null,
+                                                                                cart_item_id: cartItem ? cartItem.id : null,
+                                                                            };
+                                                                        }}
+                                                                        item={{
+                                                                            id: menu_items.id,
+                                                                            name: menu_items.name,
+                                                                            price: menu_items.price,
+                                                                            image: menu_items.image
+                                                                        }} />
+                                                                        </div>
+                                                                            </div><div className="fx1 bdt pdt05 mgt08">Delicious Sweet Lassi from Beverages cuisine</div></div>
                                                                         </div>
                                                                         {/* <div>{menu_items.item_price__}</div> */}
 
