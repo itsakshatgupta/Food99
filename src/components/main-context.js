@@ -159,10 +159,10 @@ export default function MainContext({ device, children }) {
 
                             <lowscreen-nav className="df jcsb aic xfg font-sm pdy05 bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(1rem + 3vmin)', zIndex:2 }}>
                                 <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02 fx1" id="account"><Icon.Account/><span>Account</span></Link>
-                                <span class="df fd-c aic gap02 fx1 font600 bdTrds bdBrds mgl1 font-sm pdx05 pdy05" style="
+                                <span class="fx1 font600 bdTrds bdBrds mgl1 font-md pdx05 pdy05" style={{
     background: '#252525',
     color: 'white'
-"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round" aria-hidden="true"><circle cx="12" cy="12" r="10" class="fill-portion-shine "></circle><circle cx="12" cy="10" r="4" class=" fill-portion-shine"></circle><path d="M18 20a6 6 0 0 0-12 0" class=" fill-portion-glossy"></path></svg><span>Menu</span></span></lowscreen-nav>
+}}>Menu</span></lowscreen-nav>
                         </div>
 
                     </div>
