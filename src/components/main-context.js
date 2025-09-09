@@ -157,7 +157,7 @@ export default function MainContext({ device, children }) {
                                 }
                             </div>
 
-                            <lowscreen-nav className="df jcsb aic xfg font-sm pdy05 bdt" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(1rem + 3vmin)' }}>
+                            <lowscreen-nav className="df jcsb aic xfg font-sm pdy05 bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(1rem + 3vmin)', zIndex:2 }}>
                                 <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02 fx1" id="account"><Icon.Account/><span>Account</span></Link></lowscreen-nav>
                         </div>
 

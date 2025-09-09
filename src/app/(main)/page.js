@@ -149,7 +149,7 @@ const mobile_banner = <>
 </>
 
 export default function branches() {
-    const { device, menu___i, cart__i } = useContext(dynamic_);
+    const { device, menu___i, cart__i, usr } = useContext(dynamic_);
     const [menu___i_, set_menu___i] = useState(null);
     const [cart__i_, set_cart__i] = useState(null);
 
@@ -157,7 +157,7 @@ export default function branches() {
     
     useEffect(() => {
         console.log(menu___i)
-        if (cart_ && menu___i) {
+        if (cart_ && menu___i && usr?.username) {
             set_floaters(<div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                 <span className='xbg oh mg05 mgx07 font07 font600 df fd-c aic jcc bd gap01' style={{ borderRadius: '100%', height: '3.8rem', width: '3.8rem', background: '#9970faff', color: '#ffffffff', border: '1px solid black' }}>
                     <BookOpen />
@@ -182,7 +182,7 @@ export default function branches() {
                 mutate("/cart"); // Refresh the cart data when leaving
             };
         }
-    }, [menu___i])
+    }, [menu___i, usr])
     // useEffect(() => {
     //     async function fetchCart() {
     //         try {

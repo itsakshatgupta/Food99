@@ -139,9 +139,11 @@ export default function Topbar_() {
                             {usr?.username ? <span className="df aic fx1 oh font-sm gap02  bdrds bd" style={{ color: 'black' }}>
                                 <span className="pdl05 pdr03 pdt02 xfg"><MapPinHouse /></span>
                                 <span className="oh font08 font600" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}><span className="font900">Home:</span> Sigra abc colony, Varanasi 221010</span>
-                            </span> : <Link href="/login"><span className="df aic oh font-sm bdrds bd pdx05" style={{ color: 'black' }}>
-                                <span className="pdt02 pdr02"><User2 size={21} /></span>
-                                <span className="oh font600">Login</span></span></Link>}
+                            </span> : <Link href="/login"><span className="oh font600 font-md bdrds bd pdx06 pdy02 gap03" style={{
+                                color: '#ffffff',
+                                background: '#000000',
+                                borderColor: 'black'
+                            }}>Login</span></Link>}
 
                             {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search /></span>}
                         </div>
