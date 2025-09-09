@@ -234,7 +234,7 @@ function msg() {
     animation: slideRight 10s forwards;
 }
 `}</style>
-        <div className="df aic jcsb gap05 pdy06 pdx1 bdt xbg bdTrds mgb03 font600 pR slide-animation"
+        <div className="df aic jcsb gap05 pdy06 pdx1 bdt xbg bdTrds font600 pR slide-animation"
             style={{
                 boxShadow: 'rgba(128, 128, 128, 0.19) 0px 3px 6px 5px',
                 background: '#0f0f0fd0',
