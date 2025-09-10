@@ -120,9 +120,7 @@ export default function MainContext({ device, children }) {
         #lsn-1{
         border-top:1px solid #f8f8f8;
         }
-        #lsn-2{
-        background:black;
-        }
+
         `}</style>
             <style>{`    .menu_list{width: 70vw;
     position: absolute;
