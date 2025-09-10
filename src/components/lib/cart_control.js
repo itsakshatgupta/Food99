@@ -205,9 +205,18 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
                 } else {
                     if (showmsg === false) {
                         set_showmsg(true)
-                        setTimeout(() =>
-                            set_showmsg(false)
-                            , 11000)
+                        const new_msgtimer =
+                            setTimeout(() =>
+                                set_showmsg(false)
+                                , 11000)
+                        set_timer(new_msgtimer)
+                    } else {
+                        if (timer) clearTimeout(timer)
+                        const new_msgtimer =
+                            setTimeout(() =>
+                                set_showmsg(false)
+                                , 11000)
+                        set_timer(new_msgtimer)
                     }
                 }
             }}
@@ -219,9 +228,18 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
                 } else {
                     if (showmsg === false) {
                         set_showmsg(true)
-                        setTimeout(() =>
-                            set_showmsg(false)
-                            , 11000)
+                        const new_msgtimer =
+                            setTimeout(() =>
+                                set_showmsg(false)
+                                , 11000)
+                        set_timer(new_msgtimer)
+                    } else {
+                        if (timer) clearTimeout(timer)
+                        const new_msgtimer =
+                            setTimeout(() =>
+                                set_showmsg(false)
+                                , 11000)
+                        set_timer(new_msgtimer)
                     }
                 }
             }

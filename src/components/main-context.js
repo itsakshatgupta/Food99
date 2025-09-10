@@ -111,6 +111,45 @@ export default function MainContext({ device, children }) {
         check_floaters();
     }, [floaters]);
 
+    function display_menu_list() {
+        return set_floaters(<>
+        <style>{`
+        lowscreen-nav{
+        border-top:none !important;
+        }
+        #lsn-1{
+        border-top:1px solid #f8f8f8;
+        }
+        #lsn-2{
+        background:black;
+        }
+        `}</style>
+            <style>{`    .menu_list{width: 70vw;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 40vh;
+    box-shadow: 0 0 12px 1px #b2b2b2;
+    animation:menu_ani 0.8s linear;
+    }
+
+    @keyframes menu_ani {
+    0% {
+        height:0;
+        width:0;
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+            }
+    `}</style>
+            <div className="df fd-c aic padx1 pdy1 menu_list bdTrds xfg gap08 oy" style={{background:'black',color:'white'}}>
+                {menu___i&&menu___i.map((v, i)=><div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span>i</span><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
+            </div>
+        </>)
+    }
+
     return (
         <>
             {device === 'pc' &&
@@ -160,15 +199,18 @@ export default function MainContext({ device, children }) {
                                         }
                                     </div>
 
-                                    <lowscreen-nav className="df aic bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(0.5rem + 1vmin)', zIndex: 2 }}>
+                                    <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2 }}>
                                         {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
-                                        <div className="df jcsb aic xbg pdy05 bdr fx1">
+                                        <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1" style={{ paddingInline: 'calc(0.5rem + 1vmin)'}}>
                                             <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                         </div>
-                                        <span className="font600 bdTrds bdBrds mgl1 font-md pdx1 pdy05 tac" style={{
+                                        <div className='df aic' id="lsn-2">
+                                        <span className="font600 bdTrds bdBrds mgx1 font-md pdx1 pdy05 tac" style={{
                                             background: '#252525',
                                             color: 'white'
-                                        }}>Menu</span></lowscreen-nav>
+                                        }} onClickCapture={menu___i&&display_menu_list}>Menu</span>
+                                        </div>
+                                        </lowscreen-nav>
                                 </div>
 
                             </div>
