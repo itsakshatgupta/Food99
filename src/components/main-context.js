@@ -21,6 +21,8 @@ const fetcher = async (url) => {
 };
 
 export const dynamic_ = createContext();
+export const floaters_ = createContext();
+export const menu_ = createContext();
 export const Menu = [
     {
         menu_ctg_: 'Pizza', list_: [
@@ -50,7 +52,6 @@ export default function MainContext({ device, children }) {
     const [dynamic_portal_main, set_dynamics_portal_main] = useState(null)
 
     const [dynamic_portal_ab, set_dynamics_portal_ab] = useState(null)
-    const [cart_, set_cart] = useState(10);
     // const [cart__i, set_cart__i] = useState(null);
     const [floaters, set_floaters] = useState(null);
 
@@ -66,12 +67,12 @@ export default function MainContext({ device, children }) {
     const panel = searchParams.get('panel');
     console.log(searchParams.get('page'), typeof (searchParams.get('page')), searchParams.get('page') in ['login', 'signup'], noLayoutOnPages)
 
-    
+
     const { data: usr, error: usrError } = useSWR("/api/me/", fetcher, {
         revalidateOnFocus: false,      // Don't refresh when window gains focus
         revalidateOnReconnect: false,  // Don't refresh when internet reconnects
         refreshInterval: 0,             // Don't refresh automatically at intervals
-        shouldRetryOnError:false
+        shouldRetryOnError: false
     });
 
     const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
@@ -85,11 +86,11 @@ export default function MainContext({ device, children }) {
         revalidateOnFocus: false,      // Don't refresh when window gains focus
         revalidateOnReconnect: false,  // Don't refresh when internet reconnects
         refreshInterval: 0,             // Don't refresh automatically at intervals
-        shouldRetryOnError:false
+        shouldRetryOnError: false
 
     });
     // if (usr) {set_cart__i(cart__i_)}
-    
+
     useEffect(() => {
         console.log('check run')
         if (['/', '/cart'].includes(pathname) === false) {
@@ -113,7 +114,7 @@ export default function MainContext({ device, children }) {
     return (
         <>
             {device === 'pc' &&
-                <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, dynamic_portal_ab, set_dynamics_portal_ab }}>
+                <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab }}>
 
                     <div className="df fd-c hfp wfp">
 
@@ -137,39 +138,44 @@ export default function MainContext({ device, children }) {
 
 
             {device === 'mobile' && <>
-                <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, dynamic_portal_ab, set_dynamics_portal_ab, floaters, set_floaters, menu___i, cart__i, usr }}>
-                    <div className="hfp wfp  df fd-c" style={{ alignContent: 'space-between' }}>
+                <menu_.Provider value={{ menu___i }}>
+                    <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr }}>
+                        <floaters_.Provider value={{ floaters, set_floaters }}>
+                            <div className="hfp wfp  df fd-c" style={{ alignContent: 'space-between' }}>
 
-                        <main className="main fx1"
-                            ref={mainRef}
-                        >
-                            <div className="hfp oy1 oh1" style={{ scrollbarWidth: 'none' }} >
-                                {children}
-                            </div>
-                        </main>
-                        <div className="wfp" style={{ position: 'fixed', bottom: 0 }} ref={floaterRef}>
-                            <div className='containers-area pR' >
-                                <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}</div>
-                                {floaters &&
-                                    <div className='floater-container'>
-                                        {floaters}
+                                <main className="main fx1"
+                                    ref={mainRef}
+                                >
+                                    <div className="hfp oy1 oh1" style={{ scrollbarWidth: 'none' }} >
+                                        {children}
                                     </div>
-                                }
-                            </div>
+                                </main>
+                                <div className="wfp" style={{ position: 'fixed', bottom: 0 }} ref={floaterRef}>
+                                    <div className='containers-area pR' >
+                                        <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}</div>
+                                        {floaters &&
+                                            <div className='floater-container'>
+                                                {floaters}
+                                            </div>
+                                        }
+                                    </div>
 
-                            <lowscreen-nav className="df aic bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(0.5rem + 1vmin)', zIndex:2 }}>
-                                <div className="df jcsb aic xbg pdy05 bdr fx1">
-                                <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account/><span>Account</span></Link>
+                                    <lowscreen-nav className="df aic bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(0.5rem + 1vmin)', zIndex: 2 }}>
+                                        {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
+                                        <div className="df jcsb aic xbg pdy05 bdr fx1">
+                                            <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
+                                        </div>
+                                        <span className="font600 bdTrds bdBrds mgl1 font-md pdx1 pdy05 tac" style={{
+                                            background: '#252525',
+                                            color: 'white'
+                                        }}>Menu</span></lowscreen-nav>
                                 </div>
-                                <span className="font600 bdTrds bdBrds mgl1 font-md pdx1 pdy05 tac" style={{
-    background: '#252525',
-    color: 'white'
-}}>Menu</span></lowscreen-nav>
-                        </div>
 
-                    </div>
-                    {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA hfp xbg wfp' style={{ top: 0, zIndex: 1 }}>{dynamic_portal_ab}</div> : null}
-                </dynamic_.Provider>
+                            </div>
+                            {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA hfp xbg wfp' style={{ top: 0, zIndex: 1 }}>{dynamic_portal_ab}</div> : null}
+                        </floaters_.Provider>
+                    </dynamic_.Provider>
+                </menu_.Provider>
             </>
             }
         </>

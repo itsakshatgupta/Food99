@@ -7,7 +7,7 @@ import { apiFetch } from "@/app/(api)/api";
 import { cartprice } from "@/app/(main)/cart/page";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { mutate } from 'swr';
-import { dynamic_ } from "../main-context";
+import { dynamic_, floaters_ } from "../main-context";
 import Link from "next/link";
 
 
@@ -111,13 +111,16 @@ export function Cart_Control_Direct({ item }) {
 
 
 export function Cart_Control_Indirect({ cart_detail, item }) {
-    const { usr, set_floaters } = useContext(dynamic_);
+    const { usr } = useContext(dynamic_);
+    const { floaters, set_floaters } = useContext(floaters_);
+
     const { quantity, cart_item_id } = cart_detail();
     const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(quantity !== null ? quantity : "ADD");
     // console.log(quantity)
     // console.log('iq', quantity, cart_quantity_indirect)
     const [CartItem_id, set_CartItem_id] = useState(cart_item_id || null);
     const [timer, set_timer] = useState(null);
+    const [showmsg, set_showmsg] = useState(false);
 
     useEffect(() => {
         const { quantity, cart_item_id } = cart_detail();
@@ -125,6 +128,15 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
         set_CartItem_id(cart_item_id || null);
 
     }, [cart_detail])
+
+    useEffect(() => {
+        if (showmsg) {
+            set_floaters(msg())
+        }
+        if (showmsg === false) {
+            set_floaters(null)
+        }
+    }, [showmsg])
 
     const handleAdd = async () => {
         if (cart_quantity_indirect === "ADD") {
@@ -191,8 +203,12 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
                 if (usr?.username) {
                     handleRemove
                 } else {
-                    set_floaters(msg())
-                    setTimeout(() => set_floaters(null), 3000)
+                    if (showmsg === false) {
+                        set_showmsg(true)
+                        setTimeout(() =>
+                            set_showmsg(false)
+                            , 11000)
+                    }
                 }
             }}
         ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>{cart_quantity_indirect}</span><span className="df aic fx1 tac jcc CKEFT "
@@ -201,8 +217,12 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
                 if (usr?.username) {
                     handleAdd
                 } else {
-                    set_floaters(msg())
-                    setTimeout(() => set_floaters(null), 10000)
+                    if (showmsg === false) {
+                        set_showmsg(true)
+                        setTimeout(() =>
+                            set_showmsg(false)
+                            , 11000)
+                    }
                 }
             }
             }
@@ -244,7 +264,7 @@ function msg() {
             }}
         >
             <span>Login to eat.</span>
-            <Link href="/login" className="font800 font-sm" style={{color:'orange'}}><u>Login</u></Link>
+            <Link href="/login" className="font800 font-sm" style={{ color: 'orange' }}><u>Login</u></Link>
         </div>
     </>)
 }

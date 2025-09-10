@@ -1,7 +1,7 @@
 'use client'
 import ContainerAContents from '@/components/container-A-contents';
-import { dynamic_ } from '@/components/main-context';
-import { useContext, useEffect, useState } from "react"
+import { dynamic_, floaters_, menu_ } from '@/components/main-context';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import Portal_ from "@/components/main_portal/main_protral";
 import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
@@ -14,13 +14,6 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
 import { mutate } from 'swr';
 import { menu } from '@/components/dummy_data';
-
-
-// ✅ one shared fetcher
-const fetcher = async (url) => {
-    const res = await apiFetch(url);
-    return res.json();
-};
 
 const banner_ = <>
     <div className="df jcsb wfp hfp" style={{ background: '#f1f8e9' }}>
@@ -149,15 +142,16 @@ const mobile_banner = <>
 </>
 
 export default function branches() {
-    const { device, menu___i, cart__i, usr } = useContext(dynamic_);
-    const [menu___i_, set_menu___i] = useState(null);
-    const [cart__i_, set_cart__i] = useState(null);
 
-    const { dynamic_portal_main, set_dynamics_portal_main, cart_, set_cart, floaters, set_floaters } = useContext(dynamic_);
-    
+
+    const { device, cart__i, set_dynamics_portal_main, usr } = useContext(dynamic_);
+
+    const { floaters, set_floaters } = useContext(floaters_);
+    const { menu___i } = useContext(menu_);
+
     useEffect(() => {
         console.log(menu___i)
-        if (cart_ && menu___i && usr?.username) {
+        if (menu___i && usr?.username) {
             set_floaters(<div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                 <span className='xbg oh mg05 mgx07 font07 font600 df fd-c aic jcc bd gap01' style={{ borderRadius: '100%', height: '3.8rem', width: '3.8rem', background: '#9970faff', color: '#ffffffff', border: '1px solid black' }}>
                     <BookOpen />
@@ -183,204 +177,139 @@ export default function branches() {
             };
         }
     }, [menu___i, usr])
-    // useEffect(() => {
-    //     async function fetchCart() {
-    //         try {
-    //             const res = await apiFetch("/cart"); // Django cart API
-    //             const data = await res.json();
-    //             set_cart__i(data);
 
-    //         } catch (error) {
-    //             console.error("Error fetching cart:", error);
-    //         }
-    //     }
-    //     async function fetchMenu() {
-    //         try {
-    //             const res = await apiFetch("/menu/"); // Django cart API
-    //             const data = await res.json();
-    //             set_menu___i(data);
-    //         } catch (error) {
-    //             console.error("Error fetching cart:", error);
-    //         }
-    //     }
-    //     fetchCart();
-    //     fetchMenu();
-    // }, []);
+    const menu = useMemo(() => {
+        return menu___i?.map((categories) => {
+            console.log('ccc', cart__i)
+            if (categories.items.length >= 1) {
+                return (
 
-    const d = (fall_ctg_, n, p, d) => {
-        return (<>
-            <style>
-                {`
-                .CKEFT pd04{
-                    transition: all 0.16s;
-                    cursor:pointer;
-                }
-                .CKEFT pd04:hover{
-                    background:#d6ebd1;
-                }
-                `}
-            </style>
-            <div className="df aic jcsb wfp pdy05 pdl05 pdr08 bdb pS" style={{ background: '#8BC34A', top: '0' }}>
-                <h3 className="mg0">{fall_ctg_}</h3>
-                <div className="df aic gap1">
-                    <span className="df bdrds" style={{
-                        background: 'whitesmoke',
-                        padding: '2px',
-                    }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#000000"><path d="M680-80q-50 0-85-35t-35-85q0-6 3-28L282-392q-16 15-37 23.5t-45 8.5q-50 0-85-35t-35-85q0-50 35-85t85-35q24 0 45 8.5t37 23.5l281-164q-2-7-2.5-13.5T560-760q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35q-24 0-45-8.5T598-672L317-508q2 7 2.5 13.5t.5 14.5q0 8-.5 14.5T317-452l281 164q16-15 37-23.5t45-8.5q50 0 85 35t35 85q0 50-35 85t-85 35Zm0-80q17 0 28.5-11.5T720-200q0-17-11.5-28.5T680-240q-17 0-28.5 11.5T640-200q0 17 11.5 28.5T680-160ZM200-440q17 0 28.5-11.5T240-480q0-17-11.5-28.5T200-520q-17 0-28.5 11.5T160-480q0 17 11.5 28.5T200-440Zm480-280q17 0 28.5-11.5T720-760q0-17-11.5-28.5T680-800q-17 0-28.5 11.5T640-760q0 17 11.5 28.5T680-720Zm0 520ZM200-480Zm480-280Z" /></svg>
-                    </span>
-                    <span className="df" onClick={() => set_dynamics_portal_main(null)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-            </div>
-            <div className="hfp oy" style={{
-                scrollbarColor: 'rgb(234 234 234) white',
-                scrollbarWidth: 'thin'
-            }}>
-                <div className="df fd-c">
-                    <img className="img_"
-                        src="file:///home/akshat-gupta/Downloads/old%201/Coding.jpg"
-                        style={{
-                            background: 'rgb(251 251 251)'
-                        }}
-                        height='190px'
-                        width='350px'
-                    ></img>
-                    <div className="pdy1 df aic pdx05 bdt"><span className="fx1">{n}</span><div className="add_cart_control_ICart_Control_Indirect font-sm oh" style={{ width: '5.2rem', fontSize: '0.875rem', background: 'white' }}><span className="fx1 df aic jcc tac CKEFT pd04 pdy01" onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="tac fx1 pdy01" id="orderNo">0</span><span className="fx1 df aic jcc tac CKEFT pdy01" onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div></div></div><div className="pdy5 pdx05" style={{ borderRadius: '5px', background: '#f8f8f8' }}>Description</div>
-            </div>
-        </>)
-    }
 
-    function less(e) {
-        let n = e.currentTarget.parentElement.children[1].textContent;
+                    <div className="bdrds mgx05 mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
+                        <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
+                        <div className={` catg df fd-c fxw`} style={{ gap: '1.2rem' }}>
 
-        if (n <= 1 || n === 'ADD') {
-            e.currentTarget.parentElement.children[1].textContent = 'ADD';
+                            {categories.items.map((menu_items, i) =>
+                                <div key={i}>
+                                    {device === 'mobile' &&
+                                        <>
+                                            <style>
+                                                {`              
+                                                .lowscreen-portal{
+                                                  animation:a_lowscreen-porta_ 0.15s linear ;
+                                                }
+                                                @keyframes a_lowscreen-porta_{
+                                                0%{
+                                                bottom:-100%;
+                                                }
+                                                100%{
+                                                bottom:0;
+                                                }
+                                                }`}
+                                            </style>
+                                           
+                                               
+                                                <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
+                                                    <div className="pdr06">
+                                                        <div className="df" style={{ alignItems: 'flex-start' }}>
+                                                            <span className="mgl01 font-lg font700">{menu_items.name}</span>
+                                                            <span className="pdx02 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
+                                                        </div>
+                                                        <div className="df aic pdt02 pdx02 gap02">
+                                                            <span className="pdx03 pdy01 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.7rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 -960 960 960" width="0.8rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
+                                                        <div className="font-sm font500 pdt05">{menu_items.description}</div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
+                                                            <div className="lowscreen-portal wfp df fd-c oh" style={{
+                                                                background: 'white',
+                                                                borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
+                                                            }}>
+                                                                <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
+                                                                <div className="wfp df gap05" style={{ height: '200px' }}>
+                                                                    {/* Hii */}
+                                                                    <Image
+                                                                        src={menu_items.image}
+                                                                        alt="iphone 15"
+                                                                        width={202}
+                                                                        height={200}
+                                                                    />
+                                                                    <div className="df fd-c gap08 mgt05 fx1 pdr05">
+                                                                        <div className="df aic jcsb"><span>{'$' + menu_items.price}</span>
+                                                                            <div className="pR df" style={{ width: '100px' }}>
+
+                                                                                <Cart_Control_Indirect cart_detail={() => {
+                                                                                    const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
+
+                                                                                    return {
+                                                                                        quantity: cartItem ? cartItem.quantity : null,
+                                                                                        cart_item_id: cartItem ? cartItem.id : null,
+                                                                                    };
+                                                                                }}
+                                                                                    item={{
+                                                                                        id: menu_items.id,
+                                                                                        name: menu_items.name,
+                                                                                        price: menu_items.price,
+                                                                                        image: menu_items.image
+                                                                                    }} />
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div className="fx1 bdt pdt05 font08">{menu_items.description}</div></div>
+                                                                </div>
+                                                                {/* <div>{menu_items.item_price__}</div> */}
+
+                                                            </div>
+                                                        )} style={{
+                                                            width: '121px',
+                                                            height: "120px",
+                                                            borderRadius: '10px',
+                                                            justifySelf: 'center',
+                                                            background: 'white'
+                                                        }}>                                                    <Image
+                                                                src={menu_items.image}
+                                                                alt="iphone 15"
+                                                                width={122}
+                                                                height={120}
+                                                            />
+                                                        </div>
+                                                            <Cart_Control_Indirect
+                                                                cart_detail={() => {
+                                                                    const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
+
+                                                                    return {
+                                                                        quantity: cartItem ? cartItem.quantity : null,
+                                                                        cart_item_id: cartItem ? cartItem.id : null,
+                                                                    };
+                                                                }}
+                                                                item={{
+                                                                    id: menu_items.id,
+                                                                    name: menu_items.name,
+                                                                    price: menu_items.price,
+                                                                    image: menu_items.image
+                                                                }}
+                                                            />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                           
+                                        </>
+                                    }
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                )
+            }
+
         }
-        else {
-            e.currentTarget.parentElement.children[1].textContent = n - 1
-            let nn = parseInt(e.currentTarget.parentElement.children[1].textContent);
-            if (nn <= 0) { e.currentTarget.parentElement.classList.remove('dfIMP') }
-            set_cart(nn)
-            n = parseInt(e.currentTarget.parentElement.children[1].textContent);
-        }
 
-    }
-    function add(e) {
-        let n;
-        if (e.currentTarget.parentElement.children[1].textContent === 'ADD') {
-            n = 0;
-        }
-        else { n = parseInt(e.currentTarget.parentElement.children[1].textContent); }
+        )
+    }, [menu___i, cart__i])
 
-        e.currentTarget.parentElement.children[1].textContent = n + 1
-        let nn = parseInt(e.currentTarget.parentElement.children[1].textContent);
-        if (nn > 0) { e.currentTarget.parentElement.classList.add('dfIMP') }
-        console.log('?cart', typeof cart_)
-
-        set_cart(nn)
-        // console.log('?cart', cart_)
-    }
-
-    const menu__ = [
-        {
-            main_ctg__: 'pizza', items_list__: [
-                { item_name__: 'Marhertia', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 120 },
-                { item_name__: 'Farm Loaded', item_description__: 'Tomato Sauce, Mozorolla Cheese, Capscium, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 150 },
-                { item_name__: 'Farm House', item_description__: 'Tomato Sauce, Mozorolla Cheese, Onions, Corn, Basil and Veggies', img_src: '/food_img/c.jpg', item_price__: 149 },
-                { item_name__: 'Heavy Veggie Loaded', item_description__: 'Tomato Sauce, Mozorolla, Onion, Mashroom, Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 190 },
-                { item_name__: 'Farmer Pizza', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 180 },
-                { item_name__: 'Panner Makhani Pizza', item_description__: 'Tomato Sauce, Mozorolla Cheese, Panner, Makhani Grevy, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 170 },
-                { item_name__: 'Golden Corn', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Corn', img_src: '/food_img/g.jpg', item_price__: 130 },
-                { item_name__: 'Mushroom Loaded', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Mushroom', img_src: '/food_img/h.png', item_price__: 160 },
-                { item_name__: 'Italy Florentina', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil, Spinach and Veggies', img_src: '/food_img/i.png', item_price__: 180 },
-                { item_name__: 'Cheese Loaded', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 120 },
-            ]
-        },
-        {
-            main_ctg__: 'Burger', items_list__: [
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/c.jpg', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 69 },
-                { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 69 },
-            ]
-        },
-        {
-            main_ctg__: 'Pasta', items_list__: [
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 99 },
-                { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 99 },
-            ]
-        },
-        {
-            main_ctg__: 'French Fries', items_list__: [
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/c.jpg', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 49 },
-                { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 49 },
-            ]
-        },
-        {
-            main_ctg__: 'Roll', items_list__: [
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 49 },
-                { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 49 },
-            ]
-        },
-        {
-            main_ctg__: 'Breverages', items_list__: [
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 29 },
-                { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 29 },
-            ]
-        },
-        {
-            main_ctg__: 'Combo', items_list__: [
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 149 },
-                { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 149 },
-            ]
-        },
-    ]
 
     return (<>
         {/* <style>{`#topbar{box-shadow: 0px 3px 4px 0px #eaeaea82;}`}</style> */}
@@ -429,7 +358,7 @@ export default function branches() {
         </style>
 
 
-                {console.log(menu___i)}
+        {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
                 <div className="pS xbg" style={{ top: 0, zIndex: 1 }}>
@@ -457,133 +386,8 @@ export default function branches() {
                     background: 'whitesmoke',
                     paddingBlockEnd: `${floaters ? '150px' : 0}`
                 }}>
-
-                    {menu___i?.map((categories) => {
-                        console.log('ccc', cart__i)
-                        if (categories.items.length >= 1) {
-                            return (
-
-
-                                <div className="bdrds mgx05 mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
-                                    <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
-                                    <div className={` catg df fd-c fxw`} style={{ gap: '1.2rem' }}>
-
-                                        {categories.items.map((menu_items, i) =>
-                                            <div key={i}>
-                                                {device === 'mobile' &&
-                                                    <>
-                                                        <style>
-                                                            {`              
-                                                .lowscreen-portal{
-                                                  animation:a_lowscreen-porta_ 0.15s linear ;
-                                                }
-                                                @keyframes a_lowscreen-porta_{
-                                                0%{
-                                                bottom:-100%;
-                                                }
-                                                100%{
-                                                bottom:0;
-                                                }
-                                                }`}
-                                                        </style>
-                                                        <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
-                                                            <div className="pdr06">
-                                                                <div className="df" style={{ alignItems: 'flex-start' }}>
-                                                                    <span className="mgl01 font-lg font700">{menu_items.name}</span>
-                                                                    <span className="pdx02 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
-                                                                </div>
-                                                                <div className="df aic pdt02 pdx02 gap02">
-                                                                    <span className="pdx03 pdy01 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.7rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 -960 960 960" width="0.8rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
-                                                                <div className="font-sm font500 pdt05">{menu_items.description}</div>
-                                                            </div>
-                                                            <div>
-                                                                <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
-                                                                    <div className="lowscreen-portal wfp df fd-c oh" style={{
-                                                                        background: 'white',
-                                                                        borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
-                                                                    }}>
-                                                                        <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-                                                                        <div className="wfp df gap05" style={{ height: '200px' }}>
-                                                                            {/* Hii */}
-                                                                            <Image
-                                                                                src={menu_items.image}
-                                                                                alt="iphone 15"
-                                                                                width={202}
-                                                                                height={200}
-                                                                            />
-                                                                            <div className="df fd-c gap08 mgt05 fx1 pdr05">
-                                                                                <div className="df aic jcsb"><span>{'$'+menu_items.price}</span>
-                                                                            <div className="pR df" style={{width:'100px'}}>
-
-                                                                            <Cart_Control_Indirect cart_detail={() => {
-                                                                                const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
-
-                                                                            return {
-                                                                                quantity: cartItem ? cartItem.quantity : null,
-                                                                                cart_item_id: cartItem ? cartItem.id : null,
-                                                                            };
-                                                                        }}
-                                                                        item={{
-                                                                            id: menu_items.id,
-                                                                            name: menu_items.name,
-                                                                            price: menu_items.price,
-                                                                            image: menu_items.image
-                                                                        }} />
-                                                                        </div>
-                                                                            </div>
-                                                                            
-                                                                            <div className="fx1 bdt pdt05 font08">{menu_items.description}</div></div>
-                                                                        </div>
-                                                                        {/* <div>{menu_items.item_price__}</div> */}
-
-                                                                    </div>
-                                                                )} style={{
-                                                                    width: '121px',
-                                                                    height: "120px",
-                                                                    borderRadius: '10px',
-                                                                    justifySelf: 'center',
-                                                                    background: 'white'
-                                                                }}>                                                    <Image
-                                                                        src={menu_items.image}
-                                                                        alt="iphone 15"
-                                                                        width={122}
-                                                                        height={120}
-                                                                    />
-                                                                </div>
-                                                                    <Cart_Control_Indirect
-                                                                        cart_detail={() => {
-                                                                            const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
-
-                                                                            return {
-                                                                                quantity: cartItem ? cartItem.quantity : null,
-                                                                                cart_item_id: cartItem ? cartItem.id : null,
-                                                                            };
-                                                                        }}
-                                                                        item={{
-                                                                            id: menu_items.id,
-                                                                            name: menu_items.name,
-                                                                            price: menu_items.price,
-                                                                            image: menu_items.image
-                                                                        }}
-                                                                    />
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </>
-                                                }
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                            )
-                        }
-
-                    }
-
-                    )}
+                    
+                    {menu}
 
                 </div>
 
