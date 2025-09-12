@@ -120,9 +120,6 @@ export default function MainContext({ device, children }) {
         #lsn-1{
         border-top:1px solid #f8f8f8;
         }
-        #lsn-2{
-        background:black;
-        }
         `}</style>
             <style>{`    .menu_list{width: 70vw;
     position: absolute;
@@ -144,7 +141,7 @@ export default function MainContext({ device, children }) {
     }
             }
     `}</style>
-            <div className="df fd-c aic padx1 pdy1 menu_list bdTrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
+            <div className="df fd-c aic padx1 pdy1 menu_list bdTrds xfg gap08 oy" style={{ background: '#f5f5f5'}}>
                 {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span>i</span><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
             </div>
         </>)
@@ -204,7 +201,7 @@ export default function MainContext({ device, children }) {
                                         <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1" style={{ paddingInline: 'calc(0.5rem + 1vmin)' }}>
                                             <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                         </div>
-                                        <div className='df' id="lsn-2" style={{alignItems:'flex-start'}}>
+                                        <div className='df xbg' id="lsn-2" style={{alignItems:'flex-start'}}>
                                             <span className="font600 bdTrds bdBrds mgx1 font-md pdx1 pdy05 df aic" style={{
                                                 height: '79%',
                                                 background: '#252525',
