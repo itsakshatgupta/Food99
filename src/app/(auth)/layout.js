@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           @media (max-width: 720px) {
             body {
                 backdrop-filter: brightness(0.95);
-                background: repeating-linear-gradient(45deg, #ffffff, #e4e4e4 100px);
+                // background: repeating-linear-gradient(45deg, #ffffff, #e4e4e4 100px);
             }
           }
           `}
