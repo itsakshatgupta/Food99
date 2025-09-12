@@ -68,7 +68,7 @@ export default function Login() {
             style={{
               background: 'url(https://res.cloudinary.com/dbe8vybbp/image/upload/v1756398282/samples/people/kitchen-bar.jpg)',
               backgroundSize: 'cover',
-              boxShadow: 'inset 0px -50px 60px 1px black'
+              boxShadow: 'inset 0px -10px 60px 1px black'
             }}
           >
             <div className="pd1">
