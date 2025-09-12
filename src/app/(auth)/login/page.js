@@ -138,7 +138,7 @@ export default function Login() {
             </div>
           </div>
 
-          <div className={styles.container}>
+          <div className={`${styles.container} fx1`}>
             <div className="df" style={{ background: '#7f5bd5', color: 'white' }}><span className={styles.heading}>Sign in to Food99</span></div>
             <div className="df fd-c"><div className={styles.card}>
               <input type="name" placeholder="Username" className={styles.input} value={username} onChange={e => set_username(e.target.value)} />
