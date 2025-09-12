@@ -82,63 +82,9 @@ export default function Login() {
                 Food99
               </span>
             </div>
-
-            <div>
-              <div
-                className="df aic pd1 bdTrds"
-                style={{
-                  color: 'white',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  background: '#00000075',
-                  backdropFilter: 'blur(5px)',
-                  borderColor: 'black'
-                }}
-              >
-                <div
-                  className="df fd-c aic"
-                  style={{
-                    color: 'yellow'
-                  }}
-                >
-                  <span
-                    className="font-lg font800"
-                    style={{}}
-                  >
-                    108+
-                  </span>
-                  <span
-                    className="font-sm font600"
-                    style={{}}
-                  >
-                    Happy customers
-                  </span>
-                </div>
-
-                <div
-                  className="df fd-c aic"
-                  style={{
-                    color: 'cyan'
-                  }}
-                >
-                  <span className="font-lg font800">85%</span>
-                  <span className="font-sm font600">Reduced cost</span>
-                </div>
-
-                <div
-                  className="df fd-c aic"
-                  style={{
-                    color: '#00ff0a'
-                  }}
-                >
-                  <span className="font-lg font800">800+</span>
-                  <span className="font-sm font600">Orders delivered</span>
-                </div>
-              </div>
-            </div>
           </div>
 
-          <div className={`${styles.container} fx1`}>
+          <div className={styles.container}>
             <div className="df" style={{ background: '#7f5bd5', color: 'white' }}><span className={styles.heading}>Sign in to Food99</span></div>
             <div className="df fd-c"><div className={styles.card}>
               <input type="name" placeholder="Username" className={styles.input} value={username} onChange={e => set_username(e.target.value)} />
