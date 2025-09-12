@@ -202,7 +202,7 @@ export default function MainContext({ device, children }) {
                                             <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                         </div>
                                         <div className='df xbg' id="lsn-2" style={{alignItems:'flex-start'}}>
-                                            <span className="font600 bdTrds bdBrds mgx1 font-md pdx1 pdy05 df aic" style={{
+                                            <span className="font600 bdBrds mgx1 font-md pdx1 pdy05 df aic" style={{
                                                 height: '79%',
                                                 background: '#252525',
                                                 color: 'white'
