@@ -113,7 +113,7 @@ export default function MainContext({ device, children }) {
 
     function display_menu_list() {
         return set_floaters(<>
-        <style>{`
+            <style>{`
         lowscreen-nav{
         border-top:none !important;
         }
@@ -144,8 +144,8 @@ export default function MainContext({ device, children }) {
     }
             }
     `}</style>
-            <div className="df fd-c aic padx1 pdy1 menu_list bdTrds xfg gap08 oy" style={{background:'black',color:'white'}}>
-                {menu___i&&menu___i.map((v, i)=><div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span>i</span><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
+            <div className="df fd-c aic padx1 pdy1 menu_list bdTrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
+                {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span>i</span><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
             </div>
         </>)
     }
@@ -201,16 +201,17 @@ export default function MainContext({ device, children }) {
 
                                     <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2 }}>
                                         {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
-                                        <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1" style={{ paddingInline: 'calc(0.5rem + 1vmin)'}}>
+                                        <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1" style={{ paddingInline: 'calc(0.5rem + 1vmin)' }}>
                                             <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                         </div>
-                                        <div className='df aic' id="lsn-2">
-                                        <span className="font600 bdTrds bdBrds mgx1 font-md pdx1 pdy05 tac" style={{
-                                            background: '#252525',
-                                            color: 'white'
-                                        }} onClickCapture={menu___i&&display_menu_list}>Menu</span>
+                                        <div className='df' id="lsn-2" style={{alignItems:'flex-start'}}>
+                                            <span className="font600 bdTrds bdBrds mgx1 font-md pdx1 pdy05 df aic" style={{
+                                                height: '79%',
+                                                background: '#252525',
+                                                color: 'white'
+                                            }} onClickCapture={menu___i && display_menu_list}>Menu</span>
                                         </div>
-                                        </lowscreen-nav>
+                                    </lowscreen-nav>
                                 </div>
 
                             </div>
