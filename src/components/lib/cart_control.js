@@ -111,8 +111,7 @@ export function Cart_Control_Direct({ item }) {
 
 
 export function Cart_Control_Indirect({ cart_detail, item }) {
-    const { usr } = useContext(dynamic_);
-    const { floaters, set_floaters } = useContext(floaters_);
+    const { usr, floaters, set_floaters } = useContext(dynamic_);
 
     const { quantity, cart_item_id } = cart_detail();
     const [cart_quantity_indirect, set_cart_quantity_indirect] = useState(quantity !== null ? quantity : "ADD");
@@ -131,10 +130,14 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
 
     useEffect(() => {
         if (showmsg) {
-            set_floaters(msg())
+            set_floaters((prev)=> [...prev, {name:'msg', child:msg()}])
         }
         if (showmsg === false) {
-            set_floaters(null)
+            console.log("log")
+            set_floaters((prev)=>prev.filter((v, i)=>v.name!=='msg'))
+        }
+        return()=>{
+            set_timer(null)
         }
     }, [showmsg])
 

@@ -144,9 +144,7 @@ const mobile_banner = <>
 export default function branches() {
 
 
-    const { device, cart__i, set_dynamics_portal_main, usr } = useContext(dynamic_);
-
-    const { floaters, set_floaters } = useContext(floaters_);
+    const { device, cart__i, set_dynamics_portal_main, usr,  floaters, set_floaters  } = useContext(dynamic_);
     const { menu___i } = useContext(menu_);
 
     useEffect(() => {
@@ -170,11 +168,11 @@ export default function branches() {
                     </div>
                 </div>
             </div>);
-            return () => {
-                set_floaters(null)
-                // This runs when the component is unmounted
-                mutate("/cart"); // Refresh the cart data when leaving
-            };
+            // return () => {
+            //     set_floaters(null)
+            //     // This runs when the component is unmounted
+            //     mutate("/cart"); // Refresh the cart data when leaving
+            // };
         }
     }, [menu___i, usr])
 
@@ -183,8 +181,6 @@ export default function branches() {
             console.log('ccc', cart__i)
             if (categories.items.length >= 1) {
                 return (
-
-
                     <div className="bdrds mgx05 mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
                         <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
                         <div className={` catg df fd-c fxw`} style={{ gap: '1.2rem' }}>
@@ -206,9 +202,7 @@ export default function branches() {
                                                 bottom:0;
                                                 }
                                                 }`}
-                                            </style>
-                                           
-                                               
+                                            </style> 
                                                 <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
                                                     <div className="pdr06">
                                                         <div className="df" style={{ alignItems: 'flex-start' }}>
@@ -301,7 +295,6 @@ export default function branches() {
                             )}
                         </div>
                     </div>
-
                 )
             }
 

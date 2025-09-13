@@ -53,7 +53,7 @@ export default function MainContext({ device, children }) {
 
     const [dynamic_portal_ab, set_dynamics_portal_ab] = useState(null)
     // const [cart__i, set_cart__i] = useState(null);
-    const [floaters, set_floaters] = useState(null);
+    const [floaters, set_floaters] = useState([{name:1, child:0}]);
 
 
     const noLayoutOnPages = ['loginl', 'signup']
@@ -89,17 +89,7 @@ export default function MainContext({ device, children }) {
         shouldRetryOnError: false
 
     });
-    // if (usr) {set_cart__i(cart__i_)}
 
-    useEffect(() => {
-        console.log('check run')
-        if (['/', '/cart'].includes(pathname) === false) {
-            set_floaters(null)
-            console.log('pn', pathname, ['/', '/cart'].includes(pathname) === false)
-        } else {
-        }
-
-    }, [pathname])
 
     useEffect(() => {
         function check_floaters() {
@@ -111,9 +101,14 @@ export default function MainContext({ device, children }) {
         check_floaters();
     }, [floaters]);
 
-    function display_menu_list() {
-        return set_floaters(<>
-            <style>{`
+    function display_menu_list(e) {
+        if (e.target.textContent === "X Close") {
+            e.target.textContent = "Menu"
+            set_floaters((prev)=>prev.filter((v, i)=>v.name!=='menu'));
+        } else {
+            e.target.textContent = "X Close"
+            set_floaters((prev)=>[...prev, {name:'menu', child:<>
+                <style>{`
         lowscreen-nav{
         border-top:none !important;
         }
@@ -121,30 +116,32 @@ export default function MainContext({ device, children }) {
         border-top:1px solid #f8f8f8;
         }
         `}</style>
-            <style>{`    .menu_list{width: 70vw;
+                <style>{`    .menu_list{width: 70vw;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 5px;
+    right: 10px;
     height: 40vh;
     box-shadow: 0 0 12px 1px #b2b2b2;
     animation:menu_ani 0.8s linear;
+    z-index:1;
     }
 
     @keyframes menu_ani {
     0% {
         height:0;
         width:0;
-        opacity: 0.5;
+        opacity: 0.8;
     }
     100% {
         opacity: 1;
     }
             }
     `}</style>
-            <div className="df fd-c aic padx1 pdy1 menu_list bdTrds xfg gap08 oy" style={{ background: '#f5f5f5'}}>
-                {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span>i</span><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
-            </div>
-        </>)
+                <div className="df fd-c aic padx1 pdy1 menu_list bdTrds bdBrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
+                    {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span>i</span><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
+                </div>
+            </>}])
+        }
     }
 
     return (
@@ -175,25 +172,22 @@ export default function MainContext({ device, children }) {
 
             {device === 'mobile' && <>
                 <menu_.Provider value={{ menu___i }}>
-                    <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr }}>
-                        <floaters_.Provider value={{ floaters, set_floaters }}>
+                    <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters  }}>
                             <div className="hfp wfp  df fd-c" style={{ alignContent: 'space-between' }}>
-
-                                <main className="main fx1"
-                                    ref={mainRef}
-                                >
+                                <main className="main fx1" ref={mainRef}>
                                     <div className="hfp oy1 oh1" style={{ scrollbarWidth: 'none' }} >
                                         {children}
                                     </div>
                                 </main>
                                 <div className="wfp" style={{ position: 'fixed', bottom: 0 }} ref={floaterRef}>
                                     <div className='containers-area pR' >
-                                        <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}</div>
-                                        {floaters &&
+                                        <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}
+                                        </div>
+                                        {/* {floaters && */}
                                             <div className='floater-container'>
-                                                {floaters}
+                                                {floaters.map((v,k)=><div key={k}>{v.child}</div>)}
                                             </div>
-                                        }
+                                        {/* } */}
                                     </div>
 
                                     <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2 }}>
@@ -201,19 +195,16 @@ export default function MainContext({ device, children }) {
                                         <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1" style={{ paddingInline: 'calc(0.5rem + 1vmin)' }}>
                                             <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                         </div>
-                                        <div className='df xbg' id="lsn-2" style={{alignItems:'flex-start'}}>
-                                            <span className="font600 bdBrds mgx1 font-md pdx1 pdy05 df aic" style={{
-                                                height: '79%',
+                                        <div className='df aic jcc xbg' id="lsn-2" style={{width: 'calc(1rem + 100px)'}}>
+                                            <span className="font600 bdBrds bdTrds font-md pdx1 pdy06 df aic" style={{
                                                 background: '#252525',
                                                 color: 'white'
-                                            }} onClickCapture={menu___i && display_menu_list}>Menu</span>
+                                            }} onClickCapture={(e) => { if (menu___i) display_menu_list(e) }}>Menu</span>
                                         </div>
                                     </lowscreen-nav>
                                 </div>
-
                             </div>
                             {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA hfp xbg wfp' style={{ top: 0, zIndex: 1 }}>{dynamic_portal_ab}</div> : null}
-                        </floaters_.Provider>
                     </dynamic_.Provider>
                 </menu_.Provider>
             </>
