@@ -138,7 +138,7 @@ export default function MainContext({ device, children }) {
             }
     `}</style>
                 <div className="df fd-c aic padx1 pdy1 menu_list bdTrds bdBrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
-                    {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span>i</span><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
+                    {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
                 </div>
             </>}])
         }

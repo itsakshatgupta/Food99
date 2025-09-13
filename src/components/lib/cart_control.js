@@ -129,14 +129,16 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
     }, [cart_detail])
 
     useEffect(() => {
-        if (showmsg) {
-            set_floaters((prev)=> [...prev, {name:'msg', child:msg()}])
+        // only add if "msg" doesn't already exist
+        const exists = floaters.some(v => v.name === 'msg');
+        if (showmsg && !exists) {
+            set_floaters((prev) => [...prev, { name: 'msg', child: msg() }])
         }
         if (showmsg === false) {
             console.log("log")
-            set_floaters((prev)=>prev.filter((v, i)=>v.name!=='msg'))
+            set_floaters((prev) => prev.filter((v, i) => v.name !== 'msg'))
         }
-        return()=>{
+        return () => {
             set_timer(null)
         }
     }, [showmsg])
