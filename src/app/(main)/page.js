@@ -223,7 +223,7 @@ export default function branches() {
 
                                 borderRadius: '10px',
                             }}
-                                className="font700 font-md">Checkout <ChevronRight/> </Link>
+                                className="font700 font-md df aic">Checkout <ChevronRight/> </Link>
                         </div>
                     </div>
                 </div>
@@ -420,10 +420,10 @@ export default function branches() {
                     <Topbar_ />
                 </div>
                 {mobile_banner}
-                <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS1 bdBrds" style={{
+                <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
-                    top: 0,
+                    top: '127.34px',
 
                 }}>
                     <div className="df aic gap1 fx1">
