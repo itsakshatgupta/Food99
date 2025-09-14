@@ -144,36 +144,95 @@ const mobile_banner = <>
 export default function branches() {
 
 
-    const { device, cart__i, set_dynamics_portal_main, usr,  floaters, set_floaters  } = useContext(dynamic_);
+    const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option } = useContext(dynamic_);
     const { menu___i } = useContext(menu_);
 
     useEffect(() => {
-        console.log(menu___i)
-        if (menu___i && usr?.username) {
-            set_floaters(<div className='df fd-c' style={{ alignItems: 'flex-end' }}>
-                <span className='xbg oh mg05 mgx07 font07 font600 df fd-c aic jcc bd gap01' style={{ borderRadius: '100%', height: '3.8rem', width: '3.8rem', background: '#9970faff', color: '#ffffffff', border: '1px solid black' }}>
-                    <BookOpen />
-                    Menu
-                </span>
+        function display_menu_list(e) {
+            if (e.target.textContent === "X Close") {
+                e.target.textContent = "Menu"
+                set_floaters((prev) => prev.filter((v, i) => v.name !== 'menu'));
+            } else {
+                e.target.textContent = "X Close"
+                set_floaters((prev) => [...prev, {
+                    name: 'menu', child: <>
+                        <style>{`
+        lowscreen-nav{
+        border-top:none !important;
+        }
+        #lsn-1{
+        border-top:1px solid #f8f8f8;
+        }
+        `}</style>
+                        <style>{`    .menu_list{width: 70vw;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    height: 40vh;
+    box-shadow: 0 0 12px 1px #b2b2b2;
+    animation:menu_ani 0.5s linear;
+    z-index:1;
+    }
 
-                <div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
-                    {{ bottom: 0, borderColor: 'blac1k' }}><div className="pdy02 pdx05 font700 " style={{ background: '#ffffffe1', color: 'green', backdropFilter: 'blur(2px)' }}><span className='font08 font700'>Add item worth 99 and get 50% flat discount</span></div>
-                    <div className="df aic jcsb gap05 pdy06 pdx05 bdt xbg" style={{ boxShadow: '0 0 6px 5px #ecececff' }}><span>21 Items</span>
-                        <Link href='/cart' style={{
-                            background: '#9970faff',
-                            color: 'white',
-                            borderRadius: '10px',
-                        }}
-                            className="pdx2 xfg df aic pdy1 font700 font-md"><span className='df'><Icon.Cart_ c='white' s='20' /></span>Checkout</Link>
+    @keyframes menu_ani {
+    0% {
+        height:0;
+        width:0;
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+            }
+    `}</style>
+                        <div className="df fd-c aic padx1 pdy1 menu_list bdTrds bdBrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
+                            {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
+                        </div>
+                    </>
+                }])
+            }
+        }
+
+        set_feature_option(
+            <div className='df aic jcc xbg' id="lsn-2" style={{ width: 'calc(1rem + 100px)' }}>
+                <span className="font600 bdBrds bdTrds font-md pdx1 pdy06 df aic" style={{
+                    background: '#252525',
+                    color: 'white'
+                }} onClickCapture={(e) => { if (menu___i) display_menu_list(e) }}>Menu</span>
+            </div>
+        );
+        return ()=>{
+            set_feature_option(null);
+        }
+    }, [menu___i])
+
+    useEffect(() => {
+        console.log(menu___i);
+
+        if (menu___i && usr?.username) {
+            set_floaters((prev) => [...prev, {
+                name: 'f1', child: <div className='df fd-c' style={{ alignItems: 'flex-end' }}>
+                    <div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
+                        {{ bottom: 0, borderColor: 'blac1k' }}><div className="pdy02 pdx05 font700 " style={{ background: '#ffffffe1', color: 'green', backdropFilter: 'blur(2px)' }}><span className='font08 font700'>Add item worth 99 and get 50% flat discount</span></div>
+                        <div className="df aic jcsb gap05 pdy06 pdx05 bdt xbg" style={{ boxShadow: '0 0 6px 5px #ecececff' }}><span>21 Items</span>
+                            <Link href='/cart' style={{
+                                background: '#9970faff',
+                                color: 'white',
+                                borderRadius: '10px',
+                            }}
+                                className="pdx2 xfg df aic pdy1 font700 font-md"><span className='df'><Icon.Cart_ c='white' s='20' /></span>Checkout</Link>
+                        </div>
                     </div>
                 </div>
-            </div>);
-            // return () => {
-            //     set_floaters(null)
-            //     // This runs when the component is unmounted
-            //     mutate("/cart"); // Refresh the cart data when leaving
-            // };
-        }
+            }]);
+        };
+
+        return () => {
+            set_floaters((prev) => prev.filter((v, i) => v.name !== 'f1'))
+
+            // This runs when the component is unmounted
+            mutate("/cart"); // Refresh the cart data when leaving
+        };
     }, [menu___i, usr])
 
     const menu = useMemo(() => {
@@ -202,93 +261,93 @@ export default function branches() {
                                                 bottom:0;
                                                 }
                                                 }`}
-                                            </style> 
-                                                <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
-                                                    <div className="pdr06">
-                                                        <div className="df" style={{ alignItems: 'flex-start' }}>
-                                                            <span className="mgl01 font-lg font700">{menu_items.name}</span>
-                                                            <span className="pdx02 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
-                                                        </div>
-                                                        <div className="df aic pdt02 pdx02 gap02">
-                                                            <span className="pdx03 pdy01 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.7rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 -960 960 960" width="0.8rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
-                                                        <div className="font-sm font500 pdt05">{menu_items.description}</div>
+                                            </style>
+                                            <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
+                                                <div className="pdr06">
+                                                    <div className="df" style={{ alignItems: 'flex-start' }}>
+                                                        <span className="mgl01 font-lg font700">{menu_items.name}</span>
+                                                        <span className="pdx02 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
                                                     </div>
-                                                    <div>
-                                                        <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
-                                                            <div className="lowscreen-portal wfp df fd-c oh" style={{
-                                                                background: 'white',
-                                                                borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
-                                                            }}>
-                                                                <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-                                                                <div className="wfp df gap05" style={{ height: '200px' }}>
-                                                                    {/* Hii */}
-                                                                    <Image
-                                                                        src={menu_items.image}
-                                                                        alt="iphone 15"
-                                                                        width={202}
-                                                                        height={200}
-                                                                    />
-                                                                    <div className="df fd-c gap08 mgt05 fx1 pdr05">
-                                                                        <div className="df aic jcsb"><span>{'$' + menu_items.price}</span>
-                                                                            <div className="pR df" style={{ width: '100px' }}>
-
-                                                                                <Cart_Control_Indirect cart_detail={() => {
-                                                                                    const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
-
-                                                                                    return {
-                                                                                        quantity: cartItem ? cartItem.quantity : null,
-                                                                                        cart_item_id: cartItem ? cartItem.id : null,
-                                                                                    };
-                                                                                }}
-                                                                                    item={{
-                                                                                        id: menu_items.id,
-                                                                                        name: menu_items.name,
-                                                                                        price: menu_items.price,
-                                                                                        image: menu_items.image
-                                                                                    }} />
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div className="fx1 bdt pdt05 font08">{menu_items.description}</div></div>
-                                                                </div>
-                                                                {/* <div>{menu_items.item_price__}</div> */}
-
-                                                            </div>
-                                                        )} style={{
-                                                            width: '121px',
-                                                            height: "120px",
-                                                            borderRadius: '10px',
-                                                            justifySelf: 'center',
-                                                            background: 'white'
-                                                        }}>                                                    <Image
-                                                                src={menu_items.image}
-                                                                alt="iphone 15"
-                                                                width={122}
-                                                                height={120}
-                                                            />
-                                                        </div>
-                                                            <Cart_Control_Indirect
-                                                                cart_detail={() => {
-                                                                    const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
-
-                                                                    return {
-                                                                        quantity: cartItem ? cartItem.quantity : null,
-                                                                        cart_item_id: cartItem ? cartItem.id : null,
-                                                                    };
-                                                                }}
-                                                                item={{
-                                                                    id: menu_items.id,
-                                                                    name: menu_items.name,
-                                                                    price: menu_items.price,
-                                                                    image: menu_items.image
-                                                                }}
-                                                            />
-                                                        </div>
-
-                                                    </div>
+                                                    <div className="df aic pdt02 pdx02 gap02">
+                                                        <span className="pdx03 pdy01 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.7rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 -960 960 960" width="0.8rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
+                                                    <div className="font-sm font500 pdt05">{menu_items.description}</div>
                                                 </div>
-                                           
+                                                <div>
+                                                    <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
+                                                        <div className="lowscreen-portal wfp df fd-c oh" style={{
+                                                            background: 'white',
+                                                            borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
+                                                        }}>
+                                                            <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
+                                                            <div className="wfp df gap05" style={{ height: '200px' }}>
+                                                                {/* Hii */}
+                                                                <Image
+                                                                    src={menu_items.image}
+                                                                    alt="iphone 15"
+                                                                    width={202}
+                                                                    height={200}
+                                                                />
+                                                                <div className="df fd-c gap08 mgt05 fx1 pdr05">
+                                                                    <div className="df aic jcsb"><span>{'$' + menu_items.price}</span>
+                                                                        <div className="pR df" style={{ width: '100px' }}>
+
+                                                                            <Cart_Control_Indirect cart_detail={() => {
+                                                                                const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
+
+                                                                                return {
+                                                                                    quantity: cartItem ? cartItem.quantity : null,
+                                                                                    cart_item_id: cartItem ? cartItem.id : null,
+                                                                                };
+                                                                            }}
+                                                                                item={{
+                                                                                    id: menu_items.id,
+                                                                                    name: menu_items.name,
+                                                                                    price: menu_items.price,
+                                                                                    image: menu_items.image
+                                                                                }} />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="fx1 bdt pdt05 font08">{menu_items.description}</div></div>
+                                                            </div>
+                                                            {/* <div>{menu_items.item_price__}</div> */}
+
+                                                        </div>
+                                                    )} style={{
+                                                        width: '121px',
+                                                        height: "120px",
+                                                        borderRadius: '10px',
+                                                        justifySelf: 'center',
+                                                        background: 'white'
+                                                    }}>                                                    <Image
+                                                            src={menu_items.image}
+                                                            alt="iphone 15"
+                                                            width={122}
+                                                            height={120}
+                                                        />
+                                                    </div>
+                                                        <Cart_Control_Indirect
+                                                            cart_detail={() => {
+                                                                const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
+
+                                                                return {
+                                                                    quantity: cartItem ? cartItem.quantity : null,
+                                                                    cart_item_id: cartItem ? cartItem.id : null,
+                                                                };
+                                                            }}
+                                                            item={{
+                                                                id: menu_items.id,
+                                                                name: menu_items.name,
+                                                                price: menu_items.price,
+                                                                image: menu_items.image
+                                                            }}
+                                                        />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                         </>
                                     }
                                 </div>
@@ -379,7 +438,7 @@ export default function branches() {
                     background: 'whitesmoke',
                     paddingBlockEnd: `${floaters ? '150px' : 0}`
                 }}>
-                    
+
                     {menu}
 
                 </div>

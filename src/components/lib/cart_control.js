@@ -134,7 +134,7 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
         if (showmsg && !exists) {
             set_floaters((prev) => [...prev, { name: 'msg', child: msg() }])
         }
-        if (showmsg === false) {
+        if (showmsg === false && exists) {
             console.log("log")
             set_floaters((prev) => prev.filter((v, i) => v.name !== 'msg'))
         }

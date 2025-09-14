@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { Suspense, useContext, useEffect, useState } from "react";
-import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2 } from 'lucide-react';
+import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2, UserCircle } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -144,8 +144,8 @@ export default function Topbar_() {
                                 background: '#000000',
                                 borderColor: 'black'
                             }}>Login</span></Link>}
-
-                            {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search /></span>}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#ffffff" stroke="lightgrey" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" fill="#c2b5b1"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
                         </div>
                     </div>
                 </>
@@ -163,6 +163,10 @@ export default function Topbar_() {
                 // style={{ background: '#b1261cff', color:'white' }}  
                 >
                     {top_bar_}
+                    <div className="df aic gap03 pdy05 bd bdTrds bdBrds pdl05">
+                        {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search /></span>}
+                        <div>Search any dishes..</div>
+                    </div>
                 </div>
 
             }
