@@ -183,11 +183,11 @@ export default function MainContext({ device, children }) {
                                     <div className='containers-area pR' >
                                         <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}
                                         </div>
-                                        {/* {floaters && */}
+                                        {floaters &&
                                             <div className='floater-container'>
                                                 {floaters.map((v,k)=><div key={k}>{v.child}</div>)}
                                             </div>
-                                        {/* } */}
+                                        }
                                     </div>
 
                                     <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2 }}>
