@@ -424,6 +424,7 @@ export default function branches() {
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
                     top: '127.34px',
+                    zIndex:1
 
                 }}>
                     <div className="df aic gap1 fx1">

@@ -194,9 +194,10 @@ export default function MainContext({ device, children }) {
                                     }
                                 </div>
 
-                                <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2 }}>
+
+                                <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2, ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
                                     {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
-                                    <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1" style={{ paddingInline: 'calc(0.5rem + 1vmin)' }}>
+                                    <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
                                         <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                     </div>
                                     {feature_option &&
