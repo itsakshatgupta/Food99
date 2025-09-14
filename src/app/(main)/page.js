@@ -8,7 +8,7 @@ import { Icon } from '@/components/lib/icons';
 import Image from 'next/image';
 import { Cart_Control_Direct, Cart_Control_Indirect } from '@/components/lib/cart_control';
 import Topbar_ from '@/components/topbar_/topbar';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, ChevronRight } from 'lucide-react';
 import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
@@ -201,7 +201,7 @@ export default function branches() {
                 }} onClickCapture={(e) => { if (menu___i) display_menu_list(e) }}>Menu</span>
             </div>
         );
-        return ()=>{
+        return () => {
             set_feature_option(null);
         }
     }, [menu___i])
@@ -214,13 +214,16 @@ export default function branches() {
                 name: 'f1', child: <div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                     <div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
                         {{ bottom: 0, borderColor: 'blac1k' }}><div className="pdy02 pdx05 font700 " style={{ background: '#ffffffe1', color: 'green', backdropFilter: 'blur(2px)' }}><span className='font08 font700'>Add item worth 99 and get 50% flat discount</span></div>
-                        <div className="df aic jcsb gap05 pdy06 pdx05 bdt xbg" style={{ boxShadow: '0 0 6px 5px #ecececff' }}><span>21 Items</span>
+                        <div className="df aic jcsb gap05 pdy1 pdx1 bdt xbg" style={{
+                            boxShadow: '0 0 6px 5px #ecececff', background: '#9970faff',
+                            color: 'white'
+                        }}>
+                        <span className="font500" >21 Items</span>
                             <Link href='/cart' style={{
-                                background: '#9970faff',
-                                color: 'white',
+
                                 borderRadius: '10px',
                             }}
-                                className="pdx2 xfg df aic pdy1 font700 font-md"><span className='df'><Icon.Cart_ c='white' s='20' /></span>Checkout</Link>
+                                className="font700 font-md">Checkout <ChevronRight/> </Link>
                         </div>
                     </div>
                 </div>
