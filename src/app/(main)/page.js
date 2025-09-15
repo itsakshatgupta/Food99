@@ -237,7 +237,7 @@ export default function branches() {
             // This runs when the component is unmounted
             mutate("/cart"); // Refresh the cart data when leaving
         };
-    }, [menu___i, usr])
+    }, [cart__i])
 
     const menu = useMemo(() => {
         return menu___i?.map((categories) => {
@@ -424,7 +424,7 @@ export default function branches() {
                 <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
-                    top:document.querySelector('.topbar-container')?.clientHeight+'px'||0,
+                    top:'127px',
                     zIndex: 1
 
                 }}>

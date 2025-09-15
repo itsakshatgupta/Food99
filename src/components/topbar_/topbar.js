@@ -170,6 +170,7 @@ export default function Topbar_() {
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
+    
     return (
         <>
             {device === "mobile" &&
