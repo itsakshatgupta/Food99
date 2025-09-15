@@ -287,7 +287,7 @@ export default function branches() {
                                                             <div className="wfp df gap05" style={{ height: '200px' }}>
                                                                 {/* Hii */}
                                                                 <Image
-                                                                    src={menu_items.image}
+                                                                    src={menu_items.image||"/food-2-svgrepo-com.png"}
                                                                     alt="iphone 15"
                                                                     width={202}
                                                                     height={200}
@@ -325,7 +325,7 @@ export default function branches() {
                                                         justifySelf: 'center',
                                                         background: 'white'
                                                     }}>                                                    <Image
-                                                            src={menu_items.image}
+                                                            src={menu_items.image||"/food-2-svgrepo-com.png"}
                                                             alt="iphone 15"
                                                             width={122}
                                                             height={120}
