@@ -70,8 +70,8 @@ const mobile_banner = <>
     <div className="oh bdrds mgx05">
         <div className="pdx08" style={{
             background: '#43A047',
-            borderColor:'#43a047',
-            color:'white'
+            borderColor: '#43a047',
+            color: 'white'
         }}
         ><h4 className="mg0 pdt1">Don't Miss this Deal</h4><h1 className="pdx02 mg0">Get 50% Off</h1></div>
         <div className="pdx05 pdy05 oh" style={{
@@ -437,6 +437,90 @@ export default function branches() {
             <>
                 <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1 }}>
                     <Topbar_ />
+                </div>
+                <div className="df aic gap05 fx1 mgb05 xbg ox" style={{background:'ghostwhite'}}>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Burger</span>
+                    </span>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/top-view-pizza-with_24589160.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Pizza</span>
+                    </span>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/indian-cuisine-at-a-thali_59246817.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Thali</span>
+                    </span>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/ai-generated-samosas-dish-png-isolated-on-transparent_36256574.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Samosa</span>
+                    </span>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/indian-paneer-butter-masala-isolated-on-transparent-background_56102177.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Panner Handi</span>
+                    </span>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/potted-green-clover-plant-in-white-ceramic-bowl_57752437.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Manchurian</span>
+                    </span>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Naan</span>
+                    </span>
+                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/spring-roll-isolated-on-background_39112107.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Spring Roll</span>
+                    </span>
+                                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                        <Image
+                            src={"/static-img/delicious-strawberry-sundae-with-cherry-and-toppings_50756335.png"}
+                            width={50}
+                            height={50}
+                            alt='food'
+                        />
+                        <span className="font600">Shakes</span>
+                    </span>
+
                 </div>
                 {mobile_banner}
                 <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
