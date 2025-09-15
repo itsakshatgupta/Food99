@@ -234,8 +234,8 @@ export default function branches() {
         return () => {
             set_floaters((prev) => prev.filter((v, i) => v.name !== 'f1'))
 
-            // This runs when the component is unmounted
-            mutate("/cart"); // Refresh the cart data when leaving
+            // // This runs when the component is unmounted
+            // mutate("/cart"); // Refresh the cart data when leaving
         };
     }, [cart__i])
 
