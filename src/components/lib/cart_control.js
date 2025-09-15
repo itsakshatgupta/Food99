@@ -144,11 +144,14 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
     }, [showmsg])
 
     const handleAdd = async () => {
+        console.log('a')
+
         if (cart_quantity_indirect === "ADD") {
             // first add to cart
             set_cart_quantity_indirect(1);
             const response = await addToCart(item.id, 1); // menu_item.id
             if (response.ok) {
+                mutate("/cart"); // Refresh the cart data
                 let r = await response.json()
                 console.log('r', r)
                 set_CartItem_id(r.id); // store cartItem.id
@@ -163,6 +166,8 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
                     await updateCartItem(CartItem_id, newQty);
                 } catch (err) {
                     set_cart_quantity_indirect(11);
+                } finally {
+                    mutate("/cart"); // Refresh the cart data
                 }
             }, 1500)
             set_timer(newtimer)
@@ -170,6 +175,7 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
     };
 
     const handleRemove = async () => {
+        console.log('r')
         if (cart_quantity_indirect > 1) {
             const newQty = cart_quantity_indirect - 1;
             set_cart_quantity_indirect(newQty);
@@ -179,6 +185,8 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
                     await updateCartItem(CartItem_id, newQty);
                 } catch (err) {
                     set_cart_quantity_indirect(11);
+                } finally {
+                    mutate("/cart"); // Refresh the cart data
                 }
             }, 1500)
             set_timer(newtimer)
@@ -205,8 +213,9 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
         <div className="pA add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
             onClickCapture={(e) => {
                 e.preventDefault();
-                if (usr?.username) {
-                    handleRemove
+                if (usr.hasOwnProperty('username')) {
+                    console.log('usr::')
+                    handleRemove()
                 } else {
                     if (showmsg === false) {
                         set_showmsg(true)
@@ -228,8 +237,8 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
         ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>{cart_quantity_indirect}</span><span className="df aic fx1 tac jcc CKEFT "
             onClickCapture={(e) => {
                 e.preventDefault();
-                if (usr?.username) {
-                    handleAdd
+                if (usr.hasOwnProperty('username')) {
+                    handleAdd()
                 } else {
                     if (showmsg === false) {
                         set_showmsg(true)

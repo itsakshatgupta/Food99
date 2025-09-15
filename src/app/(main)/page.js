@@ -163,8 +163,9 @@ export default function branches() {
         #lsn-1{
         border-top:1px solid #f8f8f8;
         }
-        `}</style>
-                        <style>{`    .menu_list{width: 70vw;
+                        `}</style>
+                        <style>{`
+                            .menu_list{width: 70vw;
     position: absolute;
     bottom: 5px;
     right: 10px;
@@ -184,7 +185,7 @@ export default function branches() {
         opacity: 1;
     }
             }
-    `}</style>
+                        `}</style>
                         <div className="df fd-c aic padx1 pdy1 menu_list bdTrds bdBrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
                             {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
                         </div>
@@ -218,12 +219,12 @@ export default function branches() {
                             boxShadow: '0 0 6px 5px #ecececff', background: '#9970faff',
                             color: 'white'
                         }}>
-                        <span className="font500" >21 Items</span>
+                            <span className="font500" >{cart__i?.items.length} items</span>
                             <Link href='/cart' style={{
 
                                 borderRadius: '10px',
                             }}
-                                className="font700 font-md df aic">Checkout <ChevronRight/> </Link>
+                                className="font700 font-md df aic">Checkout <ChevronRight /> </Link>
                         </div>
                     </div>
                 </div>
@@ -236,7 +237,7 @@ export default function branches() {
             // This runs when the component is unmounted
             mutate("/cart"); // Refresh the cart data when leaving
         };
-    }, [menu___i, usr])
+    }, [menu___i, usr, cart__i])
 
     const menu = useMemo(() => {
         return menu___i?.map((categories) => {
@@ -424,7 +425,7 @@ export default function branches() {
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
                     top: '127.34px',
-                    zIndex:1
+                    zIndex: 1
 
                 }}>
                     <div className="df aic gap1 fx1">

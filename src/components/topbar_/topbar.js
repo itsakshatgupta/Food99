@@ -145,7 +145,7 @@ export default function Topbar_() {
                                 borderColor: 'black'
                             }}>Login</span></Link>}
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#ffffff" stroke="lightgrey" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10" fill="#c2b5b1"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+                                <circle cx="12" cy="12" r="10" fill="#c2b5b1"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
                         </div>
                     </div>
                 </>
@@ -153,7 +153,21 @@ export default function Topbar_() {
         />)
 
     }, [device, search_mode, pathname, usr])
+    const searchTexts = [
+        "Pizza..",
+        "Burgers..",
+        "Panner handi.."
+    ];
+    const [currentIndex, setCurrentIndex] = useState(0);
 
+    // Set up the interval to change text every 2 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % searchTexts.length);
+        }, 2000);
+
+        return () => clearInterval(interval); // Cleanup on unmount
+    }, []);
     return (
         <>
             {device === "mobile" &&
@@ -165,7 +179,45 @@ export default function Topbar_() {
                     {top_bar_}
                     <div className="df aic gap03 pdy05 bd bdTrds bdBrds pdl05">
                         {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search /></span>}
-                        <div>Search any dishes..</div>
+                        <style>{`.search-animation-container {
+
+    overflow: hidden;
+}
+
+.search-animation-inner {
+    height: 24px; /* adjust as needed */
+}
+
+.search-item {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.search-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+`}</style>
+
+                        <div className="wfp df aic gap03">
+                            <span>Search </span> 
+
+                            <div className="search-animation-inner">
+                                {searchTexts.map((text, i) => (
+                                    <div
+                                        key={i}
+                                        className={`search-item ${i === currentIndex ? 'active' : ''}`}
+                                    >
+                                         {text}
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
 
