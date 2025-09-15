@@ -67,12 +67,13 @@ const banner_ = <>
 </>
 
 const mobile_banner = <>
-    <div className="wfp oh">
+    <div className="oh bdrds mgx05">
         <div className="pdx08" style={{
-            color: '#323232'
+            background: '#43A047'
         }}
         ><h4 className="mg0 pdt1">Don't Miss this Deal</h4><h1 className="pdx02 mg0">Get 50% Off</h1></div>
-        <div className="pdx05 pdy05 oh" style={{ background: '#ededed' }}>
+        <div className="pdx05 pdy05 oh" style={{     background: '#E8F5E9',
+    color: 'black'}}>
             <div className=" catg df aic pdy05 pdx1 gap2 oy">
 
                 <style>{`.e{width: 75px; height: 80px; border-radius: 10px; justify-self: center; background: white; box-shadow:2px 2px 5px 1px #cfcfcfff`}</style>
