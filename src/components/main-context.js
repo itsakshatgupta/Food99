@@ -191,7 +191,7 @@ export default function MainContext({ device, children }) {
                                     {children}
                                 </div>
                             </main>
-                            <div className="wfp" style={{ position: 'fixed', bottom: 0 }} ref={floaterRef}>
+                            <div className="wfp" style={{ position: 'fixed', bottom: 0, zIndex:1 }} ref={floaterRef}>
                                 <div className='containers-area pR' >
                                     <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}
                                     </div>

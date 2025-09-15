@@ -438,7 +438,7 @@ export default function branches() {
                 <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1 }}>
                     <Topbar_ />
                 </div>
-                <div className="df gap05 fx1 mgb05 xbg ox" style={{background:'ghostwhite'}}>
+                <div className="df gap05 fx1 mgb05 xbg ox pdy05" style={{background:'ghostwhite'}}>
                     <span className="df fd-c aic gap02 font08 pdx05 pdy03">
                         <Image
                             src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
@@ -527,7 +527,7 @@ export default function branches() {
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
                     top: usr ? '127px' : '124px',
-                    zIndex: 0
+                    zIndex: 1
 
                 }}>
                     <div className="df aic gap1 fx1 mgb05">
