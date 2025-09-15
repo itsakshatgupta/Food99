@@ -67,7 +67,7 @@ const banner_ = <>
 </>
 
 const mobile_banner = <>
-    <div className="oh bdrds mgx05">
+    <div className="oh bdrds mgx05 mgb05">
         <div className="pdx08" style={{
             background: '#43A047',
             borderColor: '#43a047',
@@ -438,7 +438,7 @@ export default function branches() {
                 <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1 }}>
                     <Topbar_ />
                 </div>
-                <div className="df aic gap05 fx1 mgb05 xbg ox" style={{background:'ghostwhite'}}>
+                <div className="df gap05 fx1 mgb05 xbg ox" style={{background:'ghostwhite'}}>
                     <span className="df fd-c aic gap02 font08 pdx05 pdy03">
                         <Image
                             src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
@@ -527,7 +527,7 @@ export default function branches() {
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
                     top: usr ? '127px' : '124px',
-                    zIndex: 1
+                    zIndex: 0
 
                 }}>
                     <div className="df aic gap1 fx1 mgb05">
