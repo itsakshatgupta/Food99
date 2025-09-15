@@ -213,7 +213,7 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
         <div className="pA add_cart_control oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  "
             onClickCapture={(e) => {
                 e.preventDefault();
-                if (usr.hasOwnProperty('username')) {
+                if (usr.status===200) {
                     console.log('usr::')
                     handleRemove()
                 } else {
@@ -237,7 +237,7 @@ export function Cart_Control_Indirect({ cart_detail, item }) {
         ><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>{cart_quantity_indirect}</span><span className="df aic fx1 tac jcc CKEFT "
             onClickCapture={(e) => {
                 e.preventDefault();
-                if (usr.hasOwnProperty('username')) {
+                if (usr.status===200) {
                     handleAdd()
                 } else {
                     if (showmsg === false) {

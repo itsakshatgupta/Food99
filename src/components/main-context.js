@@ -17,7 +17,16 @@ import { apiFetch } from '@/app/(api)/api';
 // ✅ one shared fetcher
 const fetcher = async (url) => {
     const res = await apiFetch(url);
-    return res.json();
+    const res_status = 111;
+    const res_json = res.json();
+    // const ready = res_json.push({status:res_status})
+    console.log(':::', res.status)
+    console.log(':::', res_json)
+    if(res.status===200){
+        return res_json;
+    }else{
+        return null
+    } 
 };
 
 export const dynamic_ = createContext();

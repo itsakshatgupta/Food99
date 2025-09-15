@@ -50,6 +50,5 @@ export async function apiFetch(url, options = {}) {
     }
   }
     console.log(1112)
-
   return response;
 }
