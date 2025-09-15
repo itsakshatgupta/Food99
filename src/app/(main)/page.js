@@ -210,21 +210,24 @@ export default function branches() {
     useEffect(() => {
         console.log(menu___i);
 
-        if (menu___i && usr?.username) {
+        if (cart__i?.items.length > 0) {
             set_floaters((prev) => [...prev, {
                 name: 'f1', child: <div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                     <div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
-                        {{ bottom: 0, borderColor: 'blac1k' }}><div className="pdy02 pdx05 font700 " style={{ background: '#ffffffe1', color: 'green', backdropFilter: 'blur(2px)' }}><span className='font08 font700'>Add item worth 99 and get 50% flat discount</span></div>
-                        <div className="df aic jcsb gap05 pdy1 pdx1 bdt xbg" style={{
+                        {{ bottom: 0, borderColor: 'blac1k' }}>
+                        <div className="df fd-c aic jcsb gap05 pdy1 pdx1 bdt xbg" style={{
                             boxShadow: '0 0 6px 5px #ecececff', background: '#9970faff',
                             color: 'white'
                         }}>
-                            <span className="font500" >{cart__i?.items.length} </span>
-                            <Link href='/cart' style={{
 
+                            <Link href='/cart' style={{
                                 borderRadius: '10px',
                             }}
-                                className="font700 font-md df aic">Checkout <ChevronRight /> </Link>
+                                className="font700 font-md df aic">{cart__i?.items.length} Items Added <ChevronRight className="mgl05" style={{    background: '#4f2797',
+    borderRadius: '100%'}}/>
+                            </Link>
+
+                            <span className='font08 font700'>Add item worth 99 and get 50% flat discount</span>
                         </div>
                     </div>
                 </div>
@@ -286,7 +289,7 @@ export default function branches() {
                                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
                                                             <div className="wfp df gap05" style={{ height: '200px' }}>
                                                                 {/* Hii */}
-                                                               
+
                                                                 <ProductImage
                                                                     src={menu_items.image}
                                                                     alt="iphone 15"
@@ -326,7 +329,7 @@ export default function branches() {
                                                         borderRadius: '10px',
                                                         justifySelf: 'center',
                                                         background: 'white'
-                                                    }}>                                                    
+                                                    }}>
                                                         <ProductImage
                                                             src={menu_items.image}
                                                             alt="iphone 15"

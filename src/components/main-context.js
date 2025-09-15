@@ -53,7 +53,7 @@ export default function MainContext({ device, children }) {
 
     const [dynamic_portal_ab, set_dynamics_portal_ab] = useState(null)
     // const [cart__i, set_cart__i] = useState(null);
-    const [floaters, set_floaters] = useState([{ name: 1, child: 0 }]);
+    const [floaters, set_floaters] = useState([]);
     const [feature_option, set_feature_option] = useState(null);
 
 
