@@ -70,7 +70,8 @@ const mobile_banner = <>
     <div className="oh bdrds mgx05">
         <div className="pdx08" style={{
             background: '#43A047',
-            borderColor:'#43a047'
+            borderColor:'#43a047',
+            color:'white'
         }}
         ><h4 className="mg0 pdt1">Don't Miss this Deal</h4><h1 className="pdx02 mg0">Get 50% Off</h1></div>
         <div className="pdx05 pdy05 oh" style={{
