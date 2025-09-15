@@ -286,11 +286,13 @@ export default function branches() {
                                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
                                                             <div className="wfp df gap05" style={{ height: '200px' }}>
                                                                 {/* Hii */}
-                                                                <Image
-                                                                    src={menu_items.image||"/food-2-svgrepo-com.png"}
+                                                               
+                                                                <ProductImage
+                                                                    src={menu_items.image}
                                                                     alt="iphone 15"
-                                                                    width={202}
-                                                                    height={200}
+                                                                    width={122}
+                                                                    height={120}
+                                                                    fallbackSrc="/Food99.png"
                                                                 />
                                                                 <div className="df fd-c gap08 mgt05 fx1 pdr05">
                                                                     <div className="df aic jcsb"><span>{'$' + menu_items.price}</span>
@@ -324,11 +326,13 @@ export default function branches() {
                                                         borderRadius: '10px',
                                                         justifySelf: 'center',
                                                         background: 'white'
-                                                    }}>                                                    <Image
-                                                            src={menu_items.image||"/food-2-svgrepo-com.png"}
+                                                    }}>                                                    
+                                                        <ProductImage
+                                                            src={menu_items.image}
                                                             alt="iphone 15"
                                                             width={122}
                                                             height={120}
+                                                            fallbackSrc="/Food99.png"
                                                         />
                                                     </div>
                                                         <Cart_Control_Indirect
@@ -424,7 +428,7 @@ export default function branches() {
                 <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
-                    top:'127px',
+                    top: '127px',
                     zIndex: 1
 
                 }}>
@@ -590,3 +594,19 @@ export default function branches() {
 //         {device === 'mobile' && dynamic_portal_main}
 //     </div>
 // </div>}
+
+
+function ProductImage({ src, alt, width, height, fallbackSrc }) {
+    const [imgSrc, setImgSrc] = useState(src);
+
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={width}
+            height={height}
+            onError={() => setImgSrc(fallbackSrc)}
+        />
+    );
+}
+

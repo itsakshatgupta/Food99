@@ -206,7 +206,7 @@ export default function MainContext({ device, children }) {
                                 </lowscreen-nav>
                             </div>
                         </div>
-                        {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA hfp xbg wfp' style={{ top: 0, zIndex: 1 }}>{dynamic_portal_ab}</div> : null}
+                        {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA xbg wfp' style={{ top: 0, zIndex: 1, height:'100vh' }}>{dynamic_portal_ab}</div> : null}
                     </dynamic_.Provider>
                 </menu_.Provider>
             </>
