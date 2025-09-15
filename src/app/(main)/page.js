@@ -219,7 +219,7 @@ export default function branches() {
                             boxShadow: '0 0 6px 5px #ecececff', background: '#9970faff',
                             color: 'white'
                         }}>
-                            <span className="font500" >{cart__i?.items.length} items</span>
+                            <span className="font500" >{cart__i?.items.length} </span>
                             <Link href='/cart' style={{
 
                                 borderRadius: '10px',
@@ -237,7 +237,7 @@ export default function branches() {
             // This runs when the component is unmounted
             mutate("/cart"); // Refresh the cart data when leaving
         };
-    }, [menu___i, usr, cart__i])
+    }, [menu___i, usr])
 
     const menu = useMemo(() => {
         return menu___i?.map((categories) => {
@@ -417,14 +417,14 @@ export default function branches() {
         {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
-                <div className="pS xbg" style={{ top: 0, zIndex: 1 }}>
+                <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1 }}>
                     <Topbar_ />
                 </div>
                 {mobile_banner}
                 <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
-                    top: '127.34px',
+                    top:document.querySelector('.topbar-container')?.clientHeight+'px'||0,
                     zIndex: 1
 
                 }}>

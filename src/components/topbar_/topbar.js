@@ -108,6 +108,7 @@ export default function Topbar_() {
                     />
                     <div className="oh"><div className="pR df aic gap05 dropdowneffect"><div className="fx1 df pdx05 pdy04 gap02 xfg" style={{ borderRadius: '10px', alignContent: 'center' }}><svg xmlns="http://www.w3.org/2000/svg" height="calc(5px + 5vmin)" viewBox="0 -960 960 960" width="calc(5px + 5vmin)" fill=" #000000ff"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" /></svg><div className="font-md">{pathname}</div></div></div></div>
                 </div>)
+
         } else { set_dynamics_portal_ab(null) }
 
         set_top_bar_(<Topbar
@@ -153,6 +154,7 @@ export default function Topbar_() {
         />)
 
     }, [device, search_mode, pathname, usr])
+
     const searchTexts = [
         "Pizza..",
         "Burgers..",
@@ -177,8 +179,8 @@ export default function Topbar_() {
                 // style={{ background: '#b1261cff', color:'white' }}  
                 >
                     {top_bar_}
-                    <div className="df aic gap03 pdy05 bd bdTrds bdBrds pdl05">
-                        {search_mode === false && <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} onClickCapture={() => set_search_mode(true)}><Search /></span>}
+                    <div className="df aic gap03 pdy05 bd bdTrds bdBrds pdl05" onClick={() => set_search_mode(true)}>
+                        <span className="df aic xfg pdx02 pdy02" style={{ background: '#ffffffff' }} ><Search /></span>
                         <style>{`.search-animation-container {
 
     overflow: hidden;
@@ -202,7 +204,7 @@ export default function Topbar_() {
 }
 `}</style>
 
-                        <div className="wfp df aic gap03">
+                        <div className="wfp df aic gap03" >
                             <span>Search </span> 
 
                             <div className="search-animation-inner">
