@@ -69,11 +69,14 @@ const banner_ = <>
 const mobile_banner = <>
     <div className="oh bdrds mgx05">
         <div className="pdx08" style={{
-            background: '#43A047'
+            background: '#43A047',
+            borderColor:'#43a047'
         }}
         ><h4 className="mg0 pdt1">Don't Miss this Deal</h4><h1 className="pdx02 mg0">Get 50% Off</h1></div>
-        <div className="pdx05 pdy05 oh" style={{     background: '#E8F5E9',
-    color: 'black'}}>
+        <div className="pdx05 pdy05 oh" style={{
+            background: '#E8F5E9',
+            color: 'black'
+        }}>
             <div className=" catg df aic pdy05 pdx1 gap2 oy">
 
                 <style>{`.e{width: 75px; height: 80px; border-radius: 10px; justify-self: center; background: white; box-shadow:2px 2px 5px 1px #cfcfcfff`}</style>
@@ -139,6 +142,10 @@ const mobile_banner = <>
                 </div>
             </div>
         </div>
+    </div>
+    <div class=" oh bdrds mgx05 mgb05 bd" style={{
+        color: 'white'
+    }}><div class="pdx08 xfg" style={{ background: '#3F51B5' }}><h1 class="pdx02 mg0 pdy4 tac">Product_AD</h1></div>
     </div>
 </>
 
@@ -211,7 +218,7 @@ export default function branches() {
     useEffect(() => {
         console.log(menu___i);
 
-        if (cart__i&&cart__i?.items.length > 0) {
+        if (cart__i && cart__i?.items.length > 0) {
             set_floaters((prev) => [...prev, {
                 name: 'f1', child: <div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                     <div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
@@ -224,8 +231,10 @@ export default function branches() {
                             <Link href='/cart' style={{
                                 borderRadius: '10px',
                             }}
-                                className="font700 font-md df aic">{cart__i?.items.length} Items Added <ChevronRight className="mgl05" style={{    background: '#4f2797',
-    borderRadius: '100%'}}/>
+                                className="font700 font-md df aic">{cart__i?.items.length} Items Added <ChevronRight className="mgl05" style={{
+                                    background: '#4f2797',
+                                    borderRadius: '100%'
+                                }} />
                             </Link>
 
                             <span className='font08 font700'>Add item worth 99 and get 50% flat discount</span>
@@ -432,7 +441,7 @@ export default function branches() {
                 <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
-                    top: usr?'127px':'124px',
+                    top: usr ? '127px' : '124px',
                     zIndex: 1
 
                 }}>
