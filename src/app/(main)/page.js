@@ -293,7 +293,7 @@ export default function branches() {
                                                                 <ProductImage
                                                                     src={menu_items.image}
                                                                     alt="iphone 15"
-                                                                    width={212}
+                                                                    width={202}
                                                                     height={200}
                                                                     fallbackSrc="/Food99.png"
                                                                 />
