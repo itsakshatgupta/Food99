@@ -148,7 +148,7 @@ const mobile_banner = <>
             </div>
         </div>
     </div>
-    <div class=" oh bdrds bd" style={{
+    <div class="mgx05 oh bdrds bd" style={{
         color: 'white'
     }}><div className="df aic">
         <Image
