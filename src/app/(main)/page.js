@@ -68,9 +68,9 @@ const banner_ = <>
 
 const mobile_banner = <>
     <div className="oh bdrds bd mgx05" style={{
-        borderColor: '#43a047',
+        borderColor: '#18801eff',
         color: 'white',
-        background: '#43A047'
+        background: '#18801eff'
     }}><div className="pdx08 pdy05 df">
             <div className="fx1">
                 <h4 className="mg0">Don't Miss this Deal</h4>
@@ -304,8 +304,8 @@ export default function branches() {
                 name: 'f1', child: <div className='df fd-c' style={{ alignItems: 'flex-end' }}>
                     <div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
                         {{ bottom: 0, borderColor: 'blac1k' }}>
-                        <div className="df fd-c aic jcsb gap05 pdy1 pdx1 bdt xbg" style={{
-                            boxShadow: '0 0 6px 5px #ecececff', background: '#9970faff',
+                        <div className="df fd-c aic jcsb gap05 pdy1 pdx1 xbg" style={{
+                            boxShadow: '0 0 6px 5px #ecececff', background: '#6d34f1ff',
                             color: 'white'
                         }}>
 
