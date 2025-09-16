@@ -69,12 +69,11 @@ const banner_ = <>
 const mobile_banner = <>
     <div className="oh bdrds bd mgx05" style={{
         borderColor: '#43a047',
-        color: 'white'
+        color: 'white',
+        background: '#43A047'
     }}><div className="pdx08 pdy05 df">
-            <div className="fx1" style={{
-                background: '#43A047',
-            }}
-            ><h4 className="mg0">Don't Miss this Deal</h4>
+            <div className="fx1">
+                <h4 className="mg0">Don't Miss this Deal</h4>
                 <h1 className="mg0">Get 50% Off</h1>
             </div>
             <span className='font-sm' style={{ alignSelf: 'self-end' }}><b>See All</b></span>
@@ -149,9 +148,17 @@ const mobile_banner = <>
             </div>
         </div>
     </div>
-    <div class=" oh bdrds mgx05 bd" style={{
+    <div class=" oh bdrds bd" style={{
         color: 'white'
-    }}><div class="pdx08 xfg" style={{ background: '#3F51B5' }}><h1 class="pdx02 mg0 pdy4 tac">Product_AD</h1></div>
+    }}><div className="df aic">
+        <Image
+        src="/static-img/the-pepperoni-pizza-and-a-piece-of-streched-cheese-pizza-with_22994042.jpg"
+        height={200}
+        width={600}
+        style={{width:"100%"}}
+        alt='pizza-ad'
+        />
+    </div>
     </div>
 </>
 
