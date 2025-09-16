@@ -153,13 +153,10 @@ const mobile_banner = <>
 
 const mobile_animation_promo = <><style>{`
 .animated-header {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(0deg, #FFF3E0, #ffffff);
-  border: 2px solid #000;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  animation: slideDown 1s ease-out forwards;
+    padding-block: 10px;
+    padding-inline: 10px;
+    background: linear-gradient(0deg, #2196F3, #ffffff);
+    animation: slideDown 1s ease-out forwards;
 }
 
 .animated-header h1 {
@@ -193,7 +190,15 @@ const mobile_animation_promo = <><style>{`
 @keyframes slideDown {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}`}</style><div className="animated-header df oh">
+}`}</style><div className="animated-header df oh bdBrds">
+    <span>
+        <Image
+         src="/static-img/pizza-side-view-with_24585871.png"
+         height="100px"
+         width="100px"
+         alt="pizza-promo"
+         />
+    </span>
         <div className="fx1" style={{placeItems: 'center'}}>
             <h1 className='mg0'>Delicious Deals</h1>
             <p>Enjoy tasty meals at unbeatable prices!</p>
