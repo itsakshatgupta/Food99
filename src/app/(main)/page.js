@@ -162,12 +162,12 @@ const mobile_animation_promo = <><style>{`
 .animated-header h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #FF5722;
+  color: #173363;
   animation: fadeInl 2s ease-in-out infinite alternate;
 }
 
 .animated-header p {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     animation: bounce 2s infinite;
     background-color: #173363;
     color: white;
@@ -191,15 +191,15 @@ const mobile_animation_promo = <><style>{`
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }`}</style><div className="animated-header df oh bdBrds">
-    <span>
-        <Image
-         src="/static-img/pizza-side-view-with_24585871.png"
-         height="100px"
-         width="100px"
-         alt="pizza-promo"
-         />
-    </span>
-        <div className="fx1" style={{placeItems: 'center'}}>
+        <span style={{ top: '30px', left: '-10px' }}>
+            <Image
+                src="/static-img/pizza-side-view-with_24585871.png"
+                height={100}
+                width={100}
+                alt="pizza-promo"
+            />
+        </span>
+        <div className="fx1" style={{ placeItems: 'center' }}>
             <h1 className='mg0'>Delicious Deals</h1>
             <p>Enjoy tasty meals at unbeatable prices!</p>
         </div>
@@ -207,7 +207,8 @@ const mobile_animation_promo = <><style>{`
             height: '70px',
             width: '100px',
             display: 'flex',
-            transform: 'scale(2.5)'
+            transform: 'scale(2)',
+            marginRight: '5px'
         }}>    <DotLottieReact
                 src="https://lottie.host/fa2f1462-060e-4c10-8b30-dd0925c3bb7a/9JlxUiE7fq.lottie"
                 loop
