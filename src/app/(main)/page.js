@@ -67,11 +67,12 @@ const banner_ = <>
 </>
 
 const mobile_banner = <>
-    <div className="oh bdrds mgx05 mgb05">
+    <div className="oh bdrds bd mgx05" style={{
+        borderColor: '#43a047',
+        color: 'white'
+    }}>
         <div className="pdx08" style={{
             background: '#43A047',
-            borderColor: '#43a047',
-            color: 'white'
         }}
         ><h4 className="mg0 pdt1">Don't Miss this Deal</h4><h1 className="pdx02 mg0">Get 50% Off</h1></div>
         <div className="pdx05 pdy05 oh" style={{
@@ -144,9 +145,70 @@ const mobile_banner = <>
             </div>
         </div>
     </div>
-    <div class=" oh bdrds mgx05 mgb05 bd" style={{
+    <div class=" oh bdrds mgx05 bd" style={{
         color: 'white'
     }}><div class="pdx08 xfg" style={{ background: '#3F51B5' }}><h1 class="pdx02 mg0 pdy4 tac">Product_AD</h1></div>
+    </div>
+</>
+
+const mobile_animation_promo = <><style>{`
+.animated-header {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(0deg, #FFF3E0, #ffffff);
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  animation: slideDown 1s ease-out forwards;
+}
+
+.animated-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FF5722;
+  animation: fadeInl 2s ease-in-out infinite alternate;
+}
+
+.animated-header p {
+      font-size: 0.8rem;
+    animation: bounce 2s infinite;
+    background-color: #173363;
+    color: white;
+    font-weight: 800;
+    width: fit-content;
+    padding-inline: 0.2rem;
+    border-radius: 5px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.5; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}`}</style><div className="animated-header df oh">
+        <div className="fx1" style={{placeItems: 'center'}}>
+            <h1 className='mg0'>Delicious Deals</h1>
+            <p>Enjoy tasty meals at unbeatable prices!</p>
+        </div>
+        <span style={{
+            height: '70px',
+            width: '100px',
+            display: 'flex',
+            transform: 'scale(2.5)'
+        }}>    <DotLottieReact
+                src="https://lottie.host/fa2f1462-060e-4c10-8b30-dd0925c3bb7a/9JlxUiE7fq.lottie"
+                loop
+                autoplay
+            /></span>
+
     </div>
 </>
 
@@ -430,99 +492,100 @@ export default function branches() {
                 }
                 `}
         </style>
-
-
         {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
                 <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1 }}>
                     <Topbar_ />
                 </div>
-                <div className="df gap05 fx1 mgb05 xbg ox pdy05" style={{background:'ghostwhite'}}>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Burger</span>
-                    </span>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/top-view-pizza-with_24589160.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Pizza</span>
-                    </span>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/indian-cuisine-at-a-thali_59246817.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Thali</span>
-                    </span>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/ai-generated-samosas-dish-png-isolated-on-transparent_36256574.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Samosa</span>
-                    </span>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/indian-paneer-butter-masala-isolated-on-transparent-background_56102177.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Panner Handi</span>
-                    </span>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/potted-green-clover-plant-in-white-ceramic-bowl_57752437.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Manchurian</span>
-                    </span>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Naan</span>
-                    </span>
-                    <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/spring-roll-isolated-on-background_39112107.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Spring Roll</span>
-                    </span>
-                                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                        <Image
-                            src={"/static-img/delicious-strawberry-sundae-with-cherry-and-toppings_50756335.png"}
-                            width={50}
-                            height={50}
-                            alt='food'
-                        />
-                        <span className="font600">Shakes</span>
-                    </span>
+                {mobile_animation_promo}
+                <div className="df fd-c gap1 mgy1">
+                    <div className="df gap05 fx1 ox pdx05">
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Burger</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/top-view-pizza-with_24589160.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Pizza</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/indian-cuisine-at-a-thali_59246817.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Thali</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/ai-generated-samosas-dish-png-isolated-on-transparent_36256574.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Samosa</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/indian-paneer-butter-masala-isolated-on-transparent-background_56102177.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Panner Handi</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/potted-green-clover-plant-in-white-ceramic-bowl_57752437.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Manchurian</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Naan</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/spring-roll-isolated-on-background_39112107.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Spring Roll</span>
+                        </span>
+                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                            <Image
+                                src={"/static-img/delicious-strawberry-sundae-with-cherry-and-toppings_50756335.png"}
+                                width={50}
+                                height={50}
+                                alt='food'
+                            />
+                            <span className="font600">Shakes</span>
+                        </span>
 
+                    </div>
+                    {mobile_banner}
                 </div>
-                {mobile_banner}
                 <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
                     scrollbarColor: '#f8f8f8 white',
                     scrollbarWidth: 'none',
