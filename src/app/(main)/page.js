@@ -191,7 +191,7 @@ const mobile_animation_promo = <><style>{`
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }`}</style><div className="animated-header df oh bdBrds">
-        <span style={{ top: '30px', left: '-10px' }}>
+        <span className='pA' style={{ top: '30px', left: '-10px' }}>
             <Image
                 src="/static-img/pizza-side-view-with_24585871.png"
                 height={100}
