@@ -70,16 +70,20 @@ const mobile_banner = <>
     <div className="oh bdrds bd mgx05" style={{
         borderColor: '#43a047',
         color: 'white'
-    }}>
-        <div className="pdx08" style={{
-            background: '#43A047',
-        }}
-        ><h4 className="mg0 pdt1">Don't Miss this Deal</h4><h1 className="pdx02 mg0">Get 50% Off</h1></div>
+    }}><div className="pdx08 pdy05 df">
+            <div className="fx1" style={{
+                background: '#43A047',
+            }}
+            ><h4 className="mg0">Don't Miss this Deal</h4>
+                <h1 className="mg0">Get 50% Off</h1>
+            </div>
+            <span className='font-sm' style={{ alignSelf: 'self-end' }}><b>See All</b></span>
+        </div>
         <div className="pdx05 pdy05 oh" style={{
             background: '#E8F5E9',
             color: 'black'
         }}>
-            <div className=" catg df aic pdy05 pdx1 gap2 oy">
+            <div className=" catg df aic pdy05 pdx1 gap2 ox sbn">
 
                 <style>{`.e{width: 75px; height: 80px; border-radius: 10px; justify-self: center; background: white; box-shadow:2px 2px 5px 1px #cfcfcfff`}</style>
                 <div>
@@ -155,8 +159,9 @@ const mobile_animation_promo = <><style>{`
 .animated-header {
     padding-block: 10px;
     padding-inline: 10px;
-    background: linear-gradient(0deg, #2196F3, #ffffff);
+    background: linear-gradient(0deg, #f8f8f7, #ffffff);
     animation: slideDown 1s ease-out forwards;
+    border-color:black;
 }
 
 .animated-header h1 {
@@ -190,7 +195,7 @@ const mobile_animation_promo = <><style>{`
 @keyframes slideDown {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}`}</style><div className="animated-header df oh bdBrds">
+}`}</style><div className="animated-header df oh bdBrds bdb">
         <span className='pA' style={{ top: '30px', left: '-10px' }}>
             <Image
                 src="/static-img/pizza-side-view-with_24585871.png"
@@ -506,7 +511,7 @@ export default function branches() {
                 </div>
                 {mobile_animation_promo}
                 <div className="df fd-c gap1 mgy1">
-                    <div className="df gap05 fx1 ox pdx05">
+                    <div className="df gap05 fx1 ox pdx05 sbn">
                         <span className="df fd-c aic gap02 font08 pdx05 pdy03">
                             <Image
                                 src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
