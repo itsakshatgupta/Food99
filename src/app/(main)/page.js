@@ -1,7 +1,7 @@
 'use client'
 import ContainerAContents from '@/components/container-A-contents';
 import { dynamic_, floaters_, menu_ } from '@/components/main-context';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, useRef } from "react"
 import Portal_ from "@/components/main_portal/main_protral";
 import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
@@ -15,7 +15,18 @@ import useSWR from "swr";
 import { mutate } from 'swr';
 import { menu } from '@/components/dummy_data';
 
-const banner_ = <>
+
+
+export default function branches() {
+
+
+    const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option } = useContext(dynamic_);
+    const { menu___i } = useContext(menu_);
+
+    const top_header = useRef(null);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const banner_ = <>
     <div className="df jcsb wfp hfp" style={{ background: '#f1f8e9' }}>
         <div className="pdx1" style={{ justifyItems: 'center' }}>
             <h2>Sales Live</h2>
@@ -216,7 +227,7 @@ const mobile_animation_promo = <><style>{`
 @keyframes slideDown {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}`}</style><div className="animated-header df oh">
+}`}</style><div className={`${isScrolled ? "dn" : "df"} animated-header oh`}>
         <div className="fx1">
             <h1 className='mg0'>Delicious Deals</h1>
             <p>Enjoy tasty meals at unbeatable prices!</p>
@@ -235,12 +246,6 @@ const mobile_animation_promo = <><style>{`
 
     </div>
 </>
-
-export default function branches() {
-
-
-    const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option } = useContext(dynamic_);
-    const { menu___i } = useContext(menu_);
 
     useEffect(() => {
         function display_menu_list(e) {
@@ -470,7 +475,36 @@ export default function branches() {
         )
     }, [menu___i, cart__i])
 
+    useEffect(() => {
+        console.log('func-init-eft', document.querySelector('.qqqXA'), top_header.current)
 
+        const scrollableDiv = document.querySelector('.qqqXA');
+        if (!scrollableDiv || !top_header.current) return;
+
+        function scrollWatcher() {
+            console.log('func-init')
+
+            const scrollTop = scrollableDiv.scrollTop;
+            const headerHeight = top_header.current.offsetHeight;
+            if (scrollTop >= headerHeight) {
+                console.log('set-true')
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+                console.log('set-false')
+            }
+        }
+
+        scrollableDiv.addEventListener('scroll', scrollWatcher);
+
+        // Initial check
+        scrollWatcher();
+
+        return () => {
+            scrollableDiv.removeEventListener('scroll', scrollWatcher);
+        };
+    }, [menu___i]);
+    
     return (<>
         {/* <style>{`#topbar{box-shadow: 0px 3px 4px 0px #eaeaea82;}`}</style> */}
         <style>{`
@@ -519,9 +553,11 @@ export default function branches() {
         {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
-                <div className="pS xbg topbar-container bdBrds" style={{ top: 0, zIndex: 1, background:'royalblue' }}>
+                <div className="pS xbg topbar-container bdBrds" style={{ top: 0, zIndex: 1, background: 'royalblue' }} ref={top_header}>
                     <Topbar_ />
-                {mobile_animation_promo}
+
+                        {mobile_animation_promo}
+                    
                 </div>
                 <div className="df fd-c gap1 mgy1">
                     <div className="df gap05 fx1 ox pdx05 sbn">

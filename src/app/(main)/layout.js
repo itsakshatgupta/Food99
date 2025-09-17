@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
 
       </head>
-      <body className={`${inter.variable} font-sans`} data-theme="light">
+      <body className={`${inter.variable} font-sans qqqXA`} data-theme="light">
         <style>
           {`
           @media (max-width: 720px) {

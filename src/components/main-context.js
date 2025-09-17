@@ -185,7 +185,7 @@ export default function MainContext({ device, children }) {
             {device === 'mobile' && <>
                 <menu_.Provider value={{ menu___i }}>
                     <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option }}>
-                        <div className="hfp wfp  df fd-c" style={{ alignContent: 'space-between' }}>
+                        <div className="hfp wfp df fd-c" style={{ alignContent: 'space-between' }}>
                             <main className="main fx1" ref={mainRef}>
                                 <div className="hfp oy1 oh1" style={{ scrollbarWidth: 'none' }} >
                                     {children}
