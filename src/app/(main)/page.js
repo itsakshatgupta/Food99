@@ -78,84 +78,6 @@ export default function branches() {
     </>
 
     const mobile_banner = <>
-        <div className="oh bdrds bd mgx05" style={{
-            background: 'linear-gradient(0deg, rgb(205 233 255), #e4d4ff)'
-        }}><div className="pdx08 pdb05 pdt08 df">
-                <div className="fx1">
-                    <h4 className="mg0">Don't Miss this Deal</h4>
-                    <h2 className="mg0">Get 50% Off</h2>
-                </div>
-                <span className='font-sm' style={{ alignSelf: 'self-end' }}><b>See All</b></span>
-            </div>
-            <div className="pdx05 pdy05 oh" style={{
-                color: 'black'
-            }}>
-                <div className=" catg df aic pdx1 gap2 ox sbn">
-
-                    <style>{`.e{width: 75px; height: 80px; border-radius: 10px; justify-self: center; background: white; box-shadow:2px 2px 3px 1px #3d3d3dc9`}</style>
-                    <div>
-                        <div className="pR">
-                            <div className="bd e oh">
-                                <Image
-                                    alt="offer"
-                                    src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
-                                    width={75}
-                                    height={80}
-                                />
-                            </div>
-                            <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
-                        </div>
-                        <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
-
-                    </div>
-                    <div>
-                        <div className="pR">
-                            <div className="bd e oh">
-                                <Image
-                                    alt="offer"
-                                    src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
-                                    width={75}
-                                    height={80}
-                                />
-                            </div>
-                            <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
-                        </div>
-                        <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
-
-                    </div>
-                    <div>
-                        <div className="pR">
-                            <div className="bd e oh">
-                                <Image
-                                    alt="offer"
-                                    src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
-                                    width={75}
-                                    height={80}
-                                />
-                            </div>
-                            <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
-                        </div>
-                        <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
-
-                    </div>
-                    <div>
-                        <div className="pR">
-                            <div className="bd e oh">
-                                <Image
-                                    alt="offer"
-                                    src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
-                                    width={75}
-                                    height={80}
-                                />
-                            </div>
-                            <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
-                        </div>
-                        <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="mgx05" style={{
             color: 'white'
         }}><div className="df aic pR oh bdrds">
@@ -184,7 +106,7 @@ export default function branches() {
                     }}
                 ><span className='font-md'>Pepronie pizza@159</span></div>
             </div>
-            <div class="df aic jcsb mgt06" style={{justifyContent: 'space-evenly'}}>
+            <div class="df aic jcsb mgt06" style={{ justifyContent: 'space-evenly' }}>
                 <ChevronLeftCircle color='#E91E63' />
                 <style>{`.more- span{
                     padding: 4px;
@@ -198,6 +120,86 @@ export default function branches() {
                 </div>
                 <ChevronRightCircle color='#E91E63' />
 
+            </div>
+        </div>
+        <div className='mgx05 mgy05 df fd-c'>
+            <h4 class="mgx03 mgb08 mg0 font500" style={{ color: '#0e0e0e' }}>Don't Miss this Deal</h4>
+            <div className="oh bdrds bd mgx05" style={{
+                background: 'linear-gradient(0deg, rgb(205 233 255), #e4d4ff)'
+            }}><div className="pdx08 pdb05 pdt08 df">
+                    <div className="fx1">
+                        <h2 className="mg0">Get 50% Off</h2>
+                    </div>
+                    <span className='font-sm' style={{ alignSelf: 'self-end' }}><b>See All</b></span>
+                </div>
+                <div className="pdx05 pdy05 oh" style={{
+                    color: 'black'
+                }}>
+                    <div className=" catg df aic pdx1 gap2 ox sbn">
+
+                        <style>{`.e{width: 75px; height: 80px; border-radius: 10px; justify-self: center; background: white; box-shadow:2px 2px 3px 1px #3d3d3dc9`}</style>
+                        <div>
+                            <div className="pR">
+                                <div className="bd e oh">
+                                    <Image
+                                        alt="offer"
+                                        src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
+                                        width={75}
+                                        height={80}
+                                    />
+                                </div>
+                                <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
+                            </div>
+                            <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
+
+                        </div>
+                        <div>
+                            <div className="pR">
+                                <div className="bd e oh">
+                                    <Image
+                                        alt="offer"
+                                        src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
+                                        width={75}
+                                        height={80}
+                                    />
+                                </div>
+                                <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
+                            </div>
+                            <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
+
+                        </div>
+                        <div>
+                            <div className="pR">
+                                <div className="bd e oh">
+                                    <Image
+                                        alt="offer"
+                                        src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
+                                        width={75}
+                                        height={80}
+                                    />
+                                </div>
+                                <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
+                            </div>
+                            <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
+
+                        </div>
+                        <div>
+                            <div className="pR">
+                                <div className="bd e oh">
+                                    <Image
+                                        alt="offer"
+                                        src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
+                                        width={75}
+                                        height={80}
+                                    />
+                                </div>
+                                <div className="pA pdx04 bdrds font500" style={{ justifySelf: 'end', background: 'green', border: '1px solid black', color: 'white', fontSize: '0.65rem', bottom: '-3px' }}>$250</div>
+                            </div>
+                            <div style={{ justifySelf: 'cente1r', marginTop: '5px', fontSize: '0.65rem' }} className="font500">Heavy Veggie Loaded</div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </>
@@ -669,7 +671,7 @@ export default function branches() {
 
                 }}>
                     <div className="df aic gap1 fx1 mgb05">
-                        <span className="df aic gap02 font08 pdx05 pdy03 bd bdrds" style={{background:'#d2d0ff'}}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#e05836ff" d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16.88 11.53C16.88 11.92 16.57 12.23 16.18 12.23C15.79 12.23 15.48 11.92 15.48 11.53V11.35L12.76 14.07C12.61 14.22 12.41 14.29 12.2 14.27C11.99 14.25 11.8 14.14 11.69 13.96L10.67 12.44L8.29 14.82C8.15 14.96 7.98 15.02 7.8 15.02C7.62 15.02 7.44 14.95 7.31 14.82C7.04 14.55 7.04 14.11 7.31 13.83L10.29 10.85C10.44 10.7 10.64 10.63 10.85 10.65C11.06 10.67 11.25 10.78 11.36 10.96L12.38 12.48L14.49 10.37H14.31C13.92 10.37 13.61 10.06 13.61 9.67C13.61 9.28 13.92 8.97 14.31 8.97H16.17C16.26 8.97 16.35 8.99 16.44 9.02C16.61 9.09 16.75 9.23 16.82 9.4C16.86 9.49 16.87 9.58 16.87 9.67V11.53H16.88Z"></path> </g></svg><span className="font600">Pizza</span></span>
+                        <span className="df aic gap02 font08 pdx05 pdy03 bd bdrds" style={{ background: '#d2d0ff' }}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#e05836ff" d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16.88 11.53C16.88 11.92 16.57 12.23 16.18 12.23C15.79 12.23 15.48 11.92 15.48 11.53V11.35L12.76 14.07C12.61 14.22 12.41 14.29 12.2 14.27C11.99 14.25 11.8 14.14 11.69 13.96L10.67 12.44L8.29 14.82C8.15 14.96 7.98 15.02 7.8 15.02C7.62 15.02 7.44 14.95 7.31 14.82C7.04 14.55 7.04 14.11 7.31 13.83L10.29 10.85C10.44 10.7 10.64 10.63 10.85 10.65C11.06 10.67 11.25 10.78 11.36 10.96L12.38 12.48L14.49 10.37H14.31C13.92 10.37 13.61 10.06 13.61 9.67C13.61 9.28 13.92 8.97 14.31 8.97H16.17C16.26 8.97 16.35 8.99 16.44 9.02C16.61 9.09 16.75 9.23 16.82 9.4C16.86 9.49 16.87 9.58 16.87 9.67V11.53H16.88Z"></path> </g></svg><span className="font600">Pizza</span></span>
                         <span className="df aic gap02 font08 pdx05 pdy03 bd bdrds"><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg><span className="font600">Recommended</span></span>
                         <span className="df aic gap02 font08 pdx05 pdy03 bd bdrds"><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600">Trending</span></span>
                         <span className="df"><svg className="dn" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#000000"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z" /></svg></span></div>
