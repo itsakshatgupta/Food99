@@ -68,29 +68,26 @@ const banner_ = <>
 
 const mobile_banner = <>
     <div className="oh bdrds bd mgx05" style={{
-        borderColor: '#18801eff',
-        color: 'white',
-        background: '#18801eff'
-    }}><div className="pdx08 pdy05 df">
+        background: 'linear-gradient(0deg, rgb(205 233 255), #e4d4ff)'
+    }}><div className="pdx08 pdb05 pdt08 df">
             <div className="fx1">
                 <h4 className="mg0">Don't Miss this Deal</h4>
-                <h1 className="mg0">Get 50% Off</h1>
+                <h2 className="mg0">Get 50% Off</h2>
             </div>
             <span className='font-sm' style={{ alignSelf: 'self-end' }}><b>See All</b></span>
         </div>
         <div className="pdx05 pdy05 oh" style={{
-            background: '#E8F5E9',
             color: 'black'
         }}>
-            <div className=" catg df aic pdy05 pdx1 gap2 ox sbn">
+            <div className=" catg df aic pdx1 gap2 ox sbn">
 
-                <style>{`.e{width: 75px; height: 80px; border-radius: 10px; justify-self: center; background: white; box-shadow:2px 2px 5px 1px #cfcfcfff`}</style>
+                <style>{`.e{width: 75px; height: 80px; border-radius: 10px; justify-self: center; background: white; box-shadow:2px 2px 3px 1px #3d3d3dc9`}</style>
                 <div>
                     <div className="pR">
                         <div className="bd e oh">
                             <Image
                                 alt="offer"
-                                src="/food_img/k.jpg"
+                                src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
                                 width={75}
                                 height={80}
                             />
@@ -105,7 +102,7 @@ const mobile_banner = <>
                         <div className="bd e oh">
                             <Image
                                 alt="offer"
-                                src="/food_img/k.jpg"
+                                src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
                                 width={75}
                                 height={80}
                             />
@@ -120,7 +117,7 @@ const mobile_banner = <>
                         <div className="bd e oh">
                             <Image
                                 alt="offer"
-                                src="/food_img/k.jpg"
+                                src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
                                 width={75}
                                 height={80}
                             />
@@ -135,7 +132,7 @@ const mobile_banner = <>
                         <div className="bd e oh">
                             <Image
                                 alt="offer"
-                                src="/food_img/k.jpg"
+                                src="/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"
                                 width={75}
                                 height={80}
                             />
@@ -163,18 +160,18 @@ const mobile_banner = <>
             }}>Order Now</span></div>
             <Image
                 src="/static-img/the-pepperoni-pizza-and-a-piece-of-streched-cheese-pizza-with_22994042.jpg"
-                height={200}
+                height={210}
                 width={600}
                 style={{ width: "100%" }}
                 alt='pizza-ad'
             />
-            <div class="wfp df jcsb aic pA font700 pd05"
+            <div class="wfp df jcsb aic pA font700 pdy03 pdx05"
                 style={{
                     color: '#ffffff',
-                    top: 0,
-                    background: 'linear-gradient(0deg, transparent, #000000)'
+                    bottom: 0,
+                    background: 'linear-gradient(to right, #181818, rgb(0 0 0 / 0%) 100%)'
                 }}
-            ><span className='font-lg'>Pepronie pizza@159</span></div>
+            ><span className='font-md'>Pepronie pizza@159</span></div>
         </div>
     </div>
 </>
@@ -191,7 +188,7 @@ const mobile_animation_promo = <><style>{`
 .animated-header h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #173363;
+  color: black;
   animation: fadeInl 2s ease-in-out infinite alternate;
 }
 
@@ -219,7 +216,7 @@ const mobile_animation_promo = <><style>{`
 @keyframes slideDown {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}`}</style><div className="animated-header df oh bdBrds bdb">
+}`}</style><div className="animated-header df oh">
         <span className='pA' style={{ top: '30px', left: '-10px' }}>
             <Image
                 src="/static-img/pizza-side-view-with_24585871.png"
@@ -228,7 +225,7 @@ const mobile_animation_promo = <><style>{`
                 alt="pizza-promo"
             />
         </span>
-        <div className="fx1" style={{ placeItems: 'center' }}>
+        <div className="fx1">
             <h1 className='mg0'>Delicious Deals</h1>
             <p>Enjoy tasty meals at unbeatable prices!</p>
         </div>
@@ -530,7 +527,7 @@ export default function branches() {
         {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
-                <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1, background:'linear-gradient(45deg, #1976D2, #00BCD4)' }}>
+                <div className="pS xbg topbar-container bdRrds" style={{ top: 0, zIndex: 1, background:'royalblue' }}>
                     <Topbar_ />
                 {mobile_animation_promo}
                 </div>
