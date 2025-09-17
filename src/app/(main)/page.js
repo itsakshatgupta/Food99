@@ -150,15 +150,32 @@ const mobile_banner = <>
     </div>
     <div class="mgx05 oh bdrds bd" style={{
         color: 'white'
-    }}><div className="df aic">
-        <Image
-        src="/static-img/the-pepperoni-pizza-and-a-piece-of-streched-cheese-pizza-with_22994042.jpg"
-        height={200}
-        width={600}
-        style={{width:"100%"}}
-        alt='pizza-ad'
-        />
-    </div>
+    }}><div className="df aic pR">
+            <div class="wfp df jcsb aic pA font700 pd05"
+                style={{
+                    color: '#ffffff',
+                    top: 0,
+                    background: 'linear-gradient(0deg, transparent, #000000)'
+                }}
+            ><span className='font-lg'>New Launch</span><span className='pdx04' style={{
+                color: '#ffffff',
+                background: 'crimson'
+            }}>Order Now</span></div>
+            <Image
+                src="/static-img/the-pepperoni-pizza-and-a-piece-of-streched-cheese-pizza-with_22994042.jpg"
+                height={200}
+                width={600}
+                style={{ width: "100%" }}
+                alt='pizza-ad'
+            />
+            <div class="wfp df jcsb aic pA font700 pd05"
+                style={{
+                    color: '#ffffff',
+                    top: 0,
+                    background: 'linear-gradient(0deg, transparent, #000000)'
+                }}
+            ><span className='font-lg'>Pepronie pizza@159</span></div>
+        </div>
     </div>
 </>
 
@@ -166,7 +183,7 @@ const mobile_animation_promo = <><style>{`
 .animated-header {
     padding-block: 10px;
     padding-inline: 10px;
-    background: linear-gradient(0deg, #f8f8f7, #ffffff);
+    // background: linear-gradient(0deg, #f8f8f7, #ffffff);
     animation: slideDown 1s ease-out forwards;
     border-color:black;
 }
@@ -513,10 +530,10 @@ export default function branches() {
         {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
-                <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1 }}>
+                <div className="pS xbg topbar-container" style={{ top: 0, zIndex: 1, background:'linear-gradient(45deg, #1976D2, #00BCD4)' }}>
                     <Topbar_ />
-                </div>
                 {mobile_animation_promo}
+                </div>
                 <div className="df fd-c gap1 mgy1">
                     <div className="df gap05 fx1 ox pdx05 sbn">
                         <span className="df fd-c aic gap02 font08 pdx05 pdy03">

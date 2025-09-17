@@ -113,7 +113,7 @@ export default function Topbar_() {
 
         set_top_bar_(<Topbar
             l={
-                <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Food<span>99</span></h4>
+                <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem', color:'white' }}>Food<span>99</span></h4>
             }
 
             r={
