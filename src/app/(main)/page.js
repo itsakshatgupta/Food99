@@ -124,7 +124,7 @@ export default function branches() {
         </div>
         <div className='mgx05 mgy05 df fd-c'>
             <h4 class="mgx03 mgb08 mg0 font500" style={{ color: '#0e0e0e' }}>Don't Miss this Deal</h4>
-            <div className="oh bdrds bd mgx05" style={{
+            <div className="oh bdrds bd" style={{
                 background: 'linear-gradient(0deg, rgb(205 233 255), #e4d4ff)'
             }}><div className="pdx08 pdb05 pdt08 df">
                     <div className="fx1">
