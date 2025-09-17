@@ -8,7 +8,7 @@ import { Icon } from '@/components/lib/icons';
 import Image from 'next/image';
 import { Cart_Control_Direct, Cart_Control_Indirect } from '@/components/lib/cart_control';
 import Topbar_ from '@/components/topbar_/topbar';
-import { BookOpen, ChevronLeftCircle, ChevronRightCircle } from 'lucide-react';
+import { BookOpen, ChevronLeftCircle, ChevronRightCircle, ChevronRight } from 'lucide-react';
 import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
