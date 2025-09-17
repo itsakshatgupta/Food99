@@ -178,8 +178,8 @@ export default function Topbar_() {
                 // style={{ background: '#b1261cff', color:'white' }}  
                 >
                     {top_bar_}
-                    <div className="df aic gap03 pdy05 bd bdTrds bdBrds pdl05 xbg" onClick={() => set_search_mode(true)} style={{ borderColor: '#673AB7' }}>
-                        <span className="df aic pdx02 pdy02" style={{ background: '#ffffffff' }} ><Search /></span>
+                    <div className="df aic gap03 pdy05 bd bdTrds bdBrds pdl05 xbg" onClick={() => set_search_mode(true)} style={{ borderColor: '#673AB7', color:'black' }}>
+                        <span className="df aic pdx02 pdy02" ><Search /></span>
                         <style>{`.search-animation-container {
 
     overflow: hidden;
@@ -202,7 +202,7 @@ export default function Topbar_() {
     transform: translateY(0);
 }
 `}</style>
-                        <div className="wfp df aic gap03" >
+                        <div className="wfp df aic gap03">
                             <span>Search </span>
 
                             <div className="search-animation-inner">

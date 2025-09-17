@@ -217,14 +217,6 @@ const mobile_animation_promo = <><style>{`
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }`}</style><div className="animated-header df oh">
-        <span className='pA' style={{ top: '30px', left: '-10px' }}>
-            <Image
-                src="/static-img/pizza-side-view-with_24585871.png"
-                height={100}
-                width={100}
-                alt="pizza-promo"
-            />
-        </span>
         <div className="fx1">
             <h1 className='mg0'>Delicious Deals</h1>
             <p>Enjoy tasty meals at unbeatable prices!</p>
@@ -527,7 +519,7 @@ export default function branches() {
         {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
-                <div className="pS xbg topbar-container bdRrds" style={{ top: 0, zIndex: 1, background:'royalblue' }}>
+                <div className="pS xbg topbar-container bdBrds" style={{ top: 0, zIndex: 1, background:'royalblue' }}>
                     <Topbar_ />
                 {mobile_animation_promo}
                 </div>
