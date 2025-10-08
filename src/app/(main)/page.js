@@ -592,7 +592,7 @@ export default function branches() {
         {device === 'mobile' && menu___i ?
             <>
                 <div className="pA wfp" style={{height:'280px', background:'linear-gradient(to bottom, #8ba1ffff, #d2afffff)', top:0}}></div>
-                <div className={`${isScrolled && "xbg_ bdBrds bdb"} topbar-container pS`} style={{ top: 0, zIndex: 100, backdropFilter: 'blur(1px)', background: isScrolled?'whitesmoke':'transparent', borderColor:'black' }} ref={top_header}>
+                <div className={`${isScrolled && "xbg_ bdBrds bdb"} topbar-container pS`} style={{ top: 0, zIndex: 100, backdropFilter: 'blur(1px)', background: isScrolled?'whitesmoke':'transparent', borderColor:'black', transition:'all 1s ease' }} ref={top_header}>
                     <Topbar_ />
                 </div>
                 {mobile_animation_promo}
