@@ -8,7 +8,7 @@ import { Icon } from '@/components/lib/icons';
 import Image from 'next/image';
 import { Cart_Control_Direct, Cart_Control_Indirect } from '@/components/lib/cart_control';
 import Topbar_ from '@/components/topbar_/topbar';
-import { BookOpen, ChevronLeftCircle, ChevronRightCircle, ChevronRight } from 'lucide-react';
+import { BookOpen, ChevronLeftCircle, ChevronRightCircle, ChevronRight, ChevronDown, ChevronUp, CircleArrowDown, Cross } from 'lucide-react';
 import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
@@ -25,6 +25,7 @@ export default function branches() {
 
     const top_header = useRef(null);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [menuLister, set_menuLister] = useState(false)
 
     const banner_ = <>
         <div className="df jcsb wfp hfp" style={{ background: '#f1f8e9' }}>
@@ -78,10 +79,10 @@ export default function branches() {
     </>
 
     const mobile_banner = <>
-        <div class="mgx05" style={{
+        <div className="mgx05" style={{
             color: 'white'
         }}><div className="df aic pR oh bdrds">
-                <div class="wfp df jcsb aic pA font700 pd05"
+                <div className="wfp df jcsb aic pA font700 pd05"
                     style={{
                         color: '#ffffff',
                         top: 0,
@@ -98,7 +99,7 @@ export default function branches() {
                     style={{ width: "100%" }}
                     alt='pizza-ad'
                 />
-                <div class="wfp df jcsb aic pA font700 pdy03 pdx05"
+                <div className="wfp df jcsb aic pA font700 pdy03 pdx05"
                     style={{
                         color: '#ffffff',
                         bottom: 0,
@@ -106,7 +107,7 @@ export default function branches() {
                     }}
                 ><span className='font-md'>Pepronie pizza@159</span></div>
             </div>
-            <div class="df aic jcsb mgt06" style={{ justifyContent: 'space-evenly' }}>
+            <div className="df aic jcsb mgt06" style={{ justifyContent: 'space-evenly' }}>
                 <ChevronLeftCircle color='#E91E63' />
                 <style>{`.more- span{
                     padding: 4px;
@@ -123,7 +124,7 @@ export default function branches() {
             </div>
         </div>
         <div className='mgx05 mgy05 df fd-c'>
-            <h4 class="mgx03 mgb08 mg0 font500" style={{ color: '#0e0e0e' }}>Don't Miss this Deal</h4>
+            <h4 className="mgx03 mgb08 mg0 font500" style={{ color: '#0e0e0e' }}>Don't Miss this Deal</h4>
             <div className="oh bdrds bd" style={{
                 background: 'linear-gradient(0deg, rgb(205 233 255), #e4d4ff)'
             }}><div className="pdx08 pdb05 pdt08 df">
@@ -204,7 +205,8 @@ export default function branches() {
         </div>
     </>
 
-    const mobile_animation_promo = <><style>{`
+    const mobile_animation_promo = <>
+        <style>{`
 .animated-header {
     padding-block: 10px;
     padding-inline: 10px;
@@ -244,35 +246,50 @@ export default function branches() {
 @keyframes slideDown {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}`}</style><div className={`${isScrolled ? "dn" : "df"} animated-header oh`}>
-            <div className="fx1">
-                <h1 className='mg0'>Delicious Deals</h1>
-                <p>Enjoy tasty meals at unbeatable prices!</p>
-            </div>
-            <span style={{
-                height: '70px',
-                width: '100px',
-                display: 'flex',
-                transform: 'scale(2)',
-                marginRight: '5px'
-            }}>    <DotLottieReact
-                    src="https://lottie.host/fa2f1462-060e-4c10-8b30-dd0925c3bb7a/9JlxUiE7fq.lottie"
-                    loop
-                    autoplay
-                /></span>
+}`}
+        </style>
+        <div className="df fd-c xbg_ bdBrds pR pS" style={{ background: 'linear-gradient(180deg, whitesmoke, #e9e9e9ff))_', top: '131.56px' }}>
 
+            <div className='df aic font600 font08 pdx1' style={{ justifyContent: 'flex-end' }} ><span className='df aic bdTrds bdBrds pd03 ' style={{ background: 'orange_' }}><Icon.restart s={22} /> Reorder</span></div><div className="df animated-header oh">
+                <div className="fx1">
+                    <h1 className='mg0'>Delicious Deals</h1>
+                    <p>Enjoy tasty meals at unbeatable prices!</p>
+                </div>
+                <span style={{
+                    height: '70px',
+                    width: '100px',
+                    display: 'flex',
+                    transform: 'scale(2)',
+                    marginRight: '5px'
+                }}>
+                    <DotLottieReact
+                        src="https://lottie.host/fa2f1462-060e-4c10-8b30-dd0925c3bb7a/9JlxUiE7fq.lottie"
+                        loop
+                        autoplay
+                    />
+                </span>
+
+            </div>
         </div>
+
     </>
 
     useEffect(() => {
-        function display_menu_list(e) {
-            if (e.target.textContent === "X Close") {
-                e.target.textContent = "Menu"
-                set_floaters((prev) => prev.filter((v, i) => v.name !== 'menu'));
-            } else {
-                e.target.textContent = "X Close"
-                set_floaters((prev) => [...prev, {
-                    name: 'menu', child: <>
+
+        set_floaters((prev) => [{
+            name: 'menu-btn', child:
+                <>
+                    <div className='df aic jcc pd05 pR' id="lsn-2" style={{ zIndex: 1 }}>
+                        <span className="font600 bdBrds bdTrds font-md pdx07 pdy04 df aic gap02" style={{
+                            background:'black',
+                            color:'white',
+                            boxShadow: !menuLister&&'0 0 12px 1px #b2b2b2',
+                            border:'1px solid black',
+                            transition:'all 0.5sec'
+                        }} onClick={(e) => { if (menu___i) { menuLister ? set_menuLister(false) : set_menuLister(true) } }}>{menuLister ? <ChevronDown fill='black' color='white' size={25} /> : <ChevronUp fill='black' color='white' size={25} />}<b>Menu</b></span>
+                    </div>
+
+                    {menuLister && <div className='menu-list'> <>
                         <style>{`
         lowscreen-nav{
         border-top:none !important;
@@ -282,14 +299,14 @@ export default function branches() {
         }
                         `}</style>
                         <style>{`
-                            .menu_list{width: 70vw;
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    height: 40vh;
+                            .menu_list{width: 55vw;
+    // position: absolute;
+    // bottom: 5px;
+    // right: 10px;
+    height: 30vh;
     box-shadow: 0 0 12px 1px #b2b2b2;
     animation:menu_ani 0.5s linear;
-    z-index:1;
+    // z-index:1;
     }
 
     @keyframes menu_ani {
@@ -303,50 +320,54 @@ export default function branches() {
     }
             }
                         `}</style>
-                        <div className="df fd-c aic padx1 pdy1 menu_list bdTrds bdBrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
-                            {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
+                        <div className="menu_list bdTrds bdBrds oh pA mgy2 bd" style={{ background: '#323232', color: 'white', placeSelf: 'center', bottom: 0, borderColor:'black' }}>
+                            <div className="df fd-c aic gap08 pdy08 hfp oy pdb1">
+                                {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy01" key={i}><div className="df aic gap02"><span className="font500">{v.name}</span></div><span>{v.items.length}</span></div>)}
+                            </div>
                         </div>
                     </>
-                }])
-            }
-        }
-
-        set_feature_option(
-            <div className='df aic jcc xbg' id="lsn-2" style={{ width: 'calc(1rem + 100px)' }}>
-                <span className="font600 bdBrds bdTrds font-md pdx1 pdy06 df aic" style={{
-                    background: '#252525',
-                    color: 'white'
-                }} onClickCapture={(e) => { if (menu___i) display_menu_list(e) }}>Menu</span>
-            </div>
+                    </div>}
+                </>
+        }, ...prev]
         );
         return () => {
-            set_feature_option(null);
-        }
-    }, [menu___i])
+            set_floaters((prev) => prev.filter((v, i) => v.name !== 'menu-btn'))
+
+            // // This runs when the component is unmounted
+            // mutate("/cart"); // Refresh the cart data when leaving
+        };
+    }, [menu___i, menuLister])
 
     useEffect(() => {
         console.log(menu___i);
 
         if (cart__i && cart__i?.items.length > 0) {
             set_floaters((prev) => [...prev, {
-                name: 'f1', child: <div className='df fd-c' style={{ alignItems: 'flex-end' }}>
+                name: 'f1', child: <div className='df fd-c ybg' style={{ alignItems: 'flex-end', background: '#5f54f8ff', color: 'white' }}>
+                    <div className='pdx05 pdy04 font800 font-lg df aic wfp'><span className='font09 font700'>Add item worth 99 and get 50% flat discount</span>
+                    </div>
                     <div className="pS pd05l jcsb wfp bdt oh bdTrds" style=
-                        {{ bottom: 0, borderColor: 'blac1k' }}>
+                        {{ bottom: 0, borderColor: 'black', color: 'black' }}>
                         <div className="df fd-c aic jcsb gap05 pdy1 pdx1 xbg" style={{
-                            boxShadow: '0 0 6px 5px #ecececff', background: '#6d34f1ff',
-                            color: 'white'
+                            boxShadow: '0 0 6px 5px #ecececff', background: 'whitesmoke',
+                            color: 'wheat1'
                         }}>
+                            <div className='df aic jcsb wfp'>
+                                <span className="font700 font-md df aic">{cart__i?.items.length}  Items Added</span>
+                                <Link href='/cart' className='pdx2 pdy1 font-lg font900 bdrds xfg' style={{ background: 'forestgreen', color: 'white' }}>Checkout</Link>
+                            </div>
 
-                            <Link href='/cart' style={{
+                            {/* <Link href='/cart' style={{
                                 borderRadius: '10px',
                             }}
-                                className="font700 font-md df aic">{cart__i?.items.length} Items Added <ChevronRight className="mgl05" style={{
-                                    background: '#4f2797',
+                                className="font700 font-md df aic">{cart__i?.items.length} Items Added <ChevronRight className="mgl05" size={22} style={{
+                                    color: 'forestgreen',
+                                    background: 'white',
                                     borderRadius: '100%'
                                 }} />
-                            </Link>
+                            </Link> */}
 
-                            <span className='font08 font700'>Add item worth 99 and get 50% flat discount</span>
+
                         </div>
                     </div>
                 </div>
@@ -570,125 +591,140 @@ export default function branches() {
         {console.log(menu___i)}
         {device === 'mobile' && menu___i ?
             <>
-                <div className="pS xbg topbar-container bdBrds" style={{ top: 0, zIndex: 1, background: 'royalblue' }} ref={top_header}>
+                <div className="pA wfp" style={{height:'280px', background:'linear-gradient(to bottom, #8ba1ffff, #d2afffff)', top:0}}></div>
+                <div className={`${isScrolled && "xbg_ bdBrds bdb"} topbar-container pS`} style={{ top: 0, zIndex: 100, backdropFilter: 'blur(1px)', background: isScrolled?'whitesmoke':'transparent', borderColor:'black' }} ref={top_header}>
                     <Topbar_ />
-
-                    {mobile_animation_promo}
-
                 </div>
-                <div className="df fd-c gap1 mgy1">
-                    <div className="df gap05 fx1 ox pdx05 sbn">
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Burger</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/top-view-pizza-with_24589160.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Pizza</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/indian-cuisine-at-a-thali_59246817.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Thali</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/ai-generated-samosas-dish-png-isolated-on-transparent_36256574.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Samosa</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/indian-paneer-butter-masala-isolated-on-transparent-background_56102177.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Panner Handi</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/potted-green-clover-plant-in-white-ceramic-bowl_57752437.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Manchurian</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Naan</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/spring-roll-isolated-on-background_39112107.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Spring Roll</span>
-                        </span>
-                        <span className="df fd-c aic gap02 font08 pdx05 pdy03">
-                            <Image
-                                src={"/static-img/delicious-strawberry-sundae-with-cherry-and-toppings_50756335.png"}
-                                width={50}
-                                height={50}
-                                alt='food'
-                            />
-                            <span className="font600">Shakes</span>
-                        </span>
+                {mobile_animation_promo}
+                <div className='df fd-c xbg pR bdTrds bdt' style={{ zIndex: 1, boxShadow: '0 0 12px 1px #323232' }}>
+                    <div className="df fd-c gap1 mgy1 bdTrds oh xbg pdt05">
+                        <div className="df gap05 fx1 ox pdx05 sbn">
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/cute-cartoon-burger-icon_22911694.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Burger</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/top-view-pizza-with_24589160.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Pizza</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/indian-cuisine-at-a-thali_59246817.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Thali</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/ai-generated-samosas-dish-png-isolated-on-transparent_36256574.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Samosa</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/indian-paneer-butter-masala-isolated-on-transparent-background_56102177.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Panner Handi</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/potted-green-clover-plant-in-white-ceramic-bowl_57752437.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Manchurian</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/stack-of-garlic-butter-naan-bread-garnished-with-fresh-herbs_60423589.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Naan</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/spring-roll-isolated-on-background_39112107.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Spring Roll</span>
+                            </span>
+                            <span className="df fd-c aic gap02 font08 pdx05 pdy03">
+                                <Image
+                                    src={"/static-img/delicious-strawberry-sundae-with-cherry-and-toppings_50756335.png"}
+                                    width={50}
+                                    height={50}
+                                    alt='food'
+                                />
+                                <span className="font600">Shakes</span>
+                            </span>
+
+                        </div>
+                        {mobile_banner}
+                    </div>
+                    <div className="df aic jcsb bdb pdx1 pdy08 ybg gap3 ox pS " style={{
+                        scrollbarColor: '#f8f8f8 white',
+                        scrollbarWidth: 'none',
+                        top: usr ? '129px' : '124px',
+                        zIndex: 1,
+                        background: '#ecececff',
+                        borderBottom: '1px solid lightgray',
+                        borderTop: '1px solid lightgray'
+
+                    }}>
+                        <div className="df aic gap1 fx1">
+                            <span className="df aic gap02 font08 pdx05 pdy05 bd bdTrds bdBrds" style={{ background: 'black', color: 'white', border: '1px solid black' }}>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#ffffffff" d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16.88 11.53C16.88 11.92 16.57 12.23 16.18 12.23C15.79 12.23 15.48 11.92 15.48 11.53V11.35L12.76 14.07C12.61 14.22 12.41 14.29 12.2 14.27C11.99 14.25 11.8 14.14 11.69 13.96L10.67 12.44L8.29 14.82C8.15 14.96 7.98 15.02 7.8 15.02C7.62 15.02 7.44 14.95 7.31 14.82C7.04 14.55 7.04 14.11 7.31 13.83L10.29 10.85C10.44 10.7 10.64 10.63 10.85 10.65C11.06 10.67 11.25 10.78 11.36 10.96L12.38 12.48L14.49 10.37H14.31C13.92 10.37 13.61 10.06 13.61 9.67C13.61 9.28 13.92 8.97 14.31 8.97H16.17C16.26 8.97 16.35 8.99 16.44 9.02C16.61 9.09 16.75 9.23 16.82 9.4C16.86 9.49 16.87 9.58 16.87 9.67V11.53H16.88Z"></path> </g>
+                                </svg>
+                                <span className="font800 df aic">Pizza <span className="df aic mgl02 ybg bdrds pd01" style={{ background: 'black' }}><Icon.close s="16px" fill="white"/></span>
+                                </span></span>
+                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bd bdTrds bdBrds" style={{ background: '#f7f7f7ff', border: '1px solid black' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg><span className="font600">Recommended</span></span>
+                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bd bdTrds bdBrds" style={{ background: '#f7f7f7ff', border: '1px solid black' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600">Trending</span></span>
+                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bd bdTrds bdBrds" style={{ background: '#f7f7f7ff', border: '1px solid black' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600">Chilly</span></span>
+                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bd bdTrds bdBrds" style={{ background: '#f7f7f7ff', border: '1px solid black' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600 wmc">Chef Choice</span></span>
+                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bd bdTrds bdBrds" style={{ background: '#f7f7f7ff', border: '1px solid black' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600 wmc">Rated 5+</span></span>
+
+                            <span className="df"><svg className="dn" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#000000"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z" /></svg></span>
+                        </div>
+                    </div>
+
+                    {/* </div> */}
+
+
+                    <div className="fx1" style={{
+                        scrollbarColor: '#e7e7e7ff white',
+                        scrollbarWidth: 'thin',
+                        background: 'whitesmoke',
+                        paddingBlockEnd: `${floaters ? '150px' : 0}`
+                    }}>
+
+                        {menu}
 
                     </div>
-                    {mobile_banner}
                 </div>
-                <div className="df aic jcsb bdb pdx1 pdt06 xbg gap3 ox pS bdBrds" style={{
-                    scrollbarColor: '#f8f8f8 white',
-                    scrollbarWidth: 'none',
-                    top: usr ? '127px' : '124px',
-                    zIndex: 1
 
-                }}>
-                    <div className="df aic gap1 fx1 mgb05">
-                        <span className="df aic gap02 font08 pdx05 pdy03 bd bdrds" style={{ background: '#d2d0ff' }}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#e05836ff" d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16.88 11.53C16.88 11.92 16.57 12.23 16.18 12.23C15.79 12.23 15.48 11.92 15.48 11.53V11.35L12.76 14.07C12.61 14.22 12.41 14.29 12.2 14.27C11.99 14.25 11.8 14.14 11.69 13.96L10.67 12.44L8.29 14.82C8.15 14.96 7.98 15.02 7.8 15.02C7.62 15.02 7.44 14.95 7.31 14.82C7.04 14.55 7.04 14.11 7.31 13.83L10.29 10.85C10.44 10.7 10.64 10.63 10.85 10.65C11.06 10.67 11.25 10.78 11.36 10.96L12.38 12.48L14.49 10.37H14.31C13.92 10.37 13.61 10.06 13.61 9.67C13.61 9.28 13.92 8.97 14.31 8.97H16.17C16.26 8.97 16.35 8.99 16.44 9.02C16.61 9.09 16.75 9.23 16.82 9.4C16.86 9.49 16.87 9.58 16.87 9.67V11.53H16.88Z"></path> </g></svg><span className="font600">Pizza</span></span>
-                        <span className="df aic gap02 font08 pdx05 pdy03 bd bdrds"><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg><span className="font600">Recommended</span></span>
-                        <span className="df aic gap02 font08 pdx05 pdy03 bd bdrds"><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600">Trending</span></span>
-                        <span className="df"><svg className="dn" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#000000"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z" /></svg></span></div>
-                </div>
-                {/* </div> */}
-
-
-                <div className="fx1" style={{
-                    scrollbarColor: '#e7e7e7ff white',
-                    scrollbarWidth: 'thin',
-                    background: 'whitesmoke',
-                    paddingBlockEnd: `${floaters ? '150px' : 0}`
-                }}>
-
-                    {menu}
-
-                </div>
 
                 {/* {device === 'mobile' && dynamic_portal_main} */}
             </>

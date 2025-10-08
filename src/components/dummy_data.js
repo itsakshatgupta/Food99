@@ -1,100 +1,100 @@
-export let menu = [
+export let menu_dummy = [
     {
-        main_ctg__: 'pizza', items_list__: [
-            { item_name__: 'Marhertia', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 120 },
-            { item_name__: 'Farm Loaded', item_description__: 'Tomato Sauce, Mozorolla Cheese, Capscium, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 150 },
-            { item_name__: 'Farm House', item_description__: 'Tomato Sauce, Mozorolla Cheese, Onions, Corn, Basil and Veggies', img_src: '/food_img/c.jpg', item_price__: 149 },
-            { item_name__: 'Heavy Veggie Loaded', item_description__: 'Tomato Sauce, Mozorolla, Onion, Mashroom, Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 190 },
-            { item_name__: 'Farmer Pizza', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 180 },
-            { item_name__: 'Panner Makhani Pizza', item_description__: 'Tomato Sauce, Mozorolla Cheese, Panner, Makhani Grevy, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 170 },
-            { item_name__: 'Golden Corn', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Corn', img_src: '/food_img/g.jpg', item_price__: 130 },
-            { item_name__: 'Mushroom Loaded', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Mushroom', img_src: '/food_img/h.png', item_price__: 160 },
-            { item_name__: 'Italy Florentina', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil, Spinach and Veggies', img_src: '/food_img/i.png', item_price__: 180 },
-            { item_name__: 'Cheese Loaded', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 120 },
+        id: 1, name: 'pizza', items: [
+            {id:1, name: 'Marhertia', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 120 },
+            {id:1, name: 'Farm Loaded', description: 'Tomato Sauce, Mozorolla Cheese, Capscium, Basil and Veggies', image: '/food_img/b.jpg', price: 150 },
+            {id:1, name: 'Farm House', description: 'Tomato Sauce, Mozorolla Cheese, Onions, Corn, Basil and Veggies', image: '/food_img/c.jpg', price: 149 },
+            {id:1, name: 'Heavy Veggie Loaded', description: 'Tomato Sauce, Mozorolla, Onion, Mashroom, Cheese, Basil and Veggies', image: '/food_img/d.jpeg', price: 190 },
+            {id:1, name: 'Farmer Pizza', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/e.png', price: 180 },
+            {id:1, name: 'Panner Makhani Pizza', description: 'Tomato Sauce, Mozorolla Cheese, Panner, Makhani Grevy, Basil and Veggies', image: '/food_img/f.png', price: 170 },
+            {id:1, name: 'Golden Corn', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Corn', image: '/food_img/g.jpg', price: 130 },
+            {id:1, name: 'Mushroom Loaded', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Mushroom', image: '/food_img/h.png', price: 160 },
+            {id:1, name: 'Italy Florentina', description: 'Tomato Sauce, Mozorolla Cheese, Basil, Spinach and Veggies', image: '/food_img/i.png', price: 180 },
+            {id:1, name: 'Cheese Loaded', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 120 },
         ]
     },
     {
-        main_ctg__: 'Burger', items_list__: [
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/c.jpg', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 69 },
-            { item_name__: 'Cheesey Burger', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 69 },
+        id: 2, name: 'Burger', items: [
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/k.jpg', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/l.png', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/i.png', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/b.jpg', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/c.jpg', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/d.jpeg', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/e.png', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/f.png', price: 69 },
+            {id:1, name: 'Cheesey Burger', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/g.jpg', price: 69 },
         ]
     },
     {
-        main_ctg__: 'Pasta', items_list__: [
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 99 },
-            { item_name__: 'White Cheesey Pasta', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 99 },
+        id: 3, name: 'Pasta', items: [
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/h.png', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/i.png', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/b.jpg', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/k.jpg', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/e.png', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/l.png', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/f.png', price: 99 },
+            {id:1, name: 'White Cheesey Pasta', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/i.png', price: 99 },
         ]
     },
     {
-        main_ctg__: 'French Fries', items_list__: [
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/c.jpg', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 49 },
-            { item_name__: 'American French Fries', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 49 },
+        id: 4, name: 'French Fries', items: [
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/b.jpg', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/c.jpg', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/d.jpeg', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/e.png', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/f.png', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/g.jpg', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/h.png', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/i.png', price: 49 },
+            {id:1, name: 'American French Fries', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 49 },
         ]
     },
     {
-        main_ctg__: 'Roll', items_list__: [
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 49 },
-            { item_name__: 'Spring Roll', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/h.png', item_price__: 49 },
+        id: 5, name: 'Roll', items: [
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/h.png', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/d.jpeg', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/b.jpg', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/i.png', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/l.png', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/d.jpeg', price: 49 },
+            {id:1, name: 'Spring Roll', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/h.png', price: 49 },
         ]
     },
     {
-        main_ctg__: 'Breverages', items_list__: [
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/d.jpeg', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/f.png', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 29 },
-            { item_name__: 'Lassi', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 29 },
+        id: 6, name: 'Breverages', items: [
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/b.jpg', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/k.jpg', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/g.jpg', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/d.jpeg', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/f.png', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/e.png', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/i.png', price: 29 },
+            {id:1, name: 'Lassi', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 29 },
         ]
     },
     {
-        main_ctg__: 'Combo', items_list__: [
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/l.png', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/b.jpg', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/e.png', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/j.jpg', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/a.jpeg', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/i.png', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/k.jpg', item_price__: 149 },
-            { item_name__: 'Pizza with Burger Combo', item_description__: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', img_src: '/food_img/g.jpg', item_price__: 149 },
+        id: 7, name: 'Combo', items: [
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/l.png', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/b.jpg', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/e.png', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/j.jpg', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/k.jpg', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/a.jpeg', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/i.png', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/k.jpg', price: 149 },
+            {id:1, name: 'Pizza with Burger Combo', description: 'Tomato Sauce, Mozorolla Cheese, Basil and Veggies', image: '/food_img/g.jpg', price: 149 },
         ]
     },
 ]
@@ -106,27 +106,27 @@ export let orders = [
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/b.jpg"
+                image: "/food_img/b.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/g.jpg"
+                image: "/food_img/g.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/d.jpeg"
+                image: "/food_img/d.jpeg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
 
 
@@ -139,27 +139,27 @@ export let orders = [
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: '/food_img/j.jpg'
+                image: '/food_img/j.jpg'
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/g.jpg"
+                image: "/food_img/g.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/d.jpeg"
+                image: "/food_img/d.jpeg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
 
         ],
@@ -171,27 +171,27 @@ export let orders = [
             {
                 item_name: 'Heavy veggi loaded',
                 quantity: 1,
-                img_src: "/food_img/e.png"
+                image: "/food_img/e.png"
 
             }, {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/g.jpg"
+                image: "/food_img/g.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/d.jpeg"
+                image: "/food_img/d.jpeg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
 
         ],
@@ -203,27 +203,27 @@ export let orders = [
             {
                 item_name: 'Cheese burger',
                 quantity: 5,
-                img_src: "/food_img/d.jpeg"
+                image: "/food_img/d.jpeg"
 
             }, {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/g.jpg"
+                image: "/food_img/g.jpg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/d.jpeg"
+                image: "/food_img/d.jpeg"
             },
             {
                 item_name: 'marherita',
                 quantity: 2,
-                img_src: "/food_img/c.jpg"
+                image: "/food_img/c.jpg"
             },
 
         ],
@@ -231,44 +231,23 @@ export let orders = [
     }
 ]
 
-export let cart = [
+export let cart = 
 
-    {
-        item_name: 'marherita',
-        item_no: 'Lx2202gh0',
-        quantity: 2,
-        price: 86,
-        img_src: "/food_img/b.jpg"
-    },
-    {
-        item_name: 'marherita',
-        item_no: 'K430RTNBV',
-        quantity: 2,
-        price: 99,
-        img_src: "/food_img/c.jpg"
-    },
-    {
-        item_name: 'marherita',
-        item_no: 'QFVBTHGD23',
-        quantity: 2,
-        price: 120,
-        img_src: "/food_img/g.jpg"
-    },
-    {
-        item_name: 'marherita',
-        item_no: 'ANBIFMX6JZ',
-        quantity: 2,
-        price: 115,
-        img_src: "/food_img/d.jpeg"
-    },
-    {
-        item_name: 'marherita',
-        item_no: 'GBKIOE45V21ZSR',
-        quantity: 2,
-        price: 109,
-        img_src: "/food_img/c.jpg"
+    {   id:1,
+        items: [{
+            menu_item:{
+                id:1
+            },
+            name: 'marherita',
+            item_no: 'Lx2202gh0',
+            quantity: 2,
+            price: 86,
+            image: "/food_img/b.jpg"
+        }],
+        quantity:5,
     }
-]
+
+
 export let cart__ = [
     'marherita',
     'Farm Loaded',

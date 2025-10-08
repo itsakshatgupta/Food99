@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
 import useSWR from "swr";
 import { apiFetch } from '@/app/(api)/api';
+import { menu_dummy, cart } from './dummy_data';
 
 // ✅ one shared fetcher
 const fetcher = async (url) => {
@@ -99,6 +100,10 @@ export default function MainContext({ device, children }) {
         shouldRetryOnError: false
 
     });
+
+    // const usr = true
+    // const menu___i = menu_dummy
+    // const cart__i = cart
 
 
     useEffect(() => {
@@ -195,24 +200,25 @@ export default function MainContext({ device, children }) {
                                 <div className='containers-area pR' >
                                     <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}
                                     </div>
+                                    {feature_option &&
+                                        feature_option
+                                    }
                                     {floaters &&
                                         <div className='floater-container'>
                                             {console.log(floaters)}
-                                            {floaters.map((v, k) => <div key={k}>{v.child}</div>)}
+                                            {floaters.map((v, k) => <div className="pR" key={k}>{v.child}</div>)}
                                         </div>
                                     }
                                 </div>
 
 
-                                <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2, ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
+                                <lowscreen-nav className="dn df1 bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2, ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
                                     {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
                                     <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
                                         <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                     </div>
-                                    {feature_option &&
-                                        feature_option
-                                    }
                                 </lowscreen-nav>
+                                    
                             </div>
                         </div>
                         {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA xbg wfp' style={{ top: 0, zIndex: 1, height:'100vh' }}>{dynamic_portal_ab}</div> : null}
