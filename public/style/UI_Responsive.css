@@ -36,6 +36,9 @@
             justify-content: space-around;
             user-select:none;
         }
+.bdn{
+  border:none;
+}
 
 @media (max-width: 1024px) {
   .fdc_mx1024 {

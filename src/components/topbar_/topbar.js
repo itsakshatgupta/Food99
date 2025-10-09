@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { Suspense, useContext, useEffect, useState } from "react";
-import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2, UserCircle, Mic, ChevronDown, HomeIcon, House } from 'lucide-react';
+import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2, UserCircle, Mic, ChevronDown, HomeIcon, House, ArrowLeft } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -12,6 +12,7 @@ import Address from "./address";
 import Cart from "./cart";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Icon } from "../lib/icons";
 export default function Topbar_() {
     const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr } = useContext(dynamic_);
     const [search_mode, set_search_mode] = useState(false)
@@ -96,18 +97,84 @@ export default function Topbar_() {
 
         if (search_mode) {
             set_dynamics_portal_ab(
-                <div className="df fd-c pdy09 pdx1 gap1 bdb"
-                // style={{ background: '#b1261cff', color:'white' }}  Jng
-                >
-                    <Topbar
-                        l={
-                            <h4 className="mg0 font900 font-lg" style={{ color: '#3e7210' }}>Food<span style={{ color: 'black' }}>99</span></h4>
-                        }
-                        r={<span className="df pd03" onClickCapture={() => set_search_mode(false)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span>}
-                    />
-                    <div className="oh"><div className="pR df aic gap05 dropdowneffect"><div className="fx1 df pdx05 pdy04 gap02 xfg" style={{ borderRadius: '10px', alignContent: 'center' }}><svg xmlns="http://www.w3.org/2000/svg" height="calc(5px + 5vmin)" viewBox="0 -960 960 960" width="calc(5px + 5vmin)" fill=" #000000ff"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" /></svg><div className="font-md">{pathname}</div></div></div></div>
-                </div>)
+                <>
+                <style>{`
+                               .dropdowneffect{
+                               overflow:hidden;
+                               transition:all 1s;
+                               animation:a_dropdowneffect 0.15s linear;
+                               }
+                               @keyframes a_dropdowneffect{
+                               0%{
+                               position:relative;
+                               top:-50px;
+                               }
+                               100%{
+                               position:relative;
+
+                               top:0px;
+                               }
+                               }
+                               `}</style>
+                <div className="df aic pdy1 pdx08 gap1 bdb dropdowneffect" style={{ background: 'ghostwhite', boxShadow:'0 2px 5px 1px #e9e9e9ff' }}
+                //  Jng
+                 >
+
+                    <span className="df aic" onClick={() => set_search_mode(false)}><ArrowLeft /></span>
+
+                    <div className="df aic gap05 wfp fx1">
+                       
+                        <div className="df aic gap03 pdy06 bd bdrds pdl05 xbg wfp xbg" onClick={() => set_search_mode(true)} style={{ borderColor: '#6e70faff', color: 'black', borderWidth: '2px', background:'#ffffffff' }}>
+                            <span className="df aic pdx02 pdy02" ><Search /></span>
+                            <style jsx>{`
+                            .focus-border{
+                            border:2px solid black !important;
+                            }
+                            `}</style>
+                            <style>{`.search-animation-container {
+
+    overflow: hidden;
+}
+
+.search-animation-inner {
+    height: 24px; /* adjust as needed */
+}
+
+.search-item {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.search-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+`}</style>
+                            <div className="fx1 df aic gap03 " style={{ borderColor: '#323232' }}>
+                                <input type="text" autoFocus="true" placeholder="Search dishes, food.." className="bdn font1 font600" style={{outline:'none', background:'transparent'}}/> 
+                                {/* <span>Search </span>
+
+                                <div className="search-animation-inner">
+                                    {searchTexts.map((text, i) => (
+                                        <div
+                                            key={i}
+                                            className={`search-item ${i === currentIndex ? 'active' : ''}`} style={{ color: '#5e5e5eff' }}
+                                        >
+                                            <b>{text}</b>
+                                        </div>
+                                    ))}
+                                </div> */}
+
+                            </div>
+                            <span className="df aic pdx05 pdy02 mgr02" ><Mic size={22} className="mgx05" /></span>
+                        </div>
+                    </div>
+                </div>
+                </>
+                )
 
         } else { set_dynamics_portal_ab(null) }
 
@@ -139,7 +206,7 @@ export default function Topbar_() {
                         <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
                             {usr ?
                                 <span className="oh font07 font500 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-                                    <span className="font900 font09 df aic"><House className="pdx01" size={19.19} fill="black"/>Home<ChevronDown size={18}/></span> Sigra abc colony, Varanasi 221010
+                                    <span className="font900 font09 df aic"><House className="pdx01" size={19.19} fill="black" />Home<ChevronDown size={18} /></span> Sigra abc colony, Varanasi 221010
                                 </span>
 
                                 : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
@@ -176,11 +243,11 @@ export default function Topbar_() {
             {device === "mobile" &&
 
 
-                <div className="df fd-c pdy09 pdx1 gap1 pS" style={{ top: 0, zIndex: 100 }}
+                <div className="df fd-c pdy09 pdx1 gap1 pS" style={{ top: 0 }}
                 // style={{ background: '#b1261cff', color:'white' }}  
                 >
                     {top_bar_}
-                    <div className="df aic gap03 pdy05 bd bdTrds bdBrds pdl05 xbg" onClick={() => set_search_mode(true)} style={{ borderColor: '#a3a3a3ff', color: 'black', borderWidth:'2px' }}>
+                    <div className="df aic gap03 pdy05 bdTrds bdBrds pdl05 xbg" onClick={() => set_search_mode(true)} style={{ color: 'black', borderWidth: '2px', background:'#e7ebffff'}}>
                         <span className="df aic pdx02 pdy02" ><Search /></span>
                         <style>{`.search-animation-container {
 

@@ -221,7 +221,7 @@ export default function MainContext({ device, children }) {
                                     
                             </div>
                         </div>
-                        {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA xbg wfp' style={{ top: 0, zIndex: 1, height:'100vh' }}>{dynamic_portal_ab}</div> : null}
+                        {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA xbg wfp oh' style={{ top: 0, zIndex: 100, height:'100vh' }}>{dynamic_portal_ab}</div> : null}
                     </dynamic_.Provider>
                 </menu_.Provider>
             </>
