@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { Suspense, useContext, useEffect, useState } from "react";
-import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2, UserCircle, Mic, ChevronDown, HomeIcon, House, ArrowLeft } from 'lucide-react';
+import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2, UserCircle, Mic, ChevronDown, HomeIcon, House, ArrowLeft, Filter, Settings2, SearchX, SearchSlash } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -18,6 +18,8 @@ export default function Topbar_() {
     const [search_mode, set_search_mode] = useState(false)
     const [top_bar_, set_top_bar_] = useState(null)
     const pathname = usePathname()
+    const [searchText, set_searchText] = useState("")
+
 
     const topbarBtn = {
         l: [
@@ -98,7 +100,7 @@ export default function Topbar_() {
         if (search_mode) {
             set_dynamics_portal_ab(
                 <>
-                <style>{`
+                    <style>{`
                                .dropdowneffect{
                                overflow:hidden;
                                transition:all 1s;
@@ -116,22 +118,21 @@ export default function Topbar_() {
                                }
                                }
                                `}</style>
-                <div className="df aic pdy1 pdx08 gap1 bdb dropdowneffect" style={{ background: 'ghostwhite', boxShadow:'0 2px 5px 1px #e9e9e9ff' }}
-                //  Jng
-                 >
+                    <div className="df aic pdy1 pdx08 gap1 bdb dropdowneffect" style={{ background: 'ghostwhite', boxShadow: '0 2px 5px 1px #e9e9e9ff' }}
+                    //  Jng
+                    >
 
-                    <span className="df aic" onClick={() => set_search_mode(false)}><ArrowLeft /></span>
+                        <span className="df aic" onClick={() => set_search_mode(false)}><ArrowLeft /></span>
 
-                    <div className="df aic gap05 wfp fx1">
-                       
-                        <div className="df aic gap03 pdy06 bd bdrds pdl05 xbg wfp xbg" onClick={() => set_search_mode(true)} style={{ borderColor: '#6e70faff', color: 'black', borderWidth: '2px', background:'#ffffffff' }}>
-                            <span className="df aic pdx02 pdy02" ><Search /></span>
-                            <style jsx>{`
+                        <div className="df aic gap05 wfp fx1">
+                            <div className="df aic gap03 pdy06 bd bdrds pdl05 xbg wfp xbg" onClick={() => set_search_mode(true)} style={{ borderColor: '#6e70faff', color: 'black', borderWidth: '2px', background: '#ffffffff' }}>
+                                <span className="df aic pdx02 pdy02" ><Search /></span>
+                                <style jsx>{`
                             .focus-border{
                             border:2px solid black !important;
                             }
                             `}</style>
-                            <style>{`.search-animation-container {
+                                <style>{`.search-animation-container {
 
     overflow: hidden;
 }
@@ -153,30 +154,39 @@ export default function Topbar_() {
     transform: translateY(0);
 }
 `}</style>
-                            <div className="fx1 df aic gap03 " style={{ borderColor: '#323232' }}>
-                                <input type="text" autoFocus="true" placeholder="Search dishes, food.." className="bdn font1 font600" style={{outline:'none', background:'transparent'}}/> 
-                                {/* <span>Search </span>
-
-                                <div className="search-animation-inner">
-                                    {searchTexts.map((text, i) => (
-                                        <div
-                                            key={i}
-                                            className={`search-item ${i === currentIndex ? 'active' : ''}`} style={{ color: '#5e5e5eff' }}
-                                        >
-                                            <b>{text}</b>
-                                        </div>
-                                    ))}
-                                </div> */}
-
+                                <div className="fx1 df aic gap03 " style={{ borderColor: '#323232' }}>
+                                    <input type="text" autoFocus="true" placeholder="Search dishes, food.." className="wfp bdn font1 font600" id="search-input" style={{ outline: 'none', background: 'transparent' }} onChange={(e) => set_searchText(e.target.value)} />
+                                </div>
+                                <span className="df" style={{ visibility: searchText === "" && 'hidden' }} onClick={(e) => { document.querySelector('#search-input').value = ""; set_searchText("") }}><Icon.close fill="#414141ff" /></span>
+                                <span className="df aic pdx051 pdy02 mgr02" ><Mic size={22} className="mgx05" /></span>
                             </div>
-                            <span className="df aic pdx05 pdy02 mgr02" ><Mic size={22} className="mgx05" /></span>
                         </div>
-                    </div>
-                </div>
-                </>
-                )
 
-        } else { set_dynamics_portal_ab(null) }
+                    </div>
+                    <div className="hfp">
+
+                       {searchText? <>
+                            <div className="df aic pdx05 pdt08 font-sm font500 gap05 ox" style={{ scrollbarWidth: 'none' }}>
+                                <span className="df aic"><Filter size={15} /> Filters</span> |
+                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
+                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
+                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
+                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
+                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
+                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
+                            </div>
+                            <div className="df fd-c">
+                                <div className="df aic gap05 pdx05 pdy2 bdb"><Search /><div className="font600">{searchText}<span className="font800" style={{ color: '#6e70faff' }}> See all result</span></div></div>
+                            </div>
+                        </>:
+                        <div className="df aic jcc"><span className="font900 font2 tac df fd-c aic gap05 mgt9"><SearchSlash size={50}/> Search by mood ^v^</span></div>
+                        }
+
+                    </div>
+                </>
+            )
+
+        } else { set_dynamics_portal_ab(null); set_searchText(""); }
 
         set_top_bar_(<Topbar
             l={
@@ -205,9 +215,9 @@ export default function Topbar_() {
 
                         <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
                             {usr ?
-                                <span className="oh font07 font500 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+                                <Link href="/account/address_book" className="oh font07 font500 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
                                     <span className="font900 font09 df aic"><House className="pdx01" size={19.19} fill="black" />Home<ChevronDown size={18} /></span> Sigra abc colony, Varanasi 221010
-                                </span>
+                                </Link>
 
                                 : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
                                     color: '#673AB7',
@@ -220,7 +230,8 @@ export default function Topbar_() {
             }
         />)
 
-    }, [device, search_mode, pathname, usr])
+
+    }, [device, search_mode, pathname, usr, searchText])
 
     const searchTexts = [
         "Pizza..",
@@ -243,11 +254,11 @@ export default function Topbar_() {
             {device === "mobile" &&
 
 
-                <div className="df fd-c pdy09 pdx1 gap1 pS" style={{ top: 0 }}
+                <div className="df fd-c pdy09 pdx09 gap1 pS" style={{ top: 0 }}
                 // style={{ background: '#b1261cff', color:'white' }}  
                 >
                     {top_bar_}
-                    <div className="df aic gap03 pdy05 bdTrds bdBrds pdl05 xbg" onClick={() => set_search_mode(true)} style={{ color: 'black', borderWidth: '2px', background:'#e7ebffff'}}>
+                    <div className="df aic gap03 pdy06 bdArds pdl05 xbg oh" onClick={() => set_search_mode(true)} style={{display:'hidden', color: 'black', borderWidth: '2px', background: '#e7ebffff', borderRadius: '2rem' }}>
                         <span className="df aic pdx02 pdy02" ><Search /></span>
                         <style>{`.search-animation-container {
 

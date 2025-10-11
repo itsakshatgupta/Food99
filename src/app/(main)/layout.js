@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
           @media (max-width: 720px) {
             body {
               background: whitesmoke;
+              overflow-x:hidden;
             }
           }
           .nav-menu-active{
