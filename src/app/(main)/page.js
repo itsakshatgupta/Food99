@@ -582,7 +582,7 @@ export default function branches() {
             }
             let f = filterMenuSmart(
                 {
-                    menuData: menu_dummy,
+                    menuData: menu___i,
                     rawFilters: food_filter_data,
                     activeFilters: food_filter, // "Price < 150" and "Chilly"
                     compareMap: { name: "ct", tags: "tag", price: "price_range", items: "ct" },
