@@ -26,6 +26,8 @@ export default function branches() {
 
     const [sildeshow_data, set_slideshow_data] = useState([]);
     const [sildeshow_current, set_slideshow_current] = useState(0);
+    const [sildeshow_next, set_slideshow_next] = useState(1);
+    const [sildeshow_isAnimating, set_slideshow_isAnimating] = useState(false);
     const [sildeshow_content, set_slideshow_content] = useState(<h1>Hii</h1>);
     const [sildeshow_TI, set_slideshow_TI] = useState(null);
     const [sildeshow_dots, set_slideshow_dots] = useState(null);
@@ -96,50 +98,171 @@ export default function branches() {
     </>
 
     const mobile_banner = <>
-        <div className="mgx05" style={{ color: 'white' }}>
-            <div className="df aic ox gap1">
+        <div className="" style={{ color: 'white' }}>
+            <div className="df aic gap1 pR ybg" style={{ height: '250px' }}>
 
+                <style>{`
+                          .w100{
+                          min-width:100%;
+                          }
+                .op0{
+                opacity:0;
+                }
+                .inward{
+                display:block;
 
+                left:calc(100% + 1rem);
+                    animation:inward_ 0.6s linear;
 
-                <div className="df aic pR oh bdrds wfp">
-                    {sildeshow_content}
+                }
+                @keyframes inward_{
+                // opacity:1 ;
+                    0%{
+                        left:calc(100%);
+                    }
+                    100%{
+// opacity:0;
+                    left:0%;
+                    }
+                    }
+                    
+                .outward{
+                                        // opacity:0;
+                    animation:outward_ 0.6s linear;
+
+                }
+                @keyframes outward_{
+                    0%{
+                                        // opacity:1;
+                    left:0%;
+                        }
+                    100%{
+                    opacity:0;
+                    left:calc(-100%);
+                    }
+                    }
+
+                .inward-l{
+                display:block;
+                
+                    animation:inward-l_ 0.6s linear;
+
+                }
+                @keyframes inward-l_{
+                    0%{
+                    left:calc(-100% );
+                        }
+                    100%{
+                // display:none;
+
+                    left:0;
+               
+                    }
+                    }
+                .outward-r{
+                    // opacity:0;
+
+                    animation:outward-r_ 0.6s linear;
+
+                }
+                @keyframes outward-r_{
+                    0%{
+                    // opacity:1;
+                    left:0%;
+                        }
+                    100%{
+                    opacity:0;
+                    left:calc(100% );
+                    }
+                    }
+
+                
+                `}</style>
+
+                <div className={`${sildeshow_isAnimating ? sildeshow_direction === 'right' ? 'outward' : 'outward-r' : ''} pA wfp pdx05 C`} style={{ zIndex: 1 }}>
+                    <div className="pR oh bdrds">
+                        {sildeshow_data[sildeshow_current]}
+                    </div>
                 </div>
+
+                <div className={`${sildeshow_isAnimating ? sildeshow_direction === 'right' ? 'inward' : 'inward-l' : ''} pA wfp pdx05 N `}>
+                    <div className="pR oh bdrds">
+                        {sildeshow_data[sildeshow_next]}
+                    </div>
+                </div>
+
+
+
 
 
             </div>
             <div className="df aic jcsb mgt06" style={{ justifyContent: 'space-evenly' }}>
                 <ChevronLeftCircle color='#E91E63' onClick={(e) => {
-
                     e.preventDefault();
-                    set_slideshow_current((prev) => {
-                        let l = sildeshow_data.length - 1;
-                        let reg_incresment = prev !== 0 ? prev - 1 : l - 1;
+                    if (sildeshow_TI) clearTimeout(sildeshow_TI);
+                    set_slideshow_direction('left');
+                    set_slideshow_isAnimating(true);
+
+                    if (sildeshow_current === 0) {
+
+                        set_slideshow_next(sildeshow_data.length - 1)
+                    } else {
+
+                        set_slideshow_next(sildeshow_current - 1);
+                    }
 
 
-                        return reg_incresment <= l ? reg_incresment : 0;
+                    setTimeout(() => {
+                        if (sildeshow_current === 0) {
 
+                            set_slideshow_current(sildeshow_data.length - 1)
+                        } else {
 
-                    })
+                            set_slideshow_current(sildeshow_current - 1);
+                        }
+
+                        set_slideshow_isAnimating(false);
+                    }, 600)
+
                 }} />
                 <style>{`.more- span{
                     padding: 4px;
                     background: #dadada;
                     border-radius: 100%;
-                }`}</style>
+                    }`}</style>
                 <div className='df aic gap08 more-'>
                     {sildeshow_dots}
                 </div>
                 <ChevronRightCircle color='#E91E63' onClick={(e) => {
                     e.preventDefault();
-                    set_slideshow_current((prev) => {
-                        let l = sildeshow_data.length;
-                        let reg_incresment = prev + 1;
-                        console.log(reg_incresment > l, reg_incresment, l, reg_incresment);
+                    if (sildeshow_TI) clearTimeout(sildeshow_TI);
+                    set_slideshow_direction('right');
 
-                        return reg_incresment <= l - 1 ? reg_incresment : 0;
+                    set_slideshow_isAnimating(true);
+
+                    if (sildeshow_current === sildeshow_data.length - 1) {
+
+                        set_slideshow_next(0)
+                    } else {
+
+                        set_slideshow_next(sildeshow_current + 1);
+                    }
 
 
-                    })
+                    setTimeout(() => {
+                        if (sildeshow_current  === sildeshow_data.length - 1) {
+
+                            set_slideshow_current(0)
+                        } else {
+
+                            set_slideshow_current(sildeshow_current + 1);
+                        }
+
+                        set_slideshow_isAnimating(false);
+                    }, 600)
+
+
+
                 }} />
 
             </div>
@@ -304,97 +427,95 @@ export default function branches() {
         { f_name: 'Chef Choice', f_logo: <ThumbsUp size="1.175rem" fill="white" />, f_property: { f_type: 'tag', f_action: 'chef choice' } },
         { f_name: 'Rated 5+', f_logo: <Star size="1.175rem" fill="white" />, f_property: { f_type: 'ct', f_action: 'pizza' } },
     ]
+    // useEffect(() => {
+    //     set_slideshow_content(<>
+    //         <style>{`
+    //             .go_from_right{
+    //                 animation:gfr 5s linear;
+
+    //             }
+    //             @keyframes gfr{
+    //                 0%{
+    //                 right:0px;
+    //                     }
+    //                 100%{
+    //                 right:-50px;
+    //                 }
+    //                 }
+
+    //             .come_from_right{
+
+    //                 animation:cfr 5s linear;
+
+    //             }
+    //             @keyframes cfr{
+    //                 0%{
+    //                 right:-50px;
+    //                     }
+    //                 100%{
+    //                 right:0
+    //                 }
+    //                 }
+
+    //             .go_from_left{
+    //                 animation:gfl 5s linear;
+    //             }
+    //             @keyframes gfl{
+    //                 0%{
+    //                 left:0px;
+    //                     }
+    //                 100%{
+    //                 left:-50px
+    //                 }
+    //                 }
+
+    //             .come_from_left{
+    //                 animation:cfl 5s linear;
+    //             }  
+    //             @keyframes cfl{
+    //                 0%{
+    //                 left:-50px;
+    //                     }
+    //                 100%{
+    //                 left:0
+    //                 }
+    //                 }
+
+    //             `}</style>
+    //         <div className={`${sildeshow_isAnimating ? 'go_from_left come_from_right' : 'go_from_right come_from_left'} pR wfp`}>{sildeshow_data[sildeshow_current]}</div>
+
+    //         <div className={`${sildeshow_isAnimating ? 'go_from_left come_from_right' : 'go_from_right come_from_left'} pR wfp`}>{sildeshow_data[sildeshow_next]}</div>
+
+    //     </>);
+    // }, [])
+
     useEffect(() => {
-        const old_i = sildeshow_current===0?2:sildeshow_current-2
-
-        console.log('iop:', sildeshow_data[sildeshow_current]);
-        set_slideshow_content(<>
-                        <style>{`
-                .go_from_right{
-                    animation:gfr 5s linear;
-
-                }
-                @keyframes gfr{
-                    0%{
-                    right:0px;
-                        }
-                    100%{
-                    right:-50px;
-                    }
-                    }
-
-                .come_from_right{
-                   
-                    animation:cfr 5s linear;
-
-                }
-                @keyframes cfr{
-                    0%{
-                    right:-50px;
-                        }
-                    100%{
-                    right:0
-                    }
-                    }
-
-                .go_from_left{
-                    animation:gfl 5s linear;
-                }
-                @keyframes gfl{
-                    0%{
-                    left:0px;
-                        }
-                    100%{
-                    left:-50px
-                    }
-                    }
-
-                .come_from_left{
-                    animation:cfl 5s linear;
-                }  
-                @keyframes cfl{
-                    0%{
-                    left:-50px;
-                        }
-                    100%{
-                    left:0
-                    }
-                    }
-                
-                `}</style>
-            <div className={`${sildeshow_direction==='right'&&sildeshow_current>=old_i?'go_from_left come_from_right':'go_from_right come_from_left'} pR wfp`}>{sildeshow_data[sildeshow_current]}</div>
-
-            <div className={`${sildeshow_direction==='right'&&sildeshow_current<=old_i?'go_from_left come_from_right':'go_from_right come_from_left'} pR wfp`}>{sildeshow_current!==0?sildeshow_data[sildeshow_current-1]:sildeshow_data[1]}</div>
-            
-        </>);
-        console.log(sildeshow_content, '::::::11')
-                set_slideshow_dots(<>
-            {sildeshow_data.map((element, i) => 
-                 <span style={{ background: sildeshow_current === i && '#E91E63' }}></span>
+        set_slideshow_dots(<>
+            {sildeshow_data.map((element, i) =>
+                <span style={{ background: sildeshow_current === i && '#E91E63' }}></span>
 
             )}
         </>)
-    console.log('old_i:',  sildeshow_current===0?2:sildeshow_current-1, sildeshow_current)
+
     }, [sildeshow_current, sildeshow_data])
+
     useEffect(() => {
-        set_slideshow_current(0);
         if (sildeshow_TI) clearTimeout(sildeshow_TI);
 
         set_slideshow_TI(
             setInterval(() => {
-                set_slideshow_current((prev) => {
-                    let l = sildeshow_data.length;
-                    let reg_incresment = prev + 1 >= l ? 0 : prev + 1
-                    console.log(reg_incresment > l, reg_incresment, l, reg_incresment);
+                set_slideshow_isAnimating(true);
+                set_slideshow_direction('right');
+                setTimeout(() => {
+                    set_slideshow_current(sildeshow_next);
+                    set_slideshow_next((sildeshow_next + 1) % sildeshow_data.length);
+                    set_slideshow_isAnimating(false);
+                }, 600)
+            }
+                , 5000)
+        )
+    }, [sildeshow_data.length, sildeshow_next])
 
-                    return reg_incresment;
-
-
-                })
-            }, 5000))
-
-
-    }, [sildeshow_data])
     useEffect(() => {
         if (filter_bar.current) {
             const top_header_height = top_header.current?.offsetHeight;
