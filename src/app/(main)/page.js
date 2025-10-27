@@ -8,35 +8,19 @@ import { Icon } from '@/components/lib/icons';
 import Image from 'next/image';
 import { Cart_Control_Direct, Cart_Control_Indirect } from '@/components/lib/cart_control';
 import Topbar_ from '@/components/topbar_/topbar';
-<<<<<<< HEAD
-import { BookOpen, ChevronLeftCircle, ChevronRightCircle, ChevronRight, ChevronDown, ChevronUp, CircleArrowDown, Cross } from 'lucide-react';
-=======
 import { BookOpen, ChevronLeftCircle, ChevronRightCircle, ChevronRight, ChevronUp, CircleArrowDown, Search, Mic, ChevronDown, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, Mic2, Verified, Smile, Star, Pizza, PizzaIcon, LucidePizza, ForkKnife, ThumbsUp, Stars, Clock, Clock7, Clock3 } from 'lucide-react';
->>>>>>> master
 import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
 import { mutate } from 'swr';
-<<<<<<< HEAD
-import { menu } from '@/components/dummy_data';
-=======
 import { menu, menu_dummy } from '@/components/dummy_data';
 import dynamic from 'next/dynamic';
->>>>>>> master
 
 
 
 export default function branches() {
 
 
-<<<<<<< HEAD
-    const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option } = useContext(dynamic_);
-    const { menu___i } = useContext(menu_);
-
-    const top_header = useRef(null);
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [menuLister, set_menuLister] = useState(false)
-=======
     const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option, set_dynamics_portal_ab } = useContext(dynamic_);
     const { menu___i } = useContext(menu_);
 
@@ -61,7 +45,6 @@ export default function branches() {
 
     const [searchText, set_searchText] = useState("")
 
->>>>>>> master
 
     const banner_ = <>
         <div className="df jcsb wfp hfp" style={{ background: '#f1f8e9' }}>
@@ -115,38 +98,6 @@ export default function branches() {
     </>
 
     const mobile_banner = <>
-<<<<<<< HEAD
-        <div className="mgx05" style={{
-            color: 'white'
-        }}><div className="df aic pR oh bdrds">
-                <div className="wfp df jcsb aic pA font700 pd05"
-                    style={{
-                        color: '#ffffff',
-                        top: 0,
-                        background: 'linear-gradient(0deg, transparent, #000000)'
-                    }}
-                ><span className='font-lg'>New Launch</span><span className='pdx04' style={{
-                    color: '#ffffff',
-                    background: 'crimson'
-                }}>Order Now</span></div>
-                <Image
-                    src="/static-img/the-pepperoni-pizza-and-a-piece-of-streched-cheese-pizza-with_22994042.jpg"
-                    height={210}
-                    width={600}
-                    style={{ width: "100%" }}
-                    alt='pizza-ad'
-                />
-                <div className="wfp df jcsb aic pA font700 pdy03 pdx05"
-                    style={{
-                        color: '#ffffff',
-                        bottom: 0,
-                        background: 'linear-gradient(to right, #181818, rgb(0 0 0 / 0%) 100%)'
-                    }}
-                ><span className='font-md'>Pepronie pizza@159</span></div>
-            </div>
-            <div className="df aic jcsb mgt06" style={{ justifyContent: 'space-evenly' }}>
-                <ChevronLeftCircle color='#E91E63' />
-=======
         <div className="" style={{ color: 'white' }}>
             <div className="df aic gap1 pR ybg" style={{ height: '250px' }}>
 
@@ -274,20 +225,10 @@ export default function branches() {
                     }, 600)
 
                 }} />
->>>>>>> master
                 <style>{`.more- span{
                     padding: 4px;
                     background: #dadada;
                     border-radius: 100%;
-<<<<<<< HEAD
-                }`}</style>
-                <div className='df aic gap08 more-'>
-                    <span style={{ background: '#E91E63' }}></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <ChevronRightCircle color='#E91E63' />
-=======
                     }`}</style>
                 <div className='df aic gap08 more-'>
                     {sildeshow_dots}
@@ -323,7 +264,6 @@ export default function branches() {
 
 
                 }} />
->>>>>>> master
 
             </div>
         </div>
@@ -452,11 +392,7 @@ export default function branches() {
   to { transform: translateY(0); opacity: 1; }
 }`}
         </style>
-<<<<<<< HEAD
-        <div className="df fd-c xbg_ bdBrds pR pS" style={{ background: 'linear-gradient(180deg, whitesmoke, #e9e9e9ff))_', top: '131.56px' }}>
-=======
         <div className="df fd-c xbg_ bdBrds pR pS" id="m-container-2" style={{ background: 'linear-gradient(180deg, whitesmoke, #e9e9e9ff))_', top: '131.56px' }}>
->>>>>>> master
 
             <div className='df aic font600 font08 pdx1' style={{ justifyContent: 'flex-end' }} ><span className='df aic bdTrds bdBrds pd03 ' style={{ background: 'orange_' }}><Icon.restart s={22} /> Reorder</span></div><div className="df animated-header oh">
                 <div className="fx1">
@@ -482,8 +418,6 @@ export default function branches() {
 
     </>
 
-<<<<<<< HEAD
-=======
     const food_filter_data = [
         { f_name: '5 min', f_logo: <Clock3 size="1.175rem" />, f_property: { f_type: 'tag', f_action: '5min' } },
         { f_name: 'Recommended', f_logo: <Verified size="1.175rem" fill="white" />, f_property: { f_type: 'tag', f_action: 'recommended' } },
@@ -732,22 +666,12 @@ export default function branches() {
         // }
     }, [food_filter])
 
->>>>>>> master
     useEffect(() => {
 
         set_floaters((prev) => [{
             name: 'menu-btn', child:
                 <>
                     <div className='df aic jcc pd05 pR' id="lsn-2" style={{ zIndex: 1 }}>
-<<<<<<< HEAD
-                        <span className="font600 bdBrds bdTrds font-md pdx07 pdy04 df aic gap02" style={{
-                            background:'black',
-                            color:'white',
-                            boxShadow: !menuLister&&'0 0 12px 1px #b2b2b2',
-                            border:'1px solid black',
-                            transition:'all 0.5sec'
-                        }} onClick={(e) => { if (menu___i) { menuLister ? set_menuLister(false) : set_menuLister(true) } }}><ChevronDown fill='black' color='white' size={25} style={{transition:'all 0.6s ease', transform:menuLister&&'rotate(180deg)'}}/><b>Menu</b></span>
-=======
                         <span className="font600 bdBrds bdTrds font1 pdx08 pdy04 df aic gap01" style={{
                             background: 'black',
                             color: 'white',
@@ -756,7 +680,6 @@ export default function branches() {
                             borderRadius: '2rem',
                             transition: 'all 0.5sec'
                         }} onClick={(e) => { if (menu___i) { menuLister ? set_menuLister(false) : set_menuLister(true) } }}><ChevronDown fill='black' color='white' size={22} style={{ transition: 'all 0.6s ease', transform: menuLister && 'rotate(180deg)' }} /><b>Menu</b></span>
->>>>>>> master
                     </div>
 
                     {menuLister && <div className='menu-list'> <>
@@ -790,11 +713,7 @@ export default function branches() {
     }
             }
                         `}</style>
-<<<<<<< HEAD
-                        <div className="menu_list bdTrds bdBrds oh pA mgy2 bd" style={{ background: '#323232', color: 'white', placeSelf: 'center', bottom: 0, borderColor:'black' }}>
-=======
                         <div className="menu_list bdTrds bdBrds oh pA mgy2 bd" style={{ background: '#323232', color: 'white', placeSelf: 'center', bottom: 0, borderColor: 'black' }}>
->>>>>>> master
                             <div className="df fd-c aic gap08 pdy08 hfp oy pdb1">
                                 {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy01" key={i}><div className="df aic gap02"><span className="font500">{v.name}</span></div><span>{v.items.length}</span></div>)}
                             </div>
@@ -813,8 +732,6 @@ export default function branches() {
     }, [menu___i, menuLister])
 
     useEffect(() => {
-<<<<<<< HEAD
-=======
 
         if (search_mode) {
             set_dynamics_portal_ab(
@@ -1030,44 +947,10 @@ export default function branches() {
     }, [device, search_mode, usr, searchText])
 
     useEffect(() => {
->>>>>>> master
         console.log(menu___i);
 
         if (cart__i && cart__i?.items.length > 0) {
             set_floaters((prev) => [...prev, {
-<<<<<<< HEAD
-                name: 'f1', child: 
-                <div className='pd05'>
-                <div className='df fd-c ybg bdrds oh' style={{ alignItems: 'flex-end', background: '#5f54f8ff', color: 'white', boxShadow:'0 0 5px 1px #999999ff' }}>
-                    <div className='pdx05 pdy02 font800 font-lg df aic wfp'><span className='font-sm font700'>Add item worth 99 and get 50% flat discount</span>
-                    </div>
-                    <div className="pS pd05l jcsb wfp oh bdrds bd" style=
-                        {{ bottom: 0, color: 'black' }}>
-                        <div className="df fd-c aic jcsb gap05 pdy08 pdx08 xbg" style={{
-                             background: 'whitesmoke',
-                            color: 'wheat1'
-                        }}>
-                            <div className='df aic jcsb wfp'>
-                                <span className="font700 font-md df aic">{cart__i?.items.length}  Items Added</span>
-                                <Link href='/cart' className='pdx2 pdy09 font-lg font900 bdrds xfg' style={{ background: 'forestgreen', color: 'white' }}>Checkout</Link>
-                            </div>
-
-                            {/* <Link href='/cart' style={{
-                                borderRadius: '10px',
-                            }}
-                                className="font700 font-md df aic">{cart__i?.items.length} Items Added <ChevronRight className="mgl05" size={22} style={{
-                                    color: 'forestgreen',
-                                    background: 'white',
-                                    borderRadius: '100%'
-                                }} />
-                            </Link> */}
-
-
-                        </div>
-                    </div>
-                </div>
-                </div>
-=======
                 name: 'f1', child:
                     <div className='pd05'>
                         <div className='df xbg fd-c bdrds oh' style={{
@@ -1127,7 +1010,6 @@ export default function branches() {
                             </div>
                         </div>
                     </div>
->>>>>>> master
             }]);
         };
 
@@ -1139,14 +1021,6 @@ export default function branches() {
         };
     }, [cart__i])
 
-<<<<<<< HEAD
-    const menu = useMemo(() => {
-        return menu___i?.map((categories) => {
-            console.log('ccc', cart__i)
-            if (categories.items.length >= 1) {
-                return (
-                    <div className="bdrds mgx05 mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
-=======
     useEffect(() => {
         if (food_filter.length === 0) {
             set_menu_filtered(null);
@@ -1161,7 +1035,6 @@ export default function branches() {
             if (categories.items.length >= 1) {
                 return (
                     <div className="bdrds mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
->>>>>>> master
                         <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
                         <div className={` catg df fd-c fxw`} style={{ gap: '1.2rem' }}>
 
@@ -1183,16 +1056,6 @@ export default function branches() {
                                                 }
                                                 }`}
                                             </style>
-<<<<<<< HEAD
-                                            <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ boxShadow: '1px 0 10px 1px #f7f7f7ff' }}>
-                                                <div className="pdr06">
-                                                    <div className="df" style={{ alignItems: 'flex-start' }}>
-                                                        <span className="mgl01 font-lg font700">{menu_items.name}</span>
-                                                        <span className="pdx02 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
-                                                    </div>
-                                                    <div className="df aic pdt02 pdx02 gap02">
-                                                        <span className="pdx03 pdy01 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.7rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 -960 960 960" width="0.8rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
-=======
                                             <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ border: '1px solid lightgray' }}>
                                                 <div className="pdr06 df fd-c gap05">
                                                     <div className="df" style={{ alignItems: 'flex-start' }}>
@@ -1209,7 +1072,6 @@ export default function branches() {
                                                         )}
                                                     </div>
                                                     <span className="font-sm font500">{menu_items.price}</span>
->>>>>>> master
                                                     <div className="font-sm font500 pdt05">{menu_items.description}</div>
                                                 </div>
                                                 <div>
@@ -1304,11 +1166,7 @@ export default function branches() {
         }
 
         )
-<<<<<<< HEAD
-    }, [menu___i, cart__i])
-=======
     }, [menu___i, cart__i, menu_filtered])
->>>>>>> master
 
     useEffect(() => {
         console.log('func-init-eft', document.querySelector('.qqqXA'), top_header.current)
@@ -1340,8 +1198,6 @@ export default function branches() {
         };
     }, [menu___i]);
 
-<<<<<<< HEAD
-=======
     useEffect(() => {
         // getting and setting the slideshow content data from sever..
         let contentList = [
@@ -1445,7 +1301,6 @@ export default function branches() {
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
->>>>>>> master
     return (<>
         {/* <style>{`#topbar{box-shadow: 0px 3px 4px 0px #eaeaea82;}`}</style> */}
         <style>{`
@@ -1491,19 +1346,6 @@ export default function branches() {
                 }
                 `}
         </style>
-<<<<<<< HEAD
-        {console.log(menu___i)}
-        {device === 'mobile' && menu___i ?
-            <>
-                <div className="pA wfp" style={{height:'280px', background:'linear-gradient(to bottom, #8ba1ffff, #d2afffff)', top:0}}></div>
-                
-                <div className={`${isScrolled && "xbg_ bdBrds bdb pdb01"} topbar-container pS `} style={{ top: 0, zIndex: 2, backdropFilter: 'blur(1px)', background: isScrolled?'white':'transparent', borderColor:'#e9f1ffff', transition:'all 0.3s ease', boxShadow:isScrolled&&'0 1px 5px 1px #ecececff' }} ref={top_header}>
-                    <Topbar_ />
-                </div>
-                {mobile_animation_promo}
-                <div className='df fd-c xbg pR bdTrds bdt' style={{ zIndex: 1 }}>
-                    <div className="df fd-c gap1 mgy1 bdTrds oh xbg pdt05">
-=======
         {/* {console.log(menu___i)} */}
 
         <div className="pA wfp" style={{ height: '280px', background: 'linear-gradient(to bottom, #8ba1ffff, #d2afffff)', top: 0 }}></div>
@@ -1564,7 +1406,6 @@ export default function branches() {
             <>
                 <div className='df fd-c xbg pR bdTrds bdt' style={{ zIndex: 1 }}>
                     <div className="df fd-c gap1 mgy1 bdTrds oh xbg pdt05" id="m-container-user-focus-stuffs-1">
->>>>>>> master
                         <div className="df gap05 fx1 ox pdx05 sbn">
                             <span className="df fd-c aic gap02 font08 pdx05 pdy03">
                                 <Image
@@ -1651,30 +1492,6 @@ export default function branches() {
                         </div>
                         {mobile_banner}
                     </div>
-<<<<<<< HEAD
-                    <div className="df aic jcsb bdb pdx1 pdt1 pdb06 ybg gap3 ox pS " style={{
-                        scrollbarColor: '#f8f8f8 white',
-                        scrollbarWidth: 'none',
-                        top: usr ? '129px' : '124px',
-                        zIndex: 1,
-                        background: 'white',
-                        
-
-                    }}>
-                        <div className="df aic gap1 fx1">
-                            <span className="df aic gap02 font08 pdx05 pdy05 bd bdArds" style={{ background: '#000000ff', color: 'white', border: '1px solid black_' }}>
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#ffffffff" d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16.88 11.53C16.88 11.92 16.57 12.23 16.18 12.23C15.79 12.23 15.48 11.92 15.48 11.53V11.35L12.76 14.07C12.61 14.22 12.41 14.29 12.2 14.27C11.99 14.25 11.8 14.14 11.69 13.96L10.67 12.44L8.29 14.82C8.15 14.96 7.98 15.02 7.8 15.02C7.62 15.02 7.44 14.95 7.31 14.82C7.04 14.55 7.04 14.11 7.31 13.83L10.29 10.85C10.44 10.7 10.64 10.63 10.85 10.65C11.06 10.67 11.25 10.78 11.36 10.96L12.38 12.48L14.49 10.37H14.31C13.92 10.37 13.61 10.06 13.61 9.67C13.61 9.28 13.92 8.97 14.31 8.97H16.17C16.26 8.97 16.35 8.99 16.44 9.02C16.61 9.09 16.75 9.23 16.82 9.4C16.86 9.49 16.87 9.58 16.87 9.67V11.53H16.88Z"></path> </g>
-                                </svg>
-                                <span className="font800 df aic">Pizza <span className="df aic mgl02 ybg bdArds pd01" style={{ background: 'black' }}><Icon.close s="16px" fill="white"/></span>
-                                </span></span>
-                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bdArds" style={{ background: '#f4f3ffff', border: '1px solid 5f54f8ff' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg><span className="font600">Recommended</span></span>
-                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bdArds" style={{ background: '#f4f3ffff', border: '1px solid 5f54f8ff' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600">Trending</span></span>
-                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bdArds" style={{ background: '#f4f3ffff', border: '1px solid 5f54f8ff' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600">Chilly</span></span>
-                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bdArds" style={{ background: '#f4f3ffff', border: '1px solid 5f54f8ff' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600 wmc">Chef Choice</span></span>
-                            <span className="df aic gap02 font08 pdl02 pdr05 pdy05 bdArds" style={{ background: '#f4f3ffff', border: '1px solid 5f54f8ff' }}><svg className="" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font600 wmc">Rated 5+</span></span>
-
-                            <span className="df"><svg className="dn" xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#000000"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z" /></svg></span>
-=======
                     <div className="df aic jcsb bdb pdx1 pdb08 ybg gap3 ox pS " style={{
                         scrollbarColor: '#f8f8f8 white',
                         scrollbarWidth: 'none',
@@ -1704,7 +1521,6 @@ export default function branches() {
                             )}
 
 
->>>>>>> master
                         </div>
                     </div>
 
@@ -1714,11 +1530,7 @@ export default function branches() {
                     <div className="fx1" style={{
                         scrollbarColor: '#e7e7e7ff white',
                         scrollbarWidth: 'thin',
-<<<<<<< HEAD
-                        background: 'whitesmoke',
-=======
                         background: 'whitesmoke_',
->>>>>>> master
                         paddingBlockEnd: `${floaters ? '150px' : 0}`
                     }}>
 
