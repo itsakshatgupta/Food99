@@ -13,7 +13,11 @@ import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
 import useSWR from "swr";
 import { apiFetch } from '@/app/(api)/api';
+<<<<<<< HEAD
 import { menu_dummy, cart } from './dummy_data';
+=======
+import { menu_dummy, cart, cart__ } from './dummy_data';
+>>>>>>> master
 
 // ✅ one shared fetcher
 const fetcher = async (url) => {
@@ -23,11 +27,19 @@ const fetcher = async (url) => {
     // const ready = res_json.push({status:res_status})
     console.log(':::', res.status)
     console.log(':::', res_json)
+<<<<<<< HEAD
     if(res.status===200){
         return res_json;
     }else{
         return null
     } 
+=======
+    if (res.status === 200) {
+        return res_json;
+    } else {
+        return null
+    }
+>>>>>>> master
 };
 
 export const dynamic_ = createContext();
@@ -101,9 +113,14 @@ export default function MainContext({ device, children }) {
 
     });
 
+<<<<<<< HEAD
     // const usr = true
     // const menu___i = menu_dummy
     // const cart__i = cart
+=======
+
+    // const [ usr, menu___i, cart__i ]= [ true, menu_dummy, cart]
+>>>>>>> master
 
 
     useEffect(() => {
@@ -190,13 +207,21 @@ export default function MainContext({ device, children }) {
             {device === 'mobile' && <>
                 <menu_.Provider value={{ menu___i }}>
                     <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option }}>
+<<<<<<< HEAD
                         <div className="hfp wfp df fd-c" style={{ alignContent: 'space-between'}}>
+=======
+                        <div className="hfp wfp df fd-c" style={{ alignContent: 'space-between' }}>
+>>>>>>> master
                             <main className="main fx1" ref={mainRef} >
                                 <div className="hfp oy1 oh1" >
                                     {children}
                                 </div>
                             </main>
+<<<<<<< HEAD
                             <div className="wfp" style={{ position: 'fixed', bottom: 0, zIndex:1 }} ref={floaterRef}>
+=======
+                            <div className="wfp" style={{ position: 'fixed', bottom: 0, zIndex: 1 }} ref={floaterRef}>
+>>>>>>> master
                                 <div className='containers-area pR' >
                                     <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}
                                     </div>
@@ -211,17 +236,32 @@ export default function MainContext({ device, children }) {
                                     }
                                 </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
                                 <lowscreen-nav className="dn df1 bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2, ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
                                     {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
                                     <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
                                         <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="dfl dn fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="dfl dn fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                                     </div>
                                 </lowscreen-nav>
+<<<<<<< HEAD
                                     
                             </div>
                         </div>
                         {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA xbg wfp oh' style={{ top: 0, zIndex: 100, height:'100vh' }}>{dynamic_portal_ab}</div> : null}
+=======
+
+                            </div>
+                        </div>
+                        {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA xbg wfp oh' style={{
+                            top: 0,
+                            zIndex: 100,
+                            height: '100vh',
+                            // maxHeight:'fit-content' 
+                        }}>{dynamic_portal_ab}</div> : null}
+>>>>>>> master
                     </dynamic_.Provider>
                 </menu_.Provider>
             </>
