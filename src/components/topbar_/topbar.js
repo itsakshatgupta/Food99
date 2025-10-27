@@ -1,12 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
-<<<<<<< HEAD
-import { Suspense, useContext, useEffect, useState } from "react";
-import { Box, Home, LogIn, MapPinHouse, Search, Shapes, UserCircle2, User2, UserCircle, Mic, ChevronDown, HomeIcon, House, ArrowLeft, Filter, Settings2, SearchX, SearchSlash } from 'lucide-react';
-=======
 import { useContext, useEffect, useState } from "react";
 import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory } from 'lucide-react';
->>>>>>> master
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -18,10 +13,7 @@ import Cart from "./cart";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Icon } from "../lib/icons";
-<<<<<<< HEAD
-=======
 import Image from "next/image";
->>>>>>> master
 export default function Topbar_() {
     const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr } = useContext(dynamic_);
     const [search_mode, set_search_mode] = useState(false)
@@ -108,11 +100,7 @@ export default function Topbar_() {
 
         if (search_mode) {
             set_dynamics_portal_ab(
-<<<<<<< HEAD
-                <>
-=======
                 <div className="hfp oy">
->>>>>>> master
                     <style>{`
                                .dropdowneffect{
                                overflow:hidden;
@@ -131,11 +119,7 @@ export default function Topbar_() {
                                }
                                }
                                `}</style>
-<<<<<<< HEAD
-                    <div className="df aic pdy1 pdx08 gap1 bdb dropdowneffect" style={{ background: 'ghostwhite', boxShadow: '0 2px 5px 1px #e9e9e9ff' }}
-=======
                     <div className="df aic pd08 gap1 xbg dropdowneffect pS" style={{ boxShadow: '0 0 5px 1px #a7a7a7ff', top: 0 }}
->>>>>>> master
                     //  Jng
                     >
 
@@ -180,29 +164,6 @@ export default function Topbar_() {
                         </div>
 
                     </div>
-<<<<<<< HEAD
-                    <div className="hfp">
-
-                       {searchText? <>
-                            <div className="df aic pdx05 pdt08 font-sm font500 gap05 ox" style={{ scrollbarWidth: 'none' }}>
-                                <span className="df aic"><Filter size={15} /> Filters</span> |
-                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
-                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
-                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
-                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
-                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
-                                <span className="bd bdrds font600 pdy03 pdx05" style={{ textWrap: 'nowrap', borderColor: 'black' }}>Price below 200</span>
-                            </div>
-                            <div className="df fd-c">
-                                <div className="df aic gap05 pdx05 pdy2 bdb"><Search /><div className="font600">{searchText}<span className="font800" style={{ color: '#6e70faff' }}> See all result</span></div></div>
-                            </div>
-                        </>:
-                        <div className="df aic jcc"><span className="font900 font2 tac df fd-c aic gap05 mgt9"><SearchSlash size={50}/> Search by mood ^v^</span></div>
-                        }
-
-                    </div>
-                </>
-=======
                     <div className="hfp" style={{ background: !searchText && "#f2f2ffff" }}>
 
                         {searchText ? <>
@@ -343,21 +304,15 @@ export default function Topbar_() {
 
                     </div>
                 </div>
->>>>>>> master
             )
 
         } else { set_dynamics_portal_ab(null); set_searchText(""); }
 
         set_top_bar_(<Topbar
-<<<<<<< HEAD
-            l={
-                <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Food<span>99</span></h4>
-=======
             l={<div className="font06 font700">
                 <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Yggimy</h4>
                 Food AttheRate
                 </div>
->>>>>>> master
             }
 
             r={
@@ -382,24 +337,15 @@ export default function Topbar_() {
 
                         <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
                             {usr ?
-<<<<<<< HEAD
-                                <Link href="/account/address_book" className="oh font07 font500 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-                                    <span className="font900 font09 df aic"><House className="pdx01" size={19.19} fill="black" />Home<ChevronDown size={18} /></span> Sigra abc colony, Varanasi 221010
-=======
                                 <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background:'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
                                     <span className="font900 font09 df aic"><House className="pdx01" size={18} fill="black" />Home<ChevronDown size={15} /></span> Sigra abc colony, Varanasi 221010
->>>>>>> master
                                 </Link>
 
                                 : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
                                     color: '#673AB7',
                                     background: '#EDE7F6'
                                 }}>Login</Link>}
-<<<<<<< HEAD
-                            {usr && <Link href="/account" className="df aic"> <svg version="1.1" id="Capa_1" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.532 45.532" stroke="#000000ff" fill="black"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765 S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53 c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012 c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592 c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path> </g> </g></svg> </Link>}
-=======
                             {usr && <Link href="/account" className="df aic fd-c font07 font600 gap01"> <svg version="1.1" id="Capa_1" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.532 45.532" stroke="#000000ff" fill="black"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765 S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53 c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012 c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592 c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path> </g> </g></svg> You</Link>}
->>>>>>> master
                         </div>
                     </div>
                 </>
@@ -407,84 +353,15 @@ export default function Topbar_() {
         />)
 
 
-<<<<<<< HEAD
-    }, [device, search_mode, pathname, usr, searchText])
-
-    const searchTexts = [
-        "Pizza..",
-        "Burgers..",
-        "Panner handi.."
-    ];
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    // Set up the interval to change text every 2 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % searchTexts.length);
-        }, 2000);
-
-        return () => clearInterval(interval); // Cleanup on unmount
-    }, []);
-=======
     }, [device, search_mode, pathname, usr])
 
 
->>>>>>> master
 
     return (
         <>
             {device === "mobile" &&
 
 
-<<<<<<< HEAD
-                <div className="df fd-c pdy09 pdx09 gap1 pS" style={{ top: 0 }}
-                // style={{ background: '#b1261cff', color:'white' }}  
-                >
-                    {top_bar_}
-                    <div className="df aic gap03 pdy06 bdArds pdl05 xbg oh" onClick={() => set_search_mode(true)} style={{display:'hidden', color: 'black', borderWidth: '2px', background: '#e7ebffff', borderRadius: '2rem' }}>
-                        <span className="df aic pdx02 pdy02" ><Search /></span>
-                        <style>{`.search-animation-container {
-
-    overflow: hidden;
-}
-
-.search-animation-inner {
-    height: 24px; /* adjust as needed */
-}
-
-.search-item {
-    position: absolute;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.5s ease;
-}
-
-.search-item.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-`}</style>
-                        <div className="fx1 df aic gap03 bdr" style={{ borderColor: '#323232' }}>
-                            <span>Search </span>
-
-                            <div className="search-animation-inner">
-                                {searchTexts.map((text, i) => (
-                                    <div
-                                        key={i}
-                                        className={`search-item ${i === currentIndex ? 'active' : ''}`} style={{ color: '#5e5e5eff' }}
-                                    >
-                                        <b>{text}</b>
-                                    </div>
-                                ))}
-                            </div>
-
-                        </div>
-                        <span className="df aic pdx05 pdy02 mgr02" ><Mic size={22} className="mgx05" /></span>
-                    </div>
-                </div>
-
-=======
                 <Topbar
             l={<div className="font06 font700">
                 <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Yggimy</h4>
@@ -528,7 +405,6 @@ export default function Topbar_() {
                 </>
             }
         />
->>>>>>> master
             }
 
             {device === "pc" && <Topbar
