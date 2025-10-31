@@ -1170,7 +1170,7 @@ export default function branches() {
 
                                 <div className="w-full rounded-xl hover:shadow-md transition-all duration-300 bg-white overflow-hidden">
                                     {/* Product Image */}
-                                    <Link href={`/product/${product.slug}`} className="block relative w-full h-[150] oh">
+                                    <Link href={`/product/${product.slug}`} className="block relative w-full h-[150px] oh">
                                         <div className="pA hfp wfp xbg" style={{
                                             zIndex: 1,
                                             opacity: '0.3',
