@@ -8,7 +8,7 @@ import { Icon } from '@/components/lib/icons';
 import Image from 'next/image';
 import { Cart_Control_Direct, Cart_Control_Indirect } from '@/components/lib/cart_control';
 import Topbar_ from '@/components/topbar_/topbar';
-import { BookOpen, ChevronLeftCircle, ChevronRightCircle, ChevronRight, ChevronUp, CircleArrowDown, Search, Mic, ChevronDown, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, Mic2, Verified, Smile, Star, Pizza, PizzaIcon, LucidePizza, ForkKnife, ThumbsUp, Stars, Clock, Clock7, Clock3 } from 'lucide-react';
+import { BookOpen, ChevronLeftCircle, ChevronRightCircle, ChevronRight, ChevronUp, CircleArrowDown, Search, Mic, ChevronDown, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, Mic2, Verified, Smile, Star, Pizza, PizzaIcon, LucidePizza, ForkKnife, ThumbsUp, Stars, Clock, Clock7, Clock3, TruckElectric, Truck } from 'lucide-react';
 import { apiFetch } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import useSWR from "swr";
@@ -954,80 +954,80 @@ export default function branches() {
 
     }, [device, search_mode, usr, searchText])
 
-    useEffect(() => {
-        console.log(menu___i);
+    // useEffect(() => {
+    //     console.log(menu___i);
 
-        if (cart__i && cart__i?.items.length > 0) {
-            set_floaters((prev) => [...prev, {
-                name: 'f1', child:
-                    <div className='pd05'>
-                        <div className='df xbg fd-c bdrds oh' style={{
-                            alignItems: 'flex-end',
-                            //  background: '#5f54f8ff',
-                            background: '#ffffffff',
+    //     if (cart__i && cart__i?.items.length > 0) {
+    //         set_floaters((prev) => [...prev, {
+    //             name: 'f1', child:
+    //                 <div className='pd05'>
+    //                     <div className='df xbg fd-c bdrds oh' style={{
+    //                         alignItems: 'flex-end',
+    //                         //  background: '#5f54f8ff',
+    //                         background: '#ffffffff',
 
-                            color: '#3045ffff', boxShadow: '0 0 5px 1px #999999ff'
-                        }}>
-                            <div className='pdx05 pdy03 font800 font-lg df aic wfp gap02'>
+    //                         color: '#3045ffff', boxShadow: '0 0 5px 1px #999999ff'
+    //                     }}>
+    //                         <div className='pdx05 pdy03 font800 font-lg df aic wfp gap02'>
 
-                                <span className="df aic">
-                                    <svg height="18px" width="18px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
-                                        viewBox="0 0 512 512" space="preserve">
-                                        <path fill="#3045ffff" d="M255.999,512c-2.954,0-5.737-1.144-7.835-3.221l-47.332-46.876l-64.437,16.927
-	c-0.946,0.25-1.903,0.376-2.857,0.376c-4.984,0-9.387-3.374-10.709-8.205l-17.559-64.27L41,389.171
-	c-5.86-1.601-9.372-7.687-7.829-13.566l16.927-64.436L3.222,263.836c-4.272-4.319-4.272-11.349,0.002-15.67l46.875-47.331
-	l-16.927-64.437c-1.544-5.878,1.969-11.964,7.829-13.566l64.27-17.559l17.56-64.27c1.32-4.828,5.728-8.201,10.717-8.201
-	c0.952,0,1.909,0.125,2.843,0.371l64.442,16.927l47.333-46.877C250.265,1.145,253.048,0,255.999,0s5.734,1.145,7.835,3.223
-	l47.332,46.876l64.437-16.927c0.939-0.247,1.9-0.372,2.854-0.372c4.99,0,9.394,3.371,10.711,8.199l17.56,64.272l64.27,17.56
-	c5.86,1.601,9.372,7.687,7.829,13.566l-16.927,64.436l46.877,47.333c4.272,4.319,4.272,11.349-0.002,15.67L461.9,311.168
-	l16.927,64.437c1.544,5.878-1.969,11.964-7.829,13.566l-64.27,17.56l-17.56,64.27c-1.318,4.832-5.719,8.205-10.703,8.205
-	c-0.955,0-1.916-0.126-2.854-0.374l-64.445-16.928l-47.333,46.877C261.736,510.857,258.953,512,255.999,512z"/>
-                                        <path fill="#091797ff" d="M461.902,200.834l16.927-64.436c1.544-5.879-1.969-11.965-7.829-13.566l-64.27-17.56L389.169,41
-	c-1.317-4.827-5.721-8.199-10.711-8.199c-0.954,0-1.914,0.125-2.854,0.372L311.167,50.1L263.835,3.223
-	C261.735,1.145,259.34,0,256.001,0v512c3.339,0,5.736-1.144,7.834-3.221l47.333-46.877l64.445,16.928
-	c0.939,0.248,1.899,0.374,2.854,0.374c4.984,0,9.385-3.374,10.703-8.205l17.56-64.27l64.27-17.56
-	c5.86-1.601,9.372-7.687,7.829-13.566l-16.927-64.437l46.875-47.331c4.274-4.321,4.274-11.352,0.002-15.67L461.902,200.834z"/>
-                                        <path fill="#FFFFFF" d="M189.217,244.871c-30.684,0-55.652-24.968-55.652-55.652s24.968-55.652,55.652-55.652
-	s55.652,24.968,55.652,55.652S219.901,244.871,189.217,244.871z M189.217,166.958c-12.277,0-22.261,9.984-22.261,22.261
-	s9.984,22.261,22.261,22.261c12.277,0,22.261-9.984,22.261-22.261S201.494,166.958,189.217,166.958z"/>
-                                        <path fill="#D1E7F8" d="M322.782,378.435c-30.684,0-55.652-24.968-55.652-55.652s24.968-55.652,55.652-55.652
-	s55.652,24.968,55.652,55.652S353.466,378.435,322.782,378.435z M322.782,300.523c-12.277,0-22.261,9.984-22.261,22.261
-	c0,12.277,9.984,22.261,22.261,22.261c12.277,0,22.261-9.984,22.261-22.261C345.043,310.507,335.059,300.523,322.782,300.523z"/>
-                                        <path fill="#FFFFFF" d="M178.087,350.609c-4.272,0-8.544-1.631-11.804-4.892c-6.521-6.516-6.521-17.092,0-23.609
-	l155.825-155.825c6.521-6.521,17.087-6.521,23.609,0c6.521,6.516,6.521,17.092,0,23.609L189.892,345.718
-	C186.63,348.98,182.359,350.609,178.087,350.609z"/>
-                                        <path fill="#D1E7F8" d="M322.108,166.285l-66.108,66.109v47.217l89.716-89.716c6.521-6.516,6.521-17.092,0-23.609
-	C339.196,159.763,328.63,159.763,322.108,166.285z"/>
-                                    </svg>
-                                </span>
-                                <span className='font-sm font700'>
-                                    Add item worth 99 and get 50% flat discount
-                                </span>
-                            </div>
-                            <div className="pS pd05l jcsb wfp oh bdrds bd" style=
-                                {{ bottom: 0, color: 'black' }}>
-                                <div className="df fd-c aic jcsb gap05 pdy06 pdx06 xbg" style={{
-                                    background: 'forestgreen',
-                                    color: 'white'
-                                }}>
-                                    <div className='df aic jcsb wfp'>
-                                        <span className="font600 font-md df aic">{cart__i?.items.length}  Items Added</span>
-                                        <Link href='/cart' className='font-lg font900 bdrds xfg' style={{ background: 'mintcream', color: 'forestgreen', paddingBlock: '1.2rem', paddingInline: '2.5rem' }}>Checkout</Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            }]);
-        };
+    //                             <span className="df aic">
+    //                                 <svg height="18px" width="18px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
+    //                                     viewBox="0 0 512 512" space="preserve">
+    //                                     <path fill="#3045ffff" d="M255.999,512c-2.954,0-5.737-1.144-7.835-3.221l-47.332-46.876l-64.437,16.927
+	// c-0.946,0.25-1.903,0.376-2.857,0.376c-4.984,0-9.387-3.374-10.709-8.205l-17.559-64.27L41,389.171
+	// c-5.86-1.601-9.372-7.687-7.829-13.566l16.927-64.436L3.222,263.836c-4.272-4.319-4.272-11.349,0.002-15.67l46.875-47.331
+	// l-16.927-64.437c-1.544-5.878,1.969-11.964,7.829-13.566l64.27-17.559l17.56-64.27c1.32-4.828,5.728-8.201,10.717-8.201
+	// c0.952,0,1.909,0.125,2.843,0.371l64.442,16.927l47.333-46.877C250.265,1.145,253.048,0,255.999,0s5.734,1.145,7.835,3.223
+	// l47.332,46.876l64.437-16.927c0.939-0.247,1.9-0.372,2.854-0.372c4.99,0,9.394,3.371,10.711,8.199l17.56,64.272l64.27,17.56
+	// c5.86,1.601,9.372,7.687,7.829,13.566l-16.927,64.436l46.877,47.333c4.272,4.319,4.272,11.349-0.002,15.67L461.9,311.168
+	// l16.927,64.437c1.544,5.878-1.969,11.964-7.829,13.566l-64.27,17.56l-17.56,64.27c-1.318,4.832-5.719,8.205-10.703,8.205
+	// c-0.955,0-1.916-0.126-2.854-0.374l-64.445-16.928l-47.333,46.877C261.736,510.857,258.953,512,255.999,512z"/>
+    //                                     <path fill="#091797ff" d="M461.902,200.834l16.927-64.436c1.544-5.879-1.969-11.965-7.829-13.566l-64.27-17.56L389.169,41
+	// c-1.317-4.827-5.721-8.199-10.711-8.199c-0.954,0-1.914,0.125-2.854,0.372L311.167,50.1L263.835,3.223
+	// C261.735,1.145,259.34,0,256.001,0v512c3.339,0,5.736-1.144,7.834-3.221l47.333-46.877l64.445,16.928
+	// c0.939,0.248,1.899,0.374,2.854,0.374c4.984,0,9.385-3.374,10.703-8.205l17.56-64.27l64.27-17.56
+	// c5.86-1.601,9.372-7.687,7.829-13.566l-16.927-64.437l46.875-47.331c4.274-4.321,4.274-11.352,0.002-15.67L461.902,200.834z"/>
+    //                                     <path fill="#FFFFFF" d="M189.217,244.871c-30.684,0-55.652-24.968-55.652-55.652s24.968-55.652,55.652-55.652
+	// s55.652,24.968,55.652,55.652S219.901,244.871,189.217,244.871z M189.217,166.958c-12.277,0-22.261,9.984-22.261,22.261
+	// s9.984,22.261,22.261,22.261c12.277,0,22.261-9.984,22.261-22.261S201.494,166.958,189.217,166.958z"/>
+    //                                     <path fill="#D1E7F8" d="M322.782,378.435c-30.684,0-55.652-24.968-55.652-55.652s24.968-55.652,55.652-55.652
+	// s55.652,24.968,55.652,55.652S353.466,378.435,322.782,378.435z M322.782,300.523c-12.277,0-22.261,9.984-22.261,22.261
+	// c0,12.277,9.984,22.261,22.261,22.261c12.277,0,22.261-9.984,22.261-22.261C345.043,310.507,335.059,300.523,322.782,300.523z"/>
+    //                                     <path fill="#FFFFFF" d="M178.087,350.609c-4.272,0-8.544-1.631-11.804-4.892c-6.521-6.516-6.521-17.092,0-23.609
+	// l155.825-155.825c6.521-6.521,17.087-6.521,23.609,0c6.521,6.516,6.521,17.092,0,23.609L189.892,345.718
+	// C186.63,348.98,182.359,350.609,178.087,350.609z"/>
+    //                                     <path fill="#D1E7F8" d="M322.108,166.285l-66.108,66.109v47.217l89.716-89.716c6.521-6.516,6.521-17.092,0-23.609
+	// C339.196,159.763,328.63,159.763,322.108,166.285z"/>
+    //                                 </svg>
+    //                             </span>
+    //                             <span className='font-sm font700'>
+    //                                 Add item worth 99 and get 50% flat discount
+    //                             </span>
+    //                         </div>
+    //                         <div className="pS pd05l jcsb wfp oh bdrds bd" style=
+    //                             {{ bottom: 0, color: 'black' }}>
+    //                             <div className="df fd-c aic jcsb gap05 pdy06 pdx06 xbg" style={{
+    //                                 background: 'forestgreen',
+    //                                 color: 'white'
+    //                             }}>
+    //                                 <div className='df aic jcsb wfp'>
+    //                                     <span className="font600 font-md df aic">{cart__i?.items.length}  Items Added</span>
+    //                                     <Link href='/cart' className='font-lg font900 bdrds xfg' style={{ background: 'mintcream', color: 'forestgreen', paddingBlock: '1.2rem', paddingInline: '2.5rem' }}>Checkout</Link>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //         }]);
+    //     };
 
-        return () => {
-            set_floaters((prev) => prev.filter((v, i) => v.name !== 'f1'))
+    //     return () => {
+    //         set_floaters((prev) => prev.filter((v, i) => v.name !== 'f1'))
 
-            // // This runs when the component is unmounted
-            // mutate("/cart"); // Refresh the cart data when leaving
-        };
-    }, [cart__i])
+    //         // // This runs when the component is unmounted
+    //         // mutate("/cart"); // Refresh the cart data when leaving
+    //     };
+    // }, [cart__i])
 
     useEffect(() => {
         if (food_filter.length === 0) {
@@ -1042,9 +1042,10 @@ export default function branches() {
         return tomenu?.map((categories) => {
             if (categories.items.length >= 1) {
                 return (
-                    <div className="bdrds mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
-                        <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
-                        <div className="flex flex-wrap gap-1">
+                    <div className="bdrds pdb1" key={categories.id}>
+                        <span className="font2 font700 text-grey">{categories.name}</span>
+
+                        <div className="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-2 justify-items-center pd05">
 
                             {categories.items.map((menu_items, i) =>
                                 // <div key={i}>
@@ -1167,9 +1168,9 @@ export default function branches() {
                                 // </div>
 
 
-                                <div className="w-[calc(50%-0.25rem)] rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300 bg-white overflow-hidden">
+                                <div className="w-full rounded-xl hover:shadow-md transition-all duration-300 bg-white overflow-hidden">
                                     {/* Product Image */}
-                                    <Link href={`/product/${product.slug}`} className="block relative w-full h-56 oh">
+                                    <Link href={`/product/${product.slug}`} className="block relative w-full h-[150] oh">
                                         <div className="pA hfp wfp xbg" style={{
                                             zIndex: 1,
                                             opacity: '0.3',
@@ -1184,7 +1185,7 @@ export default function branches() {
                                     </Link>
 
                                     {/* Product Info */}
-                                    <div className="p-3">
+                                    <div className="p-3" style={{background:'#f9fbff83'}}>
                                         <Link href={`/product/${product.slug}`}>
                                             <h3 className="text-base font-medium text-gray-800 truncate">{menu_items.name}</h3>
                                         </Link>
@@ -1199,8 +1200,11 @@ export default function branches() {
 
                                         {/* Distributor Name */}
                                         {product.distributor && (
-                                            <p className="text-sm text-gray-500 mt-1 dn">
-                                                Sold by: <span className="font-medium text-gray-700">{product.distributor}</span>
+                                            <p className="text-sm text-gray-500 mt-1">
+                                                {/* Sold by: <span className="font-medium text-gray-700">{product.distributor}</span> */}
+                                                <span className="pdy02 pdx03 bdArds df aic wfc gap02 font07 font800" style={{background:'#eaeefdff'}}>
+                                                    <Truck size="1rem"/> Deliver in 2 days
+                                                    </span>
                                             </p>
                                         )}
                                     </div>
@@ -1540,46 +1544,6 @@ export default function branches() {
 
                         </div>
                         {mobile_banner}
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                        <div className="w-[calc(50%-0.25rem)] rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300 bg-white overflow-hidden">
-                            {/* Product Image */}
-                            <Link href={`/product/${product.slug}`} className="block relative w-full h-56 oh">
-                                <div className="pA hfp wfp xbg" style={{
-                                    zIndex: 1,
-                                    opacity: '0.3',
-                                    background: '#3d73ad2e'
-                                }}></div>
-                                <Image
-                                    src={product.image || "/placeholder.png"}
-                                    alt={product.name}
-                                    fill
-                                    className="object-cover rounded-t-xl"
-                                />
-                            </Link>
-
-                            {/* Product Info */}
-                            <div className="p-3">
-                                <Link href={`/product/${product.slug}`}>
-                                    <h3 className="text-base font-medium text-gray-800 truncate">{product.name}</h3>
-                                </Link>
-
-                                {/* Price Row */}
-                                <div className="flex items-center gap-2 mt-2">
-                                    <span className="text-lg font-semibold text-green-600">₹{product.price}</span>
-                                    {product.oldPrice && (
-                                        <span className="text-sm text-gray-400 line-through">₹{product.oldPrice}</span>
-                                    )}
-                                </div>
-
-                                {/* Distributor Name */}
-                                {product.distributor && (
-                                    <p className="text-sm text-gray-500 mt-1 dn">
-                                        Sold by: <span className="font-medium text-gray-700">{product.distributor}</span>
-                                    </p>
-                                )}
-                            </div>
-                        </div>
                     </div>
 
                     {/* <div className="df aic jcsb bdb pdx1 pdb08 ybg gap3 ox pS " style={{

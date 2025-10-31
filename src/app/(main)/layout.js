@@ -22,11 +22,7 @@ export default function RootLayout({ children }) {
           {`
           @media (max-width: 720px) {
             body {
-<<<<<<< HEAD
-              background: whitesmoke;
-=======
               background: whitesmoke_;
->>>>>>> master
               overflow-x:hidden;
             }
           }
