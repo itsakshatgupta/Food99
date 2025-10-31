@@ -10,7 +10,7 @@ const withPWA = withPWAInit({
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["res.cloudinary.com", "food99api.onrender.com", "localhost", "127.0.0.1", 'placehold'],
+    domains: ["res.cloudinary.com", "food99api.onrender.com", "localhost", "127.0.0.1", 'placehold', 'm.media-amazon.com'],
   },
 };
 

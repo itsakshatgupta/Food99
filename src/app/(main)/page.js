@@ -20,6 +20,14 @@ import dynamic from 'next/dynamic';
 
 export default function branches() {
 
+    const product = {
+        name: "Sage Square Adjustable Strap Muzzle",
+        price: 179,
+        oldPrice: 349,
+        image: "https://m.media-amazon.com/images/I/51hh5hEqQ2S._MCnd_AC_.jpg",
+        slug: "sage-square-adjustable-muzzle",
+        distributor: "Sage Square Distributors"
+    }
 
     const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option, set_dynamics_portal_ab } = useContext(dynamic_);
     const { menu___i } = useContext(menu_);
@@ -250,7 +258,7 @@ export default function branches() {
 
 
                     setTimeout(() => {
-                        if (sildeshow_current  === sildeshow_data.length - 1) {
+                        if (sildeshow_current === sildeshow_data.length - 1) {
 
                             set_slideshow_current(0)
                         } else {
@@ -1036,130 +1044,171 @@ export default function branches() {
                 return (
                     <div className="bdrds mgt2 pdb1" key={categories.id} style={{ border: '1px dashed #9970faff' }}>
                         <span className="mgl04 pdx05 pdy02 pR font-md font600 bdrds df aic wfc bd" style={{ top: '-15px', background: '#9970faff', color: 'white', fontVariant: 'all-petite-caps', borderColor: 'black' }}>{categories.name}</span>
-                        <div className={` catg df fd-c fxw`} style={{ gap: '1.2rem' }}>
+                        <div className="flex flex-wrap gap-1">
 
                             {categories.items.map((menu_items, i) =>
-                                <div key={i}>
-                                    {device === 'mobile' &&
-                                        <>
-                                            <style>
-                                                {`              
-                                                .lowscreen-portal{
-                                                  animation:a_lowscreen-porta_ 0.15s linear ;
-                                                }
-                                                @keyframes a_lowscreen-porta_{
-                                                0%{
-                                                bottom:-100%;
-                                                }
-                                                100%{
-                                                bottom:0;
-                                                }
-                                                }`}
-                                            </style>
-                                            <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ border: '1px solid lightgray' }}>
-                                                <div className="pdr06 df fd-c gap05">
-                                                    <div className="df" style={{ alignItems: 'flex-start' }}>
-                                                        <span className="mgl01 font-lg font700 df" style={{ justifyItems: 'start' }}>{menu_items.name}<Verified fill="#3045ffff" color="white" /></span>
+                                // <div key={i}>
+                                //     {device === 'mobile' &&
+                                //         <>
+                                //             <style>
+                                //                 {`              
+                                //                 .lowscreen-portal{
+                                //                   animation:a_lowscreen-porta_ 0.15s linear ;
+                                //                 }
+                                //                 @keyframes a_lowscreen-porta_{
+                                //                 0%{
+                                //                 bottom:-100%;
+                                //                 }
+                                //                 100%{
+                                //                 bottom:0;
+                                //                 }
+                                //                 }`}
+                                //             </style>
+                                //             <div className=" xbg df jcsb pdt1 pdb2 mgx08 pdx07  bdrds" style={{ border: '1px solid lightgray' }}>
+                                //                 <div className="pdr06 df fd-c gap05">
+                                //                     <div className="df" style={{ alignItems: 'flex-start' }}>
+                                //                         <span className="mgl01 font-lg font700 df" style={{ justifyItems: 'start' }}>{menu_items.name}<Verified fill="#3045ffff" color="white" /></span>
 
-                                                    </div>
-                                                    <div className="df aic gap02">
-                                                        <span className="pdx03 pdy01 bdrds aic font-sm df font600 gap01" style={{ background: '#ecececff', color: 'black', fontSize: '0.775rem' }}><Star size="0.875rem" fill="forestgreen" />4.5</span>
-                                                        <span className="pdx03 pdy01 bdrds aic font-sm df font600 gap01" style={{ background: '#ecececff', color: 'black', fontSize: '0.7rem' }}><Smile size="0.9rem" fill="gold" /> 2K+</span>
-                                                    </div>
-                                                    <div className="df aic gap03 fxw">
-                                                        {menu_items.tags.map(t =>
-                                                            <span className="pdx03 pdy01  aic font-sm df font600 gap01 wmc" style={{ background: '#ecececff', color: 'black', fontSize: '0.775rem' }}>{t}</span>
-                                                        )}
-                                                    </div>
-                                                    <span className="font-sm font500">{menu_items.price}</span>
-                                                    <div className="font-sm font500 pdt05">{menu_items.description}</div>
-                                                </div>
-                                                <div>
-                                                    <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
-                                                        <div className="lowscreen-portal wfp df fd-c oh" style={{
-                                                            background: 'white',
-                                                            borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
-                                                        }}>
-                                                            <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-                                                            <div className="wfp df gap05" style={{ height: '200px' }}>
-                                                                {/* Hii */}
+                                //                     </div>
+                                //                     <div className="df aic gap02">
+                                //                         <span className="pdx03 pdy01 bdrds aic font-sm df font600 gap01" style={{ background: '#ecececff', color: 'black', fontSize: '0.775rem' }}><Star size="0.875rem" fill="forestgreen" />4.5</span>
+                                //                         <span className="pdx03 pdy01 bdrds aic font-sm df font600 gap01" style={{ background: '#ecececff', color: 'black', fontSize: '0.7rem' }}><Smile size="0.9rem" fill="gold" /> 2K+</span>
+                                //                     </div>
+                                //                     <div className="df aic gap03 fxw">
+                                //                         {menu_items.tags.map(t =>
+                                //                             <span className="pdx03 pdy01  aic font-sm df font600 gap01 wmc" style={{ background: '#ecececff', color: 'black', fontSize: '0.775rem' }}>{t}</span>
+                                //                         )}
+                                //                     </div>
+                                //                     <span className="font-sm font500">{menu_items.price}</span>
+                                //                     <div className="font-sm font500 pdt05">{menu_items.description}</div>
+                                //                 </div>
+                                //                 <div>
+                                //                     <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd bdrds oh" onClick={() => set_dynamics_portal_main(
+                                //                         <div className="lowscreen-portal wfp df fd-c oh" style={{
+                                //                             background: 'white',
+                                //                             borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
+                                //                         }}>
+                                //                             <div className="pdy05 pdx1 font600 bdb">{menu_items.name}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
+                                //                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
+                                //                             <div className="wfp df gap05" style={{ height: '200px' }}>
+                                //                                 {/* Hii */}
 
-                                                                <ProductImage
-                                                                    src={menu_items.image}
-                                                                    alt="iphone 15"
-                                                                    width={202}
-                                                                    height={200}
-                                                                    fallbackSrc="/Food99.png"
-                                                                />
-                                                                <div className="df fd-c gap08 mgt05 fx1 pdr05">
-                                                                    <div className="df aic jcsb"><span>{'$' + menu_items.price}</span>
-                                                                        <div className="pR df" style={{ width: '100px' }}>
+                                //                                 <ProductImage
+                                //                                     src={menu_items.image}
+                                //                                     alt="iphone 15"
+                                //                                     width={202}
+                                //                                     height={200}
+                                //                                     fallbackSrc="/Food99.png"
+                                //                                 />
+                                //                                 <div className="df fd-c gap08 mgt05 fx1 pdr05">
+                                //                                     <div className="df aic jcsb"><span>{'$' + menu_items.price}</span>
+                                //                                         <div className="pR df" style={{ width: '100px' }}>
 
-                                                                            <Cart_Control_Indirect cart_detail={() => {
-                                                                                const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
+                                //                                             <Cart_Control_Indirect cart_detail={() => {
+                                //                                                 const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
 
-                                                                                return {
-                                                                                    quantity: cartItem ? cartItem.quantity : null,
-                                                                                    cart_item_id: cartItem ? cartItem.id : null,
-                                                                                };
-                                                                            }}
-                                                                                item={{
-                                                                                    id: menu_items.id,
-                                                                                    name: menu_items.name,
-                                                                                    price: menu_items.price,
-                                                                                    image: menu_items.image
-                                                                                }} />
-                                                                        </div>
-                                                                    </div>
+                                //                                                 return {
+                                //                                                     quantity: cartItem ? cartItem.quantity : null,
+                                //                                                     cart_item_id: cartItem ? cartItem.id : null,
+                                //                                                 };
+                                //                                             }}
+                                //                                                 item={{
+                                //                                                     id: menu_items.id,
+                                //                                                     name: menu_items.name,
+                                //                                                     price: menu_items.price,
+                                //                                                     image: menu_items.image
+                                //                                                 }} />
+                                //                                         </div>
+                                //                                     </div>
 
-                                                                    <div className="fx1 bdt pdt05 font08">{menu_items.description}</div></div>
-                                                            </div>
-                                                            {/* <div>{menu_items.item_price__}</div> */}
+                                //                                     <div className="fx1 bdt pdt05 font08">{menu_items.description}</div></div>
+                                //                             </div>
+                                //                             {/* <div>{menu_items.item_price__}</div> */}
 
-                                                        </div>
-                                                    )} style={{
-                                                        width: '121px',
-                                                        height: "120px",
-                                                        borderRadius: '10px',
-                                                        justifySelf: 'center',
-                                                        background: 'white'
-                                                    }}>
-                                                        <ProductImage
-                                                            src={menu_items.image}
-                                                            alt="iphone 15"
-                                                            width={122}
-                                                            height={120}
-                                                            fallbackSrc="/Food99.png"
-                                                        />
-                                                    </div>
-                                                        <Cart_Control_Indirect
-                                                            cart_detail={() => {
-                                                                const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
+                                //                         </div>
+                                //                     )} style={{
+                                //                         width: '121px',
+                                //                         height: "120px",
+                                //                         borderRadius: '10px',
+                                //                         justifySelf: 'center',
+                                //                         background: 'white'
+                                //                     }}>
+                                //                         <ProductImage
+                                //                             src={menu_items.image}
+                                //                             alt="iphone 15"
+                                //                             width={122}
+                                //                             height={120}
+                                //                             fallbackSrc="/Food99.png"
+                                //                         />
+                                //                     </div>
+                                //                         <Cart_Control_Indirect
+                                //                             cart_detail={() => {
+                                //                                 const cartItem = cart__i?.items?.find((v) => v.menu_item.id === menu_items.id);
 
-                                                                return {
-                                                                    quantity: cartItem ? cartItem.quantity : null,
-                                                                    cart_item_id: cartItem ? cartItem.id : null,
-                                                                };
-                                                            }}
-                                                            item={{
-                                                                id: menu_items.id,
-                                                                name: menu_items.name,
-                                                                price: menu_items.price,
-                                                                image: menu_items.image
-                                                            }}
-                                                        />
-                                                    </div>
+                                //                                 return {
+                                //                                     quantity: cartItem ? cartItem.quantity : null,
+                                //                                     cart_item_id: cartItem ? cartItem.id : null,
+                                //                                 };
+                                //                             }}
+                                //                             item={{
+                                //                                 id: menu_items.id,
+                                //                                 name: menu_items.name,
+                                //                                 price: menu_items.price,
+                                //                                 image: menu_items.image
+                                //                             }}
+                                //                         />
+                                //                     </div>
 
-                                                </div>
-                                            </div>
+                                //                 </div>
+                                //             </div>
 
-                                        </>
-                                    }
+                                //         </>
+                                //     }
+                                // </div>
+
+
+                                <div className="w-[calc(50%-0.25rem)] rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300 bg-white overflow-hidden">
+                                    {/* Product Image */}
+                                    <Link href={`/product/${product.slug}`} className="block relative w-full h-56 oh">
+                                        <div className="pA hfp wfp xbg" style={{
+                                            zIndex: 1,
+                                            opacity: '0.3',
+                                            background: '#3d73ad2e'
+                                        }}></div>
+                                        <Image
+                                            src={menu_items.image || "/placeholder.png"}
+                                            alt={menu_items.name}
+                                            fill
+                                            className="object-cover rounded-t-xl"
+                                        />
+                                    </Link>
+
+                                    {/* Product Info */}
+                                    <div className="p-3">
+                                        <Link href={`/product/${product.slug}`}>
+                                            <h3 className="text-base font-medium text-gray-800 truncate">{menu_items.name}</h3>
+                                        </Link>
+
+                                        {/* Price Row */}
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <span className="text-lg font-semibold text-green-600">₹{menu_items.price}</span>
+                                            {product.oldPrice && (
+                                                <span className="text-sm text-gray-400 line-through">₹{menu_items.oldPrice - 25}</span>
+                                            )}
+                                        </div>
+
+                                        {/* Distributor Name */}
+                                        {product.distributor && (
+                                            <p className="text-sm text-gray-500 mt-1 dn">
+                                                Sold by: <span className="font-medium text-gray-700">{product.distributor}</span>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
                             )}
                         </div>
                     </div>
+
                 )
             }
 
@@ -1492,7 +1541,48 @@ export default function branches() {
                         </div>
                         {mobile_banner}
                     </div>
-                    <div className="df aic jcsb bdb pdx1 pdb08 ybg gap3 ox pS " style={{
+                    <div className="flex flex-wrap gap-1">
+                        <div className="w-[calc(50%-0.25rem)] rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300 bg-white overflow-hidden">
+                            {/* Product Image */}
+                            <Link href={`/product/${product.slug}`} className="block relative w-full h-56 oh">
+                                <div className="pA hfp wfp xbg" style={{
+                                    zIndex: 1,
+                                    opacity: '0.3',
+                                    background: '#3d73ad2e'
+                                }}></div>
+                                <Image
+                                    src={product.image || "/placeholder.png"}
+                                    alt={product.name}
+                                    fill
+                                    className="object-cover rounded-t-xl"
+                                />
+                            </Link>
+
+                            {/* Product Info */}
+                            <div className="p-3">
+                                <Link href={`/product/${product.slug}`}>
+                                    <h3 className="text-base font-medium text-gray-800 truncate">{product.name}</h3>
+                                </Link>
+
+                                {/* Price Row */}
+                                <div className="flex items-center gap-2 mt-2">
+                                    <span className="text-lg font-semibold text-green-600">₹{product.price}</span>
+                                    {product.oldPrice && (
+                                        <span className="text-sm text-gray-400 line-through">₹{product.oldPrice}</span>
+                                    )}
+                                </div>
+
+                                {/* Distributor Name */}
+                                {product.distributor && (
+                                    <p className="text-sm text-gray-500 mt-1 dn">
+                                        Sold by: <span className="font-medium text-gray-700">{product.distributor}</span>
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* <div className="df aic jcsb bdb pdx1 pdb08 ybg gap3 ox pS " style={{
                         scrollbarColor: '#f8f8f8 white',
                         scrollbarWidth: 'none',
                         top: usr ? '140.4px' : '124px',
@@ -1538,6 +1628,7 @@ export default function branches() {
 
                     </div>
                 </div>
+
 
 
                 {/* {device === 'mobile' && dynamic_portal_main} */}
