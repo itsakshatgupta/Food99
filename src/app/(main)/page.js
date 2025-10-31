@@ -275,7 +275,7 @@ export default function branches() {
 
             </div>
         </div>
-        <div className='mgx05 mgy05 df fd-c'>
+        <div className='mgx05 mgy05 dfl dn fd-c'>
             <h4 className="mgx03 mgb08 mg0 font500" style={{ color: '#0e0e0e' }}>Don't Miss this Deal</h4>
             <div className="oh bdrds bd" style={{
                 background: 'linear-gradient(0deg, rgb(205 233 255), #e4d4ff)'
@@ -1194,7 +1194,7 @@ export default function branches() {
                                         <div className="flex items-center gap-2 mt-2">
                                             <span className="text-lg font-semibold text-green-600">₹{menu_items.price}</span>
                                             {product.oldPrice && (
-                                                <span className="text-sm text-gray-400 line-through">₹{menu_items.oldPrice - 25}</span>
+                                                <span className="text-sm text-gray-400 line-through">₹{menu_items.price - 25}</span>
                                             )}
                                         </div>
 
@@ -1202,7 +1202,7 @@ export default function branches() {
                                         {product.distributor && (
                                             <p className="text-sm text-gray-500 mt-1">
                                                 {/* Sold by: <span className="font-medium text-gray-700">{product.distributor}</span> */}
-                                                <span className="pdy02 pdx03 bdArds df aic wfc gap02 font07 font800" style={{background:'#eaeefdff'}}>
+                                                <span className="pdy02 pdx03 bdArdsl df aic wfc gap02 font07 font800" style={{background:'#eaeefdcf'}}>
                                                     <Truck size="1rem"/> Deliver in 2 days
                                                     </span>
                                             </p>
@@ -1580,6 +1580,28 @@ export default function branches() {
 
                     {/* </div> */}
 
+    <div className="w-full mt-6 pdx05 sbn">
+  <h2 className="text-xl font-semibold text-gray-800 mb-3">🔥 Offers for You</h2>
+  <div className="flex gap-4 overflow-x-auto pb-2 hide-scrollbar sbn">
+    {/* Offer Cards */}
+    {[
+      { title: "50% OFF on First Order", code: "WELCOME50", bg: "bg-gradient-to-r from-blue-500 to-indigo-500" },
+      { title: "Free Delivery Above ₹199", code: "FREESHIP", bg: "bg-gradient-to-r from-green-400 to-emerald-500" },
+      { title: "10% Cashback via UPI", code: "UPI10", bg: "bg-gradient-to-r from-rose-400 to-pink-500" },
+      { title: "Flat ₹75 OFF for Students", code: "STUDENT75", bg: "bg-gradient-to-r from-amber-400 to-orange-500" },
+    ].map((offer, i) => (
+      <div
+        key={i}
+        className={`${offer.bg} min-w-[220px] text-white rounded-xl p-4 shadow-md flex flex-col justify-between`}
+      >
+        <span className="text-lg font-semibold">{offer.title}</span>
+        <span className="mt-2 text-sm font-medium bg-white/20 px-2 py-1 rounded-md w-fit">
+          Use Code: {offer.code}
+        </span>
+      </div>
+    ))}
+  </div>
+</div>
 
                     <div className="fx1" style={{
                         scrollbarColor: '#e7e7e7ff white',
@@ -1592,6 +1614,7 @@ export default function branches() {
 
                     </div>
                 </div>
+
 
 
 
