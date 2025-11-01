@@ -1396,18 +1396,6 @@ export default function branches() {
             ],
         },
         {
-            id: 4,
-            type: "search_suggestion",
-            title: "🥗 Healthy Choices",
-            gridCol: 2,
-            overflowX: false,
-            items: [
-                { name: "Hakka Noodles", image: "/food_img/b.jpg", api: "/api/menu/trending" },
-                { name: "Pizza Sauce", image: "/food_img/c.jpg", api: "/api/menu/trending" },
-                { name: "Healthy Juices", image: "/food_img/g.jpg", api: "/api/menu/trending" },
-            ],
-        },
-        {
             id: 5,
             type: "category_grid",
             title: "🍱 Featured Products",
@@ -1445,6 +1433,18 @@ export default function branches() {
             title: "🍰 Desserts & Sweets",
             overflowX: false,
             api: "/api/menu/desserts",
+        },
+        {
+            id: 4,
+            type: "search_suggestion",
+            title: "🥗 Healthy Choices",
+            gridCol: 2,
+            overflowX: false,
+            items: [
+                { name: "Hakka Noodles", image: "/food_img/b.jpg", api: "/api/menu/trending" },
+                { name: "Pizza Sauce", image: "/food_img/c.jpg", api: "/api/menu/trending" },
+                { name: "Healthy Juices", image: "/food_img/g.jpg", api: "/api/menu/trending" },
+            ],
         },
         {
             id: 8,

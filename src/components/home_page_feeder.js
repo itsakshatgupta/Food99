@@ -14,7 +14,7 @@ export function Search_suggestion({ data, title, col }) {
             <div className={`grid gap-${col <= 2 ? 4 : 1}`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
                 {data.map((item, i) => (
                     <Link href={`/${item.api}`} key={i} className="rounded-lg overflow-hidden bg-white shadow hover:shadow-lg transition-all bdArds pdy05 pdx1 flex gap-1 align-center">
-                        <Search />
+                        <Search size="1rem" />
                         <h3 className="text-sm font-medium truncate">{item.name}</h3>
                     </Link>
                 ))}
