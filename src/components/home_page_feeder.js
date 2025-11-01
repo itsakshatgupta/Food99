@@ -9,7 +9,10 @@ export function Search_suggestion({ data, title, col }) {
 
     return (
         <div className=" pdy1 pdx05" style={{ background: 'aliceblue' }}>
-            <h2 className="text-xl font-semibold mb-3">{title}</h2>
+            <div className="df aic jcsb">
+                <h2 className="text-xl font-semibold mb-3">{title}</h2>
+                <span className="bdrds pdy02 pdx05 font600 font-sm" style={{color:'white', background:'black'}}>See all</span>
+            </div>
 
             <div className={`grid gap-${col <= 2 ? 4 : 1}`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
                 {data.map((item, i) => (
