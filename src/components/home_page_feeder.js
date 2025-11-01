@@ -41,7 +41,7 @@ export function CategoryGrid({ data, title, col }) {
                             src={item.image}
                             alt={item.name}
                             height={col <= 2 ?150:100}
-                            className={`w-full object-cover rounded-lg`}
+                            className={`w-full ${col <= 2 ?" h-[150px]": "h-[100px]"} object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium text-center">{item.name}{typeof col}{col ? col : "nuulll"}</p>
                     </div>
