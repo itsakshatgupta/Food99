@@ -30,7 +30,7 @@ export function CategoryGrid({ data, title, col }) {
             {title &&             
             <div className="df aic jcsb mb-4 ">
                 <h2 className="text-xl font-semibold pdx02">{title}</h2>
-                <span className="bdrds pdy02 pdx05 font600 font-sm" style={{color:'white', background:'black'}}>See all</span>
+                <span className="bdrds pdy02 pdx08 font600 font-sm mgr03" style={{color:'white', background:'black'}}>See all</span>
             </div>}
             <div className={`grid ${col === 2 ? 'grid-cols-[repeat(auto-fit,minmax(50%,1fr))' : 'grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))'} gap-${col <= 2 ? 4 : 1}`} style={{
                 gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
