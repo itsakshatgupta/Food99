@@ -16,7 +16,7 @@ export function ProductGrid({ api, title, col }) {
         <div className="p-4">
             <h2 className="text-xl font-semibold mb-3">{title}</h2>
 
-            <div className="grid gap-${col<=2?4:1}" style={{gridTemplateColumns: col===2?'repeat(auto-fit, minmax(50% , 1fr))':'repeat(auto-fit,  minmax(33.33%, 1fr))'}}>
+            <div className={`grid gap-${col<=2?4:1}`} style={{gridTemplateColumns: col===2?'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))':'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'}}>
                 {products.map((item, i) => (
                     <div key={i} className="rounded-lg overflow-hidden bg-white shadow hover:shadow-lg transition-all">
                         <div className="relative h-[140px]">
@@ -43,7 +43,7 @@ export function CategoryGrid({ data, title, col }) {
     return (
         <section className="w-full">
             {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
-            <div className={`grid ${col===2?'grid-cols-[repeat(auto-fit,minmax(50%,1fr))':'grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))'} gap-${col<=2?4:1}`} style={{gridTemplateColumns: col===2?'repeat(auto-fit, minmax(50% , 1fr))':'repeat(auto-fit,  minmax(33.33%, 1fr))'
+            <div className={`grid ${col===2?'grid-cols-[repeat(auto-fit,minmax(50%,1fr))':'grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))'} gap-${col<=2?4:1}`} style={{gridTemplateColumns: col===2?'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))':'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
 }}>
                 {data.map((item, i) => (
                     <div
