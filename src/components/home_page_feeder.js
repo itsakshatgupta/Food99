@@ -9,8 +9,8 @@ export function Search_suggestion({ data, title, col }) {
 
     return (
         <div className=" pdy1 pdx05" style={{ background: 'aliceblue' }}>
-            <div className="df aic jcsb">
-                <h2 className="text-xl font-semibold mb-3">{title}</h2>
+            <div className="df aic jcsb mb-3">
+                <h2 className="text-xl font-semibold ">{title}</h2>
                 <span className="bdrds pdy02 pdx05 font600 font-sm" style={{color:'white', background:'black'}}>See all</span>
             </div>
 
