@@ -8,7 +8,7 @@ export function Search_suggestion({ data, title, col }) {
     const [products, setProducts] = useState([]);
 
     return (
-        <div className="p-4" style={{ background: 'aliceblue' }}>
+        <div className=" pdy1 pdx05" style={{ background: 'aliceblue' }}>
             <h2 className="text-xl font-semibold mb-3">{title}</h2>
 
             <div className={`grid gap-${col <= 2 ? 4 : 1}`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
@@ -26,8 +26,8 @@ export function Search_suggestion({ data, title, col }) {
 // components/CategoryGrid.jsx
 export function CategoryGrid({ data, title, col }) {
     return (
-        <section className="w-full">
-            {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
+        <section className="w-full pdx05 pdy1">
+            {title && <h2 className="text-xl font-semibold mb-4 pdx02">{title}</h2>}
             <div className={`grid ${col === 2 ? 'grid-cols-[repeat(auto-fit,minmax(50%,1fr))' : 'grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))'} gap-${col <= 2 ? 4 : 1}`} style={{
                 gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             }}>
@@ -41,6 +41,7 @@ export function CategoryGrid({ data, title, col }) {
                             src={item.image}
                             alt={item.name}
                             height={col <= 2 ?150:100}
+                            width={100}
                             className={`w-full ${col <= 2 ?" h-[150px]": "h-[100px]"} object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium text-center">{item.name}{typeof col}{col ? col : "nuulll"}</p>
