@@ -34,7 +34,7 @@ export function CategoryGrid({ data, title, col }) {
                 {data.map((item, i) => (
                     <div
                         key={i}
-                        className={`p-4 bg-white ${col<=2 &&"rounded-xl shadow-sm hover:shadow-md"} transition 
+                        className={`${col<=2?"p-4":"p-1"} bg-white ${col<=2 &&"rounded-xl shadow-sm hover:shadow-md"} transition 
               `}
                     >
                         <Image
