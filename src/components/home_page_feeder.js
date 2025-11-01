@@ -14,7 +14,7 @@ export function Search_suggestion({ data, title, col }) {
             <div className={`grid gap-${col <= 2 ? 4 : 1}`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
                 {data.map((item, i) => (
                     <Link href={`/${item.api}`} key={i} className="rounded-lg overflow-hidden bg-white shadow hover:shadow-lg transition-all bdArds pdy05 pdx1 flex gap-1 align-center">
-                        <Search size="1rem" />
+                        <Search size="1.275rem" />
                         <h3 className="text-sm font-medium truncate">{item.name}</h3>
                     </Link>
                 ))}
@@ -34,13 +34,13 @@ export function CategoryGrid({ data, title, col }) {
                 {data.map((item, i) => (
                     <div
                         key={i}
-                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition 
+                        className={`p-4 bg-white ${col<=2 &&"rounded-xl shadow-sm hover:shadow-md"} transition 
               `}
                     >
                         <img
                             src={item.image}
                             alt={item.name}
-                            className={`w-full h-[${col <= 2 ? 40 : 20}px] object-cover rounded-lg`}
+                            className={`w-full ${col <= 2 ?" h-[150px]": "h-[100px]"} object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium text-center">{item.name}{typeof col}{col ? col : "nuulll"}</p>
                     </div>
