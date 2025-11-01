@@ -9,10 +9,7 @@ export function Search_suggestion({ data, title, col }) {
 
     return (
         <div className=" pdy1 pdx05" style={{ background: 'aliceblue' }}>
-            <div className="df aic jcsb mb-3">
-                <h2 className="text-xl font-semibold ">{title}</h2>
-                <span className="bdrds pdy02 pdx05 font600 font-sm" style={{color:'white', background:'black'}}>See all</span>
-            </div>
+            <h2 className="text-xl font-semibold mb-3">{title}</h2>
 
             <div className={`grid gap-${col <= 2 ? 4 : 1}`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
                 {data.map((item, i) => (
@@ -30,22 +27,26 @@ export function Search_suggestion({ data, title, col }) {
 export function CategoryGrid({ data, title, col }) {
     return (
         <section className="w-full pdx05 pdy1">
-            {title && <h2 className="text-xl font-semibold mb-4 pdx02">{title}</h2>}
+            {title &&             
+            <div className="df aic jcsb mb-4 ">
+                <h2 className="text-xl font-semibold pdx02">{title}</h2>
+                <span className="bdrds pdy02 pdx05 font600 font-sm" style={{color:'white', background:'black'}}>See all</span>
+            </div>}
             <div className={`grid ${col === 2 ? 'grid-cols-[repeat(auto-fit,minmax(50%,1fr))' : 'grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))'} gap-${col <= 2 ? 4 : 1}`} style={{
                 gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             }}>
                 {data.map((item, i) => (
                     <div
                         key={i}
-                        className={`${col<=2?"p-4":"p-1"} bg-white ${col<=2 &&"rounded-xl shadow-sm hover:shadow-md"} transition 
+                        className={`${col <= 2 ? "p-4" : "p-1"} bg-white ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
               `}
                     >
                         <Image
                             src={item.image}
                             alt={item.name}
-                            height={col <= 2 ?150:100}
+                            height={col <= 2 ? 150 : 100}
                             width={100}
-                            className={`w-full ${col <= 2 ?" h-[150px]": "h-[100px]"} object-cover rounded-lg`}
+                            className={`w-full ${col <= 2 ? " h-[150px]" : "h-[100px]"} object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium text-center">{item.name}{typeof col}{col ? col : "nuulll"}</p>
                     </div>
