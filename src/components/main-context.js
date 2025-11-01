@@ -80,32 +80,32 @@ export default function MainContext({ device, children }) {
     console.log(searchParams.get('page'), typeof (searchParams.get('page')), searchParams.get('page') in ['login', 'signup'], noLayoutOnPages)
 
 
-    const { data: usr, error: usrError } = useSWR("/api/me/", fetcher, {
-        revalidateOnFocus: false,      // Don't refresh when window gains focus
-        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-        refreshInterval: 0,             // Don't refresh automatically at intervals
-        shouldRetryOnError: false
-    });
+    // const { data: usr, error: usrError } = useSWR("/api/me/", fetcher, {
+    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
+    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+    //     refreshInterval: 0,             // Don't refresh automatically at intervals
+    //     shouldRetryOnError: false
+    // });
 
-    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
-        revalidateOnFocus: false,      // Don't refresh when window gains focus
-        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-        refreshInterval: 0,             // Don't refresh automatically at intervals
+    // const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
+    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
+    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+    //     refreshInterval: 0,             // Don't refresh automatically at intervals
 
-    });
+    // });
 
-    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
-        revalidateOnFocus: false,      // Don't refresh when window gains focus
-        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-        refreshInterval: 0,             // Don't refresh automatically at intervals
-        shouldRetryOnError: false
+    // const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
+    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
+    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+    //     refreshInterval: 0,             // Don't refresh automatically at intervals
+    //     shouldRetryOnError: false
 
-    });
+    // });
 
 
-    // const usr = true
-    // const menu___i = menu_dummy
-    // const cart__i = cart
+    const usr = true
+    const menu___i = menu_dummy
+    const cart__i = cart
 
 
 
