@@ -37,10 +37,11 @@ export function CategoryGrid({ data, title, col }) {
                         className={`p-4 bg-white ${col<=2 &&"rounded-xl shadow-sm hover:shadow-md"} transition 
               `}
                     >
-                        <img
+                        <Image
                             src={item.image}
                             alt={item.name}
-                            className={`w-full ${col <= 2 ?" h-[150px]": "h-[100px]"} object-cover rounded-lg`}
+                            height={col <= 2 ?150:100}
+                            className={`w-full object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium text-center">{item.name}{typeof col}{col ? col : "nuulll"}</p>
                     </div>
