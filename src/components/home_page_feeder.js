@@ -40,7 +40,7 @@ export function CategoryGrid({ data, title, col, overflow_x }) {
                     <div
                         key={i}
                         className={`${col? col <= 2 ? "p-4" : "p-1": "min-w-[160px] pd05"} bg-white ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
-              `} style={{border:overflow_x&&'1px solid #9b9b9bff'}}
+              `} style={{border:overflow_x&&'1px solid #ccccccff'}}
                     >
                         <Image
                             src={item.image}
