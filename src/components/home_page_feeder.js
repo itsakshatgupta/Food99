@@ -56,14 +56,14 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                         <p className="mt-2 font-medium">{item.name}</p>
                         </div>
                         <div className="oh">
-                        <div className="df aic gap03 ">
-                            <div className={`df mt-2 text-center aic ${overflow_x?"pdx05 font600":"font500"} ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
-                                <div style={{fontSize:'0.9em'}}>₹</div>
-                                <span className="font-lg" style={{fontSize:'1.2em'}}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize:'0.9em' }}>00</span>
+                        <div className={`df aic gap03 ${overflow_x&&"pdx05"}`}>
+                            <div className={`df mt-2 text-center aic ${overflow_x?"font600":"font500"} ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
+                                <div style={{fontSize:'0.675em'}}>₹</div>
+                                <span className="font-lg" style={{fontSize:'1.2em'}}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize:'0.675em' }}>00</span>
                             </div>
                             <div className={`df mt-2 text-center aic  ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color:'grey' }}>
-                                <div style={{fontSize:'0.7em'}}>₹</div>
-                                <h1 style={{fontSize:'1rem'}}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize:'0.7em' }}>00</span>
+                                <div style={{fontSize:'0.475em'}}>₹</div>
+                                <h1 style={{fontSize:'1em'}}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize:'0.475em' }}>00</span>
                             </div>
                         </div>
                         {overflow_x&&<span className={`${overflow_x&&"mgt1 bdt"} pd04 font600 df gap03`} style={{background:'aliceblue', fontSize:'0.825rem'}}><TruckElectric size="1rem"/> Deliver in 2 days</span>

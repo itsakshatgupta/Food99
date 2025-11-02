@@ -674,71 +674,71 @@ export default function branches() {
 
         // }
     }, [food_filter])
+    //menu-btn(soft pop up)
+    // useEffect(() => {
 
-    useEffect(() => {
+    //     set_floaters((prev) => [{
+    //         name: 'menu-btn', child:
+    //             <>
+    //                 <div className='df aic jcc pd05 pR' id="lsn-2" style={{ zIndex: 1 }}>
+    //                     <span className="font600 bdBrds bdTrds font1 pdx08 pdy04 df aic gap01" style={{
+    //                         background: 'black',
+    //                         color: 'white',
+    //                         boxShadow: !menuLister && '0 0 12px 1px #b2b2b2',
+    //                         border: '1px solid black',
+    //                         borderRadius: '2rem',
+    //                         transition: 'all 0.5sec'
+    //                     }} onClick={(e) => { if (menu___i) { menuLister ? set_menuLister(false) : set_menuLister(true) } }}><ChevronDown fill='black' color='white' size={22} style={{ transition: 'all 0.6s ease', transform: menuLister && 'rotate(180deg)' }} /><b>Menu</b></span>
+    //                 </div>
 
-        set_floaters((prev) => [{
-            name: 'menu-btn', child:
-                <>
-                    <div className='df aic jcc pd05 pR' id="lsn-2" style={{ zIndex: 1 }}>
-                        <span className="font600 bdBrds bdTrds font1 pdx08 pdy04 df aic gap01" style={{
-                            background: 'black',
-                            color: 'white',
-                            boxShadow: !menuLister && '0 0 12px 1px #b2b2b2',
-                            border: '1px solid black',
-                            borderRadius: '2rem',
-                            transition: 'all 0.5sec'
-                        }} onClick={(e) => { if (menu___i) { menuLister ? set_menuLister(false) : set_menuLister(true) } }}><ChevronDown fill='black' color='white' size={22} style={{ transition: 'all 0.6s ease', transform: menuLister && 'rotate(180deg)' }} /><b>Menu</b></span>
-                    </div>
+    //                 {menuLister && <div className='menu-list'> <>
+    //                     <style>{`
+    //     lowscreen-nav{
+    //     border-top:none !important;
+    //     }
+    //     #lsn-1{
+    //     border-top:1px solid #f8f8f8;
+    //     }
+    //                     `}</style>
+    //                     <style>{`
+    //                         .menu_list{width: 55vw;
+    // // position: absolute;
+    // // bottom: 5px;
+    // // right: 10px;
+    // height: 30vh;
+    // box-shadow: 0 0 12px 1px #b2b2b2;
+    // animation:menu_ani 0.5s linear;
+    // // z-index:1;
+    // }
 
-                    {menuLister && <div className='menu-list'> <>
-                        <style>{`
-        lowscreen-nav{
-        border-top:none !important;
-        }
-        #lsn-1{
-        border-top:1px solid #f8f8f8;
-        }
-                        `}</style>
-                        <style>{`
-                            .menu_list{width: 55vw;
-    // position: absolute;
-    // bottom: 5px;
-    // right: 10px;
-    height: 30vh;
-    box-shadow: 0 0 12px 1px #b2b2b2;
-    animation:menu_ani 0.5s linear;
-    // z-index:1;
-    }
+    // @keyframes menu_ani {
+    // 0% {
+    //     height:0;
+    //     width:0;
+    //     opacity: 0.8;
+    // }
+    // 100% {
+    //     opacity: 1;
+    // }
+    //         }
+    //                     `}</style>
+    //                     <div className="menu_list bdTrds bdBrds oh pA mgy2 bd" style={{ background: '#323232', color: 'white', placeSelf: 'center', bottom: 0, borderColor: 'black' }}>
+    //                         <div className="df fd-c aic gap08 pdy08 hfp oy pdb1">
+    //                             {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy01" key={i}><div className="df aic gap02"><span className="font500">{v.name}</span></div><span>{v.items.length}</span></div>)}
+    //                         </div>
+    //                     </div>
+    //                 </>
+    //                 </div>}
+    //             </>
+    //     }, ...prev]
+    //     );
+    //     return () => {
+    //         set_floaters((prev) => prev.filter((v, i) => v.name !== 'menu-btn'))
 
-    @keyframes menu_ani {
-    0% {
-        height:0;
-        width:0;
-        opacity: 0.8;
-    }
-    100% {
-        opacity: 1;
-    }
-            }
-                        `}</style>
-                        <div className="menu_list bdTrds bdBrds oh pA mgy2 bd" style={{ background: '#323232', color: 'white', placeSelf: 'center', bottom: 0, borderColor: 'black' }}>
-                            <div className="df fd-c aic gap08 pdy08 hfp oy pdb1">
-                                {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy01" key={i}><div className="df aic gap02"><span className="font500">{v.name}</span></div><span>{v.items.length}</span></div>)}
-                            </div>
-                        </div>
-                    </>
-                    </div>}
-                </>
-        }, ...prev]
-        );
-        return () => {
-            set_floaters((prev) => prev.filter((v, i) => v.name !== 'menu-btn'))
-
-            // // This runs when the component is unmounted
-            // mutate("/cart"); // Refresh the cart data when leaving
-        };
-    }, [menu___i, menuLister])
+    //         // // This runs when the component is unmounted
+    //         // mutate("/cart"); // Refresh the cart data when leaving
+    //     };
+    // }, [menu___i, menuLister])
 
     useEffect(() => {
 
