@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Search } from "lucide-react";
+import { Search, TruckElectric } from "lucide-react";
 import Link from "next/link";
 
 export function Search_suggestion({ data, title, col }) {
@@ -24,31 +24,42 @@ export function Search_suggestion({ data, title, col }) {
 }
 
 // components/CategoryGrid.jsx
-export function CategoryGrid({ data, title, col }) {
+export function CategoryGrid({ data, title, col, overflow_x }) {
     return (
-        <section className="w-full pdx05 pdy1">
-            {title &&             
-            <div className="df aic jcsb mb-4 ">
-                <h2 className="text-xl font-semibold pdx02">{title}</h2>
-                <span className="bdrds pdy02 pdx08 font600 font-sm mgr03" style={{color:'white', background:'black'}}>See all</span>
-            </div>}
-            <div className={`grid ${col === 2 ? 'grid-cols-[repeat(auto-fit,minmax(50%,1fr))' : 'grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))'} gap-${col <= 2 ? 4 : 1}`} style={{
+        <section className={`w-full pdy1 ${col&&"pdx05"}`}>
+            {title &&
+                <div className={`df aic jcsb mb-4  ${!col&&"pdx05"}`}>
+                    <h2 className="text-xl font-semibold pdx02">{title}</h2>
+                    <span className="bdrds pdy02 pdx08 font600 font-sm mgr03" style={{ color: 'white', background: 'black' }}>See all</span>
+                </div>}
+            <div className={`${overflow_x?"df aic ox ybg pd1": col === 2 ? 'grid grid-cols-[repeat(auto-fit,minmax(50%,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]'} gap-${col <= 2 ? 4 : 1}`} style={{
                 gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             }}>
                 {data.map((item, i) => (
                     <div
                         key={i}
-                        className={`${col <= 2 ? "p-4" : "p-1"} bg-white ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
+                        className={`${col? col <= 2 ? "p-4" : "p-1": "min-w-[160px] pd05"} bg-white ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
               `}
                     >
                         <Image
                             src={item.image}
                             alt={item.name}
-                            height={col <= 2 ? 150 : 100}
+                            height={col?col <= 2 ? 150 : 100:150}
                             width={100}
-                            className={`w-full ${col <= 2 ? " h-[150px]" : "h-[100px]"} object-cover rounded-lg`}
+                            className={`w-full ${col? col <= 2 ? "h-[150px]" : "h-[100px]": "h-[150px]"} object-cover rounded-lg`}
                         />
-                        <p className="mt-2 font-medium text-center">{item.name}{typeof col}{col ? col : "nuulll"}</p>
+                        <p className="mt-2 font-medium">{item.name}</p>
+                        <div className="df aic gap05 ">
+                            <div className={`df mt-2 font-medium text-center aic ${overflow_x&&"font700"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
+                                <div className={`${overflow_x?"font600":"font500"} font08`}>$</div>
+                                <span className={`${overflow_x?"font600":"font500"} font-lg`}>{159}</span><span className={`${overflow_x?"font600":"font500"} font08`} style={{ alignSelf: 'flex-start' }}>00</span>
+                            </div>
+                            <div className="df mt-2 font-medium text-center aic" style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color:'grey' }}>
+                                <div className="font07 font500">$</div>
+                                <h1>{159 - 25}</h1><span className="font07" style={{ alignSelf: 'flex-start' }}>00</span>
+                            </div>
+                        </div>
+                        <span className="pdx05 pdy02 font600 df aic font-sm gap03" style={{background:'aliceblue'}}><TruckElectric size="1.2rem"/> Deliver in 2 days</span>
                     </div>
                 ))}
             </div>
