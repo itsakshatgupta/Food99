@@ -43,8 +43,9 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                         key={i}
                         className={`${col? col <= 2 ? "p-4" : "p-1": "" } bg-white  oh ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
               `} style={{border:overflow_x&&'1px solid #ccccccff', minWidth:"fit-content"}}
-                    >
-                        <div className="pd04">
+                    >   
+                        <div className="pd04 pR">
+                            <div className={`pA ${col? col <= 2 ? "h-[170px] min-w-[150px]" : "w-full h-[100px]": "h-[160px] min-w-[150px]"}`} style={{background:'#c7c7c717'}}></div>
                         <Image
                             src={item.image}
                             alt={item.name}
