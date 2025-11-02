@@ -61,7 +61,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                                 <div style={{fontSize:'0.9em'}}>₹</div>
                                 <span className="font-lg" style={{fontSize:'1.2em'}}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize:'0.9em' }}>00</span>
                             </div>
-                            <div className={`df mt-2 font-medium text-center aic  ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color:'grey' }}>
+                            <div className={`df mt-2 text-center aic  ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color:'grey' }}>
                                 <div style={{fontSize:'0.7em'}}>₹</div>
                                 <h1 style={{fontSize:'1rem'}}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize:'0.7em' }}>00</span>
                             </div>
