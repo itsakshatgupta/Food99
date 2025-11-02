@@ -8,10 +8,10 @@ export function Search_suggestion({ data, title, col }) {
     const [products, setProducts] = useState([]);
 
     return (
-        <div className=" pdy1 pdx05" style={{ background: 'aliceblue' }}>
+        <div className=" pdt1 pdb2 pdx05" style={{ background: 'aliceblue', borderBlock:'4px solid lightgray' }}>
             <h2 className="text-xl font-semibold mb-3">{title}</h2>
 
-            <div className={`grid gap-${col <= 2 ? 4 : 1}`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
+            <div className={`grid gap-${col <= 2 ? 4 : 1} pdt05`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
                 {data.map((item, i) => (
                     <Link href={`/${item.api}`} key={i} className="rounded-lg overflow-hidden bg-white shadow hover:shadow-lg transition-all bdArds pdy05 pdx1 flex gap-1 align-center">
                         <Search size="1.275rem" />
@@ -26,20 +26,21 @@ export function Search_suggestion({ data, title, col }) {
 // components/CategoryGrid.jsx
 export function CategoryGrid({ data, title, col, overflow_x }) {
     return (
-        <section className={`w-full pdy1 ${col&&"pdx05"}`}>
+        <section className={`w-full pdy1 ${col?"pdx05":"bdy3 "}`} style={{borderBlock:overflow_x&& '4px solid lightgray',
+    background: overflow_x&&'linear-gradient(134deg, #ffffff, #f8efefff_)'}}>
             {title &&
                 <div className={`df aic jcsb mb-4  ${!col&&"pdx05"}`}>
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
                     <span className="bdrds pdy02 pdx08 font600 font-sm mgr03" style={{ color: 'white', background: 'black' }}>See all</span>
                 </div>}
-            <div className={`${overflow_x?"df aic ox ybg pd1": col === 2 ? 'grid grid-cols-[repeat(auto-fit,minmax(50%,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]'} gap-${col <= 2 ? 4 : 1}`} style={{
+            <div className={`${overflow_x?"df aic ox pd1": col === 2 ? 'grid grid-cols-[repeat(auto-fit,minmax(50%,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]'} gap-${col <= 2 ? 4 : 1}`} style={{
                 gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             }}>
                 {data.map((item, i) => (
                     <div
                         key={i}
                         className={`${col? col <= 2 ? "p-4" : "p-1": "min-w-[160px] pd05"} bg-white ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
-              `}
+              `} style={{border:overflow_x&&'1px solid #7f7f7f'}}
                     >
                         <Image
                             src={item.image}
@@ -59,7 +60,8 @@ export function CategoryGrid({ data, title, col, overflow_x }) {
                                 <h1>{159 - 25}</h1><span className="font07" style={{ alignSelf: 'flex-start' }}>00</span>
                             </div>
                         </div>
-                        <span className="pdx05 pdy02 font600 df aic font-sm gap03" style={{background:'aliceblue'}}><TruckElectric size="1.2rem"/> Deliver in 2 days</span>
+                        {overflow_x&&<span className={`${overflow_x&&"mgt09 "} pdy02 font600 df font-sm gap03`} style={{background:'aliceblue_', fontSize:'0.825rem'}}><TruckElectric size="1.1rem"/> Deliver in 2 days</span>
+                    }
                     </div>
                 ))}
             </div>
