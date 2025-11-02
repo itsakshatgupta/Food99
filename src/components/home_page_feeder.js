@@ -56,9 +56,9 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                         </div>
                         <div className="oh">
                         <div className="df aic gap03 ">
-                            <div className={`df mt-2 font-medium text-center aic ${overflow_x&&"font700 pdx05"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
-                                <div className={`${overflow_x?"font600":"font500"} font08`}>$</div>
-                                <span className={`${overflow_x?"font600":"font500"} font-lg`}>{159}</span><span className={`${overflow_x?"font600":"font500"} font08`} style={{ alignSelf: 'flex-start' }}>00</span>
+                            <div className={`df mt-2 text-center aic ${overflow_x?"pdx05 font600":"font500"} ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
+                                <div style={{fontSize:'0.9em'}}>$</div>
+                                <span className="font-lg" style={{fontSize:'1.2em'}}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize:'0.9em' }}>00</span>
                             </div>
                             <div className="df mt-2 font-medium text-center aic" style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color:'grey' }}>
                                 <div className="font07 font500">$</div>
