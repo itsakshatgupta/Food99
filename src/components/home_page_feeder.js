@@ -26,7 +26,7 @@ export function Search_suggestion({ data, title, col }) {
 // components/CategoryGrid.jsx
 export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
     return (
-        <section className={`w-full pdy1 ${col?"pdx05":"bdy3 "} ${bbb.bb&&"bdb"} ${bbb.bt&&"bdt"}`} style={{borderBlock:overflow_x&& '4px solid lightgray',
+        <section className={`w-full pdy1 ${col?"pdx05":"bdy3 "} ${bbb.bb&&"bdb"} ${bbb.bt===true&&"bdt"}`} style={{borderBlock:overflow_x&& '4px solid lightgray',
     background: overflow_x&&'white'}}>
    
 

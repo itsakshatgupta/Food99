@@ -1744,7 +1744,8 @@ export default function branches() {
                                b = {bb:false, bt:i===1?true:false};
                                
                                }else{
-                               b = {bb:['category_grid', 'product_grid'].some((index)=>index===section.type)?true:false, bt:i===1?true:false};
+                               b = {
+                                bb:['category_grid', 'product_grid'].some((index)=>index===section.type)?true:false, bt:i===0?true:false};
                                
                                }
 
