@@ -33,7 +33,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
             {title &&
                 <div className={`df aic jcsb mb-4  ${!col&&"pdx05"}`}>
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
-                    <span className={`bdrds ${overflow_x?'pd05':'pdy02 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x?'black':'white', borderRadius:overflow_x&&"100%", background:overflow_x?'ghostwhite':'black', border:overflow_x&&"1px solid royalblue"}}><ArrowRight size="1.2rem"/></span>
+                    <span className={`bdrds ${overflow_x?'pd05':'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x?'black':'white', borderRadius:overflow_x&&"100%", background:overflow_x?'ghostwhite':'black', border:overflow_x&&"1px solid royalblue"}}><ArrowRight size="1.2rem"/></span>
                 </div>}
             <div className={`${overflow_x?"df aic ox pd1": col === 2 ? 'grid grid-cols-[repeat(auto-fit,minmax(50%,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]'} gap-${col <= 2 ? 4 : 1}`} style={{
                 gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
@@ -50,7 +50,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                             alt={item.name}
                             height={col?col <= 2 ? 150 : 100:150}
                             width={100}
-                            className={` ${col? col <= 2 ? "h-[150px]" : "w-full h-[100px]": "h-[160px] min-w-[150px] "} object-cover rounded-lg`}
+                            className={` ${col? col <= 2 ? "h-[170px] min-w-[160px]" : "w-full h-[100px]": "h-[160px] min-w-[150px] "} object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium">{item.name}</p>
                         </div>
