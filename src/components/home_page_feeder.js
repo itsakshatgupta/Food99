@@ -27,7 +27,7 @@ export function Search_suggestion({ data, title, col }) {
 export function CategoryGrid({ data, title, col, overflow_x }) {
     return (
         <section className={`w-full pdy1 ${col?"pdx05":"bdy3 "}`} style={{borderBlock:overflow_x&& '4px solid lightgray',
-    background: overflow_x&&'linear-gradient(134deg, #ffffff, #f8efefff_)'}}>
+    background: overflow_x&&'white'}}>
             {title &&
                 <div className={`df aic jcsb mb-4  ${!col&&"pdx05"}`}>
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
@@ -40,7 +40,7 @@ export function CategoryGrid({ data, title, col, overflow_x }) {
                     <div
                         key={i}
                         className={`${col? col <= 2 ? "p-4" : "p-1": "min-w-[160px] pd05"} bg-white ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
-              `} style={{border:overflow_x&&'1px solid #7f7f7f'}}
+              `} style={{border:overflow_x&&'1px solid #9b9b9bff'}}
                     >
                         <Image
                             src={item.image}
