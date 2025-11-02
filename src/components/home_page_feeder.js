@@ -44,7 +44,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                         className={`${col? col <= 2 ? "p-4" : "p-1": "" } bg-white  oh ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
               `} style={{border:overflow_x&&'1px solid #ccccccff', minWidth:"fit-content"}}
                     >   
-                        <div className="pd04 pR">
+                        <div className="pdx04 pdt04 pR">
                             <div className={`pA ${col? col <= 2 ? "h-[170px] min-w-[150px]" : "w-full h-[100px]": "h-[160px] min-w-[150px]"}`} style={{background:'#c7c7c717'}}></div>
                         <Image
                             src={item.image}
@@ -58,12 +58,12 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                         <div className="oh">
                         <div className="df aic gap03 ">
                             <div className={`df mt-2 text-center aic ${overflow_x?"pdx05 font600":"font500"} ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
-                                <div style={{fontSize:'0.9em'}}>$</div>
+                                <div style={{fontSize:'0.9em'}}>₹</div>
                                 <span className="font-lg" style={{fontSize:'1.2em'}}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize:'0.9em' }}>00</span>
                             </div>
-                            <div className="df mt-2 font-medium text-center aic" style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color:'grey' }}>
-                                <div className="font07 font500">$</div>
-                                <h1>{159 - 25}</h1><span className="font07" style={{ alignSelf: 'flex-start' }}>00</span>
+                            <div className={`df mt-2 font-medium text-center aic  ${col>2?'font-sm':"font-medium"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color:'grey' }}>
+                                <div style={{fontSize:'0.7em'}}>₹</div>
+                                <h1 style={{fontSize:'1rem'}}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize:'0.7em' }}>00</span>
                             </div>
                         </div>
                         {overflow_x&&<span className={`${overflow_x&&"mgt1 bdt"} pd04 font600 df gap03`} style={{background:'aliceblue', fontSize:'0.825rem'}}><TruckElectric size="1rem"/> Deliver in 2 days</span>
