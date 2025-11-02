@@ -1463,8 +1463,21 @@ export default function branches() {
                 { name: "Juices", image: "/food_img/m.png" },
             ],
         },
-                {
-            id: 8,
+        {
+            id: 9,
+            type: "category_grid",
+            title: "🍱 Popular Categories",
+            gridCol: 2,
+            overflowX: false,
+            items: [
+                { name: "Noodles", image: "/food_img/b.jpg" },
+                { name: "Pizza", image: "/food_img/c.jpg" },
+                { name: "Juices", image: "/food_img/g.jpg" },
+            ],
+        },
+
+        {
+            id: 10,
             type: "category_grid",
             title: "🍱 Most Searched",
             gridCol: false,
@@ -1480,8 +1493,8 @@ export default function branches() {
                 { name: "Juices", image: "/food_img/m.png" },
             ],
         },
-                {
-            id: 8,
+        {
+            id: 11,
             type: "category_grid",
             title: "🍱 Get upto 70% off || Deals Perfect for You",
             gridCol: 3,
@@ -1724,12 +1737,23 @@ export default function branches() {
                     </div>
 
                     {/* </div> */}
-                    {homepageSections.map(section => (
-                        <Feeder
+                    {homepageSections.map((section, i) => {
+                        let b;
+                         let next_arr_child = homepageSections.findIndex((index)=>index===i+1);
+                         if(['category_grid', 'product_grid'].some((index)=>index===next_arr_child.type)){
+                               b = {bb:false, bt:i===1?true:false};
+                               
+                               }else{
+                               b = {bb:['category_grid', 'product_grid'].some((index)=>index===section.type)?true:false, bt:i===1?true:false};
+                               
+                               }
+
+                       return <Feeder
                             key={section.id}
                             section={section}
+                            borderBlockBooleans={b}
                         />
-                    ))}
+})}
 
                     {/* 
                     <div className="fx1" style={{

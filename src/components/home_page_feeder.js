@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Search, TruckElectric } from "lucide-react";
+import { ArrowRight, Search, TruckElectric } from "lucide-react";
 import Link from "next/link";
 
 export function Search_suggestion({ data, title, col }) {
@@ -24,14 +24,16 @@ export function Search_suggestion({ data, title, col }) {
 }
 
 // components/CategoryGrid.jsx
-export function CategoryGrid({ data, title, col, overflow_x }) {
+export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
     return (
-        <section className={`w-full pdy1 ${col?"pdx05":"bdy3 "}`} style={{borderBlock:overflow_x&& '4px solid lightgray',
+        <section className={`w-full pdy1 ${col?"pdx05":"bdy3 "} ${bbb.bb&&"bdb"} ${bbb.bt&&"bdt"}`} style={{borderBlock:overflow_x&& '4px solid lightgray',
     background: overflow_x&&'white'}}>
+   
+
             {title &&
                 <div className={`df aic jcsb mb-4  ${!col&&"pdx05"}`}>
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
-                    <span className="bdrds pdy02 pdx08 font600 font-sm mgr03" style={{ color: 'white', background: 'black' }}>See all</span>
+                    <span className="bdrds pdy02 pdx1 font600 font-sm mgr03" style={{ color: overflow_x?'black':'white', borderRadius:overflow_x&&"100%", background:overflow_x?'ghostwhite':'black', border:overflow_x&&"1px solid royalblue", padding:overflow_x&&"0.5rem !important" }}><ArrowRight size="1.2rem"/></span>
                 </div>}
             <div className={`${overflow_x?"df aic ox pd1": col === 2 ? 'grid grid-cols-[repeat(auto-fit,minmax(50%,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]'} gap-${col <= 2 ? 4 : 1}`} style={{
                 gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
@@ -39,19 +41,22 @@ export function CategoryGrid({ data, title, col, overflow_x }) {
                 {data.map((item, i) => (
                     <div
                         key={i}
-                        className={`${col? col <= 2 ? "p-4" : "p-1": "min-w-[160px] pd05"} bg-white ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
-              `} style={{border:overflow_x&&'1px solid #ccccccff'}}
+                        className={`${col? col <= 2 ? "p-4" : "p-1": "" } bg-white  oh ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
+              `} style={{border:overflow_x&&'1px solid #ccccccff', minWidth:"fit-content"}}
                     >
+                        <div className="pd04">
                         <Image
                             src={item.image}
                             alt={item.name}
                             height={col?col <= 2 ? 150 : 100:150}
                             width={100}
-                            className={`w-full ${col? col <= 2 ? "h-[150px]" : "h-[100px]": "h-[150px]"} object-cover rounded-lg`}
+                            className={` ${col? col <= 2 ? "h-[150px]" : "w-full h-[100px]": "h-[160px] min-w-[150px] "} object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium">{item.name}</p>
-                        <div className="df aic gap05 ">
-                            <div className={`df mt-2 font-medium text-center aic ${overflow_x&&"font700"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
+                        </div>
+                        <div className="oh">
+                        <div className="df aic gap03 ">
+                            <div className={`df mt-2 font-medium text-center aic ${overflow_x&&"font700 pdx05"}`} style={{ overflowWrap: 'break-word',color:overflow_x&&"#129d00ff"}}>
                                 <div className={`${overflow_x?"font600":"font500"} font08`}>$</div>
                                 <span className={`${overflow_x?"font600":"font500"} font-lg`}>{159}</span><span className={`${overflow_x?"font600":"font500"} font08`} style={{ alignSelf: 'flex-start' }}>00</span>
                             </div>
@@ -60,8 +65,9 @@ export function CategoryGrid({ data, title, col, overflow_x }) {
                                 <h1>{159 - 25}</h1><span className="font07" style={{ alignSelf: 'flex-start' }}>00</span>
                             </div>
                         </div>
-                        {overflow_x&&<span className={`${overflow_x&&"mgt09 "} pdy02 font600 df font-sm gap03`} style={{background:'aliceblue_', fontSize:'0.825rem'}}><TruckElectric size="1.1rem"/> Deliver in 2 days</span>
+                        {overflow_x&&<span className={`${overflow_x&&"mgt1 bdt"} pd04 font600 df gap03`} style={{background:'aliceblue', fontSize:'0.825rem'}}><TruckElectric size="1rem"/> Deliver in 2 days</span>
                     }
+                    </div>
                     </div>
                 ))}
             </div>
@@ -110,15 +116,16 @@ export function TrendingSection({ items, col }) {
     );
 }
 
-export function Feeder({ section }) {
+export function Feeder({ section, borderBlockBooleans }) {
+    console.log(2256565484, borderBlockBooleans)
 
     switch (section.type) {
         case "offers":
-            return <OffersSection data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} />;
+            return <OffersSection data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
         case "category_grid":
-            return <CategoryGrid data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} />;
+            return <CategoryGrid data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
         case "search_suggestion":
-            return <Search_suggestion data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} />;
+            return <Search_suggestion data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
 
         default:
             return null;
