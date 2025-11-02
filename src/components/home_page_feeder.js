@@ -50,7 +50,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                             alt={item.name}
                             height={col?col <= 2 ? 150 : 100:150}
                             width={100}
-                            className={` ${col? col <= 2 ? "h-[170px] min-w-[160px]" : "w-full h-[100px]": "h-[160px] min-w-[150px] "} object-cover rounded-lg`}
+                            className={` ${col? col <= 2 ? "h-[170px] min-w-[150px]" : "w-full h-[100px]": "h-[160px] min-w-[150px] "} object-cover rounded-lg`}
                         />
                         <p className="mt-2 font-medium">{item.name}</p>
                         </div>
