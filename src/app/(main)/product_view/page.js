@@ -367,7 +367,7 @@ export default function ProductPage({ product = sampleProduct }) {
 
                             <section className="mb-10 pR z-0 w-[100vw] right-4">
                                 <div id="reviews" className="py-6">
-                                    <h4 className="font-semibold pdx08">Customer Reviews</h4>
+                                    <h4 className="font-semibold text-lg pdx08">Customer Reviews</h4>
                                     {/* Rating Overview Section */}
                                     <div className="flex flex md:flex-row items-center gap1 pd08" style={{ background: 'radial-gradient(#00ffcf33, transparent)', boxShadow: 'inset 0 10px 23px 1px #E3F2FD;' }}>
 
@@ -432,8 +432,8 @@ export default function ProductPage({ product = sampleProduct }) {
                                         </div>
                                     </div>
                                     <div className="bdt oh">
-                                        <div className="pdx05 pdy05 text-medium font600 df aic jcsb ">Reviews Image <ArrowRight size="20px" /></div>
-                                        <div className="df gap1 ox mgy1 sbn mgx05">
+                                        <div className="pdx05 pdt08 pdb03 text-medium font600 df aic jcsb ">Reviews Image <ArrowRight size="20px" /></div>
+                                        <div className="df gap1 ox mgb1 mgt05 sbn mgx05">
 
                                             {product.reviews.map((d, i) =>
                                                 d.img.map(img =>
@@ -466,7 +466,7 @@ export default function ProductPage({ product = sampleProduct }) {
                                                         className="w-10 h-10 rounded-full object-cover"
                                                     />
                                                     <div>
-                                                        <p className="font-medium">{r.user}</p>
+                                                        <p className="font-semibold text-sm">{r.user}</p>
                                                         <div className="flex text-yellow-400">
                                                             {[...Array(5)].map((_, idx) => (
                                                                 <Star
