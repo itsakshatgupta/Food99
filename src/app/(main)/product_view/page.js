@@ -362,14 +362,14 @@ export default function ProductPage({ product = sampleProduct }) {
                                         </div>
                                     ))}
                                 </div>
-
+<div class=" mgt1 bd bdrds pdy02 tac"> <span class="font600 font-sm color-[#1565C0]">See all questions</span></div>
                             </div>
 
                             <section className="mb-10 pR z-0 w-[100vw] right-4">
                                 <div id="reviews" className="py-6">
                                     <h4 className="font-semibold pdx08">Customer Reviews</h4>
                                     {/* Rating Overview Section */}
-                                    <div className="mt-5 flex flex md:flex-row items-center gap1 bg-[#ffff] bdt pd08" style={{background:'radial-gradient(#00ffcf33, transparent)'}}>
+                                    <div className="flex flex md:flex-row items-center gap1 pd08" style={{background:'radial-gradient(#00ffcf33, transparent)', boxShadow:'inset 0 10px 23px 1px #E3F2FD;'}}>
 
                                         {/* Left: Circular Rating Display */}
                                         <div className="df fd-c gap05 jcc aic pd06 bdrds xbg" style={{ boxShadow: '0 0 10px 1px #ddddddff' }}>
