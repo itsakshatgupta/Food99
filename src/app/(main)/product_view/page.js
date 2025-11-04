@@ -457,9 +457,9 @@ export default function ProductPage({ product = sampleProduct }) {
                                     {/* --- Reviews Section --- */}
                                     <div className="bdt mgt05">
                                         {product.reviews.map((r, i) => (
-                                            <div key={i} className=" oh bg-white bdb pdt03">
+                                            <div key={i} className=" oh bg-white bdb pdt03 pdx02 mgt02">
                                                 {/* User image */}
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex items-center gap02">
                                                     <img
                                                         src={'/default_user.png'}
                                                         alt={r.user}
@@ -480,7 +480,7 @@ export default function ProductPage({ product = sampleProduct }) {
                                                     </div>
                                                         </div>
                                                 </div>
-                                                <div className="wfp df xbg aic ox gap1 sbn pdy08 mgb08 pdx05">
+                                                <div className="wfp df xbg aic ox gap1 sbn pdy08 pdx05">
                                                     {r.img.map((img, i) => <div className="df aic pR z-0 bd oh min-w-[90px] h-[90px] bdArds">
                                                         <div className="pA wfp hfp" style={{ zIndex: 1, background: 'black' }}></div>
                                                         <Image
