@@ -183,7 +183,7 @@ export default function MainContext({ device, children }) {
                             {dynamic_portal_ab}
                         </main>
 
-                        {device === 'mobile' && <lowscreen-nav className="df jcsb aic gap05 xfg font-sm pdy05 bdt" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(1rem + 3vmin)' }}>
+                        {device === 'mobile' && <lowscreen-nav className="df z-50 jcsb aic gap05 xfg font-sm pdy05 bdt" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(1rem + 3vmin)' }}>
                             <Link href='/' className="df fd-c aic gap02"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02"><Icon.Catagories /><span>Orders</span></Link><Link href='/cart' className="df fd-c aic gap02"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02"><Icon.Account /><span>Account</span></Link></lowscreen-nav>}
 
                     </div>
@@ -220,7 +220,7 @@ export default function MainContext({ device, children }) {
                                     }
                                 </div>
 
-                                <lowscreen-nav className="df bdt pR" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', zIndex: 2, ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
+                                <lowscreen-nav className="df bdt pR z-50" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem',  ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
                                     {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
                                     <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
                                         <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="df  fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>

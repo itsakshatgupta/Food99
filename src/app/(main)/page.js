@@ -1365,10 +1365,10 @@ export default function branches() {
             gridCol: 2,
             overflowX: false,
             items: [
-                { title: "50% OFF on First Order", code: "WELCOME50", bg: "bg-gradient-to-r from-blue-500 to-indigo-500" },
-                { title: "Free Delivery Above ₹199", code: "FREESHIP", bg: "bg-gradient-to-r from-green-400 to-emerald-500" },
-                { title: "10% Cashback via UPI", code: "UPI10", bg: "bg-gradient-to-r from-rose-400 to-pink-500" },
-                { title: "Flat ₹75 OFF for Students", code: "STUDENT75", bg: "bg-gradient-to-r from-amber-400 to-orange-500" },
+                { title: "50% OFF on First Order", code: "WELCOME50", image: "/test_img/nmk5.jpg", bg: "bg-gradient-to-r from-blue-500 to-indigo-500" },
+                { title: "Free Delivery Above ₹199", code: "FREESHIP", image: "/test_img/nmk2.png", bg: "bg-gradient-to-r from-green-400 to-emerald-500" },
+                { title: "10% Cashback via UPI", code: "UPI10", image: "/test_img/nmk3.jpeg", bg: "bg-gradient-to-r from-rose-400 to-pink-500" },
+                { title: "Flat ₹75 OFF for Students", code: "STUDENT75", image: "/test_img/nmk4.jpg", bg: "bg-gradient-to-r from-amber-400 to-orange-500" },
             ],
         },
         {
