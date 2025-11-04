@@ -341,7 +341,7 @@ export default function ProductPage({ product = sampleProduct }) {
                             </div>
 
                             <div id="specs" className="py-6">
-                                <h4 className="font-semibold mb-2">Technical Specifications</h4>
+                                <h4 className="font-semibold text-lg mb-2">Technical Specifications</h4>
                                 <div className="grid grid-cols-2 gap-2 text-sm">
                                     {Object.entries(product.specs).map(([k, v]) => (
                                         <div key={k} className="flex justify-between border-b py-2">
@@ -352,7 +352,7 @@ export default function ProductPage({ product = sampleProduct }) {
                                 </div>
                             </div>
                             <div id="qa" className="py-6">
-                                <h4 className="font-semibold">Q & A</h4>
+                                <h4 className="font-semibold text-lg">Q & A</h4>
                                 <div className="text-sm text-gray-600">Buyers ask & sellers answer — integrate chat / email.</div>
                                 <div className="space-y-4">
                                     {product.questions.map((qa, i) => (
