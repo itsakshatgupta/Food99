@@ -139,7 +139,7 @@ export default function ProductPage({ product = sampleProduct }) {
     return (
         <>
 
-            <div className="df aic jcsb pd08 gap1 z-50  bg-gradient-to-r from-purple-100 via-voilet-100 to-blue-100 pS top-0" style={{ boxShadow: '0 0 5px 1px #f1f1f1ff'}}>
+            <div className="df aic jcsb pd08 gap1 z-50  bg-gradient-to-r from-purple-100 via-voilet-100 to-blue-100 pS top-0" style={{ boxShadow: '0 0 5px 1px #f1f1f1ff' }}>
 
                 <span className="df aic font-medium font500 gap03"><ArrowLeft size="22px" className="font300" />Continue The Shopping</span>
 
@@ -362,14 +362,14 @@ export default function ProductPage({ product = sampleProduct }) {
                                         </div>
                                     ))}
                                 </div>
-<div class=" mgt1 bd bdrds pdy02 tac"> <span class="font600 font-sm color-[#1565C0]">See all questions</span></div>
+                                <div class=" mgt1 bd bdrds pdy02 tac"> <span class="font600 font-sm text-[#1565C0]">See all questions</span></div>
                             </div>
 
                             <section className="mb-10 pR z-0 w-[100vw] right-4">
                                 <div id="reviews" className="py-6">
                                     <h4 className="font-semibold pdx08">Customer Reviews</h4>
                                     {/* Rating Overview Section */}
-                                    <div className="flex flex md:flex-row items-center gap1 pd08" style={{background:'radial-gradient(#00ffcf33, transparent)', boxShadow:'inset 0 10px 23px 1px #E3F2FD;'}}>
+                                    <div className="flex flex md:flex-row items-center gap1 pd08" style={{ background: 'radial-gradient(#00ffcf33, transparent)', boxShadow: 'inset 0 10px 23px 1px #E3F2FD;' }}>
 
                                         {/* Left: Circular Rating Display */}
                                         <div className="df fd-c gap05 jcc aic pd06 bdrds xbg" style={{ boxShadow: '0 0 10px 1px #ddddddff' }}>
@@ -476,9 +476,9 @@ export default function ProductPage({ product = sampleProduct }) {
                                                                     stroke="#fbbf24"
                                                                 />
                                                             ))}
-                                                    <span className="text-xs mgl02 font500" style={{color:'black'}}>• 9 days ago.</span>
-                                                    </div>
+                                                            <span className="text-xs mgl02 font500" style={{ color: 'black' }}>• 9 days ago.</span>
                                                         </div>
+                                                    </div>
                                                 </div>
                                                 <div className="wfp df xbg aic ox gap1 sbn pdy08 pdx05">
                                                     {r.img.map((img, i) => <div className="df aic pR z-0 bd oh min-w-[90px] h-[90px] bdArds">
@@ -495,12 +495,12 @@ export default function ProductPage({ product = sampleProduct }) {
                                                 </div>
                                                 <div className="pd05">
 
-                                                <p className="text-gray-800">{r.comment}</p>
-                                                <div className="df aic gap1 mgt1 mgb08 text-xs"><span className="pdx05 pdy02 bd bdrds oh df aic gap03 font500 xbg">Helpful <ThumbsUp size="12px" /></span></div>
-                                            </div>
+                                                    <p className="text-gray-800">{r.comment}</p>
+                                                    <div className="df aic gap1 mgt1 mgb08 text-xs"><span className="pdx05 pdy02 bd bdrds oh df aic gap03 font500 xbg">Helpful <ThumbsUp size="12px" /></span></div>
+                                                </div>
                                             </div>
                                         ))}
-                                        <div className="tac mgt1"> <span className="pdx1 pdy05 font600 font-sm  bdArds" style={{color:'white', background:'royalblue'}}>See all reviews</span></div>
+                                        <div className="tac mgt1"> <span className="pdx1 pdy05 font600 font-sm  bdArds" style={{ color: 'white', background: 'royalblue' }}>See all reviews</span></div>
                                     </div>
                                 </div>
                             </section>
