@@ -506,16 +506,16 @@ useEffect(()=>{
                             {search_mode&&
                             <div className="pA wfp  z-[1000] oh">
                             <div className="fd fd-c wfp pR bg-[#043751] z-50 bdBrds text-sm pdy03 pdx05 dropdowneffect">
-                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
                             <div className="df gap05"><span><Search size={18}/></span><span>{searchText}</span></div>
                             </div>
-                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
                             <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
                             </div>
-                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
                             <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
                             </div>
-                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
                             <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
                             </div>
                             </div>
