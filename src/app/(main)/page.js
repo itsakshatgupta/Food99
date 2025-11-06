@@ -501,7 +501,7 @@ export default function branches() {
     useEffect(() => {
         set_slideshow_dots(<>
             {sildeshow_data.map((element, i) =>
-                <span style={{ background: sildeshow_current === i && '#E91E63' }}></span>
+                <span style={{ background: sildeshow_current === i && '#E91E63' }} key={i}></span>
 
             )}
         </>)
@@ -1375,12 +1375,30 @@ export default function branches() {
             id: 2,
             type: "category_grid",
             title: "🍱 Popular Categories",
-            gridCol: 2,
+            gridCol: 3,
             overflowX: false,
             items: [
-                { name: "Noodles", image: "/test_img/nmk1.jpg" },
-                { name: "Pizza", image: "/test_img/nmk2.png" },
-                { name: "Juices", image: "/test_img/nmk3.jpeg" },
+                {
+                    sub_cat: "Clothes", items: [
+                        { name: "Noodles", image: "/test_img/nmk3.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk4.jpg" },
+                        { name: "Juices", image: "/test_img/nmk7.jpeg" },
+                    ],
+                },
+                {
+                    sub_cat: "Foods", items: [
+                        { name: "Noodles", image: "/test_img/nmk3.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk4.jpg" },
+                        { name: "Juices", image: "/test_img/nmk7.jpeg" },
+                    ],
+                },
+                {
+                    sub_cat: "Households", items: [
+                        { name: "Noodles", image: "/test_img/nmk3.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk4.jpg" },
+                        { name: "Juices", image: "/test_img/nmk7.jpeg" },
+                    ],
+                },
             ],
         },
         {
@@ -1397,25 +1415,10 @@ export default function branches() {
         },
         {
             id: 5,
-            type: "category_grid",
+            type: "product_grid",
             title: "🍱 Featured Products",
             gridCol: false,
             overflowX: true,
-            items: [
-                { name: "Noodles", image: "/test_img/nmk8.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk9.webp" },
-                { name: "Juices", image: "/test_img/nmk10.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk11.webp" },
-                { name: "Juices", image: "/test_img/nmk1.jpg" },
-                { name: "Juices", image: "/test_img/nmk12.jpeg" },
-            ],
-        },
-        {
-            id: 6,
-            type: "category_grid",
-            title: "🍱 Trending Near You",
-            gridCol: 3,
-            overflowX: false,
             items: [
                 { name: "Noodles", image: "/test_img/nmk12.webp" },
                 { name: "Pizza", image: "/test_img/nmk13.jpg" },
@@ -1428,57 +1431,202 @@ export default function branches() {
             ],
         },
         {
-            id: 7,
-            type: "product_grid",
-            title: "🍰 Desserts & Sweets",
-            overflowX: false,
-            api: "/api/menu/desserts",
-        },
-        {
-            id: 4,
-            type: "search_suggestion",
-            title: "🥗 Healthy Choices",
-            gridCol: 2,
-            overflowX: false,
-            items: [
-                { name: "Hakka Noodles", image: "/test_img/nmk2.png", api: "/api/menu/trending" },
-                { name: "Pizza Sauce", image: "/test_img/nmk5.jpg", api: "/api/menu/trending" },
-                { name: "Healthy Juices", image: "/test_img/nmk12.jpeg", api: "/api/menu/trending" },
-            ],
-        },
-        {
-            id: 8,
+            id: 1,
             type: "category_grid",
-            title: "🍱 Deal in This Catagorie",
+            title: "🔥 Up to 70% Off — Deal Festival",
             gridCol: 3,
             overflowX: false,
             items: [
-                { name: "Noodles", image: "/test_img/nmk12.webp" },
-                { name: "Pizza", image: "/test_img/nmk13.jpg" },
-                { name: "Juices", image: "/test_img/nmk14.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk14.jpeg" },
-                { name: "Juices", image: "/test_img/nmk14.png" },
-                { name: "Juices", image: "/test_img/nmk15.webp" },
-                                { name: "Noodles", image: "/test_img/nmk12.webp" },
-                { name: "Pizza", image: "/test_img/nmk13.jpg" },
-                { name: "Juices", image: "/test_img/nmk14.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk14.jpeg" },
-                { name: "Juices", image: "/test_img/nmk14.png" },
-                { name: "Juices", image: "/test_img/nmk15.webp" },
-            ],
+                {
+                    sub_cat: "Gourmet Snacks", items: [
+                        { name: "Sesame Crackers", image: "/test_img/nmk13.jpg" },
+                        { name: "Rice Chips", image: "/test_img/nmk15.webp" },
+                        { name: "Oat Bites", image: "/test_img/nmk14.jpeg" },
+                        { name: "Coconut Crisps", image: "/test_img/nmk12.webp" },
+                        { name: "Cumin Sticks", image: "/test_img/nmk14.png" },
+                    ]
+                },
+                {
+                    sub_cat: "Hydration Essentials", items: [
+                        { name: "Vitamin Water", image: "/test_img/nmk14.png" },
+                        { name: "Energy Sipper", image: "/test_img/nmk12.webp" },
+                        { name: "Aloe Booster", image: "/test_img/nmk15.webp" },
+                    ]
+                },
+                {
+                    sub_cat: "Pizzeria Favourites", items: [
+                        { name: "Thin Crust Slice", image: "/test_img/nmk14.jpeg" },
+                        { name: "Cheese Burst", image: "/test_img/nmk14.png" },
+                        { name: "NYC Lava Pizza", image: "/test_img/nmk13.jpg" },
+                        { name: "Mushroom Special", image: "/test_img/nmk15.webp" },
+                    ]
+                },                {
+                    sub_cat: "Gourmet Snacks", items: [
+                        { name: "Sesame Crackers", image: "/test_img/nmk13.jpg" },
+                        { name: "Rice Chips", image: "/test_img/nmk15.webp" },
+                        { name: "Oat Bites", image: "/test_img/nmk14.jpeg" },
+                        { name: "Coconut Crisps", image: "/test_img/nmk12.webp" },
+                        { name: "Cumin Sticks", image: "/test_img/nmk14.png" },
+                    ]
+                },
+                {
+                    sub_cat: "Hydration Essentials", items: [
+                        { name: "Vitamin Water", image: "/test_img/nmk14.png" },
+                        { name: "Energy Sipper", image: "/test_img/nmk12.webp" },
+                        { name: "Aloe Booster", image: "/test_img/nmk15.webp" },
+                    ]
+                },
+                {
+                    sub_cat: "Pizzeria Favourites", items: [
+                        { name: "Thin Crust Slice", image: "/test_img/nmk14.jpeg" },
+                        { name: "Cheese Burst", image: "/test_img/nmk14.png" },
+                        { name: "NYC Lava Pizza", image: "/test_img/nmk13.jpg" },
+                        { name: "Mushroom Special", image: "/test_img/nmk15.webp" },
+                    ]
+                },
+            ]
         },
         {
-            id: 9,
+            id: 2,
             type: "category_grid",
-            title: "🍱 Popular Categories",
-            gridCol: 2,
+            title: "🍱 Grab More — Pay Less",
+            gridCol: 3,
             overflowX: false,
             items: [
-                { name: "Noodles", image: "/test_img/nmk3.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk4.jpg" },
-                { name: "Juices", image: "/test_img/nmk7.jpeg" },
-            ],
+                {
+                    sub_cat: "Asian Bites", items: [
+                        { name: "Ramen Bowl", image: "/test_img/nmk12.webp" },
+                        { name: "Cheese Pot Rice", image: "/test_img/nmk15.webp" },
+                        { name: "Bok Spice Plate", image: "/test_img/nmk14.png" },
+                    ]
+                },
+                {
+                    sub_cat: "Energy Boosters", items: [
+                        { name: "Guava Boost", image: "/test_img/nmk13.jpg" },
+                        { name: "Lychee Rush", image: "/test_img/nmk14.jpeg" },
+                        { name: "Mango Power", image: "/test_img/nmk12.webp" },
+                        { name: "Berry Aminos", image: "/test_img/nmk14.png" },
+                    ]
+                },
+                {
+                    sub_cat: "Baked Specials", items: [
+                        { name: "Stuffed Pizza", image: "/test_img/nmk14.png" },
+                        { name: "Napoli Slice", image: "/test_img/nmk13.jpg" },
+                        { name: "NYC Square", image: "/test_img/nmk15.webp" },
+                    ]
+                },
+                {
+                    sub_cat: "Instant Heat Meals", items: [
+                        { name: "Butter Corn Bowl", image: "/test_img/nmk13.jpg" },
+                        { name: "Hot Noodles", image: "/test_img/nmk14.jpeg" },
+                        { name: "Spice Mix Pot", image: "/test_img/nmk12.webp" },
+                    ]
+                },
+            ]
         },
+        {
+            id: 3,
+            type: "category_grid",
+            title: "🥡 Deal Fiesta — Max Saver Combo",
+            gridCol: 3,
+            overflowX: false,
+            items: [
+                {
+                    sub_cat: "Italian Crust House", items: [
+                        { name: "Roman Crust", image: "/test_img/nmk14.jpeg" },
+                        { name: "Cheese Overload", image: "/test_img/nmk13.jpg" },
+                        { name: "Firewood Slice", image: "/test_img/nmk12.webp" },
+                        { name: "Garlic Toppings", image: "/test_img/nmk15.webp" },
+                    ]
+                },
+                {
+                    sub_cat: "Refreshing Shots", items: [
+                        { name: "Mint Lime", image: "/test_img/nmk14.png" },
+                        { name: "Kiwi Boost", image: "/test_img/nmk15.webp" },
+                        { name: "Lemon Chill", image: "/test_img/nmk12.webp" },
+                        { name: "Berry Punch", image: "/test_img/nmk14.jpeg" },
+                    ]
+                },
+                {
+                    sub_cat: "Asian Pot Flare", items: [
+                        { name: "Soba Noodles", image: "/test_img/nmk14.png" },
+                        { name: "Korean Spicy", image: "/test_img/nmk14.jpeg" },
+                        { name: "Thai Crack Mix", image: "/test_img/nmk13.jpg" },
+                    ]
+                },
+            ]
+        },
+        {
+            id: 4,
+            type: "category_grid",
+            title: "🍕 Crazy Combo Drop — Deal Bomb",
+            gridCol: 3,
+            overflowX: false,
+            items: [
+                {
+                    sub_cat: "Fusion Slices", items: [
+                        { name: "Volcano Slice", image: "/test_img/nmk14.jpeg" },
+                        { name: "Hot Pepperoni", image: "/test_img/nmk15.webp" },
+                        { name: "Smoked Special", image: "/test_img/nmk13.jpg" },
+                        { name: "BBQ Deluxe", image: "/test_img/nmk12.webp" },
+                    ]
+                },
+                {
+                    sub_cat: "Hydro Juicery", items: [
+                        { name: "Cold Press Mix", image: "/test_img/nmk14.png" },
+                        { name: "Mint Hydrate", image: "/test_img/nmk14.png" },
+                        { name: "Fruit Amp", image: "/test_img/nmk12.webp" },
+                    ]
+                },
+                {
+                    sub_cat: "Flavour Filled Pots", items: [
+                        { name: "Schezwan Pot Rice", image: "/test_img/nmk14.jpeg" },
+                        { name: "Cream Noodle Mix", image: "/test_img/nmk13.jpg" },
+                        { name: "Veg Bowl Spice", image: "/test_img/nmk15.webp" },
+                    ]
+                },
+                {
+                    sub_cat: "Ultra Crunch Snacks", items: [
+                        { name: "Salted Chip Mix", image: "/test_img/nmk14.png" },
+                        { name: "Basil Nibbles", image: "/test_img/nmk12.webp" },
+                        { name: "Lemon Salt Crisp", image: "/test_img/nmk15.webp" },
+                        { name: "Rock Salt Crackers", image: "/test_img/nmk13.jpg" },
+                    ]
+                },
+            ]
+        },
+        {
+            id: 5,
+            type: "category_grid",
+            title: "🥤 Best of the Week — Mega Save",
+            gridCol: 3,
+            overflowX: false,
+            items: [
+                {
+                    sub_cat: "Quick Meal Pots", items: [
+                        { name: "Teriyaki Rice", image: "/test_img/nmk14.jpeg" },
+                        { name: "Soy Noodles", image: "/test_img/nmk15.webp" },
+                        { name: "Curry Pot Bites", image: "/test_img/nmk13.jpg" },
+                    ]
+                },
+                {
+                    sub_cat: "Juice Factory", items: [
+                        { name: "Mixed Orange", image: "/test_img/nmk12.webp" },
+                        { name: "Fruit Rush", image: "/test_img/nmk14.png" },
+                        { name: "Berry Lime", image: "/test_img/nmk14.jpeg" },
+                        { name: "Tangy Mojito", image: "/test_img/nmk13.jpg" },
+                    ]
+                },
+                {
+                    sub_cat: "Cheese Oven Crust", items: [
+                        { name: "Double Layer Crust", image: "/test_img/nmk15.webp" },
+                        { name: "Vegan Slice", image: "/test_img/nmk14.png" },
+                        { name: "Giant Slice", image: "/test_img/nmk14.jpeg" },
+                    ]
+                },
+            ]
+        },
+
 
         {
             id: 10,
@@ -1487,17 +1635,21 @@ export default function branches() {
             gridCol: false,
             overflowX: true,
             items: [
-                { name: "Noodles", image: "/test_img/nmk14.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk14.png" },
-                { name: "Juices", image: "/test_img/nmk6.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk10.jpeg" },
-                { name: "Noodles", image: "/test_img/nmk12.webp" },
-                { name: "Pizza", image: "/test_img/nmk13.jpg" },
-                { name: "Juices", image: "/test_img/bs2.webp" },
-                { name: "Pizza", image: "/test_img/bs2.webp" },
-                { name: "Juices", image: "/test_img/nmk15.webp" },
-                { name: "Juices", image: "/test_img/nmk9.webp" },
-            ],
+                {
+                    sub_cat: "Households", items: [
+                        { name: "Noodles", image: "/test_img/nmk14.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk14.png" },
+                        { name: "Juices", image: "/test_img/nmk6.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk10.jpeg" },
+                        { name: "Noodles", image: "/test_img/nmk12.webp" },
+                        { name: "Pizza", image: "/test_img/nmk13.jpg" },
+                        { name: "Juices", image: "/test_img/bs2.webp" },
+                        { name: "Pizza", image: "/test_img/bs2.webp" },
+                        { name: "Juices", image: "/test_img/nmk15.webp" },
+                        { name: "Juices", image: "/test_img/nmk9.webp" },
+                    ],
+                }
+            ]
         },
         {
             id: 11,
@@ -1506,12 +1658,16 @@ export default function branches() {
             gridCol: 3,
             overflowX: false,
             items: [
-                { name: "Noodles", image: "/test_img/nmk12.webp" },
-                { name: "Pizza", image: "/test_img/nmk13.jpg" },
-                { name: "Juices", image: "/test_img/nmk14.jpeg" },
-                { name: "Pizza", image: "/test_img/nmk14.jpeg" },
-                { name: "Juices", image: "/test_img/nmk14.png" },
-                { name: "Juices", image: "/test_img/nmk15.webp" },
+                {
+                    sub_cat: "Households", items: [
+                        { name: "Noodles", image: "/test_img/nmk12.webp" },
+                        { name: "Pizza", image: "/test_img/nmk13.jpg" },
+                        { name: "Juices", image: "/test_img/nmk14.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk14.jpeg" },
+                        { name: "Juices", image: "/test_img/nmk14.png" },
+                        { name: "Juices", image: "/test_img/nmk15.webp" },
+                    ],
+                },
             ],
         },
     ];
@@ -1563,9 +1719,9 @@ export default function branches() {
         </style>
         {/* {console.log(menu___i)} */}
 
-        <div className="pA wfp" style={{ height: '280px', background: 'linear-gradient(to bottom, #8ba1ffff, #d2afffff)', top: 0 }}></div>
+        {device === 'mobile' && <div className="pA wfp" style={{ height: '280px', background: 'linear-gradient(to bottom, #8ba1ffff, #d2afffff)', top: 0 }}></div>}
 
-        <div className={`${isScrolled && "xbg_ bdBrds bdb pdb01"} topbar-container pS `} id="m-container-1" style={{ top: 0, zIndex: 2, backdropFilter: 'blur(1px)', background: isScrolled ? 'white' : 'transparent', borderColor: '#e9f1ffff', transition: 'all 0.3s ease', boxShadow: isScrolled && '0 1px 5px 1px #ecececff' }} ref={top_header}>
+        {device === 'mobile' && <div className={`${isScrolled && "xbg_ bdBrds bdb pdb01"} topbar-container pS `} id="m-container-1" style={{ top: 0, zIndex: 2, backdropFilter: 'blur(1px)', background: isScrolled ? 'white' : 'transparent', borderColor: '#e9f1ffff', transition: 'all 0.3s ease', boxShadow: isScrolled && '0 1px 5px 1px #ecececff' }} ref={top_header}>
 
             <div className="df fd-c pdy09 pdx09 gap1"
             // style={{ background: '#b1261cff', color:'white' }}  
@@ -1613,11 +1769,11 @@ export default function branches() {
                     <span className="df aic pdx05 pdy02 mgr02" ><Mic color='#4056d4ff' size={22} className="mgx05" /></span>
                 </div>
             </div>
-        </div>
+        </div>}
 
-        {mobile_animation_promo}
+        {/* {device === 'mobile' && mobile_animation_promo} */}
 
-        {device === 'mobile' && menu___i ?
+        {device && menu___i ?
             <>
                 <div className='df fd-c xbg pR bdTrds bdt' style={{ zIndex: 1 }}>
                     <div className="df fd-c gap1 mgy1 bdTrds oh xbg pdt05" id="m-container-user-focus-stuffs-1">
@@ -1705,7 +1861,7 @@ export default function branches() {
                             </span>
 
                         </div>
-                        {mobile_banner}
+                        {/* {mobile_banner} */}
                     </div>
 
                     {/* <div className="df aic jcsb bdb pdx1 pdb08 ybg gap3 ox pS " style={{
@@ -1743,22 +1899,23 @@ export default function branches() {
                     {/* </div> */}
                     {homepageSections.map((section, i) => {
                         let b;
-                         let next_arr_child = homepageSections.findIndex((index)=>index===i+1);
-                         if(['category_grid', 'product_grid'].some((index)=>index===next_arr_child.type)){
-                               b = {bb:false, bt:i===1?true:false};
-                               
-                               }else{
-                               b = {
-                                bb:['category_grid', 'product_grid'].some((index)=>index===section.type)?true:false, bt:i===0?true:false};
-                               
-                               }
+                        let next_arr_child = homepageSections.findIndex((index) => index === i + 1);
+                        if (['category_grid', 'product_grid'].some((index) => index === next_arr_child.type)) {
+                            b = { bb: false, bt: i === 1 ? true : false };
 
-                       return <Feeder
-                            key={section.id}
+                        } else {
+                            b = {
+                                bb: ['category_grid', 'product_grid'].some((index) => index === section.type) ? true : false, bt: i === 0 ? true : false
+                            };
+
+                        }
+
+                        return device === 'pc' && section.type === 'search_suggestion' ? "" : <Feeder
+                            key={i}
                             section={section}
                             borderBlockBooleans={b}
                         />
-})}
+                    })}
 
                     {/* 
                     <div className="fx1" style={{
@@ -1788,137 +1945,6 @@ export default function branches() {
 
     </>)
 }
-{/* for pc */ }
-// {device === 'pc' && <div className="hfp oh pR df bdt">
-
-//     <div className="pdx1 pdt1 bdr df fd-c jcsb fxw" style={{ background: '#f8f8f8', width: 'calc(200px + 2rem + 1px)' }}>
-//         <div className="container-A  xs:dn xs:dn df fd-c fxn font-md" style={{ overflow: "hidden", width: '200px', fontWeight: "var(--font-weight-300)", zIndex: '1', borderRadius: '10px' }}>
-//             <ContainerAContents />
-//         </div>
-//         <div className="tac font-sm font300"><span>Terms and Conditions | Privacy Policy</span></div>
-//     </div>
-//     <div className="fx1 df fd-c pR oh">
-//         <div className={`df gap03 fx1 oh`}>
-
-//             <div className="fx1 oy" style={{
-//                 scrollbarColor: '#f8f8f8 white',
-//                 scrollbarWidth: 'thin'
-//             }}>
-//                 <div className="df fd-c pdy1" style={{ position: 'sticky', top: '0' }}>
-//                     <div className="df jcc aic">
-//                         <div className="bd bdrds oh" style={{
-//                             width: '75%',
-//                             height: '11rem',
-//                             borderColor: 'black'
-//                         }}>{banner_}</div>
-//                     </div>
-//                 </div>
-//                 <div>
-//                     <div className="df aic jcsb bdb pdx1 pdy06 xbg gap3 ox" style={{
-//                         scrollbarColor: '#f8f8f8 white',
-//                         scrollbarWidth: 'none'
-//                     }}><div className="df aic gap1 fx1">
-//                             <span className="df aic gap02 font08 pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font900">Trending</span></span>
-//                             <span className="df aic gap02 font08 bd xfg bdrds pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg><span className="font900">Recommended</span></span>
-//                             <span className="df aic gap02 font08 bd xfg bdrds pdx05 pdy03"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#4a810bff"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z" /></svg><span className="font900">Trending</span></span>
-//                             <span className="df"><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#000000"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z" /></svg></span></div>
-//                     </div>
-//                     {menu__.map((ctg, i) => (
-
-//                         <div className="pdy1" key={i}>
-//                             <h2 className="mg0 pdx1 pdy08">{ctg.main_ctg__}</h2>
-//                             <div className={` catg df ${device === 'pc' && 'aic'} pdy1 pdx1 gap2l fxw ${device === 'mobile' && 'fd-c'}`} style={{ gap: '1.5rem' }}>
-//                                 {ctg.items_list__.map((v, i) => (
-//                                     <div key={i}>
-//                                         {device === 'pc' &&
-//                                             <>
-//                                                 <div className="pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} onMouseOut={(e) => { e.currentTarget.children[1].style.display = "none" }}><div className="bd" onClick={() => set_dynamics_portal_main(<Portal_ content={d(ctg.main_ctg__, v.item_name__, v.item_price__)} />)} style={{
-//                                                     width: '110px',
-//                                                     height: "120px",
-//                                                     borderRadius: '10px',
-//                                                     justifySelf: 'center',
-//                                                     background: 'white'
-//                                                 }}></div> <div className="pA add_cart_control_ICart_Control_Indirect oh" style={{ display: 'none', bottom: '-10px' }}><span className="df aic fx1 tac jcc CKEFT" onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo">0</span><span className="df aic fx1 tac jcc CKEFT" onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div></div>
-//                                                 <div className="font-sm" style={{ justifySelf: 'center', marginTop: '13px' }}>{v.item_name__}</div>
-//                                                 <div className="font07 pdx05 bdrds" style={{ justifySelf: 'center', background: 'beige' }}>{v.item_price__}</div>
-//                                             </>
-//                                         }
-//                                         {device === 'mobile' &&
-//                                             <>
-//                                                 <style>
-//                                                     {`
-//                                         .lowscreen-portal{
-//                                           animation:a_lowscreen-porta_ 0.15s linear ;
-//                                         }
-//                                         @keyframes a_lowscreen-porta_{
-//                                         0%{
-//                                         bottom:-100%;
-//                                         }
-//                                         100%{
-//                                         bottom:0;
-//                                         }
-//                                         }`}
-//                                                 </style>
-//                                                 <div className="bd bdrds xbg df jcsb pd1 pdb2">
-//                                                     <div className="pdr06">
-//                                                         <div className="df" style={{ alignItems: 'flex-start' }}>
-//                                                             <h3 className="mg0">{v.item_name__}</h3>
-//                                                             <span className="pdx04 pdy02 bdrds aic font-sm df font600 font07" style={{ background: 'white', color: '#3d5dc7ff' }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#3d5dc7ff"><path d="M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z" /></svg></span>
-//                                                         </div>
-//                                                         <div className="df aic pdt02 pdx02 gap02">
-//                                                             <span className="pdx04 pdy02 bdrds aic font-sm df" style={{ background: 'green', color: 'white', fontSize: '0.75rem' }}>4.5<svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#ffffffff"><path d="M480-644v236l96 74-36-122 90-64H518l-38-124ZM233-120l93-304L80-600h304l96-320 96 320h304L634-424l93 304-247-188-247 188Z" /></svg></span></div>
-//                                                         <div className="font-sm pdt05">{v.item_description__}</div>
-//                                                     </div>
-//                                                     <div>
-//                                                         <div className="df fd-c aic pR" onMouseMoveCapture={(e) => { e.currentTarget.children[1].style.display = "flex" }} ><div className="bd" onClick={() => set_dynamics_portal_main(
-//                                                             <div className="lowscreen-portal pA wfp df fd-c oh" style={{
-//                                                                 background: 'white', bottom: 0,
-//                                                                 borderTop: '1px solid', borderTopRightRadius: '10px', borderTopLeftRadius: '10px'
-//                                                             }}>
-//                                                                 <div className="pdy05 pdx1 font600 bdb">{v.item_name__}  <span className="df" style={{ float: 'right' }} onClick={() => set_dynamics_portal_main(null)}>
-//                                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></span></div>
-//                                                                 <div className="xfg" style={{ height: '200px' }}>Hii</div>
-//                                                                 {/* <div>{v.item_price__}</div> */}
-
-//                                                             </div>
-//                                                         )} style={{
-//                                                             width: '110px',
-//                                                             height: "120px",
-//                                                             borderRadius: '10px',
-//                                                             justifySelf: 'center',
-//                                                             background: 'white'
-//                                                         }}></div> <div className="pA add_cart_control_ICart_Control_Indirect oh font09 font900" style={{ bottom: '-15px', width: "100px", height: '30px' }} ><span className="df aic fx1 tac jcc CKEFT  " onClick={(e) => less(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M200-440v-80h560v80H200Z" /></svg></span><span className="fx1 tac" id="orderNo" style={{ alignContent: 'center' }}>ADD</span><span className="df aic fx1 tac jcc CKEFT " onClick={(e) => add(e)}><svg xmlns="http://www.w3.org/2000/svg" height="0.9rem" viewBox="0 -960 960 960" width="0.9rem" fill="#2c720a"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></span></div></div>
-
-//                                                     </div>
-//                                                 </div>
-//                                             </>
-//                                         }
-//                                     </div>
-//                                 ))}
-//                             </div>
-//                         </div>
-//                     )
-//                     )}
-//                 </div>
-
-//             </div>
-//             {device === 'pc' && dynamic_portal_main}
-//         </div>
-//         {device === 'mobile' && cart_ && <div className="pA pd05l jcsb wfp bdt bdr bdl bdTrds xbg oh" style=
-//             {{ bottom: 0, borderColor: 'black' }}><div className="pd03 font600 bdb" style={{ background: 'lavender', color: 'wlhite' }}><span className='font-sm'>Add item worth 99 and get 50% flat discout</span></div>
-//             <div className="df aic jcsb gap05 bdtl pdy06 pdx05" style={{ borderColor: 'black' }}><span>FI</span>
-//                 <span style={{
-//                     background: 'green',
-//                     color: 'white',
-//                     borderRadius: '10px',
-//                 }}
-//                     className="pd05 xfg df aic pdy07"><span className='df'><Icon.Cart_ c='white' s='24' /></span>Checkout</span>
-//             </div>
-//         </div>}
-//         {device === 'mobile' && dynamic_portal_main}
-//     </div>
-// </div>}
-
 
 function ProductImage({ src, alt, width, height, fallbackSrc }) {
     const [imgSrc, setImgSrc] = useState(src);

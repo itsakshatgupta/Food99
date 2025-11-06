@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { useContext, useEffect, useState } from "react";
-import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory } from 'lucide-react';
+import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, ShoppingBag, Bell, UserCircle, UserCircle2, SearchIcon, MessageSquare } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -312,7 +312,7 @@ export default function Topbar_() {
             l={<div className="font06 font700">
                 <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Yggimy</h4>
                 Food AttheRate
-                </div>
+            </div>
             }
 
             r={
@@ -337,7 +337,7 @@ export default function Topbar_() {
 
                         <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
                             {usr ?
-                                <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background:'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
+                                <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background: 'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
                                     <span className="font900 font09 df aic"><House className="pdx01" size={18} fill="black" />Home<ChevronDown size={15} /></span> Sigra abc colony, Varanasi 221010
                                 </Link>
 
@@ -354,26 +354,100 @@ export default function Topbar_() {
 
 
     }, [device, search_mode, pathname, usr])
+    const SearchIcon = (props) => (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" x2="16.65" y1="21" y2="16.65" />
+        </svg>
+    );
 
+    // Shopping Cart Icon
+    const ShoppingCartIcon = (props) => (
+        <svg {...props} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+    );
 
+    // User/Account Icon
+    const UserIcon = (props) => (
+        <svg {...props} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+    );
 
+    // --- Data ---
+    const categories = [
+        {
+            name: "Hardware",
+            sub: ["Hand Tools", "Power Tools", "Fasteners"],
+        },
+        {
+            name: "Electricals",
+            sub: ["Cables", "Switchgear", "Lighting"],
+        },
+        {
+            name: "Chemicals",
+            sub: ["Solvents", "Adhesives", "Industrial Oils"],
+        },
+        {
+            name: "PPE",
+            sub: ["Gloves", "Helmets", "Safety Shoes"],
+        },
+    ];
+
+useEffect(()=>{
+    if(searchText.length>0){
+        set_search_mode(true);
+    }else{
+        set_search_mode(false);
+    }
+
+},[searchText])
     return (
-        <>
+        <>   <style>{`
+                               .dropdowneffect{
+                               overflow:hidden;
+                               transition:all 1s;
+                               animation:a_dropdowneffect 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                               }
+                               @keyframes a_dropdowneffect{
+                               0%{
+                               top:-100px;
+                               }
+                               100%{
+                               top:0px;
+                               }
+                               }
+                               `}</style>
             {device === "mobile" &&
 
 
                 <Topbar
-            l={<div className="font06 font700">
-                <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Yggimy</h4>
-                Food AttheRate
-                </div>
-            }
+                    l={<div className="font06 font700">
+                        <h4 className="mg0 font900 font-lg" style={{ fontSize: '1.25rem' }}>Yggimy</h4>
+                        Food AttheRate
+                    </div>
+                    }
 
-            r={
-                <>
+                    r={
+                        <>
 
-                    <div className="df aic gap05 wfp">
-                        <style>{`
+                            <div className="df aic gap05 wfp">
+                                <style>{`
                                     .dropdowneffect{
                                     overflow:hidden;
                                     transition:all 1s;
@@ -389,92 +463,113 @@ export default function Topbar_() {
                                     }
                                     `}</style>
 
-                        <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
-                            {usr ?
-                                <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background:'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
-                                    <span className="font900 font09 df aic"><House className="pdx01" size={18} fill="black" />Home<ChevronDown size={15} /></span> Sigra abc colony, Varanasi 221010
-                                </Link>
+                                <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
+                                    {usr ?
+                                        <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background: 'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
+                                            <span className="font900 font09 df aic"><House className="pdx01" size={18} fill="black" />Home<ChevronDown size={15} /></span> Sigra abc colony, Varanasi 221010
+                                        </Link>
 
-                                : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
-                                    color: '#673AB7',
-                                    background: '#EDE7F6'
-                                }}>Login</Link>}
-                            {usr && <Link href="/account" className="df aic fd-c font07 font600 gap01"> <svg version="1.1" id="Capa_1" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.532 45.532" stroke="#000000ff" fill="black"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765 S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53 c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012 c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592 c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path> </g> </g></svg> You</Link>}
+                                        : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
+                                            color: '#673AB7',
+                                            background: '#EDE7F6'
+                                        }}>Login</Link>}
+                                    {usr && <Link href="/account" className="df aic fd-c font07 font600 gap01"> <svg version="1.1" id="Capa_1" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.532 45.532" stroke="#000000ff" fill="black"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765 S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53 c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012 c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592 c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path> </g> </g></svg> You</Link>}
+                                </div>
+                            </div>
+                        </>
+                    }
+                />
+            }
+
+            {device === "pc" &&
+
+                <header className="bg-[#0F172A] text-white font-['Inter', sans-serif] border-b border-gray-700/50 shadow-xl pS z-[500]" style={{top:0}}>
+
+                    {/* Top Row - Brand, Search, Actions */}
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4 md:px-6">
+
+                        {/* Brand */}
+                        <div className="text-2xl font-black tracking-wider text-[#F97316] hover:text-[#FF9900] transition duration-200">
+                            Yggimy
+                        </div>
+
+                        {/* Search Box: Bright White for High Visibility */}
+                        <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR ${search_mode&&'bdTrds'} `} style={{background:search_mode&&'#043751', border:search_mode&&'1pxl solid #043751'}}>
+                            <div className="bg-white rounded-lg flex items-center gap-2.5 p-2.5 shadow-md">
+                                <SearchIcon className="text-gray-500" />
+                                <input
+                                    placeholder="Search sellers • products • distributors"
+                                    className="border-none bg-transparent text-gray-900 w-full outline-none placeholder-gray-500 text-sm"
+                                    onChange={(e)=>{set_searchText(e.target.value)}}
+                                />
+                            </div>
+                            {search_mode&&
+                            <div className="pA wfp  z-[1000] oh">
+                            <div className="fd fd-c wfp pR bg-[#043751] z-50 bdBrds text-sm pdy03 pdx05 dropdowneffect">
+                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df gap05"><span><Search size={18}/></span><span>{searchText}</span></div>
+                            </div>
+                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
+                            </div>
+                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
+                            </div>
+                            <div className="df jcsb pdy05 hover:bg-orange hover:text-black">
+                            <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
+                            </div>
+                            </div>
+</div>
+
+                            }
+                        </div>
+
+                        {/* Actions: Utility Links & Primary CTAs */}
+                        <div className="flex items-center gap-3 flex-wrap justify-center md:justify-end">
+
+                            {/* Utility Links (Track Shipment, RFQ, Messages) */}
+                            {['track Shipment', 'RFQ', 'Messages'].map((b, i) => (
+                                <button key={i} className="text-gray-300 transition-colors hover:text-[#F97316] text-sm font-medium whitespace-nowrap px-2 py-1">
+                                    {b}
+                                </button>
+                            ))}
+
+                            {/* Primary CTA: Cart (Vibrant Orange Background) */}
+                            <button className="flex items-center bg-[#F97316] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-[#FF9900] shadow-lg whitespace-nowrap">
+                                <ShoppingCartIcon />
+                                Cart
+                            </button>
+
+                            {/* Secondary CTA: Account (Bordered White) */}
+                            <button className="flex items-center border border-white/30 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-white/10 whitespace-nowrap">
+                                <UserIcon />
+                                Account
+                            </button>
                         </div>
                     </div>
-                </>
-            }
-        />
-            }
 
-            {device === "pc" && <Topbar
-                l={
-                    <h4 className="mg0 font-sm font-lighter font-lg">Vns Pizza</h4>
-                }
-                m={
-                    <span className="df aic pdy05 pdx1 bd bdrds wfc gap03" style={{
-                        borderColor: '#dbdbdb', width: '100%', minWidth: 'max-content',
-                        maxWidth: '25rem', borderRadius: '5px',
-                        boxShadow: '2px 2px 3px 1px #eeeeee'
-                    }}><svg xmlns="http://www.w3.org/2000/svg" height="1.25rem" viewBox="0 -960 960 960" width="1.25rem" fill="#8BC34A"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" /></svg><span className="font-sm">Search your daily needs here...</span></span>
-                }
-
-                r={
-                    <>
-                        <div className="df gap03 oh mgx1" style={{ alignItems: 'flex-end', whiteSpace: 'nowrap', maxWidth: '320px' }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M360-440h80v-110h80v110h80v-190l-120-80-120 80v190Zm120 254q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" style={{ fontWeight: '900', borderColor: 'black' }} onClickCapture={(e) => toogle_topbar_nav('address_')} id="address" /></svg>
-                            <span>Home: Sigra abc colony, Varanasi 221010</span>
-                        </div>
-                        <div className="df aic gap1">
-                            <div className="__menu_items" style={{
-                                fontWeight: '900',
-                                paddingInline: '5px',
-                                paddingBlock: '5px',
-                                background: 'whitesmoke',
-                                boxShadow: '0 0 3px 0px lightgray'
-                            }} onClickCapture={(e) => toogle_topbar_nav('buy_again_')} id="buy-again"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" /></svg></div>
-
-                            <div className="pR">
-                                <div className="__menu_items bd" style={{
-                                    fontWeight: '900',
-                                    paddingInline: '5px',
-                                    paddingBlock: '5px',
-                                    background: 'whitesmoke',
-                                    boxShadow: '0 0 3px 0px lightgray'
-                                }} onClickCapture={(e) => dynamic(() => import('./cart'), { ssr: 'false', loading: () => <p>Loading</p> })} id="cart">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" /></svg>
+                    {/* Categories Bar (Mega Menu) */}
+                    <div className="bg-[#1E293B] flex flex-wrap justify-center md:justify-start gap-4 md:gap-2 px-4 md:px-6 py-1 border-t border-gray-700/50 text-sm">
+                        {categories.map((cat, index) => (
+                            // Group container for hover effect
+                            <div key={index} className="group relative py-1 px-1 cursor-pointer">
+                                <div className="opacity-95 transition-all group-hover:opacity-100 group-hover:text-[#F97316] text-xs font500">
+                                    {cat.name}
                                 </div>
-                                <span className="pA" style={{
-                                    top: '-2px',
-                                    right: '0px',
-                                    background: '#FFC107',
-                                    paddingInline: '4px',
-                                    borderRadius: '10px',
-                                    fontSize: '11px',
-                                    border: '1px solid navy'
-                                }}
-                                >{cart_}</span></div>
 
-                            <div className="pR">
-                                <div className="__menu_items bd" style={{
-                                    fontWeight: '900',
-                                    paddingInline: '5px',
-                                    paddingBlock: '5px',
-                                    background: '#f1f8e9',
-                                    boxShadow: '0 0 3px 0px lightgray'
-                                }} onClickCapture={(e) => toogle_topbar_nav('cart_')} id="cart">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#8bc34a"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z" /></svg>
-                                </div></div>
-
-
-                            <a className="__menu_items bd" style={{ borderColor: 'orangered', borderStyle: 'dashed', color: 'orangered', background: 'antiquewhite' }} onClickCapture={(e) => toogle_topbar_nav('buy_again_')}><div>Coupons</div></a>
-                            <span className="df" id="account_" title="Account" onClickCapture={(e) => toogle_topbar_nav('account_')} style={{ "--local-ht-color": "white" }} >
-                                <svg className="native-btn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" /></svg>
-                            </span>
-                        </div>
-                    </>
-                }
-            />}
+                                {/* Mega Menu Dropdown */}
+                                <div className="mega absolute top-full mt-2 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 hidden group-hover:block bg-[#1E293B] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
+                                    {cat.sub.map((item, subIndex) => (
+                                        <span key={subIndex} className="block text-gray-300 py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </header>
+            }
         </>
     )
 }

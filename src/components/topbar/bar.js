@@ -8,7 +8,8 @@ export default function Topbar({ l, m, r }) {
 
   return (<>
     <style>{`.fx1_5{flex:1.5}`}</style>
-    <div className={`df jcsb aic ${device == 'pc' ? 'pd1' : null} gap05 `} id="topbar" style={{ "--local-font-size": "1.3rem", borderBottomColor: 'black' }}>
+    <div className={`df jcsb aic ${device == 'pc' ? 'pd1' : null} gap05 font500 ${device==='pc'&& 'text-white'} `} id="topbar" style={{ "--local-font-size": "1.3rem", borderBottomColor: 'black',background: device==='pc'&&'#1c1854'
+}}>
       <style>
         {`
           .xbg span.material-symbols-outlined:hover{

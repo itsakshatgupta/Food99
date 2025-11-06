@@ -1,11 +1,39 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Image from "next/image";
 import { ArrowRight, Search, TruckElectric } from "lucide-react";
 import Link from "next/link";
+import { dynamic_ } from "./main-context";
+
+function cdt() {
+    const { device } = useContext(dynamic_);
+
+    let r;
+    return device === 'pc' ? 3 : 2
+}
+function imgDimensionCalc() {
+    const { device } = useContext(dynamic_);
+
+    let pc_d = { width: 160, height: 170 };
+    let mobile_d = { width: 140, height: 150 };
+
+    let width_;
+    let height_;
+
+    if (device === 'pc') {
+        width_ = pc_d.width;
+        height_ = pc_d.height;
+
+    } else {
+        width_ = mobile_d.width;
+        height_ = mobile_d.height;
+    }
+    return `min-w-[${width_}px] min-h-[${height_}]`;
+}
 
 export function Search_suggestion({ data, title, col }) {
     const [products, setProducts] = useState([]);
+    const { device } = useContext(dynamic_);
 
     return (
         <div className=" pdt1 pdb2 pdx05" style={{ background: 'aliceblue', borderBlock: '4px solid lightgray' }}>
@@ -25,53 +53,130 @@ export function Search_suggestion({ data, title, col }) {
 
 // components/CategoryGrid.jsx
 export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
+    const { device } = useContext(dynamic_);
+
+
     return (
         <section className={`w-full pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
             borderBlock: overflow_x && '4px solid lightgray',
             background: overflow_x && 'white'
         }}>
 
+            {title &&
+                <div className={`df aic jcsb mb-4  ${!col && "pdx05"}`}>
+                    <h2 className="text-xl font-semibold pdx02">{title}</h2>
+                    <span className={`bdrds ${overflow_x ? 'pd05' : 'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x ? 'black' : 'white', borderRadius: overflow_x && "100%", background: overflow_x ? 'ghostwhite' : 'black', border: overflow_x && "1px solid royalblue" }}><ArrowRight size="1.2rem" /></span>
+                </div>}
+            <div className={`grid grid-cols-${col} gap-4`}
+            //  style={{
+            //     gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
+            // }}
+            >
+                {data.map((item, i) => (
+                    <div className={`shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05`} key={i}>
+                        <div>{item.sub_cat}</div>
+                        <div className={`grid grid-cols-${col} gap-2 p-2 ${device === 'pc' && overflow_x ? "wfp bdrds" : "wfc"} xbg`}>
+                            {item.items.map((sI, i) => (
+                                <div
+                                    key={i}
+                                    className={`${col ? col <= 2 ? "p-4" : "p-1" : ""} bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
+              `} style={{ border: overflow_x && '1px solid #0a0606ff', minWidth: "fit-content" }}
+                                >
+                                    <div className="mgx04 pdt04 pR">
+                                        <div className={`pA w-full h-full`} style={{ background: '#c7c7c717' }}></div>
+                                        <Image
+                                            src={sI.image}
+                                            alt={sI.name}
+                                            height={col ? col <= 2 ? 150 : 100 : 140}
+                                            width={100}
+                                            className={`${imgDimensionCalc()} object-contain rounded-lg`}
+                                        />
+                                        <p className="mt-2 font-medium md:text-sm">{sI.name}</p>
+                                    </div>
+                                    <div className="oh">
+                                        <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
+                                            <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
+                                                <div style={{ fontSize: '0.675em' }}>₹</div>
+                                                <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
+                                            </div>
+                                            <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
+                                                <div style={{ fontSize: '0.475em' }}>₹</div>
+                                                <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
+                                            </div>
+                                        </div>
+                                        {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 md:text-500 df gap03 sm:text-sm md:text-xs`} style={{ background: 'aliceblue' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>
+                                        }
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}
+
+// components/ProductGrid.jsx
+export function ProductGrid({ data, title, col, overflow_x, bbb }) {
+    const { device } = useContext(dynamic_);
+    return (
+        <section className={`w-full pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
+            borderBlock: overflow_x && '4px solid lightgray',
+            background: overflow_x && 'white'
+        }}>
 
             {title &&
                 <div className={`df aic jcsb mb-4  ${!col && "pdx05"}`}>
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
                     <span className={`bdrds ${overflow_x ? 'pd05' : 'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x ? 'black' : 'white', borderRadius: overflow_x && "100%", background: overflow_x ? 'ghostwhite' : 'black', border: overflow_x && "1px solid royalblue" }}><ArrowRight size="1.2rem" /></span>
                 </div>}
-            <div className={`${overflow_x ? "df aic ox pd1" : col === 2 ? 'grid grid-cols-[repeat(auto-fit,minmax(50%,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(33.33%,1fr))]'} gap-${col <= 2 ? 4 : 1}`} style={{
-                gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
-            }}>
-                {data.map((item, i) => (
-                    <div
-                        key={i}
-                        className={`${col ? col <= 2 ? "p-4" : "p-1" : ""} bg-white  oh ${col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
-              `} style={{ border: overflow_x && '1px solid #ccccccff', minWidth: "fit-content" }}
-                    >
-                        <div className="pdx04 pdt04 pR">
-                            <div className={`pA ${col ? col <= 2 ? "h-[170px] min-w-[150px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"}`} style={{ background: '#c7c7c717' }}></div>
-                            <Image
-                                src={item.image}
-                                alt={item.name}
-                                height={col ? col <= 2 ? 150 : 100 : 150}
-                                width={100}
-                                className={` ${col ? col <= 2 ? "h-[170px] min-w-[150px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px] "} object-cover rounded-lg`}
-                            />
-                            <p className="mt-2 font-medium">{item.name}</p>
-                        </div>
-                        <div className="oh">
-                            <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
-                                <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col > 2 ? 'font-sm' : "font-medium"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
-                                    <div style={{ fontSize: '0.675em' }}>₹</div>
-                                    <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
-                                </div>
-                                <div className={`df mt-2 text-center aic  ${col > 2 ? 'font-sm' : "font-medium"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
-                                    <div style={{ fontSize: '0.475em' }}>₹</div>
-                                    <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
-                                </div>
+            <div className={`
+            ${overflow_x ? "df aic ox pd1" : col === 2 ? 'grid grid-cols-[repeat(auto-fill,minmax(21rem,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]'} gap-${!device === 'pc' && overflow_x ? col <= 2 ? 4 : 1 : 2}
+            `}
+            //  style={{
+            //     gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
+            // }}
+            >
+                {data.map((item, i_) => (
+                    <div className={`pd05 `} key={i_}>
+
+
+
+                        <div
+
+                            className={`"p-4 bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : "rounded-xl shadow-sm hover:shadow-md"} transition 
+              `}
+                        >
+                            <div className="mgx04 pdt04 pR">
+                                <div className={`pA h-full w-full`} style={{ background: '#c7c7c717' }}></div>
+                                <Image
+                                    src={item.image}
+                                    alt={item.name}
+                                    height={col ? col <= 2 ? 150 : 100 : 140}
+                                    width={100}
+                                    className={` ${!device === 'pc' && overflow_x ? col ? col <= 2 ? "h-[170px] min-w-[150px]" : "w-full h-[100px]" : "h-[160px] min-w-[170px] " : " min-w-[150px] min-h-[170px]"} object-contain rounded-lg`}
+                                />
+                                <p className="mt-2 font-medium md:text-sm">{item.name}</p>
                             </div>
-                            {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 df gap03`} style={{ background: 'aliceblue', fontSize: '0.825rem' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>
-                            }
+                            <div className="oh">
+                                <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
+                                    <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
+                                        <div style={{ fontSize: '0.675em' }}>₹</div>
+                                        <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
+                                    </div>
+                                    <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
+                                        <div style={{ fontSize: '0.475em' }}>₹</div>
+                                        <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
+                                    </div>
+                                </div>
+                                {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 md:text-500 df gap03 sm:text-sm md:text-xs`} style={{ background: 'aliceblue' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>
+                                }
+                            </div>
                         </div>
+
                     </div>
+
                 ))}
             </div>
         </section>
@@ -81,40 +186,10 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
 // components/OffersSection.jsx
 export function OffersSection({ data, title, col }) {
     return (
-        <section className="w-full bg-gradient-to-r from-yellow-100 via-pink-100 to-red-100 pdx1 pdb2 rounded-2xl" style={{ paddingTop: '1.5rem', background:'lavender' }}>
-            <div className="df aic jcsb mb-3">
-            <h2 className="text-xl font-semibold">{title}</h2>
-            <div className="df aic bdArds bd ybg font-sm pd04 font600" style={{background:'gold'}}>More Offers<ArrowRight size="1.2rem" />
-            {/* <span className={`bdrds pd02 font600 font-sm`} style={{ color: 'white', borderRadius: "100%", background:'black', border: "1px solid royalblue" }}></span> */}
-            </div>
-            </div>
-            <div className={`grid grid-cols-[repeat(auto-fit,minmax(143px,1fr))] gap-5 pdx1 pdy2 bdrds mgt1`} style={{
-                background: 'ghostwhite',
-                gridtemplateColumns: 'repeat(auto-fit, minmax(142px, 1fr))',
-                border: '2px solid #D1C4E9'
-            }}>
-                {data.map((offer, i) => (
-                    <div key={i} className="bg-white rounded-xl oh shadow hover:shadow-lg transition p-[2px]" style={{
-                        background: 'black',
-                        color: 'white',
-                        border: '1px solid #D1C4E9',
-                        overflow: 'hidden'
-                    }}>
-                        <div className={`${title.bg} pR  bg-gradient-to-r from-yellow-200 via-pink-200 to-red-200 rounded-xl wfp df aic jcc pd02`}>
-                            {/* <div className={`pA ${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"}`} style={{ background: '#cecece16', zIndex:3 }}></div> */}
-                            <div className={`pA ${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"} rounded-lg`} style={{ background: '#ffffffff', zIndex: 1 }}></div>
-                            <Image
-                                src={offer.image}
-                                alt={title}
-                                height={col ? col <= 2 ? 150 : 100 : 150}
-                                width={100}
-                                className={` ${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px] "} object-cover rounded-lg`}
-                                style={{ zIndex: 2 }}
-                            /></div>
-                        <p className="font-medium text-center pdy04">{offer.title}{col ? col : 2222}</p>
-                    </div>
-                ))}
-            </div>
+        <section className="w-full bg-gradient-to-r from-yellow-100 via-pink-100 to-red-100 pdx1 pdb2 xfg" style={{ paddingTop: '1.5rem' }}>
+
+                <div className={`${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"} rounded-lg`} style={{ background: '#3b49e3ff', zIndex: 1, border: '2px solid #17338fff' }}></div>
+      
         </section>
     );
 }
@@ -145,14 +220,17 @@ export function TrendingSection({ items, col }) {
 
 export function Feeder({ section, borderBlockBooleans }) {
     console.log(2256565484, borderBlockBooleans)
+    let c = cdt();
 
     switch (section.type) {
         case "offers":
-            return <OffersSection data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+            return <OffersSection data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
         case "category_grid":
-            return <CategoryGrid data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+            return <CategoryGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+        case "product_grid":
+            return <ProductGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
         case "search_suggestion":
-            return <Search_suggestion data={section.items} title={section.title} col={section.gridCol} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+            return <Search_suggestion data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
 
         default:
             return null;

@@ -167,7 +167,7 @@ export default function MainContext({ device, children }) {
 
     return (
         <>
-            {device === 'pc' &&
+            {device === 'pcl' &&
                 <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab }}>
 
                     <div className="df fd-c hfp wfp">
@@ -191,11 +191,11 @@ export default function MainContext({ device, children }) {
             }
 
 
-            {device === 'mobile' && <>
+            {device && <>
                 <menu_.Provider value={{ menu___i }}>
                     <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option }}>
 
-
+{device==='pc'&& <Topbar_ topbar={<Topbar />} />}
                         <div className="hfp wfp df fd-c" style={{ alignContent: 'space-between' }}>
 
                             <main className="main fx1" ref={mainRef} >
@@ -220,7 +220,7 @@ export default function MainContext({ device, children }) {
                                     }
                                 </div>
 
-                                <lowscreen-nav className="df bdt pR z-50" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem',  ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
+                                <lowscreen-nav className="flex md:hidden bdt pR z-50" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem',  ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
                                     {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
                                     <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
                                         <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="df  fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
