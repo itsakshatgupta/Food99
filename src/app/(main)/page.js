@@ -1632,10 +1632,36 @@ export default function branches() {
             id: 10,
             type: "category_grid",
             title: "🍱 Most Searched",
-            gridCol: false,
-            overflowX: true,
+            gridCol: 3,
+            overflowX: false,
             items: [
                 {
+                    sub_cat: "Households", items: [
+                        { name: "Noodles", image: "/test_img/nmk14.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk14.png" },
+                        { name: "Juices", image: "/test_img/nmk6.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk10.jpeg" },
+                        { name: "Noodles", image: "/test_img/nmk12.webp" },
+                        { name: "Pizza", image: "/test_img/nmk13.jpg" },
+                        { name: "Juices", image: "/test_img/bs2.webp" },
+                        { name: "Pizza", image: "/test_img/bs2.webp" },
+                        { name: "Juices", image: "/test_img/nmk15.webp" },
+                        { name: "Juices", image: "/test_img/nmk9.webp" },
+                    ],
+                },                {
+                    sub_cat: "Households", items: [
+                        { name: "Noodles", image: "/test_img/nmk14.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk14.png" },
+                        { name: "Juices", image: "/test_img/nmk6.jpeg" },
+                        { name: "Pizza", image: "/test_img/nmk10.jpeg" },
+                        { name: "Noodles", image: "/test_img/nmk12.webp" },
+                        { name: "Pizza", image: "/test_img/nmk13.jpg" },
+                        { name: "Juices", image: "/test_img/bs2.webp" },
+                        { name: "Pizza", image: "/test_img/bs2.webp" },
+                        { name: "Juices", image: "/test_img/nmk15.webp" },
+                        { name: "Juices", image: "/test_img/nmk9.webp" },
+                    ],
+                },                {
                     sub_cat: "Households", items: [
                         { name: "Noodles", image: "/test_img/nmk14.jpeg" },
                         { name: "Pizza", image: "/test_img/nmk14.png" },
@@ -1775,8 +1801,8 @@ export default function branches() {
 
         {device && menu___i ?
             <>
-                <div className='df fd-c xbg pR bdTrds bdt' style={{ zIndex: 1 }}>
-                    <div className="df fd-c gap1 mgy1 bdTrds oh xbg pdt05" id="m-container-user-focus-stuffs-1">
+                <div className='df fd-c xbg pR' style={{ zIndex: 1 }}>
+                    <div className="df fd-c gap1 pdy1 xfg bdBrds oh pdt05" id="m-container-user-focus-stuffs-1">
                         <div className="df gap05 fx1 ox pdx05 sbn">
                             <span className="df fd-c aic gap02 font08 pdx05 pdy03">
                                 <Image

@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { useContext, useEffect, useState } from "react";
-import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, ShoppingBag, Bell, UserCircle, UserCircle2, SearchIcon, MessageSquare } from 'lucide-react';
+import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, ShoppingBag, Bell, UserCircle, UserCircle2, SearchIcon, MessageSquare, Camera } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -409,14 +409,14 @@ export default function Topbar_() {
         },
     ];
 
-useEffect(()=>{
-    if(searchText.length>0){
-        set_search_mode(true);
-    }else{
-        set_search_mode(false);
-    }
+    useEffect(() => {
+        if (searchText.length > 0) {
+            set_search_mode(true);
+        } else {
+            set_search_mode(false);
+        }
 
-},[searchText])
+    }, [searchText])
     return (
         <>   <style>{`
                                .dropdowneffect{
@@ -483,7 +483,7 @@ useEffect(()=>{
 
             {device === "pc" &&
 
-                <header className="bg-[#0F172A] text-white font-['Inter', sans-serif] border-b border-gray-700/50 shadow-xl pS z-[500]" style={{top:0}}>
+                <header className="bg-[#0F172A] text-white font-['Inter', sans-serif] border-b border-gray-700/50 shadow-xl pS z-[500]" style={{ top: 0 }}>
 
                     {/* Top Row - Brand, Search, Actions */}
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4 md:px-6">
@@ -494,32 +494,43 @@ useEffect(()=>{
                         </div>
 
                         {/* Search Box: Bright White for High Visibility */}
-                        <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR ${search_mode&&'bdTrds'} `} style={{background:search_mode&&'#043751', border:search_mode&&'1pxl solid #043751'}}>
-                            <div className="bg-white rounded-lg flex items-center gap-2.5 p-2.5 shadow-md">
-                                <SearchIcon className="text-gray-500" />
-                                <input
-                                    placeholder="Search sellers • products • distributors"
-                                    className="border-none bg-transparent text-gray-900 w-full outline-none placeholder-gray-500 text-sm"
-                                    onChange={(e)=>{set_searchText(e.target.value)}}
-                                />
+                        <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR ${search_mode && 'bdTrds xbg_'} `}>
+                            <div className={`df oh xbg $ ${search_mode ? ' bdTrds ' : 'shadow-md rounded-lg '}`}>
+                                    <span className={`df aic pdx07 text-black transition duration-200 ${search_mode ? '' : 'bg-[chocolate]'}`}>
+                                        <Search size={22}/>
+                                    </span>
+                                <div className={`flex items-center gap-2.5 p-2.5 fx1`} >
+                                    <input
+                                        placeholder="Search sellers • products • distributors"
+                                        className="border-none bg-transparent text-gray-900 fx1 outline-none placeholder-gray-500 text-sm"
+                                        id="search-input_main"
+                                        onChange={(e) => { set_searchText(e.target.value) }}
+                                    />
+                                    <div className="df aic gap-4 mgr02 text-[#414141ff]">
+                                        <span className="df bdrds pd01 hover:bg-gray-200" style={{ visibility: searchText === "" && 'hidden' }} onClick={(e) => { document.querySelector('#search-input_main').value = ""; set_searchText("") }}><Icon.close s={20} fill="#414141ff" /></span>
+                                        <div className="df aic gap-3 text-[#414141ff] bdrds pdy02 pdx05 bg-[aliceblue]">
+                                            <span className="df aic hover:text-[#F97316]" ><Mic size={22} className="mgx05_" fill="currentcolor" stroke="aliceblue" /></span><span className="df aic hover:text-[#F97316]" ><Camera size={22} fill="currentcolor" stroke="aliceblue" /></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            {search_mode&&
-                            <div className="pA wfp  z-[1000] oh">
-                            <div className="fd fd-c wfp pR bg-[#043751] z-50 bdBrds text-sm pdy03 pdx05 dropdowneffect">
-                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
-                            <div className="df gap05"><span><Search size={18}/></span><span>{searchText}</span></div>
-                            </div>
-                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
-                            <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
-                            </div>
-                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
-                            <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
-                            </div>
-                            <div className="df jcsb pdy05 hover:bg-[#fafafa] hover:text-black">
-                            <div className="df gap05"><span><ExternalLink size={18}/></span><span>Helsd</span></div>
-                            </div>
-                            </div>
-</div>
+                            {search_mode &&
+                                <div className="pA w-full  z-[1000] oh text-black ">
+                                    <div className="fd fd-c w-full pR xbg z-50 bdBrds text-sm pdy03 pdx04 dropdowneffect bdBrds" >
+                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                            <div className="df gap05"><span><Search size={18} /></span><span>{searchText}</span></div>
+                                        </div>
+                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                            <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
+                                        </div>
+                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                            <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
+                                        </div>
+                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                            <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             }
                         </div>

@@ -186,9 +186,9 @@ export function ProductGrid({ data, title, col, overflow_x, bbb }) {
 // components/OffersSection.jsx
 export function OffersSection({ data, title, col }) {
     return (
-        <section className="w-full bg-gradient-to-r from-yellow-100 via-pink-100 to-red-100 pdx1 pdb2 xfg" style={{ paddingTop: '1.5rem' }}>
+        <section className="w-full bg-gradient-to-r from-yellow-100 via-pink-100 to-red-100 pdx2 pdb2 xbg" style={{ paddingTop: '1.5rem' }}>
 
-                <div className={`${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"} rounded-lg`} style={{ background: '#3b49e3ff', zIndex: 1, border: '2px solid #17338fff' }}></div>
+                <div className={`${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"} rounded-lg`} style={{ background: 'royalblue', zIndex: 1}}></div>
       
         </section>
     );
