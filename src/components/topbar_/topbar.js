@@ -540,11 +540,11 @@ export default function Topbar_() {
                                         </div>
                                     </div>
                                    <div className="df aic jcsb bdt pdx08 pdy05 font08">
-                                        <i><span className="text-gray-500">Categories:<span className={`mgl03 font07 font500 transition duration-100 text-[black] ${search_mode && 'bg-gray-300 pdy01'}`} style={{
+                                        <span className="text-gray-500"><i>Categories:</i><span className={`mgl03 font07 font500 transition duration-100 text-[black] ${search_mode && 'bg-gray-300 pdy01'}`} style={{
                                             paddingInline: search_mode && '6px',
                                             borderRadius: '5px'
                                         }}
-                                        >All</span></span></i>
+                                        >All</span></span>
                                         <span className="text-xs text-gray-400"><i>**Search Suggestions</i></span>
                                     </div>
                                     </div>
