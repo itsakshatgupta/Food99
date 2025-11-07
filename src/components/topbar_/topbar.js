@@ -496,16 +496,18 @@ export default function Topbar_() {
                         {/* Search Box: Bright White for High Visibility */}
                         <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR ${search_mode && 'bdTrds xbg_'} `}>
                             <div className={`df oh xbg $ ${search_mode ? ' bdTrds ' : 'shadow-md rounded-lg '}`}>
-                                <span className={`df aic pdx07 text-black transition duration-200 gap-1 ${search_mode ? '' : 'bg-[chocolate]'}`}>
-                                   {!search_mode&&<Search size={20} />}
-                                    <span className={`bg-[; text-xs font500 transition duration-100 ${search_mode&&'bg-[black] text-[white] pdy02'}`} style={{
-                                         paddingInline: search_mode&&'10px',
-                                        borderRadius: '5px'
-                                    }}
-                                    >All</span>
+                                <span className={`df aic pdx07 text-black transition duration-100 gap-1 ${search_mode ? '' : 'bg-[chocolate]'}`}>
+                                    <Search size={20} />
+                                    {!search_mode && <>
+                                        <span className={`bg-[; text-xs font500 transition duration-100 ${search_mode && 'bg-[black] text-[white] pdy02'}`} style={{
+                                            paddingInline: search_mode && '10px',
+                                            borderRadius: '5px'
+                                        }}
+                                        >All</span>
+                                    </>
+                                    }
                                 </span>
-                                <div className={`flex items-center gap01 p-2.5 fx1`} >
-                                   {search_mode&&<Search size={18} fill={'white'} stroke={'lightblue'}/>}
+                                <div className={`flex items-center gap-2.5 p-2.5 fx1`} >
                                     <input
                                         placeholder="Search sellers • products • distributors"
                                         className="border-none bg-transparent text-gray-900 fx1 outline-none placeholder-gray-500 text-sm"
@@ -521,8 +523,9 @@ export default function Topbar_() {
                                 </div>
                             </div>
                             {search_mode &&
-                                <div className="pA w-full  z-[1000] oh text-black ">
-                                    <div className="fd fd-c w-full pR xbg z-50 bdBrds text-sm pdy03 pdx04 dropdowneffect bdBrds" >
+                                <div className="pA w-full  z-[1000] oh text-black xbg z-50 bdBrds shadow-md">
+                                    <div className="pR dropdowneffect">
+                                    <div className="fd fd-c w-full pR text-sm pdy03 pdx04 dropdowneffect_ bdBrds" >
                                         <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
                                             <div className="df gap05"><span><Search size={18} /></span><span>{searchText}</span></div>
                                         </div>
@@ -535,6 +538,15 @@ export default function Topbar_() {
                                         <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
                                             <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
                                         </div>
+                                    </div>
+                                   <div className="df aic jcsb bdt pdx08 pdy05 font08">
+                                        <span className="text-gray-500"><i>Categories:</i><span className={`mgl03 font07 font500 transition duration-100 text-[black] ${search_mode && 'bg-gray-300 pdy01'}`} style={{
+                                            paddingInline: search_mode && '6px',
+                                            borderRadius: '5px'
+                                        }}
+                                        >All</span></span>
+                                        <span className="text-xs text-gray-400"><i>**Search Suggestions</i></span>
+                                    </div>
                                     </div>
                                 </div>
 

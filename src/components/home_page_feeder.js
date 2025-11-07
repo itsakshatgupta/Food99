@@ -52,14 +52,14 @@ export function Search_suggestion({ data, title, col }) {
 }
 
 // components/CategoryGrid.jsx
-export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
+export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
     const { device } = useContext(dynamic_);
 
 
     return (
         <section className={`w-full pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
             borderBlock: overflow_x && '4px solid lightgray',
-            background: overflow_x && 'white'
+            background: c__.c_palette.sec_bg
         }}>
 
             {title &&
@@ -67,15 +67,17 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb }) {
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
                     <span className={`bdrds ${overflow_x ? 'pd05' : 'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x ? 'black' : 'white', borderRadius: overflow_x && "100%", background: overflow_x ? 'ghostwhite' : 'black', border: overflow_x && "1px solid royalblue" }}><ArrowRight size="1.2rem" /></span>
                 </div>}
-            <div className={`grid ${col<=2?'grid-cols-2':'grid-cols-3'} gap-4`}
+            <div className={`grid ${col <= 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-4`}
             //  style={{
             //     gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             // }}
             >
                 {data.map((item, i) => (
-                    <div className={`shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05`} key={i}>
+                    <div className={`shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05`} style={{
+                        background: c__.c_palette.sec_card_bg
+                    }} key={i}>
                         <div>{item.sub_cat}</div>
-                        <div className={`grid ${col<=2?'grid-cols-2':'grid-cols-3'} gap-2 p-2 ${device === 'pc' && overflow_x ? "wfp bdrds" : "wfc"} xbg`}>
+                        <div className={`grid ${col <= 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-2 p-2 bdrds oh ${device === 'pc' && overflow_x ? "wfp bdrds" : "wfc"} xbg`}>
                             {item.items.map((sI, i) => (
                                 <div
                                     key={i}
@@ -188,8 +190,8 @@ export function OffersSection({ data, title, col }) {
     return (
         <section className="w-full bg-gradient-to-r from-yellow-100 via-pink-100 to-red-100 pdx2 pdb2 xbg" style={{ paddingTop: '1.5rem' }}>
 
-                <div className={`${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"} rounded-lg`} style={{ background: 'royalblue', zIndex: 1}}></div>
-      
+            <div className={`${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"} rounded-lg`} style={{ background: 'royalblue', zIndex: 1 }}></div>
+
         </section>
     );
 }
@@ -221,16 +223,22 @@ export function TrendingSection({ items, col }) {
 export function Feeder({ section, borderBlockBooleans }) {
     console.log(2256565484, borderBlockBooleans)
     let c = cdt();
+    let color__ = [
+        {c_palette_name:'focus vibe', c_palette:{ sec_bg: '#7986CB', sec_card_bg: '#f4f6ff '} },
+        {c_palette_name:'fresh vibe', c_palette:{ sec_bg: '#7986CB', sec_card_bg: '#f4f6ff '} },
+        {c_palette_name:'discover vibe', c_palette:{ sec_bg: '#7986CB', sec_card_bg: '#f4f6ff '} },
+        {c_palette_name:'woman fav', c_palette:{ sec_bg: '#FFEBEE', sec_card_bg: '#F48FB1 ' }},
+    ]
 
     switch (section.type) {
         case "offers":
-            return <OffersSection data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+            return <OffersSection data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__[3]} />;
         case "category_grid":
-            return <CategoryGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+            return <CategoryGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__[3]} />;
         case "product_grid":
-            return <ProductGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+            return <ProductGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__[3]} />;
         case "search_suggestion":
-            return <Search_suggestion data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} />;
+            return <Search_suggestion data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__} />;
 
         default:
             return null;
