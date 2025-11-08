@@ -497,17 +497,17 @@ export default function Topbar_() {
                         <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR ${search_mode && 'bdTrds xbg_'} `}>
                             <div className={`df oh xbg $ ${search_mode ? ' bdTrds ' : 'shadow-md rounded-lg '}`}>
                                 <span className={`df aic pdx07 text-black transition duration-100 gap-1 ${search_mode ? '' : 'bg-[chocolate]'}`}>
-                                    <Search size={20} />
-                                    {!search_mode && <>
+                                    {!search_mode ? <>
+                                    <Search size={20}/>
                                         <span className={`bg-[; text-xs font500 transition duration-100 ${search_mode && 'bg-[black] text-[white] pdy02'}`} style={{
                                             paddingInline: search_mode && '10px',
                                             borderRadius: '5px'
                                         }}
                                         >All</span>
-                                    </>
+                                    </>:<Search size={20} stroke="orangered"/>
                                     }
                                 </span>
-                                <div className={`flex items-center gap-2.5 p-2.5 fx1`} >
+                                <div className={`flex items-center gap-2.5 p-2.5 fx1 ${search_mode&&'pdl0'}`} >
                                     <input
                                         placeholder="Search sellers • products • distributors"
                                         className="border-none bg-transparent text-gray-900 fx1 outline-none placeholder-gray-500 text-sm"
@@ -525,7 +525,7 @@ export default function Topbar_() {
                             {search_mode &&
                                 <div className="pA w-full  z-[1000] oh text-black xbg z-50 bdBrds shadow-md">
                                     <div className="pR dropdowneffect">
-                                    <div className="fd fd-c w-full pR text-sm pdy03 pdx04 dropdowneffect_ bdBrds" >
+                                    <div className="fd fd-c w-full pR text-sm pdb03 pdx04 dropdowneffect_ bdBrds" >
                                         <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
                                             <div className="df gap05"><span><Search size={18} /></span><span>{searchText}</span></div>
                                         </div>

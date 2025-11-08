@@ -54,8 +54,8 @@ export function Search_suggestion({ data, title, col }) {
 // components/CategoryGrid.jsx
 export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
     const { device } = useContext(dynamic_);
-
-
+    console.log('c__:', c__, c__.c_palette_name);
+    
     return (
         <section className={`w-full pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
             borderBlock: overflow_x && '4px solid lightgray',
@@ -71,13 +71,13 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
             //  style={{
             //     gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             // }}
-            >
+            ><>
                 {data.map((item, i) => (
-                    <div className={`shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05`} style={{
+                    <div className={`${i} shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05 df fd-c`} style={{
                         background: c__.c_palette.sec_card_bg
                     }} key={i}>
                         <div>{item.sub_cat}</div>
-                        <div className={`grid ${col <= 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-2 p-2 bdrds oh ${device === 'pc' && overflow_x ? "wfp bdrds" : "wfc"} xbg`}>
+                        <div className={`${device==='pc'&& item.items.length===3?'grid grid-cols-3 grid-rows-1': 'grid grid-cols-3 '} gap01 p-2 oh fx1 ${device === 'pc' && overflow_x ? "bdrds" : "mgt03"}  wfp xbg`}>
                             {item.items.map((sI, i) => (
                                 <div
                                     key={i}
@@ -91,7 +91,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                                             alt={sI.name}
                                             height={col ? col <= 2 ? 150 : 100 : 140}
                                             width={100}
-                                            className={`${imgDimensionCalc()} object-contain rounded-lg`}
+                                            className={`min-w-[110px] h-[120px] object-contain rounded-lg`}
                                         />
                                         <p className="mt-2 font-medium md:text-sm">{sI.name}</p>
                                     </div>
@@ -111,9 +111,12 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                                     </div>
                                 </div>
                             ))}
+                {item.items.length<=5&&data.some(v=>v.items.length>3)?![4,7,10,13].some(v=>v===i+1)||item.items.length>3?<div className={`bd  ${device==='pc'&& item.items.length===3?' col-span-3 row-start-1  df': item.items.length===4?'col-span-2 df':'w-auto df'} bg-[orangered]  h-[auto] fx1 mgy1 mgx05 text-xl font800 text-white  jcc aic`}>Ads</div>:'':''}
                         </div>
                     </div>
                 ))}
+                {[4,7,10,13].some(v=>v===data.length)&&<div className="col-span-2 bg-[#4a4a4a] text-white p-1 h-auto "><div className="hfp wfp" style={{background:'repeating-linear-gradient(45deg, black, transparent 100px)'}}>juijiuj</div></div>}
+                </>
             </div>
         </section>
     );
@@ -224,19 +227,23 @@ export function Feeder({ section, borderBlockBooleans }) {
     console.log(2256565484, borderBlockBooleans)
     let c = cdt();
     let color__ = [
-        {c_palette_name:'focus vibe', c_palette:{ sec_bg: '#7986CB', sec_card_bg: '#f4f6ff '} },
-        {c_palette_name:'fresh vibe', c_palette:{ sec_bg: '#7986CB', sec_card_bg: '#f4f6ff '} },
-        {c_palette_name:'discover vibe', c_palette:{ sec_bg: '#7986CB', sec_card_bg: '#f4f6ff '} },
+        {c_palette_name:'focus vibe', c_palette:{ sec_bg: '#eefee5', sec_card_bg: '#C5E1A5 '} },
+        {c_palette_name:'fresh vibe', c_palette:{ sec_bg: '#f2f9ff', sec_card_bg: '#c9f9ffff '} },
+        {c_palette_name:'discover vibe', c_palette:{ sec_bg: '#fffcebff', sec_card_bg: '#FFE082 '} },
         {c_palette_name:'woman fav', c_palette:{ sec_bg: '#FFEBEE', sec_card_bg: '#F48FB1 ' }},
+        {c_palette_name:'default', c_palette:{ sec_bg: '#ffffffff', sec_card_bg: '#fffae9ff ' }},
     ]
-
+    const key = Object.hasOwn(section, 'color_theme_name')
+  ? section.color_theme_name
+  : 'default';
+  const get_theme = color__.find(v=> v.c_palette_name===key);
     switch (section.type) {
         case "offers":
-            return <OffersSection data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__[3]} />;
+            return <OffersSection data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={get_theme} />;
         case "category_grid":
-            return <CategoryGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__[3]} />;
+            return <CategoryGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={get_theme} />;
         case "product_grid":
-            return <ProductGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__[3]} />;
+            return <ProductGrid data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={get_theme} />;
         case "search_suggestion":
             return <Search_suggestion data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={color__} />;
 

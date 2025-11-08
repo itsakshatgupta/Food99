@@ -1363,6 +1363,7 @@ export default function branches() {
             type: "offers",
             title: "🔥 Offers for You",
             gridCol: 2,
+            color_theme_name:'fresh vibe',
             overflowX: false,
             items: [
                 { title: "50% OFF on First Order", code: "WELCOME50", image: "/test_img/nmk5.jpg", bg: "bg-gradient-to-r from-blue-500 to-indigo-500" },
@@ -1375,6 +1376,7 @@ export default function branches() {
             id: 2,
             type: "category_grid",
             title: "🍱 Popular Categories",
+            color_theme_name:'focus vibe',
             gridCol: 3,
             overflowX: false,
             items: [
@@ -1434,6 +1436,7 @@ export default function branches() {
             id: 1,
             type: "category_grid",
             title: "🔥 Up to 70% Off — Deal Festival",
+            color_theme_name:'discover vibe',
             gridCol: 3,
             overflowX: false,
             items: [
@@ -1490,6 +1493,7 @@ export default function branches() {
             id: 2,
             type: "category_grid",
             title: "🍱 Grab More — Pay Less",
+            color_theme_name:'fresh vibe',
             gridCol: 3,
             overflowX: false,
             items: [
@@ -1525,9 +1529,27 @@ export default function branches() {
             ]
         },
         {
+            id: 5,
+            type: "product_grid",
+            title: "🍱 Featured Products",
+            gridCol: false,
+            overflowX: true,
+            items: [
+                { name: "Noodles", image: "/test_img/nmk12.webp" },
+                { name: "Pizza", image: "/test_img/nmk13.jpg" },
+                { name: "Juices", image: "/test_img/nmk14.jpeg" },
+                { name: "Pizza", image: "/test_img/nmk14.jpeg" },
+                { name: "Juices", image: "/test_img/nmk14.png" },
+                { name: "Juices", image: "/test_img/nmk15.webp" },
+                { name: "Pizza", image: "/test_img/bs2.webp" },
+                { name: "Juices", image: "/test_img/bs1.webp" },
+            ],
+        },
+        {
             id: 3,
             type: "category_grid",
             title: "🥡 Deal Fiesta — Max Saver Combo",
+            color_theme_name:'woman fav',
             gridCol: 3,
             overflowX: false,
             items: [
@@ -1560,6 +1582,7 @@ export default function branches() {
             id: 4,
             type: "category_grid",
             title: "🍕 Crazy Combo Drop — Deal Bomb",
+            color_theme_name:'discover vibe',
             gridCol: 3,
             overflowX: false,
             items: [
@@ -1599,6 +1622,7 @@ export default function branches() {
             id: 5,
             type: "category_grid",
             title: "🥤 Best of the Week — Mega Save",
+            color_theme_name:'fresh vibe',
             gridCol: 3,
             overflowX: false,
             items: [
@@ -1632,6 +1656,7 @@ export default function branches() {
             id: 10,
             type: "category_grid",
             title: "🍱 Most Searched",
+            color_theme_name:'discover vibe',
             gridCol: 3,
             overflowX: false,
             items: [
@@ -1681,6 +1706,7 @@ export default function branches() {
             id: 11,
             type: "category_grid",
             title: "🍱 Get upto 70% off || Deals Perfect for You",
+            color_theme_name:'woman fav',
             gridCol: 3,
             overflowX: false,
             items: [
