@@ -132,7 +132,7 @@ export function ProductGrid({ data, title, col, overflow_x, bbb }) {
         }}>
 
             {title &&
-                <div className={`df aic jcsb mb-4  ${!col && "pdx05"}`}>
+                <div className={`df aic jcsb  ${!col && "pdx05"}`}>
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
                     <span className={`bdrds ${overflow_x ? 'pd05' : 'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x ? 'black' : 'white', borderRadius: overflow_x && "100%", background: overflow_x ? 'ghostwhite' : 'black', border: overflow_x && "1px solid royalblue" }}><ArrowRight size="1.2rem" /></span>
                 </div>}
