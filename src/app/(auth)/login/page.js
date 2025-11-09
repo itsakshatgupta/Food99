@@ -10,7 +10,7 @@ export default function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await fetchAPI("token/", "POST", form);
+    const res = await fetchAPI("token", "POST", form);
     localStorage.setItem("token", res.access);
     router.push("/dashboard");
   }
