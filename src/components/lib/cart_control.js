@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { cart } from "../dummy_data";
 import { addToCart, removeCartItem, updateCartItem } from "./cart_api";
-import { apiFetch } from "@/app/(api)/api";
+import { fetchAPI
+ } from "@/app/(api)/api";
 import { cartprice } from "@/app/(main)/cart/page";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { mutate } from 'swr';
@@ -28,7 +29,8 @@ export function Cart_Control_Direct({ item }) {
 
     // async function updatecartprice() {
     //     try {
-    //         const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
+    //         const res2 = await fetchAPI
+("/cart/items/mycart/"); // Django cart API
     //         const data2 = await res2.json();
     //         console.log('mycart', data2)
     //         set_total_amount__i(data2)

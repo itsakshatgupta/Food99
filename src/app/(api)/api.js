@@ -1,54 +1,17 @@
-// utils/apiFetch.js
-const production_url = "https://food99api.onrender.com/api"
-const dev_url = "http://localhost:8000/api" 
+// src/lib/api.js
+const API_URL = "https://food99api.onrender.com/api";
 
-const BASE_URL = production_url;
+export async function fetchAPI(endpoint, method = "GET", body = null, token = null) {
+  const headers = { "Content-Type": "application/json" };
+  if (token) headers["Authorization"] = `Bearer ${token}`;
 
-export async function apiFetch(url, options = {}) {
-  // --- add access token ---
-  const access = localStorage.getItem("access");
-  const headers = {
-    ...(options.headers || {}),
-    "Content-Type": "application/json",
-  };
-  if (access) {
-    headers["Authorization"] = `Bearer ${access}`;
-  }
+  const res = await fetch(`${API_URL}/${endpoint}/`, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : null,
+    cache: "no-store",
+  });
 
-  let response = await fetch(BASE_URL + url, { ...options, headers });
-
-  // --- if unauthorized, try refresh ---
-    console.log(1111)
-  
-  if (response.status === 401) {
-    console.log(111)
-    const refresh = localStorage.getItem("refresh");
-    if (refresh) {
-      try {
-        const refreshResponse = await fetch(BASE_URL + "/api/token/refresh/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ refresh }),
-        });
-
-        if (refreshResponse.ok) {
-          const data = await refreshResponse.json();
-          localStorage.setItem("access", data.access);
-
-          // retry original request with new token
-          headers["Authorization"] = `Bearer ${data.access}`;
-          response = await fetch(BASE_URL + url, { ...options, headers });
-        } else {
-          // refresh failed → logout
-          localStorage.removeItem("access");
-          localStorage.removeItem("refresh");
-          window.location.href = "/login";
-        }
-      } catch (err) {
-        console.error("Refresh request failed:", err);
-      }
-    }
-  }
-    console.log(1112)
-  return response;
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
 }

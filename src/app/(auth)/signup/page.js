@@ -1,117 +1,34 @@
-'use client';
-import { useState } from 'react';
-import Link from 'next/link';
-import styles from './Signup.module.css'
-import { useRouter } from 'next/navigation';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import imageCompression from 'browser-image-compression';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { fetchAPI } from "@/app/(api)/api";
 
-export default function Signup() {
-  const router = useRouter()
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [profileImage, setProfileImage] = useState(null);
-  const [Done, setDone] = useState(false);
-  const [DoneStatus, setDoneStatus] = useState(null);
+export default function RegisterPage() {
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const router = useRouter();
 
-  // 🔹 Compress image when selected
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    try {
-      const options = {
-        maxSizeMB: 1,          // target max size (1 MB)
-        maxWidthOrHeight: 800, // resize to 800px max
-        useWebWorker: true,
-      };
-
-      const compressedFile = await imageCompression(file, options);
-      console.log("Original size:", (file.size / 1024 / 1024).toFixed(2), "MB");
-      console.log("Compressed size:", (compressedFile.size / 1024 / 1024).toFixed(2), "MB");
-
-      setProfileImage(compressedFile); // store compressed version
-    } catch (error) {
-      console.error("Image compression error:", error);
-      setProfileImage(file); // fallback to original
-    }
-  };
-
-  const handleSignup = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    let button = e.target;
-    let originalText = button.textContent;
-    button.textContent = 'Loading...';
-
-    try {
-      const formData = new FormData();
-      formData.append('username', username);
-      formData.append('email', email);
-      formData.append('password', password);
-      formData.append('phone_number', phone);
-      if (profileImage) {
-        formData.append('profile_image', profileImage);
-      }
-      const res = await fetch('https://food99api.onrender.com/api/api/signup/', {
-        method: 'POST',
-        body: formData,
-      });
-      
-      const data = await res.json();
-
-      if (res.ok) {
-        localStorage.setItem('access', data.access);
-        localStorage.setItem('refresh', data.refresh);
-        setDone(true);
-      } else {
-        alert('Signup failed: ' + JSON.stringify(data));
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Something went wrong', err);
-    } finally {
-      button.textContent = originalText;
-    }
-  };
+    await fetchAPI("register", "POST", form);
+    router.push("/login");
+  }
 
   return (
-    <>
-      {Done ? (
-        // ✅ success animation
-        <>
-          <style>{`body{background:repeating-linear-gradient(45deg, #ffffff, #fafafaff 100px)}`}</style> <div className="fd-c pdb10" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}> <div style={{ height: '500px', width: '500px' }}> <DotLottieReact
-            src="https://lottie.host/d1f8286c-6132-48a0-a1cd-41ef5c1ae36c/VcMQsjt6yH.lottie"
-            loop={false}
-            autoplay={true}
-            dotLottieRefCallback={(instance) => {
-              if (instance) {
-                instance.addEventListener("play", () => {
-                  setDoneStatus('Signup done!');
-                });
-                instance.addEventListener("complete", () => {
-                  router.push("/");
-                });
-              }
-            }} /> </div> <div className='pR font600' style={{ top: '-115px', fontSize: 'x-large' }}>{DoneStatus}</div> </div>
-        </>
-      ) : (
-        <div className={styles.container}>
-          <div className={styles.card}>
-            <h2 className={styles.heading}>Sign up to Food99</h2>
-            <input type="text" placeholder="Username" className={styles.input} value={username} onChange={e => setUsername(e.target.value)} />
-            <input type="email" placeholder="Email" className={styles.input} value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" className={styles.input} value={password} onChange={e => setPassword(e.target.value)} />
-            <input type="tel" placeholder="Phone number" className={styles.input} value={phone} onChange={e => setPhone(e.target.value)} />
-
-            {/* 🔹 compress on change */}
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-
-            <button className={styles.buttonPrimary} onClick={handleSignup}>Continue</button>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="max-w-md mx-auto mt-20 p-6 border rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold mb-4 text-center">Register</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {["username", "email", "password"].map((field) => (
+          <input
+            key={field}
+            type={field === "password" ? "password" : "text"}
+            placeholder={field}
+            value={form[field]}
+            onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+            className="w-full p-2 border rounded"
+          />
+        ))}
+        <button className="bg-blue-600 text-white w-full py-2 rounded">Register</button>
+      </form>
+    </div>
   );
 }

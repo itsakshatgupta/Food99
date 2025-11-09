@@ -6,7 +6,7 @@ import { Icon } from "@/components/lib/icons";
 import Image from "next/image";
 import { Cart_Control_Direct, Cart_Control_Indirect } from "@/components/lib/cart_control";
 import { cart, orders } from "@/components/dummy_data";
-import { apiFetch } from "@/app/(api)/api";
+import { fetchAPI } from "@/app/(api)/api";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { mutate } from 'swr';
 
@@ -39,7 +39,8 @@ export default function Cart() {
     useEffect(() => {
         async function fetchCart() {
             try {
-                // const res = await apiFetch("/cart"); // Django cart API
+                // const res = await fetchAPI
+("/cart"); // Django cart API
                 // const data = await res.json();
                 setCartItems(cart__i);
             } catch (error) {
@@ -63,7 +64,7 @@ export default function Cart() {
                         loop
                         autoplay
                     /></span></span>)
-            const res2 = await apiFetch("/cart/items/mycart/"); // Django cart API
+            const res2 = await fetchAPI("/cart/items/mycart/"); // Django cart API
             const data2 = await res2.json();
             console.log('mycart', data2)
             set_total_amount__i(<span style={{
@@ -90,7 +91,8 @@ export default function Cart() {
     async function handlePayment() {
         try {
             // 1. Ask backend to create order
-            const res = await apiFetch(`/api/payments/create-order/`, { method: "POST" });
+            const res = await fetchAPI
+(`/api/payments/create-order/`, { method: "POST" });
             const data = await res.json();
 
             if (!data.payment_session_id || !data.order_id) {
@@ -125,7 +127,8 @@ export default function Cart() {
     async function handlePaymentSuccess(orderId) {
         try {
             // Call the Django backend to verify the payment status.
-            const res = await apiFetch(`/api/payments/verify/`, {
+            const res = await fetchAPI
+(`/api/payments/verify/`, {
                 method: "POST",
                 body: JSON.stringify({ order_id: orderId }),
             });

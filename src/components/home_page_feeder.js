@@ -55,7 +55,7 @@ export function Search_suggestion({ data, title, col }) {
 export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
     const { device } = useContext(dynamic_);
     console.log('c__:', c__, c__.c_palette_name);
-    
+
     return (
         <section className={`w-full pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
             borderBlock: overflow_x && '4px solid lightgray',
@@ -72,50 +72,50 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
             //     gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             // }}
             ><>
-                {data.map((item, i) => (
-                    <div className={`${i} shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05 df fd-c`} style={{
-                        background: c__.c_palette.sec_card_bg
-                    }} key={i}>
-                        <div>{item.sub_cat}</div>
-                        <div className={`${device==='pc'&& item.items.length===3?'grid grid-cols-3 grid-rows-1': 'grid grid-cols-3 '} gap01 p-2 oh fx1 ${device === 'pc' && overflow_x ? "bdrds" : "mgt03"}  wfp xbg`}>
-                            {item.items.map((sI, i) => (
-                                <div
-                                    key={i}
-                                    className={`${col ? col <= 2 ? "p-4" : "p-1" : ""} bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
+                    {data.map((item, i) => (
+                        <div className={`${i} shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05 df fd-c`} style={{
+                            background: c__.c_palette.sec_card_bg
+                        }} key={i}>
+                            <div>{item.sub_cat}</div>
+                            <div className={`${device === 'pc' && item.items.length === 3 ? 'grid grid-cols-3 grid-rows-1' : 'grid grid-cols-3 '} gap01 p-2 oh fx1 ${device === 'pc' && overflow_x ? "bdrds" : "mgt03"}  wfp xbg`}>
+                                {item.items.map((sI, i) => (
+                                    <div
+                                        key={i}
+                                        className={`${col ? col <= 2 ? "p-4" : "p-1" : ""} bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
               `} style={{ border: overflow_x && '1px solid #0a0606ff', minWidth: "fit-content" }}
-                                >
-                                    <div className="mgx04 pdt04 pR">
-                                        <div className={`pA w-full h-full`} style={{ background: '#c7c7c717' }}></div>
-                                        <Image
-                                            src={sI.image}
-                                            alt={sI.name}
-                                            height={col ? col <= 2 ? 150 : 100 : 140}
-                                            width={100}
-                                            className={`min-w-[110px] h-[120px] object-contain rounded-lg`}
-                                        />
-                                        <p className="mt-2 font-medium md:text-sm">{sI.name}</p>
-                                    </div>
-                                    <div className="oh">
-                                        <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
-                                            <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
-                                                <div style={{ fontSize: '0.675em' }}>₹</div>
-                                                <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
-                                            </div>
-                                            <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
-                                                <div style={{ fontSize: '0.475em' }}>₹</div>
-                                                <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
-                                            </div>
+                                    >
+                                        <div className="mgx04 pdt04 pR">
+                                            <div className={`pA w-full h-full`} style={{ background: '#c7c7c717' }}></div>
+                                            <Image
+                                                src={sI.image}
+                                                alt={sI.name}
+                                                height={col ? col <= 2 ? 150 : 100 : 140}
+                                                width={100}
+                                                className={`min-w-[110px] h-[120px] object-contain rounded-lg`}
+                                            />
+                                            <p className="mt-2 font-medium md:text-sm">{sI.name}</p>
                                         </div>
-                                        {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 md:text-500 df gap03 sm:text-sm md:text-xs`} style={{ background: 'aliceblue' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>
-                                        }
+                                        <div className="oh">
+                                            <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
+                                                <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
+                                                    <div style={{ fontSize: '0.675em' }}>₹</div>
+                                                    <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
+                                                </div>
+                                                <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
+                                                    <div style={{ fontSize: '0.475em' }}>₹</div>
+                                                    <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
+                                                </div>
+                                            </div>
+                                            {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 md:text-500 df gap03 sm:text-sm md:text-xs`} style={{ background: 'aliceblue' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                {item.items.length<=5&&data.some(v=>v.items.length>3)?![4,7,10,13].some(v=>v===i+1)||item.items.length>3?<div className={`bd  ${device==='pc'&& item.items.length===3?' col-span-3 row-start-1  df': item.items.length===4?'col-span-2 df':'w-auto df'} bg-[orangered]  h-[auto] fx1 mgy1 mgx05 text-xl font800 text-white  jcc aic`}>Ads</div>:'':''}
+                                ))}
+                                {item.items.length <= 5 && data.some(v => v.items.length > 3) ? ![4, 7, 10, 13].some(v => v === i + 1) || item.items.length > 3 ? <div className={`bd  ${device === 'pc' && item.items.length === 3 ? ' col-span-3 row-start-1  df' : item.items.length === 4 ? 'col-span-2 df' : 'w-auto df'} bg-[orangered]  h-[auto] fx1 mgy1 mgx05 text-xl font800 text-white  jcc aic`}>Ads</div> : '' : ''}
+                            </div>
                         </div>
-                    </div>
-                ))}
-                {[4,7,10,13].some(v=>v===data.length)&&<div className="col-span-2 bg-[#4a4a4a] text-white p-1 h-auto "><div className="hfp wfp" style={{background:'repeating-linear-gradient(45deg, black, transparent 100px)'}}>juijiuj</div></div>}
+                    ))}
+                    {[4, 7, 10, 13].some(v => v === data.length) && <div className="col-span-2 bg-[#4a4a4a] text-white p-1 h-auto "><div className="hfp wfp" style={{ background: 'repeating-linear-gradient(45deg, black, transparent 100px)' }}>juijiuj</div></div>}
                 </>
             </div>
         </section>
@@ -193,7 +193,60 @@ export function OffersSection({ data, title, col }) {
     return (
         <section className="w-full bg-gradient-to-r from-yellow-100 via-pink-100 to-red-100 pdx2 pdb2 xbg" style={{ paddingTop: '1.5rem' }}>
 
-            <div className={`${col ? col <= 2 ? "h-[150px] min-w-[140px]" : "w-full h-[100px]" : "h-[160px] min-w-[150px]"} rounded-lg`} style={{ background: 'royalblue', zIndex: 1 }}></div>
+            <div
+                // w-full h-[100px] rounded-lg overflow-hidden flex items-center
+                className="w-full h-[100px] rounded-lg overflow-hidden flex items-center"
+                style={{
+                    background: 'linear-gradient(to right, royalblue, blue)',
+                    zIndex: 1,
+                }}
+            >
+                <div
+                    style={{
+                        width: '170px',
+                        height: '225px',
+                        backgroundSize: 'contain',
+                        position: 'relative',
+                        top: '48px',
+                    }}
+                >
+                    <div
+                        style={{
+                            position: 'absolute',
+                            background: '#3f51b51f',
+                            zIndex: 3,
+                            height: '100%',
+                            width: '100%',
+                        }}
+                    ></div>
+                    {/* Using the Next.js Image component */}
+                    <Image
+                        alt="platform_advertising"
+                        loading="lazy"
+                        // width and height are required for the Image component
+                        width={150}
+                        height={160}
+                        src="/static-img/businessman-shows-his-finger-up.jpg"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            backgroundSize: 'contain',
+                            position: 'relative',
+                            zIndex: 2,
+                        }}
+                    />
+                </div>
+                <div
+                    style={{
+                        fontSize: 'larger',
+                        margin: '8px',
+                        fontWeight: 500,
+                        color: 'white',
+                    }}
+                >
+                    Starting from <b>10-12</b>
+                </div>
+            </div>
 
         </section>
     );
@@ -227,16 +280,16 @@ export function Feeder({ section, borderBlockBooleans }) {
     console.log(2256565484, borderBlockBooleans)
     let c = cdt();
     let color__ = [
-        {c_palette_name:'focus vibe', c_palette:{ sec_bg: '#eefee5', sec_card_bg: '#C5E1A5 '} },
-        {c_palette_name:'fresh vibe', c_palette:{ sec_bg: '#f2f9ff', sec_card_bg: '#c9f9ffff '} },
-        {c_palette_name:'discover vibe', c_palette:{ sec_bg: '#fffcebff', sec_card_bg: '#FFE082 '} },
-        {c_palette_name:'woman fav', c_palette:{ sec_bg: '#FFEBEE', sec_card_bg: '#F48FB1 ' }},
-        {c_palette_name:'default', c_palette:{ sec_bg: '#ffffffff', sec_card_bg: '#fffae9ff ' }},
+        { c_palette_name: 'focus vibe', c_palette: { sec_bg: '#eefee5', sec_card_bg: '#C5E1A5 ' } },
+        { c_palette_name: 'fresh vibe', c_palette: { sec_bg: '#f2f9ff', sec_card_bg: '#c9f9ffff ' } },
+        { c_palette_name: 'discover vibe', c_palette: { sec_bg: '#fffcebff', sec_card_bg: '#FFE082 ' } },
+        { c_palette_name: 'woman fav', c_palette: { sec_bg: '#FFEBEE', sec_card_bg: '#F48FB1 ' } },
+        { c_palette_name: 'default', c_palette: { sec_bg: '#ffffffff', sec_card_bg: '#fffae9ff ' } },
     ]
     const key = Object.hasOwn(section, 'color_theme_name')
-  ? section.color_theme_name
-  : 'default';
-  const get_theme = color__.find(v=> v.c_palette_name===key);
+        ? section.color_theme_name
+        : 'default';
+    const get_theme = color__.find(v => v.c_palette_name === key);
     switch (section.type) {
         case "offers":
             return <OffersSection data={section.items} title={section.title} col={c} overflow_x={section.overflowX} bbb={borderBlockBooleans} c__={get_theme} />;

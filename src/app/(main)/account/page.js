@@ -5,7 +5,8 @@ import Link from "next/link";
 import { BadgeHelpIcon, ChevronRight, ChevronRightCircle, HandHeart, IdCard, LogOut, LucideMapPinHouse, Shield, ShieldUser, User2 } from 'lucide-react';
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { apiFetch } from "@/app/(api)/api";
+import { fetchAPI
+ } from "@/app/(api)/api";
 
 export default function Account() {
     const { device } = useContext(dynamic_);
@@ -15,7 +16,8 @@ export default function Account() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await apiFetch("/api/me/");
+                const res = await fetchAPI
+("/api/me/");
                 if (res.ok) {
                     const data = await res.json();
                     setUser(data);
