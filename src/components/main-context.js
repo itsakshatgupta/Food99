@@ -81,33 +81,40 @@ export default function MainContext({ device, children }) {
     const panel = searchParams.get('panel');
     console.log(searchParams.get('page'), typeof (searchParams.get('page')), searchParams.get('page') in ['login', 'signup'], noLayoutOnPages)
 
-
-    // const { data: usr, error: usrError } = useSWR("/api/me/", fetcher, {
-    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
-    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-    //     refreshInterval: 0,             // Don't refresh automatically at intervals
-    //     shouldRetryOnError: false
-    // });
-
-    // const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
-    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
-    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-    //     refreshInterval: 0,             // Don't refresh automatically at intervals
-
-    // });
-
-    // const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
-    //     revalidateOnFocus: false,      // Don't refresh when window gains focus
-    //     revalidateOnReconnect: false,  // Don't refresh when internet reconnects
-    //     refreshInterval: 0,             // Don't refresh automatically at intervals
-    //     shouldRetryOnError: false
-
-    // });
+        const [user, setUser] = useState(null);
+    
+      useEffect(() => {
+        const u = localStorage.getItem("user");
+        if (u) setUser(JSON.parse(u));
+      }, []);
 
 
-    const usr = true
-    const menu___i = menu_dummy
-    const cart__i = cart
+    const { data: usr, error: usrError } = useSWR("/api/me/", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0,             // Don't refresh automatically at intervals
+        shouldRetryOnError: false
+    });
+
+    const { data: menu___i, error: menuError } = useSWR("/menu/", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0,             // Don't refresh automatically at intervals
+
+    });
+
+    const { data: cart__i, error: cartError } = useSWR("/cart", fetcher, {
+        revalidateOnFocus: false,      // Don't refresh when window gains focus
+        revalidateOnReconnect: false,  // Don't refresh when internet reconnects
+        refreshInterval: 0,             // Don't refresh automatically at intervals
+        shouldRetryOnError: false
+
+    });
+
+
+    // const usr = true
+    // const menu___i = menu_dummy
+    // const cart__i = cart
 
 
 
@@ -195,7 +202,7 @@ export default function MainContext({ device, children }) {
 
             {device && <>
                 <menu_.Provider value={{ menu___i }}>
-                    <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option }}>
+                    <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option, user }}>
 
 {device==='pc'&& <Topbar_ topbar={<Topbar />} />}
                         <div className="hfp wfp df fd-c" style={{ alignContent: 'space-between' }}>

@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { useContext, useEffect, useState } from "react";
-import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, ShoppingBag, Bell, UserCircle, UserCircle2, SearchIcon, MessageSquare, Camera } from 'lucide-react';
+import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, ShoppingBag, Bell, UserCircle, UserCircle2, SearchIcon, MessageSquare, Camera, ArrowDownNarrowWide } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -15,7 +15,7 @@ import Link from "next/link";
 import { Icon } from "../lib/icons";
 import Image from "next/image";
 export default function Topbar_() {
-    const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr } = useContext(dynamic_);
+    const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr , user} = useContext(dynamic_);
     const [search_mode, set_search_mode] = useState(false)
     const [top_bar_, set_top_bar_] = useState(null)
     const pathname = usePathname()
@@ -408,6 +408,22 @@ export default function Topbar_() {
             sub: ["Gloves", "Helmets", "Safety Shoes"],
         },
     ];
+    const lang__ = [
+        'English (US)',
+        'English (UK)',
+        'Chinese',
+        'Hindi',
+        'Poland'
+    ]
+
+    const Mystore__ = [
+       {name:"Todays's Leads", path:"sellers/seller_lead"},
+       {name:"Messages", path:"sellers/seller_msg"},
+       {name:"Stocks", path:"sellers/seller_lead"},
+       {name:"Enquires", path:"sellers/seller_lead"},
+       {name:"Products", path:"sellers/seller_prod"},
+       {name:"Manage", path:"sellers/seller_dsbd"},
+    ]
 
     useEffect(() => {
         if (searchText.length > 0) {
@@ -498,16 +514,16 @@ export default function Topbar_() {
                             <div className={`df oh xbg $ ${search_mode ? ' bdTrds ' : 'shadow-md rounded-lg '}`}>
                                 <span className={`df aic pdx07 text-black transition duration-100 gap-1 ${search_mode ? '' : 'bg-[chocolate]'}`}>
                                     {!search_mode ? <>
-                                    <Search size={20}/>
+                                        <Search size={20} />
                                         <span className={`bg-[; text-xs font500 transition duration-100 ${search_mode && 'bg-[black] text-[white] pdy02'}`} style={{
                                             paddingInline: search_mode && '10px',
                                             borderRadius: '5px'
                                         }}
                                         >All</span>
-                                    </>:<Search size={20} stroke="orangered"/>
+                                    </> : <Search size={20} stroke="orangered" />
                                     }
                                 </span>
-                                <div className={`flex items-center gap-2.5 p-2.5 fx1 ${search_mode&&'pdl0'}`} >
+                                <div className={`flex items-center gap-2.5 p-2.5 fx1 ${search_mode && 'pdl0'}`} >
                                     <input
                                         placeholder="Search sellers • products • distributors"
                                         className="border-none bg-transparent text-gray-900 fx1 outline-none placeholder-gray-500 text-sm"
@@ -525,28 +541,28 @@ export default function Topbar_() {
                             {search_mode &&
                                 <div className="pA w-full  z-[1000] oh text-black xbg z-50 bdBrds shadow-md">
                                     <div className="pR dropdowneffect">
-                                    <div className="fd fd-c w-full pR text-sm pdb03 pdx04 dropdowneffect_ bdBrds" >
-                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                            <div className="df gap05"><span><Search size={18} /></span><span>{searchText}</span></div>
+                                        <div className="fd fd-c w-full pR text-sm pdb03 pdx04 dropdowneffect_ bdBrds" >
+                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                                <div className="df gap05"><span><Search size={18} /></span><span>{searchText}</span></div>
+                                            </div>
+                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                                <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
+                                            </div>
+                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                                <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
+                                            </div>
+                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
+                                                <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
+                                            </div>
                                         </div>
-                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                            <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
+                                        <div className="df aic jcsb bdt pdx08 pdy05 font08">
+                                            <span className="text-gray-500"><i>Categories:</i><span className={`mgl03 font07 font500 transition duration-100 text-[black] ${search_mode && 'bg-gray-300 pdy01'}`} style={{
+                                                paddingInline: search_mode && '6px',
+                                                borderRadius: '5px'
+                                            }}
+                                            >All</span></span>
+                                            <span className="text-xs text-gray-400"><i>**Search Suggestions</i></span>
                                         </div>
-                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                            <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
-                                        </div>
-                                        <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                            <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
-                                        </div>
-                                    </div>
-                                   <div className="df aic jcsb bdt pdx08 pdy05 font08">
-                                        <span className="text-gray-500"><i>Categories:</i><span className={`mgl03 font07 font500 transition duration-100 text-[black] ${search_mode && 'bg-gray-300 pdy01'}`} style={{
-                                            paddingInline: search_mode && '6px',
-                                            borderRadius: '5px'
-                                        }}
-                                        >All</span></span>
-                                        <span className="text-xs text-gray-400"><i>**Search Suggestions</i></span>
-                                    </div>
                                     </div>
                                 </div>
 
@@ -570,7 +586,7 @@ export default function Topbar_() {
                             </button>
 
                             {/* Secondary CTA: Account (Bordered White) */}
-                            <button className="flex items-center border border-white/30 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-white/10 whitespace-nowrap">
+                            <button className="bg-[dimgray] flex items-center border border-white/30 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-white/10 whitespace-nowrap">
                                 <UserIcon />
                                 Account
                             </button>
@@ -578,24 +594,58 @@ export default function Topbar_() {
                     </div>
 
                     {/* Categories Bar (Mega Menu) */}
-                    <div className="bg-[#1E293B] flex flex-wrap justify-center md:justify-start gap-4 md:gap-2 px-4 md:px-6 py-1 border-t border-gray-700/50 text-sm">
-                        {categories.map((cat, index) => (
-                            // Group container for hover effect
-                            <div key={index} className="group relative py-1 px-1 cursor-pointer">
-                                <div className="opacity-95 transition-all group-hover:opacity-100 group-hover:text-[#F97316] text-xs font500">
-                                    {cat.name}
+                    <div className="df jcsb aic bg-[#1E293B] md:gap-2 px-4 md:px-6 py-1 border-t border-gray-700/50 text-sm">
+                        <div className=" flex flex-wrap justify-center md:justify-start gap-4  ">
+                            {categories.map((cat, index) => (
+                                // Group container for hover effect
+                                <div key={index} className="group relative py-1 px-1 cursor-pointer">
+                                    <div className="opacity-95 transition-all group-hover:opacity-100 group-hover:text-[#F97316] text-xs font500">
+                                        {cat.name}
+                                    </div>
+
+                                    {/* Mega Menu Dropdown */}
+                                    <div className="mega absolute top-full pt-2 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 hidden group-hover:block bg-[#1E293B] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
+                                        {cat.sub.map((item, subIndex) => (
+                                            <span key={subIndex} className="block text-gray-300 py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
+                            ))}
+                        </div>
+{user&&                      <div className="df aic gap05">
+                            <span className="cursor-pointer bg-[#2a3549] pdx05 pdy01 hover:bg-[#37474F]" style={{ borderRadius: '5px' }}>Hi, {user.username}</span>
+                            {user.user_type==='seller'&&<div className="pR  group cursor-pointer bg-[#05487d] text-white pdx05 pdy01 hover:bg-[#37474F]">
+                                <Link href="/sellers/seller_dsbd" className="df aic gap01 " style={{ borderRadius: '5px' }}>My Store<ChevronDown size={14} />
+                                </Link>
 
                                 {/* Mega Menu Dropdown */}
-                                <div className="mega absolute top-full mt-2 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 hidden group-hover:block bg-[#1E293B] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
-                                    {cat.sub.map((item, subIndex) => (
-                                        <span key={subIndex} className="block text-gray-300 py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
+                                <div className="pA left-[calc(100%-180px)]">
+                                    <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
+                                        {Mystore__.map((item, subIndex) => (
+                                            <Link href={`/${item.path}`}key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-100 text-[0.85rem] font-normal">
+                                                {item.name}
+                                            </Link>
+                                        ))}
+                                    </div></div>
+                            </div>}
+                            <div className="pR  group cursor-pointer bg-[#2a3549] pdx05 pdy01 hover:bg-[#37474F]">
+                                <span className="df aic gap01 " style={{ borderRadius: '5px' }}>En<ChevronDown size={14} />
+                                </span>
+
+                                {/* Mega Menu Dropdown */}
+                                <div className="pA left-[calc(100%-180px)]">
+                                    <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
+                                        {lang__.map((item, subIndex) => (
+                                            <span key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div></div>
                             </div>
-                        ))}
+
+                        </div>}
                     </div>
                 </header>
             }

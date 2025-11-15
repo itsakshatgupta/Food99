@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import "../../../public/style/xnay.css";
 import "../../../public/style/UI_Responsive.css";
+import "../globals.css"
 
 const inter = Inter({
   subsets: ['latin'],
@@ -10,7 +11,7 @@ const inter = Inter({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html>
       <head>
         {/* Your head content here */}
         <meta name="theme-color" content="whitesmoke" />

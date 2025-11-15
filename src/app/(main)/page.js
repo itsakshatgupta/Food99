@@ -32,7 +32,7 @@ export default function branches() {
         distributor: "Sage Square Distributors"
     }
 
-    const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option, set_dynamics_portal_ab } = useContext(dynamic_);
+    const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option, set_dynamics_portal_ab, user } = useContext(dynamic_);
     const { menu___i } = useContext(menu_);
 
     const [sildeshow_data, set_slideshow_data] = useState([]);
@@ -58,18 +58,19 @@ export default function branches() {
 
     const [sections, setSections] = useState([]);
     const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
+    const [hasMore, setHasMore] = useState(true);  
+
 
     const fetchSections = async () => {
         if (!hasMore) return;
-        const res = await fetch(`/api/homepage/?page=${page}`);
-        const data = await res.json();
+        const res = await fetchAPI(`/home-sections`);
         // setSections(prev => [...prev, ...data.results]);
         // setHasMore(!!data.next);
-        SetSections(data)
+        setSections(res)
+        console.log('res:', res)
     };
 
-    useEffect(() => { fetchSections(); }, [page]);
+    useEffect(() => { fetchSections()},[]);
 
     // Infinite scroll logic
     useEffect(() => {
@@ -1487,6 +1488,7 @@ export default function branches() {
 
         {device && menu___i ?
             <>
+            {console.log(user)}
                 <div className='df fd-c xbg pR' style={{ zIndex: 1 }}>
                     <div className="df fd-c gap1 pdy1 xfg bdBrds oh pdt05" id="m-container-user-focus-stuffs-1">
                         <div className="df gap05 fx1 ox pdx05 sbn">
@@ -1641,7 +1643,7 @@ export default function branches() {
 
                     </div> */}
 
-
+                        <h1>hi {user?.username}</h1>
                     {sections.map((section, i) => (
                         <Feeder key={i} section={section} borderBlockBooleans={true} />
                     ))}
