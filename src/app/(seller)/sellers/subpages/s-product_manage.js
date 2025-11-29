@@ -1,7 +1,7 @@
 'use client'
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 // Assuming lucide-react icons are available for a Next.js environment
-import { Edit, Trash2, ToggleLeft, ToggleRight, BarChart3, Package, CheckCircle, XCircle, ChevronDown, Eye, Search, MessageSquare, PieChart as PieIcon, LineChart as LineIcon, PlusSquare, Network, File, Plus } from 'lucide-react';
+import { Edit, Trash2, ToggleLeft, ToggleRight, BarChart3, Package, CheckCircle, XCircle, ChevronDown, Eye, Search, MessageSquare, PieChart as PieIcon, LineChart as LineIcon, PlusSquare, Network, File, Plus, Delete, Box, Group, Archive } from 'lucide-react';
 
 import {
   BarChart, Bar,
@@ -9,18 +9,23 @@ import {
   PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid
 } from "recharts";
-import Seller_Page_Header, { lang__ } from '@/components/seller-cpmt/header';
+import Seller_Page_Header, { lang__, Seller_Page_Top_Bar } from '@/components/seller-cpmt/header';
+import { fetchAPI } from '@/app/(api)/api';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 
 // --- DUMMY DATA ---
 export const initialProducts = [
   // Added fields for Enquiry and Search metrics
-  { id: 1001, name: 'Industrial Grade Steel Beam (Type A)', sku: 'SB-001-A', views: 6000, enquiries: 150, searches: 800, status: true, category: 'Structural Materials' },
-  { id: 1002, name: 'CNC Precision Router', sku: 'CR-4K-22', views: 4500, enquiries: 90, searches: 550, status: true, category: 'Machinery & Tools' },
-  { id: 1003, name: 'High-Torque Actuator Unit', sku: 'HTAU-900', views: 1800, enquiries: 200, searches: 1200, status: false, category: 'Automation Components' }, // High Enquiry/Search
-  { id: 1004, name: 'Advanced Sensor Array Kit', sku: 'ASA-V3', views: 3200, enquiries: 40, searches: 300, status: true, category: 'Automation Components' },
-  { id: 1005, name: 'Hydraulic Piston Set (Medium)', sku: 'HPS-M-05', views: 5500, enquiries: 120, searches: 700, status: true, category: 'Hydraulics' },
-  { id: 1006, name: 'Reinforced Concrete Mix (Bag)', sku: 'RCM-40', views: 1200, enquiries: 30, searches: 200, status: true, category: 'Structural Materials' },
-  { id: 1007, name: 'Heavy Duty Lathe Machine', sku: 'HDLM-X', views: 7100, enquiries: 80, searches: 400, status: false, category: 'Machinery & Tools' }, // High View
+  { id: 1001, name: 'Industrial Grade Steel Beam (Type A)', model_no: 'SB-001-A', views: 6000, enquires: 150, searches: 800, status: true, category: 'Structural Materials' },
+  { id: 1002, name: 'CNC Precision Router', model_no: 'CR-4K-22', views: 4500, enquires: 90, searches: 550, status: true, category: 'Machinery & Tools' },
+  { id: 1003, name: 'High-Torque Actuator Unit', model_no: 'HTAU-900', views: 1800, enquires: 200, searches: 1200, status: false, category: 'Automation Components' }, // High Enquiry/Search
+  { id: 1004, name: 'Advanced Sensor Array Kit', model_no: 'ASA-V3', views: 3200, enquires: 40, searches: 300, status: true, category: 'Automation Components' },
+  { id: 1005, name: 'Hydraulic Piston Set (Medium)', model_no: 'HPS-M-05', views: 5500, enquires: 120, searches: 700, status: true, category: 'Hydraulics' },
+  { id: 1006, name: 'Reinforced Concrete Mix (Bag)', model_no: 'RCM-40', views: 1200, enquires: 30, searches: 200, status: true, category: 'Structural Materials' },
+  { id: 1007, name: 'Heavy Duty Lathe Machine', model_no: 'HDLM-X', views: 7100, enquires: 80, searches: 400, status: false, category: 'Machinery & Tools' }, // High View
 ];
 
 const ALL_CATEGORIES = ['All Categories', ...new Set(initialProducts.map(p => p.category))];
@@ -258,6 +263,40 @@ export const ProductMetricsChart = ({ products }) => {
 export default function ProductManager() {
   const [products, setProducts] = useState(initialProducts);
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const [todelete, set_todelete] = useState(null);
+  const r_ = useRouter()
+
+  useEffect(() => {
+    try {
+      async function getsellerproduct() {
+        const result = await fetchAPI("products", "GET", null, true);
+        const res = await result;
+        setProducts(res);
+        console.log('res:', res);
+      }
+
+      getsellerproduct()
+    } catch (error) {
+      console.log('ee:', error)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (todelete) {
+      try {
+        async function deletesellerproduct() {
+          const result = await fetchAPI("products/" + todelete, "DELETE", null, true);
+          const res = await result;
+          setProducts(res);
+          console.log('res:', res);
+        }
+
+        deletesellerproduct()
+      } catch (error) {
+        console.log('ee:', error)
+      }
+    }
+  }, [todelete])
 
   // Filter products based on selected category
   const filteredProducts = useMemo(() => {
@@ -293,13 +332,14 @@ export default function ProductManager() {
     console.log(`Editing Product ${productToEdit.sku}: ${productToEdit.name}`);
     // In a real app, this should be replaced with a custom modal UI.
   };
+
   const h_buttons = [
-    <span className="df aic gap-1"><Plus size={14} /> Add</span>,
+    <Link href="http://localhost:3000/sellers/new/product" className="df aic gap-1"><Plus size={14} /> Add</Link>,
     <span className="df aic gap-1"><Network size={14} />Trace</span>,
     <span className="df aic gap-1"><File size={14} />Reports</span>,
   ]
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 ">
+    <div className="hfp df fd-c text-gray-800 oh">
 
       <Seller_Page_Header pageTitle={'Product'} buttons={h_buttons} subButtons={[
         <div className="pR  pdy01 pdx05 bdrds bg-[white] text-[0.725rem] group cursor-pointer  border hover:border-[currentcolor]">
@@ -318,105 +358,147 @@ export default function ProductManager() {
         </div>]} />
 
       {/* Chart Row */}
-      <div className="mb-8 dn">
+      {/* <div className="mb-8 dn">
         <ProductMetricsChart products={products} />
-      </div>
+      </div> */}
 
-      {/* Product Table */}
-      <div className="bg-white rounded-lg" style={{    boxShadow: 'inset 0 2px 5px 2px #f1f1f1'}}>
-        <div className="flexl dn flex-col sm:flex-row sm:items-center justify-between pr-4 bg-[#d6f0ff]">
-          <h2 className="font-bold text-xl p-2 text-cyan-600 flex items-center sm:mb-0 ">
-            <Package className="w-5 h-5 mr-2" />
-            PUBLISHED PRODUCT LOG
-          </h2>
+      <div className="fx1 df oh">
 
-          {/* Category Filter Dropdown */}
-          <div className="relative inline-block text-left">
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="appearance-none bg-[whitesmoke] border border-gray-300 text-gray-800 py-1 pl-2 pr-5 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer text-sm"
-            >
-              {ALL_CATEGORIES.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <ChevronDown className="w-4 h-4" />
+        {/* Product Table */}
+
+        <div className="bg-white w-[16rem] border-r df fd-c">
+          {/* Search */}
+          <div className="py-1 mx-1 border-b_ border-gray-200 df aic jcsb gap1">
+            <span className="mr-5 text-md  fx1 p-1">Category</span>
+            <div className="relative fx1 dn">
+              <Search className="w-4 h-4 absolute left-1 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Find colleague or vendor..."
+                className="w-full bg-gray-100 border border-gray-300 rounded-lg py-1 pl-6 pr-1 text-xs focus:outline-none focus:ring-1 focus:ring-red-500"
+              //  value={searchQuery}
+              //  onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
+            <Search size={16} />
+            <Group size={16} />
+            <Archive size={16} />
           </div>
+          <div className="text-sm px-1 fx1 oy" style={{scrollbarWidth:'thin'}}>
+            {[{category_name:'Machinary', sub_category_name:['Machinary', 'Catipillar', 'Usha', 'Eachier']},
+            {category_name:'Component', sub_category_name:['Component', 'Usha', 'Eachier', 'Cromption']},
+            {category_name:'Tools', sub_category_name:['Tools', 'Usha', 'Max Iron', 'Havells']}
+   ].map(i => <div className="px-1 py-2 border-b bg-gray-50_ space-y-[5px]"><div className="bg-gray-100_">{i.category_name} ({i.sub_category_name.length})</div>{i.sub_category_name.map(v=><div className="px-2 py-[1px] border_ rounded-md bg-white hover:bg-gray-50">{v}</div>)}</div>)}
+          </div>
+
         </div>
 
-
         {/* Responsive Table Container */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left whitespace-nowrap">
-            <thead><tr className="uppercase text-[0.650rem] text-[#1c1c1c]" style={{
-              borderBottom: '1px solid #dddddd',
-              boxShadow: '0 1px 3px 1px #ededed'
-            }}>
-              <th className="p-2 border-rl border-gray-200">SKU / ID</th>
-              <th className="p-2 border-rl border-gray-200">Product Name</th>
-              <th className="p-2 border-rl border-gray-200">Category</th>
-              <th className="p-2 border-rl border-gray-200">Views (7d)</th>
-              <th className="p-2 border-rl border-gray-200">Enquiries</th>
-              <th className="p-2 border-rl border-gray-200">Status</th>
-              <th className="p-2 text-center">Actions</th>
-            </tr></thead>
-            <tbody className="divide-y divide-gray-200">{filteredProducts.map((p) => (
-              <tr key={p.id} className="cursor-pointer hover:bg-cyan-50 transition duration-150">
-                <td className="p-1.5 font-mono text-xs border-rl border-gray-200 text-gray-700">{p.sku}</td>
-                <td className="p-1.5 text-[0.775rem] border-rl border-gray-200 text-gray-900">{p.name}</td>
-                <td className="p-1.5 text-[0.725rem] border-rl border-gray-200 text-gray-700">
-                  <span className="bg-[#e8f5e9] px-3 py-1 rounded-full">
-                    {p.category}
-                  </span>
-                </td>
-                <td className="p-1.5 text-xs font-mono border-rl border-gray-200 text-green-600">{p.views}</td>
-                {/* New Enquiry Column */}
-                <td className="p-1.5 text-xs font-mono border-rl border-gray-200 text-red-600">{p.enquiries}</td>
-                <td className="p-1.5 text-xs border-rl border-gray-200">
-                  <span
-                    className={`inline-flex items-center px-[8px] py-[1px] text-[0.625rem] font-semibold rounded-full uppercase ${p.status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}
-                  >
-                    {p.status ? <CheckCircle className="w-3 h-3 mr-1" /> : <XCircle className="w-3 h-3 mr-1" />}
-                    {p.status ? 'Active' : 'Disabled'}
-                  </span>
-                </td>
-                <td className="p-1.5 text-center">
-                  <div className="flex justify-center space-x-3">
+        <div className="fx1 df fd-c hfp oh">
+          <div className="rounded-md_ _m-1 p-3 py-1">
+            <div className="df aic">
+              <div className="fx1">
+            <h1 className="text-md font-semibold">Machinary</h1>
+            <h2 className="text-xs">Commercial machines and related product</h2>
+              </div>
+              <span className="rounded-full text-white bg-black px-2.5 text-sm">Edit</span>
+              </div>
+          </div>
 
-                    {/* Toggle Button */}
-                    <button
-                      onClick={() => toggleProductStatus(p.id)}
-                      className={`p-1.5 rounded-full transition duration-150 ${p.status ? 'bg-red-100 hover:bg-red-200' : 'bg-green-100 hover:bg-green-200'} ${p.status ? 'text-red-600' : 'text-green-600'}`}
-                      title={p.status ? "Disable Product" : "Activate Product"}
+          <div className="oy border-t fx1">
+            <table className="w-full text-left whitespace-nowrap">
+              <thead><tr className="uppercase text-[0.650rem] text-[#1c1c1c] border-b pS top-0 bg-white z-50">
+                {/* <th className="p-2 border-rl border-gray-200">Media</th> */}
+                <th className="p-2 border-rl border-gray-200 tac">Product</th>
+                <th className="p-2 border-rl border-gray-200 tac">SKU / ID</th>
+                {/* <th className="p-2 border-rl border-gray-200 tac">Category</th> */}
+                <th className="p-2 border-rl border-gray-200 tac">Views (7d)</th>
+                <th className="p-2 border-rl border-gray-200 tac">Enquiries</th>
+                <th className="p-2 border-rl border-gray-200 tac">Availability</th>
+                {/* <th className="p-2 text-center dn">Actions</th> */}
+              </tr></thead>
+              <tbody className="divide-y divide-gray-200 tac">{filteredProducts.map((p, i) => (
+                <tr key={i} className="m-1 cursor-pointer hover:bg-gray-50 transition duration-150" onClick={() => {
+                  //  set_todelete(p.id)
+                  r_.push('product/'+p.id)
+                   }}>
+                  {/* <td className="px-1.5 font-mono text-sm border-rl border-gray-200 text-gray-700">
+                    <div className="w-[64px] h-[64px] bdArds oh pR border border-black_ m-1" onClick={() => { set_todelete(p.id) }}>
+                      <Image
+                        src={p.image}
+                        alt={p.name}
+                        fill
+                      />
+                    </div>
+                  </td> */}
+                  <td className="px-2 tac text-sm border-rl df border-gray-200 text-gray-900 gap-2 my-1.5">
+                    <div className="w-[54px] h-[54px] bdArds oh pR border border-black_ " onClick={() => { set_todelete(p.id) }}>
+                      <Image
+                        src={p.image||'/Food99.png'}
+                        alt={p.name}
+                        fill
+                      />
+                    </div>
+                    <div className="">
+                      <div>{p.name}</div>                   {!p.status && false===true&& <span
+                        className={`inline-flex items-center px-[8px] py-[1px] font-semibold_ rounded-full text-xs ${p.status ? 'bg-green-100_' : 'bg-red-100 text-red-700'}`}
+                      >
+                        {p.status ? <CheckCircle className="w-3 h-3 mr-1" /> : <XCircle className="w-3 h-3 mr-1" />}
+                        {p.status ? 'In stock' : 'Out of stock'}
+                      </span>}
+                    </div></td>
+                  <td className="px-1.5 tac font-mono text-xs border-rl border-gray-200 text-gray-700">{p.model_no}</td>
+                  {/* <td className="px-1.5 tac text-xs border-rl border-gray-200 text-gray-700">
+                    <span className="bg-[#fbfbfb] border px-3 py-1 rounded-full">
+                      {p.category}
+                    </span>
+                  </td> */}
+                  <td className="px-1.5 tac text-sm font-mono border-rl border-gray-200 text-green-600">{p.views}</td>
+                  {/* New Enquiry Column */}
+                  <td className="px-1.5 tac text-sm font-mono border-rl border-gray-200 text-red-600">{p.enquires}</td>
+                  <td className="px-1.5 tac text-xs border-rl border-gray-200">
+                    <span
+                      className={`inline-flex items-center px-[8px] py-[1px] font-semibold_ rounded-full ${p.status ? 'bg-green-100_' : 'bg-red-100 text-red-700'}`}
                     >
-                      {p.status ? <ToggleLeft size={17} /> : <ToggleRight size={17} />}
-                    </button>
+                      {p.status ? <CheckCircle className="w-3 h-3 mr-1" /> : <XCircle className="w-3 h-3 mr-1" />}
+                      {p.status ? 'In stock' : 'Out of stock'}
+                    </span>
+                  </td>
+                  <td className="p-1.5 text-center dn">
+                    <div className="flex justify-center space-x-3">
 
-                    {/* Edit Button */}
-                    <button
-                      onClick={() => editProduct(p.id)}
-                      className="p-1.5 bg-cyan-100 hover:bg-cyan-200 rounded-full transition duration-150 text-cyan-600"
-                      title="Edit Product"
-                    >
-                      <Edit size={17} />
-                    </button>
+                      {/* Toggle Button */}
+                      <button
+                        onClick={() => toggleProductStatus(p.id)}
+                        className={`p-1.5 rounded-full transition duration-150 ${p.status ? 'bg-red-100 hover:bg-red-200' : 'bg-green-100 hover:bg-green-200'} ${p.status ? 'text-red-600' : 'text-green-600'}`}
+                        title={p.status ? "Disable Product" : "Activate Product"}
+                      >
+                        {p.status ? <ToggleLeft size={17} /> : <ToggleRight size={17} />}
+                      </button>
 
-                    {/* Delete Button */}
-                    <button
-                      onClick={() => deleteProduct(p.id)}
-                      className="p-1.5 bg-gray-100 hover:bg-gray-200 rounded-full transition duration-150 text-gray-500"
-                      title="Delete Product"
-                    >
-                      <Trash2 size={17} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}</tbody>
-          </table>
+                      {/* Edit Button */}
+                      <button
+                        onClick={() => editProduct(p.id)}
+                        className="p-1.5 bg-cyan-100 hover:bg-cyan-200 rounded-full transition duration-150 text-cyan-600"
+                        title="Edit Product"
+                      >
+                        <Edit size={17} />
+                      </button>
+
+                      {/* Delete Button */}
+                      <button
+                        onClick={() => deleteProduct(p.id)}
+                        className="p-1.5 bg-gray-100 hover:bg-gray-200 rounded-full transition duration-150 text-gray-500"
+                        title="Delete Product"
+                      >
+                        <Trash2 size={17} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
           {filteredProducts.length === 0 && (
             <div className="text-center py-8 text-gray-500 text-lg">
               No products found in the "{selectedCategory}" category.

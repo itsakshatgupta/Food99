@@ -1,27 +1,30 @@
 // src/lib/api.js
-const API_URL = "https://food99api.onrender.com/api";
 
-export async function fetchAPI(endpoint, method = "GET", body = null, auth_verify = false) {
+// const API_URL = "https://food99api.onrender.com/api";
+const API_URL = "http://127.0.0.1:8000/api";
+
+export async function fetchAPI(endpoint, method = "GET", body = null, auth_verify = false, c_type = 'application/json') {
   // 🔹 remove extra slash if user passes "/token"
   const cleanEndpoint = endpoint.replace(/^\/+/, "");
   const url = `${API_URL}/${cleanEndpoint}/`;
 
-
-
-
-  const headers = { "Content-Type": "application/json" };
+  let options = { method, headers: {}, cache: "no-store" };
+  switch (c_type) {
+    case 'FormData':
+      options.body = body ? body : null;
+      break;
+    default:
+      options.headers["Content-Type"] = "application/json";
+      options.body = body ? JSON.stringify(body) : null;
+      break;
+  }
   if (auth_verify) {
     const token = localStorage.getItem("access"); // or from cookies
-    headers["Authorization"] = `Bearer ${token}`;
+    options.headers["Authorization"] = `Bearer ${token}`;
 
   }
 
-  let res = await fetch(url, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : null,
-    cache: "no-store",
-  });
+  let res = await fetch(url, options);
 
   // 🧠 If token expired, Django returns 401
   if (res.status === 401 && localStorage.getItem("refresh")) {
@@ -29,7 +32,7 @@ export async function fetchAPI(endpoint, method = "GET", body = null, auth_verif
     const newAccess = await refreshAccessToken();
 
     if (newAccess) {
-      headers["Authorization"] = `Bearer ${newAccess}`;
+      options.headers["Authorization"] = `Bearer ${newAccess}`;
       res = await fetch(url, {
         method,
         headers,

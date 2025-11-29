@@ -16,13 +16,13 @@ export default function SellerLayout({ children }) {
   const pathname = usePathname();
 
   const menu = [
-    {icon:<LayoutDashboard/>,  name: "Dashboard", path: "/sellers/seller_dsbd" },
-    {icon:<FileBox/>,  name: "Products", path: "/sellers/seller_prod" },
-    {icon:<Table/>,  name: "Leads", path: "/sellers/seller_lead" },
-    {icon:<MessageSquare/>,  name: "Messages", path: "/sellers/seller_msg" },
-    {icon:<Boxes/>,  name: "Stock", path: "/seller/stock" },
-    {icon:<Settings/>,  name: "Tools", path: "/seller/tools" },
-    {icon:<Settings2/>,  name: "Settings", path: "/sellers/seller_stng" },
+    {icon:<LayoutDashboard size={18}/>,  name: "Dashboard", path: "/sellers/seller_dsbd" },
+    {icon:<FileBox size={18}/>,  name: "Products", path: "/sellers/seller_prod" },
+    {icon:<Table size={18}/>,  name: "Leads", path: "/sellers/seller_lead" },
+    {icon:<MessageSquare size={18}/>,  name: "Messages", path: "/sellers/seller_msg" },
+    {icon:<Boxes size={18}/>,  name: "Stock", path: "/seller/stock" },
+    {icon:<Settings size={18}/>,  name: "Tools", path: "/seller/tools" },
+    {icon:<Settings2 size={18}/>,  name: "Settings", path: "/sellers/seller_stng" },
   ];
 
   return (
@@ -30,22 +30,23 @@ export default function SellerLayout({ children }) {
       <title>Seller Dashboard || Yggimy</title>
       <body className={`${inter.variable}`}>
 
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen">
       {/* Sidebar */}
-      <aside className="w-64 bg-white flex flex-col border-r">
-        <div className="p-4 df gap03 item-end text-[larger] text-white font-bold border-b border-[black] bg-[#263238]">
+      <aside className="w-64 flex flex-col border-r">
+        <div className="p-4 dfl dn gap03 item-end text-[larger] text-white font-bold border-b border-[black] bg-[#263238]">
           Yggimy <span className="text-[#90A4AE] text-[medium] df aic">Seller</span>
         </div>
-        <nav className="flex-1 mt-4 space-y-1 pdx05 text-sm">
+        <h1 className="mg1">Menu</h1>
+        <nav className="flex-1 mt-4 space-y-1 pdx05 text-md font500">
           {menu.map((item) => (
             <Link
               key={item.path}
               href={item.path}
-              className={`block px-2 py-2 rounded-md hover:bg-gray-100 hover:text-[#ff6c00] transition ${
-                pathname === item.path ? "bg-[#e2ecf4]" : ""
+              className={`block px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[royalblue] transition ${
+                pathname === item.path ? "bg-[#fafafa] py-1 border border-[dodgerblue]" : ""
               }`}
             >
-              <div className="df gap05">{item.icon}{item.name}</div>
+              <div className="df aic gap05">{item.icon}{item.name}</div>
             </Link>
           ))}
         </nav>

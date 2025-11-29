@@ -1,10 +1,11 @@
 'use client'
-import React, { useState, useCallback, useEffect } from 'react';
-import { Package, DollarSign, Text, Tag, UploadCloud, CheckCircle, XCircle, Loader, Zap, AlertTriangle, Truck, Settings, ClipboardList, Plus, CornerDownRight, ArrowDownAz, Search, Minus, Trash2, Edit, Star } from 'lucide-react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import { Package, DollarSign, Text, Tag, UploadCloud, CheckCircle, XCircle, Loader, Zap, AlertTriangle, Truck, Settings, ClipboardList, Plus, CornerDownRight, ArrowDownAz, Search, Minus, Trash2, Edit, ArrowLeft, Star, Boxes, Share2Icon } from 'lucide-react';
 import { fetchAPI } from '@/app/(api)/api';
 import Seller_Page_Header from '@/components/seller-cpmt/header';
-import { Option_Window } from '../../product/product';
+import { initialProducts } from '../subpages/s-product_manage';
 import Image from 'next/image';
+
 
 // --- CONSTANTS & DEFAULT STATE ---
 
@@ -34,80 +35,112 @@ const categoryOptions = [
     'Consulting Services',
 ];
 
-// --- COMPONENTS ---
+// //--dummy-data
+//  const initialProducts = [
+//   // Added fields for Enquiry and Search metrics
+//   { id: 1001, name: 'Industrial Grade Steel Beam (Type A)', model_no: 'SB-001-A', views: 6000, enquires: 150, searches: 800, status: true, category: 'Structural Materials' },
+//   { id: 1002, name: 'CNC Precision Router', model_no: 'CR-4K-22', views: 4500, enquires: 90, searches: 550, status: true, category: 'Machinery & Tools' },
+//   { id: 1003, name: 'High-Torque Actuator Unit', model_no: 'HTAU-900', views: 1800, enquires: 200, searches: 1200, status: false, category: 'Automation Components' }, // High Enquiry/Search
+//   { id: 1004, name: 'Advanced Sensor Array Kit', model_no: 'ASA-V3', views: 3200, enquires: 40, searches: 300, status: true, category: 'Automation Components' },
+//   { id: 1005, name: 'Hydraulic Piston Set (Medium)', model_no: 'HPS-M-05', views: 5500, enquires: 120, searches: 700, status: true, category: 'Hydraulics' },
+//   { id: 1006, name: 'Reinforced Concrete Mix (Bag)', model_no: 'RCM-40', views: 1200, enquires: 30, searches: 200, status: true, category: 'Structural Materials' },
+//   { id: 1007, name: 'Heavy Duty Lathe Machine', model_no: 'HDLM-X', views: 7100, enquires: 80, searches: 400, status: false, category: 'Machinery & Tools' }, // High View
+// ];
 
+// --- COMPONENTS ---
 // Custom Input Field with enhanced styling
-const InputField = (({ label, name, type = 'text', icon: Icon, placeholder, step, value, onChange, required = false, isLoading, min, className = '' }) => (
-    <div className={`${className}`}>
-        <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-1">
-            {label} {required && <span className="text-red-500">*</span>}
-        </label>
-        <div className={`relative `}>
-            <Icon className="absolute left-3 top-3 transform ranslate-y-1/2 w-4 h-4 text-gray-400" />
-            <input
-                id={name}
-                name={name}
-                type={type}
-                autoFocus={false}
-                autoComplete={false}
-                // value={value}
-                onChange={(e) => onChange(e.target.name, e.target.value)}
-                placeholder={placeholder}
-                step={step}
-                required={required}
-                min={min}
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:ring-indigo-500 focus:border-purple-600 outline-none transition duration-200 shadow-sm disabled:bg-gray-100 disabled:opacity-70"
-                disabled={isLoading}
-            />
+const InputField = ({ label, name, type = 'text', icon: Icon, placeholder, step, value, onChange, required = false, isLoading, min, className = '' }) => {
+
+    return (
+        <div className={`${className}`}>
+            <label htmlFor={name} className="block text-sm  text-blue-800 mb-1">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <div className={`relative `}>
+                <Icon className="absolute left-3 top-3 transform ranslate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                    id={name}
+                    name={name}
+                    type={type}
+                    value={value}
+                    onChange={(e) => onChange(e.target.name, e.target.value)}
+                    placeholder={placeholder}
+                    step={step}
+                    required={required}
+                    min={min}
+                    className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-md text-sm text-gray-900 placeholder:text-gray-400 focus:ring-indigo-500 focus:border-blue-400 focus:rounded-lg outline-none transition duration-200 shadow-sm_ disabled:bg-gray-100 disabled:opacity-70"
+                    disabled={isLoading}
+                />
+            </div>
         </div>
-    </div>
-));
+    )
+};
 
 // Toggle Switch/Checkbox Component
-const ToggleField = (({ label, name, checked, onChange, icon: Icon, description, isLoading }) => (
-    <div className="flex items-start">
+export const ToggleField = (({ label, name, checked, onChange, icon: Icon, description, isLoading }) => (
+    <div className="flex items-start jcsb">
+        <div className="text-sm">
+            <label htmlFor={name} className="font-semibold_ flex items-center">
+                <Icon className="w-4 h-4 mr-2 text-indigo-500" />
+                {label}
+            </label>
+            <p className="text-gray-500 mt-0.5">{description}</p>
+        </div>
+
         <div className="flex items-center h-5 mt-1">
             <input
                 id={name}
                 name={name}
                 type="checkbox"
                 checked={checked}
-                onChange={onChange}
+                onChange={(e) => onChange(e.target.name, e.target.checked)}
                 disabled={isLoading}
                 className="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             />
         </div>
-        <div className="ml-3 text-sm">
-            <label htmlFor={name} className="font-semibold text-gray-700 flex items-center">
-                <Icon className="w-4 h-4 mr-2 text-indigo-500" />
-                {label}
-            </label>
-            <p className="text-gray-500 mt-0.5">{description}</p>
-        </div>
     </div>
 ));
 
+
 // Main Product Upload Form Content
-const ProductUploadPage = () => {
-    const initial_required_fields= {name:null, price:null, delivery_available:null,  description:null}
-    const [product, setProduct] = useState(initial_required_fields);
+const ProductUploadPage = ({ productId }) => {
+    const [product, setProduct] = useState(null);
+    const [productToUpdate, setProductToUpdate] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [response, setResponse] = useState(null);
-    const [content, setcontent] = useState(null);
 
+
+    const [kvListPack, setkvListPack] = useState(false);
     const [Child_Window_, setChild_Window_] = useState(null);
     const [adv_view, setAdv_view] = useState(false);
 
-    const handleChange = useCallback((key, value) => {
+
+    const handleChange = (key, value) => {
+        // console.log(e, 123, e.target)
         // const { name, value, type, checked } = e.target;
-        console.log('key and value:', key, value)
+        if (key === 'status') {
+            console.log(key, value)
+
+            const statuc_local_ = { true: 'Active', false: 'diactive' }
+            value = statuc_local_[value]
+        }
+        console.log(key, value)
         setProduct(prev => ({
             ...prev,
+            [key]: value
             // Handle checkboxes for boolean state
             // [name]: type === 'checkbox' ? checked : value,
-             [key]: value
         }));
-    }, []);
+
+        setProductToUpdate(prev => ({
+            ...prev,
+            [key]: value
+
+            // Handle checkboxes for boolean state
+            // [name]: type === 'checkbox' ? checked : value,
+        }));
+
+    };
 
     const handleFileChange = useCallback((e) => {
         const file = e.target.files[0];
@@ -121,17 +154,17 @@ const ProductUploadPage = () => {
         // e.preventDefault();
         setIsLoading(true);
         setResponse(null);
-        console.log(product)
+        setProductToUpdate(null)
 
         try {
             const formData = new FormData();
 
             // append everything
-            for (const key in product) {
-                formData.append(key, product[key]);
+            for (const key in productToUpdate) {
+                formData.append(key, productToUpdate[key]);
             }
 
-            const result = await fetchAPI("products", "POST", formData, true, 'FormData');
+            const result = await fetchAPI("products/" + productId, "PATCH", formData, true, 'FormData');
 
             setResponse({
                 status: "success",
@@ -145,8 +178,61 @@ const ProductUploadPage = () => {
             setResponse({ status: "error", message: err.message });
         } finally {
             setIsLoading(false);
+
         }
     };
+
+    useEffect(() => {
+        try {
+            async function getsellerproduct() {
+                const result = await fetchAPI("products/" + productId, "GET", null, true);
+                const res = await result;
+                setProduct(res);
+                setcontentfetched(true)
+                console.log('res:', res);
+            }
+
+            getsellerproduct()
+        } catch (error) {
+            console.log('error__:', error);
+
+        }
+    }, [])
+
+    // for test by using dummy data
+    // useEffect(() => {
+    //     const get_product = initialProducts.find(v => v.id === parseInt(productId))
+    //     // alert(get_product.name)
+    //     get_product['price'] = 26580;
+    //     get_product['description'] = 'demo description'
+    //     setProduct({
+    //         name: get_product.name,
+    //         model_no: get_product.model_no,
+    //         price: get_product.price,
+    //         category: get_product.category,
+    //         description: get_product.description,
+    //     })
+    // }, [])
+
+
+    // //{
+    //     "id": 15,
+    //     "name": "Washing Machine Commerical",
+    //     "description": "Commerical washing machine.",
+    //     "price": "1230.00",
+    //     "moq": "1",
+    //     "model_no": "SMG-MN-456-VBC",
+    //     "warranty_detail": null,
+    //     "image": "http://127.0.0.1:8000/products/images/ice_creame_sundae.jpg",
+    //     "category": "Industrial Machinery",
+    //     "tags": [],
+    //     "delivery_available": "All India",
+    //     "views": "0",
+    //     "enquires": "0",
+    //     "status": "Active",
+    //     "installation_available": true,
+    //     "created_at": "2025-11-19T14:24:17.100945-06:00"
+    // }
 
 
     const Primary_info = () => (
@@ -397,61 +483,90 @@ const ProductUploadPage = () => {
         </div>
     )
 
-    const dataToRenderPack = () => (
-        <div className="mx-2 df fd-c hfp">
-            <div className="df aic gap-2 text-xs mb-1">
 
-                <span className="border rounded-md df aic gap-1 cursor-pointer hover:text-black-600 px-2 py-1 bg-black-600 hover:bg-gray-50 hover- hover:border-black-600 transition"><Trash2 size={14} className="c " />Category</span>
-                <span className="border rounded-md df aic gap-1 cursor-pointer hover:text-black-600 px-2 py-1 bg-black-600 hover:bg-gray-50 hover- hover:border-black-600 transition"><Edit size={14} className="" />Sub Category</span>
-                <span className="border rounded-md df aic gap-1 cursor-pointer text-white hover:text-red-600 px-2 py-1 bg-red-600 hover:bg-gray-50 hover- hover:border-red-600 transition"><Trash2 size={14} className="c " />Delete</span>
-                <span className="border rounded-md df aic gap-1 cursor-pointer text-white hover:text-blue-600 px-2 py-1 bg-blue-600 hover:bg-gray-50 hover- hover:border-blue-600 transition"><Edit size={14} className="" />Edit</span>
-                <div className="df aic gap-1 border border-gray-300 p-1 fx1 rounded-lg"><Search size={14} /><div>Search Category..</div></div>
-            </div>
-            <div className="fx1 border rounded-md text-sm oh">
-                <div className="bg-gray-50_ border-b border-gray-100">
-                    <div className="px-2 py-1 border-b_ border-gray-100_ df aic hover:bg-gray-50"><Minus size={14} className="mr-2 text-black-500" /> Biscuit</div>
-                    <div className="px-5 py-1 bg-gray-50_ border-l-2 border-gray-200 df aic hover:bg-gray-50 cursor-pointer"><CornerDownRight size={10} className="mr-2 text-black-500" /> Parle</div>
-                    <div className="px-5 py-1 bg-gray-50_ border-l-2 border-gray-200 df aic hover:bg-gray-50 cursor-pointer"><CornerDownRight size={10} className="mr-2 text-black-500" />Anmol</div>
-                </div>
-                <div className="px-2 py-1 border-b border-gray-100 df aic hover:bg-gray-50"><Plus size={14} className="mr-2" /> Snacks</div>
-            </div>
-            <div className="df gap-2 justify-end text-sm mt-2"><span className="py-1 px-3 border border-black rounded-md text-white bg-black cursor-pointer" onClick={() => setAdv_view(null)}>Cancel</span><span className="py-1 px-3 border cursor-pointer hover:bg-gray-50 rounded-md">Done</span></div>
-            <div></div>
-        </div>
-    )
+
+    useEffect(() => {
+        if (response) {
+            setTimeout(() => setResponse(null), 5000)
+        }
+    }, [response])
+
+    const handleDelete = async (e) => {
+        // e.preventDefault();
+        setIsLoading(true);
+        setResponse(null);
+        setProductToUpdate(null)
+
+        try {
+            const formData = new FormData();
+
+            // append everything
+            for (const key in productToUpdate) {
+                formData.append(key, productToUpdate[key]);
+            }
+
+            const result = await fetchAPI("products/" + productId, "DELETE", null, true);
+
+            setResponse({
+                status: "success",
+                message: "Product uploaded successfully",
+            });
+
+            // setProduct(defaultProductState);
+            // document.getElementById("imageFile").value = "";
+
+        } catch (err) {
+            setResponse({ status: "error", message: err.message });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (product) {
+            const _kvListPack = [
+                {
+                    name: "Visiblity", render: <div className="mx-1 text-sm">
+                        <div className="text-lg mb-3">Visiblity</div>
+                        <div className="space-y-4 divide-y mx-1">
+                            <div className="">
+                                {/* <h1 className="text-md mb-1">Manage Stock</h1> */}
+                                <div className="df_ jcsb">
+                                    {/* Current Stock State: {product.status && <span className={`${product.status === 'Active' ? "bg-gray-100 text-gray-200" : "bg-red-100 text-red-200"}`}>{product.status}</span>} */}
+                                    <ToggleField name="status" label={`Stock: ${product.status === "Active" ? "In stock" : "Out of stock"}`} description="Update the product stock seamlessly." checked={product.status === "Active" ? true : false} onChange={handleChange} isLoading={isLoading} icon={Boxes} />
+                                </div>
+                            </div>
+                            <div className="pt-1">
+                                <h1 className="text-red-600 text-md mb-2">Delete this product permanently</h1>
+                                <span className="border border-red text-white bg-red-600 px-2 rounded-md py-1" onClick={() =>setChild_Window_(
+                                    <div className="text-sm">
+                                        <h1 className="mb-3 df gap-1"><AlertTriangle size={22}/> All Information and Data Such as Forms, Enquires  and etc related this product also will be delete.</h1>
+                                        <div className="df gap-1 justify-end">
+
+                                        <span className="px-3 py-1 border cursor-pointer border-black rounded-md bg-white hover:bg-black hover:text-white" onClick={()=>setChild_Window_(null)}>Cancel</span>
+
+                                        <span className="px-3 py-1 border cursor-pointer border-red-600 rounded-md bg-white text-red hover:bg-red-600 hover:text-white" onClick={()=>handleDelete()}>Delete Permanent</span>
+                                        
+                                        </div>
+                                    </div>
+                                    ) }>Delete</span>
+                            </div>
+                        </div>
+                    </div>
+                },
+                { name: "Enquire", render: <div className="text-2xlg">m-2</div> },
+                { name: "Form", render: <div className="text-2xlg">m-3</div> },
+                { name: "Docmunent", render: <div className="text-2xlg">m-4</div> },
+            ]
+            setkvListPack(_kvListPack)
+            console.log('G:', product.status)
+        }
+    }, [product])
     return (
         <div className="df fd-c hfp pR">
-            {adv_view && <Option_Window controller_={{ control: adv_view, setControl: setAdv_view, child_Window: Child_Window_ }} dataToRender={dataToRenderPack()} meta={{ heading: "Category", side_btns: <><span className="px-2 py-1 border text-black hover:bg-gray-50 rounded-xl cursor-pointer transition hover:border-black">New Sub-Category</span><span className="df aic gap-2 border  px-2 py-1 rounded-xl hover:bg-gray-50 cursor-pointer transition hover:border-black"><Plus size={16} />New Category</span></> }} />}
+            {adv_view && <Option_Window controller_={{ control: adv_view, setControl: setAdv_view, child_Window:Child_Window_ }} kvList={kvListPack} dataToRender={false} meta={{heading:"Advance Setting"}}/>}
 
-            <div className="pA dfl dn aic jcc hfp wfp z-50 bg-[#00000008]" style={{ backdropFilter: 'blur(0.8px)' }}>
-                <div className="w-[35rem] h-[25rem] border oh rounded-xl bg-white pR shadow-md">
-                    <div className="pA hfp wfp df aic jcc " style={{ backdropFilter: 'blur(1px)_' }}>
-                        <div className="w-[15rem] bg-white border rounded-xl p-2.5 space-y-3 shadow-md"><h1 className="text-md">New Sub-Category</h1>
-                            <div className="px-2"><h2 className="text-sm mb-2">Sub-Category Name</h2><div className="h-[22px] border-2 border-purple-600 rounded-sm"></div></div><div className="df aic justify-end gap-1 text-sm pt-1"><span className="px-2 py-1 border rounded-md cursor-pointer bg-black text-white">Cancel</span><span className="px-2 py-1 border rounded-md cursor-pointer hover:bg-gray-50">Done</span></div></div>
-                    </div>
-
-                    <div className="p-5 df fd-c hfp">
-                        <div className="df jcsb mb-5"><h1 className="text-md">Category</h1> <div className="df aic gap-2  text-sm"><span className="px-2 py-1 border text-black hover:bg-gray-50 rounded-xl cursor-pointer transition hover:border-black">New Sub-Category</span><span className="df aic gap-2 border  px-2 py-1 rounded-xl hover:bg-gray-50 cursor-pointer transition hover:border-black"><Plus size={16} />New Category</span></div></div>
-                        <div className="df aic gap-2 text-xs mb-1"><div className="df aic gap-1 border p-1 fx1 rounded-lg"><Search size={14} /><div>Search Category..</div></div>
-                            <span className="border rounded-lg df aic gap-1 cursor-pointer text-white hover:text-red-600 px-2 py-1 bg-red-600 hover:bg-gray-50 hover- hover:border-red-600 transition"><Trash2 size={14} className="c " />Delete</span>
-                            <span className="border rounded-lg df aic gap-1 cursor-pointer text-white hover:text-blue-600 px-2 py-1 bg-blue-600 hover:bg-gray-50 hover- hover:border-blue-600 transition"><Edit size={14} className="" />Edit</span>
-                        </div>
-                        <div className="fx1 border rounded-md text-sm oh">
-                            <div className="bg-gray-50_ border-b border-gray-100">
-                                <div className="px-2 py-1 border-b_ border-gray-100_ df aic hover:bg-gray-50"><Minus size={14} className="mr-2 text-black-500" /> Biscuit</div>
-                                <div className="px-5 py-1 bg-gray-50_ border-l-2 border-gray-200 df aic hover:bg-gray-50 cursor-pointer"><CornerDownRight size={10} className="mr-2 text-black-500" /> Parle</div>
-                                <div className="px-5 py-1 bg-gray-50_ border-l-2 border-gray-200 df aic hover:bg-gray-50 cursor-pointer"><CornerDownRight size={10} className="mr-2 text-black-500" />Anmol</div>
-                            </div>
-                            <div className="px-2 py-1 border-b border-gray-100 df aic hover:bg-gray-50"><Plus size={14} className="mr-2" /> Snacks</div>
-                        </div>
-                        <div className="df gap-2 justify-end text-sm mt-2"><span className="py-1 px-3 border border-black rounded-md text-white bg-black cursor-pointer">Cancel</span><span className="py-1 px-3 border cursor-pointer hover:bg-gray-50 rounded-md">Done</span></div>
-                        <div></div>
-                    </div>
-                </div>
-
-            </div>
-
-            <Seller_Page_Header pageTitle="Upload" pageSubTitle="Submit comprehensive data for efficient supply chain integration." />
+            <Seller_Page_Header pageTitle="Commercial stone oven" pageSubTitle="Model:#1001" back={true} buttons={[<span>Download Report</span>,<span>Guide</span>]}/>
             {/* Response Message (Refined Look) */}
             {response && (
                 <div
@@ -469,19 +584,18 @@ const ProductUploadPage = () => {
                     <span className="text-sm">{response.message}</span>
                 </div>
             )}
-            <div className="fx1 oh">
+            <div className="fx1 oy bg-gray-50">
                 {/* p-6 md:p-5  */}
                 {product ? <form onSubmit={handleSubmit} className="p-3 hfp">
-                    <div className="df gap-3 hfp">
-                        <div className="fx1 oy py-3 df fd-c gap-2 px-1">
+                    <div className="df gap-3 min-h-full ">
+                        <div className="fx1 hmc oy_ mb-9 border rounded-sm py-3 df fd-c gap-2 px-3 bg-white mb-5">
                             {Primary_info()}
                             {Commercial_sec()}
                             {Media_sec()}
                             <div className="justify-end px-5 df mt-2">
-                                <button className="px-5 py-1 border bdArds cursor-pointer hover:bg-[#fbfbfb] text-sm" onClick={(e) => {
+                                <button className="px-5 py-1 border border-purple-600 text-purple-600 rounded-md cursor-pointer bg-purple-100  hover:bg-purple-600 hover:text-white text-sm" onClick={(e) => {
                                     e.preventDefault();
                                     let to_submit = true;
-                                    console.log('my', product)
                                     for (const key in product) {
                                         const element = product[key];
                                         console.log("[][]:", key, element)
@@ -495,19 +609,19 @@ const ProductUploadPage = () => {
                                             break;
                                         }
                                     }
-                                    to_submit && product ? handleSubmit() : null
+                                    to_submit && productToUpdate ? handleSubmit() : null
                                 }}
-                                    disabled={!product && true}
+                                    disabled={!productToUpdate && true}
                                 >{'Publish'}
                                 </button>
                             </div>
                         </div>
 
-                        <div className="w-[14rem] hfp oy">
-                            <div className='p-1.5 fx1 bg-white border rounded-xl'>
+                        <div className="min-w-[15rem] max-w-[min-content] hfp oy sbt" style={{scrollbarColor:'#eeeeeeff #fafafa '}}>
+                            <div className='p-1.5 fx1  border rounded-lg bg-white'>
 
-                                <h1 className="text-md mb-1 font-semibold border-b">Product Overview</h1>
-                                <div className='text-sm m-1.5 space-y-2 text-black/95'>
+                                <h1 className="text-md font-semibold border-b df jcsb aic">Product Overview <Share2Icon size={18} className="mr-3"/></h1>
+                                <div className='text-sm border_ rounded-lg p-2 space-y-2 text-black/95 bg-gray-50/30_'>
                                     <div className='df aic gap-1'><span>Views:</span><span>{product.views}</span></div>
                                     <div className='df aic gap-1'><span>Enquires:</span><span>{product.enquires}</span></div>
                                     <div className='df aic gap-1'><span>Total Watch Hours:</span><span>0.6</span></div>
@@ -516,15 +630,16 @@ const ProductUploadPage = () => {
                                     <div className='df aic gap-1'><span>Rating:</span><span className="df gap-1 text-sm text-blue-500 aic"><Star fill="orangered" stroke="orangered" size={14} /><Star fill="orangered" stroke="orangered" size={14} /><Star fill="orangered" stroke="orangered" size={14} /><Star fill="orangered" stroke="orangered" size={14} /><Star fill="orangered" stroke="orangered" size={14} /><span className="cursor-pointer">(59)</span></span></div>
 
                                     {/* Advance User Setting's content.
-                                                    <div className='df aic gap-1'><span>Uploaded:</span><span>{product.created_at.split('T')[0]}</span></div> */}
+                                        <div className='df aic gap-1'><span>Uploaded:</span><span>{product.created_at.split('T')[0]}</span></div> */}
                                 </div>
 
-                                <div className='df jcc aic my-3'><span className="border rounded-full w-[80%] py-[0.125rem] text-blue-600  border-gray-300 hover:bg-blue-100 hover:border-blue-600 transition text-sm tac cursor-pointer" onClick={() => setAdv_view(true)}>Advance Setting</span>
+                                <div className='df jcc aic mt-3 mb-1'><span className="border rounded-full w-[80%] py-[0.125rem] text-blue-600
+                                bg-blue-50 border-blue-300 hover:bg-blue-100 hover:border-blue-300 transition text-sm tac cursor-pointer" onClick={() => setAdv_view(true)}>Advance Setting</span>
                                 </div>
 
                             </div>
                             <div className="h-[8rem] pR border mx-1 rounded-md my-3 bg-[royalblue] text-white df fd-c aic jcc gap-3 p-1.5"><div className="font-semibold text-[0.925rem] tac">Get More Views and Earn More Value</div>
-                                <div className="px-3  text-sm font-semibold py-1 border border-white rounded-md ">Advertise Now</div>
+                                <div className="px-3  text-sm font-semibold py-1 border border-white rounded-md cursor-pointer">Advertise Now</div>
                             </div>
                         </div>
                     </div>
@@ -536,8 +651,59 @@ const ProductUploadPage = () => {
 
 
 // Main App Component
-export default function ProductNewPage() {
+export default function ProductEditPage({ productId }) {
     return (
-        <ProductUploadPage />
+        <ProductUploadPage productId={productId} />
     );
 };
+
+export function Option_Window({ controller_ = { control, setControl, child_Window:null }, kvList=null, dataToRender = null, meta={heading:null, side_btns:null} }) {
+    const [view_, setView_] = useState(kvList?{ viewFor: kvList[0].name, viewToRender: kvList[0].render }:dataToRender);
+    useEffect(() => {
+        if (kvList && view_.viewFor) {
+            setView_((prev) => ({ ...prev, viewToRender: kvList.find(f => f.name === prev.viewFor).render }))
+        }
+    }, [kvList])
+
+
+    return (
+
+        <div className="pA df aic jcc hfp wfp z-50 bg-[#00000008]" style={{ backdropFilter: 'blur(0.8px)' }}>
+            <div className="w-[35rem] h-[25rem] border oh rounded-xl bg-white pR shadow-md">
+                {controller_.child_Window&& <div className="pA hfp wfp df aic jcc " style={{ backdropFilter: 'blur(1px)_' }}>
+                            <div className="min-w-[15rem] max-w-[25rem] bg-white border rounded-xl p-2.5 space-y-3 shadow-md">{controller_.child_Window}</div>
+                        </div>}
+
+                {/* {adv_view.main} */}
+                <div className=" p-3 hfp df fd-c">
+                    <div className="df gap-2 mb-3 aic">
+                        <span className="hover:bg-gray-50 rounded-full cursor-pointer p-1">
+                            <ArrowLeft size={18} onClick={() => controller_.setControl(false)} />
+                        </span>
+                        <h1 className="text-md">{meta.heading&&meta.heading}</h1>
+                       
+                    </div>
+                    <div className={`${kvList&&"df"} fx1`}>
+                        {kvList?
+                        <>
+                        <div className="flex-[0.4] border-r space-y-2 text-sm">
+                            {kvList.map(v => (
+                                <div className={` py-1 px-2 cursor-pointer ${view_.viewFor === v.name ? "bg-purple-600 text-white " : "hover:bg-gray-100"}`} onClick={() => setView_({ viewFor: v.name, viewToRender: v.render })}>{v.name}</div>
+                            ))}
+
+                        </div>
+                        <div className="fx1">
+                            {view_.viewToRender}
+
+                        </div>
+                        </>
+                        :dataToRender}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    )
+}

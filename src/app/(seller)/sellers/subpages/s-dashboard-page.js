@@ -4,6 +4,7 @@
 import { TrendingUp, Package, AlertTriangle, User, UserCircle2, HardDriveDownload, Stamp, NotebookPenIcon, FileBox, FileBadge, FileUser, Bell, Calculator, HandCoins, Calendar, Activity, ActivitySquare, FormInput, File, Stars, ChevronDown, Network, Wifi, Eye, MessageSquare, Search, BarChart3 } from 'lucide-react';
 import { initialProducts, EVProductMetricsChart, METRIC_OPTIONS } from './s-product_manage';
 import React, { useState, useMemo } from 'react';
+import Seller_Page_Header from '@/components/seller-cpmt/header';
 
 
 const lang__ = [
@@ -38,35 +39,35 @@ const Card = ({ title, value, icon: Icon, colorClass, highlight }) => (
 // Component for the Recent Leads table
 const RecentLeads = () => {
   const leads = [
-    { buyer: 'Ramesh Kumar', product: 'Organic Honey', message: 'Need bulk order (Urgent)', date: '2025-11-10', statusColor: 'text-red-400' },
-    { buyer: 'Priya Sharma', product: 'Dry Fruits Mix', message: 'Can you deliver in Delhi?', date: '2025-11-09', statusColor: 'text-cyan-400' },
-    { buyer: 'Gita Patel', product: 'Industrial Steel Pipe', message: 'Requesting specification sheet.', date: '2025-11-08', statusColor: 'text-green-400' },
-    { buyer: 'Vijay Singh', product: 'Custom CNC Parts', message: 'Urgent need for QTY 500.', date: '2025-11-08', statusColor: 'text-red-400' },
+    { buyer: 'Ramesh Kumar', product: 'Organic Honey', message: 'Need bulk order (Urgent)', date: '2025-11-10', statusColor: 'text-red-600' },
+    { buyer: 'Priya Sharma', product: 'Dry Fruits Mix', message: 'Can you deliver in Delhi?', date: '2025-11-09', statusColor: 'text-cyan-600' },
+    { buyer: 'Gita Patel', product: 'Industrial Steel Pipe', message: 'Requesting specification sheet.', date: '2025-11-08', statusColor: 'text-green-600' },
+    { buyer: 'Vijay Singh', product: 'Custom CNC Parts', message: 'Urgent need for QTY 500.', date: '2025-11-08', statusColor: 'text-red-600' },
   ];
 
   return (
-    <div className="">
+    <div className="mx-3">
       {/* Table Header */}
 
       {/* Responsive Table Container */}
-      <div className="overflow-x-auto bg-white border border-r border-gray-700">
+      <div className="overflow-x-auto rounded-xl border border-r border-gray-200">
         <table className="w-full text-left whitespace-nowrap">
           <thead>
             {/* Table Head Row - Darker background for contrast */}
-            <tr className="uppercase text-xs text-white bg-[#153443]">
-              <th className="p-2 border-r border-gray-700">Buyer ID</th>
-              <th className="p-2 border-r border-gray-700">Product Line</th>
-              <th className="p-2 border-r border-gray-700">Query</th>
+            <tr className="uppercase text-xs border-b  border-gray-300">
+              <th className="p-2 border-r border-gray-300">Buyer ID</th>
+              <th className="p-2 border-r border-gray-300">Product Line</th>
+              <th className="p-2 border-r border-gray-300">Query</th>
               <th className="p-2">Timestamp</th>
             </tr>
           </thead>
           {/* Table Body */}
-          <tbody className="divide-y divide-gray-700">
+          <tbody className="divide-y divide-gray-200">
             {leads.map((lead, index) => (
-              <tr key={index} className="hover:bg-blue-100/50 cursor-pointer transition duration-150">
-                <td className="p-2.5 font-mono text-sm border-r border-gray-700 text-gray-600">{lead.buyer}</td>
-                <td className="p-2.5 font-mono text-sm border-r border-gray-700 text-gray-600">{lead.product}</td>
-                <td className="p-2.5 text-sm border-r border-gray-700">
+              <tr key={index} className="hover:bg-gray-100 cursor-pointer transition duration-150">
+                <td className="p-2.5 font-mono text-sm border-r border-gray-300 text-gray-600">{lead.buyer}</td>
+                <td className="p-2.5 font-mono text-sm border-r border-gray-300 text-gray-600">{lead.product}</td>
+                <td className="p-2.5 text-sm border-r border-gray-300">
                   <span className={lead.statusColor + ' font-medium'}>
                     {lead.message}
                   </span>
@@ -78,8 +79,8 @@ const RecentLeads = () => {
         </table>
       </div>
       {/* Call to action button */}
-      <div className="mt-4 text-right">
-        <button className="text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition duration-150">
+      <div className="mt-1 text-right">
+        <button className="text-sm font-semibold text-gray-700 hover:text-gray-900 transition duration-150">
           VIEW FULL LOG &rarr;
         </button>
       </div>
@@ -98,144 +99,77 @@ export default function SellerDashboard() {
   const GREEN_SUCCESS = '#4ade80'; // Tailwind green-400
 
   return (
-    <div className="h-screen text-gray-100 font-sans oy bg-[#FAFAFA] pR">
+    <div className="h-screen font-sans oy pR">
 
       {/* Main Header - Bold, structured, with a separating line */}
-      <div className="bg-[#1a272e] ">
-        <div className="pdr1 pdl08 df jcsb text-lg font500 text-[#5d5d5d]  border-b-2 border-cyan-500/50 py-2.5 ">
-          <span className="text-[#E0E0E0]">J.k Traders</span>
-          <div className="df aic gap05 text-white text-sm">
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#2a3b44] bdArds transition px-2 bg-[]">
-              <Bell stroke="white" size={18} />
-              Notification
-            </div>
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#2a3b44] bdArds transition px-2 bg-[]">
-              <Stamp stroke="white" size={18} />
 
-              Digital-Sign
-            </div>
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#2a3b44] bdArds transition px-2 bg-[]">
-              <NotebookPenIcon stroke="white" size={18} />
+      <Seller_Page_Header pageTitle={'Dashboard'} buttons={["Notification", "Forms", "Reports"]} />
 
-              Notebook
-            </div>
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#2a3b44] bdArds transition px-2 bg-[]">
-              <Calculator stroke="white" size={18} />
+      <div className="df gap-4 mx-3 my-4">
+        <div className="border_ fx1">
+          <div className="text-black px-1.5 py-2 df aic jcsb bg-white">
+            <span className="df aic font-semibold md"><BarChart3 className="w-5 h-5 mr-2 text-green-600" />PRODUCT METRICS
+              <div className="pR  ml-3 group cursor-pointer pdx05  text-sm pdy01 hover:bg-white">
+                <span className="df aic gap01 font-normal" style={{ borderRadius: '5px' }}>Today<ChevronDown size={14} />
+                </span>
 
-              Calculator
-            </div>
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#2a3b44] bdArds transition px-2 bg-orange-800 text-[gold]">
-              <UserCircle2 stroke="gold" size={18} />
-
-              Account
-            </div>
-
+                {/* Mega Menu Dropdown */}
+                <div className="pA left-[calc(100%-180px)]">
+                  <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
+                    {['Last week', 'This Month', 'Last Month', 'Last six Months', 'Custom Date'].map((item, subIndex) => (
+                      <span key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
+                        {item}
+                      </span>
+                    ))}
+                  </div></div>
+              </div>
+            </span>
           </div>
-        </div>
-        <div className="df jcsb text-xs font500 pr-2">
-          <div className=" df aic gap01 border-b-2 border-cyan-500/50 bg-[#263238]">
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#546e7a] transition px-2 bg-[#2d3d41]">
-              <Stars stroke="white" size={16} />
+          <div className="min-h-[fit-content] mx-3_">
+            <div className="fx1 bg-[gray] h-full pR mb-2">
 
-              AI
+              <EVProductMetricsChart key={selectedMetric} products={initialProducts} a={selectedMetric} n={true} ct={null} />
             </div>
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#546e7a] transition px-2 bg-[#2d3d41]">
-              <Calendar stroke="white" size={16} />
-
-              Calender
-            </div>
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#546e7a] transition px-2 bg-[#2d3d41]">
-              <File stroke="white" size={16} />
-
-              Forms
-            </div>
-          </div>
-          <div className="df aic">
-            <div className="df aic gap03 py-1 cursor-pointer transition px-2 bg-[#2d3d41]l text-green-500">
-
-              <Wifi size={14} />
-              Broadcast Message
-            </div>
-            <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#546e7a] transition px-2 bg-[#2d3d41]l">
-              <span className="df">
-                Subscribers:
-              </span>
-              12
-            </div>
-            <div className="pR  group cursor-pointer pdx05 pdy01 hover:bg-[#37474F]">
-              <span className="df aic gap01 " style={{ borderRadius: '5px' }}>En<ChevronDown size={14} />
-              </span>
-
-              {/* Mega Menu Dropdown */}
-              <div className="pA left-[calc(100%-180px)]">
-                <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
-                  {lang__.map((item, subIndex) => (
-                    <span key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
-                      {item}
-                    </span>
-                  ))}
-                </div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div className="border">
-        <div className="text-black px-1.5 py-2 df aic jcsb bg-white">
-          <span className="df aic"><BarChart3 className="w-5 h-5 mr-2 text-green-600" />PRODUCT METRICS
-            <div className="pR  ml-3 group cursor-pointer pdx05  text-xs pdy01 hover:bg-white">
-              <span className="df aic gap01 " style={{ borderRadius: '5px' }}>Today<ChevronDown size={14} />
-              </span>
-
-              {/* Mega Menu Dropdown */}
-              <div className="pA left-[calc(100%-180px)]">
-                <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
-                  {['Last week', 'This Month', 'Last Month', 'Last six Months', 'Custom Date'].map((item, subIndex) => (
-                    <span key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
-                      {item}
-                    </span>
-                  ))}
-                </div></div>
-            </div>
-          </span>
-          <span className="df aic gap03 text-gray-800 text-xs">Select Dataset:
-            <div className="pR group cursor-pointer bdrds bg-white border pdx05 text-gray-800  pdy01 hover:bg-blue-100">
-              <span className="df aic gap01 text-[0.675rem] transition" style={{ borderRadius: '5px' }}>Default<ChevronDown size={10} />
-              </span>
-
-              {/* Mega Menu Dropdown */}
-              <div className="pA left-[calc(100%-180px)]">
-                <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
-                  {['Last week', 'This Month', 'Last Month', 'Last six Months', 'Custom Date'].map((item, subIndex) => (
-                    <span key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
-                      {item}
-                    </span>
-                  ))}
-                </div></div>
-            </div>
-          </span>
-        </div>
-        <div className="min-h-[fit-content] df  jcsb ">
-          <div className="fx1 bg-[gray] h-full pR ">
-
-            <EVProductMetricsChart key={selectedMetric} products={initialProducts} a={selectedMetric} n={true} ct={null} />
-          </div>
-          <div className="w-[15vw] bg-[white] h-auto oy bg-gray-100/10  border border-gray-200 ">
-            <div className="h-[100px]">
-              {[
-                { key: 'views', title: 'Most Viewed', color: 'green', icon: Eye },
-                { key: 'enquiries', title: 'Most Enquired', color: 'red', icon: MessageSquare },
-                { key: 'searches', title: 'Most Searched', color: 'blue', icon: Search },
-              ].map(v =>
-                <div className="p-2 pR text-black text-[0.7rem] tac cursor-pointer hover:text-orange-600" onClick={() => setSelectedMetric(v.key)} style={{ userSelect: 'none' }}>
-                  <div className="mb-1 xfg h-[100px]">
-                    <div className="hfp wfp z-50 pA dn"></div>
-                    <EVProductMetricsChart products={initialProducts} a={v.key} n={false} ct={'line'} />
+            <div className=" bg-[white] h-auto oy border border-gray-200 ">
+              <div className="df gap-1">
+                {[
+                  { key: 'views', title: 'Most Viewed', color: 'green', icon: Eye },
+                  { key: 'enquiries', title: 'Most Enquired', color: 'red', icon: MessageSquare },
+                  { key: 'searches', title: 'Most Searched', color: 'blue', icon: Search },
+                ].map(v =>
+                  <div className="p-2 pR text-black text-[0.7rem] tac cursor-pointer hover:text-orange-600" onClick={() => setSelectedMetric(v.key)} style={{ userSelect: 'none' }}>
+                    <div className="mb-1 xfg h-[100px]">
+                      <div className="hfp wfp z-50 pA dn"></div>
+                      <EVProductMetricsChart products={initialProducts} a={v.key} n={false} ct={'line'} />
+                    </div>
+                    <span>{v.title}</span>
                   </div>
-                  <span>{v.title}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-[15rem] text-gray-800">
+          <div className="df fd-c hfp gap-2">
+            <div className="border rounded-sm shadow-sm bg-white fx1 border-b">
+              <h1 className="text-md font-semibold border-b mb-3 px-2 py-1  ">Summary last 7 days</h1>
+              <div className=" mx-2">
+                <div className="divide-y-2 divide-gray-100 space-y-2  text-sm">
+                  <div>Product:---</div>
+                  <div>Product:---</div>
+                  <div>Product:---</div>
+                  <div>Product:---</div>
                 </div>
-              )}
+              </div>
+            </div>
+            <div className="border rounded-sm shadow-sm bg-white">
+
+              <div className="divide-y-2 divide-gray-100 space-y-2 mx-2 text-sm border px-2 rounded-lg my-5">
+                <div>Product:---</div>
+                <div>Product:---</div>
+                <div>Product:---</div>
+                <div>Product:---</div>
+              </div>
             </div>
           </div>
         </div>

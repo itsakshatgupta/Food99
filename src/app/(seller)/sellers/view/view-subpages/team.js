@@ -3,9 +3,12 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import {
     Users, User, ChevronRight, Settings, Package, DollarSign, Zap,
     ClipboardList, MapPin, Tag, BarChart2, CheckCircle, Save, Loader,
-    Percent, Truck, Edit, Trash2, Shield, FileText, Briefcase
+    Percent, Truck, Edit, Trash2, Shield, FileText, Briefcase,
+    Group,
+    Search
 } from 'lucide-react';
 import Seller_Page_Header from '@/components/seller-cpmt/header';
+import DropDown_1 from '@/components/seller-cpmt/widget';
 
 // --- MOCK DATA ---
 
@@ -31,23 +34,23 @@ const INITIAL_PERMISSIONS = {
     lead_price_range_assign: '30000_plus', // Options: 'all', 'under_10k', '10k_30k', '30000_plus'
     lead_category_priority: ['Industrial Machinery', 'Electronics'],
     lead_location_match: true,
-    
+
     // 2. Product Management
     product_add: true,
     product_edit: true,
     product_delete: false,
     product_add_additional_data: true, // e.g., adding certifications, detailed specs
     product_toggle_availability: true, // Mark Offline/Available
-    
+
     // 3. Financial & Transaction Powers
     finance_initiate_lease: true, // Flex payment initiation
     finance_digital_sign: false, // Digital signature access
     finance_generate_receipt: true,
-    
+
     // 4. Store Settings
     store_manage_settings: false,
     store_manage_features: false,
-    
+
     // 5. Form Management
     form_create: false,
     form_fill_existing: true,
@@ -88,7 +91,7 @@ const TeamPage = () => {
         });
         setIsSaving(false);
     };
-    
+
     // Reset message after a delay
     useEffect(() => {
         if (message) {
@@ -102,7 +105,7 @@ const TeamPage = () => {
     const TabButton = ({ icon: Icon, title, name }) => (
         <button
             onClick={() => setActiveTab(name)}
-            className={`flex items-center space-x-3 p-3 text-sm font-medium rounded-xl transition duration-200 w-full text-left
+            className={`flex items-center  py-1 px-2 text-xs font-medium rounded-xl transition duration-200 w-full text-left
                 ${activeTab === name
                     ? 'bg-indigo-600 text-white shadow-lg'
                     : 'text-gray-600 hover:bg-gray-100'
@@ -113,13 +116,13 @@ const TeamPage = () => {
         </button>
     );
 
-    const PermissionToggle = ({ label, name, description, icon: Icon }) => (
-        <div className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-200">
+    const PermissionToggle = ({ label, name, description, icon: Icon, hide_border }) => (
+        <div className={`flex items-center justify-between p-4 bg-white ${!hide_border&&"border-b border-gray-200"}`}>
             <div className="flex items-center">
                 <Icon className="w-5 h-5 mr-3 text-indigo-500" />
                 <div>
-                    <p className="text-base font-semibold text-gray-800">{label}</p>
-                    <p className="text-sm text-gray-500">{description}</p>
+                    <p className="text-[0.875rem] font-semibold text-gray-800">{label}</p>
+                    <p className="text-[0.775rem] text-gray-500">{description}</p>
                 </div>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
@@ -134,57 +137,58 @@ const TeamPage = () => {
             </label>
         </div>
     );
-    
+
     const RenderContent = () => {
         switch (activeTab) {
             case 'summary':
                 return (
                     <div className="space-y-6">
-                        <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-200 shadow-md">
+                        <div className="p-2 bg-indigo-50 rounded-2xl border border-indigo-200 shadow-md">
                             <div className="flex items-center space-x-4">
-                                <div className="w-16 h-16 rounded-full bg-indigo-500 flex items-center justify-center text-white text-2xl font-bold">
+                                <div className="w-14 h-14 rounded-full bg-indigo-500 flex items-center justify-center text-white text-2xl font-bold">
                                     {selectedMember.name.charAt(0)}
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-800">{selectedMember.name}</h3>
-                                    <p className="text-indigo-600 font-medium">{selectedMember.role} <span className="text-gray-500">({selectedMember.email})</span></p>
+                                    <h3 className="text-md font-bold text-gray-800">{selectedMember.name}</h3>
+                                    <p className="text-indigo-600 font-medium text-sm">{selectedMember.role} <span className="text-gray-500 text-sm">({selectedMember.email})</span></p>
                                 </div>
+                            </div>
+                            <div className="p-4 bg-white rounded-xl mt-3 text-sm border border-indigo-200 text-blue-600">
+                                <p className="font-medium">Role Description:</p>
+                                <p>{MOCK_ROLES[selectedMember.role]}</p>
                             </div>
                         </div>
 
                         <div className="space-y-4">
-                            <h4 className="text-lg font-bold text-gray-700 flex items-center"><Shield className="w-5 h-5 mr-2 text-yellow-500"/> Current Access Summary</h4>
-                            <div className="grid grid-cols-2 gap-4 text-sm">
-                                <div className={`p-4 rounded-xl shadow-inner ${permissions.product_add ? 'bg-green-50' : 'bg-red-50'}`}>
+                            <h4 className="text-sm font-bold text-gray-700 flex items-center"><Shield className="w-5 h-5 mr-2 text-yellow-500" /> Current Access Summary</h4>
+                            <div className="grid grid-cols-2 gap-4 text-[0.8rem]">
+                                <div className={`p-3 rounded-xl shadow-inner ${permissions.product_add ? 'bg-green-50' : 'bg-red-50'}`}>
                                     <p className="font-semibold">Product CRUD</p>
                                     <p>{permissions.product_add ? 'Full Add/Edit' : 'View Only'}</p>
                                 </div>
-                                <div className={`p-4 rounded-xl shadow-inner ${permissions.finance_digital_sign ? 'bg-green-50' : 'bg-red-50'}`}>
+                                <div className={`p-3 rounded-xl shadow-inner ${permissions.finance_digital_sign ? 'bg-green-50' : 'bg-red-50'}`}>
                                     <p className="font-semibold">Digital Signing Power</p>
                                     <p>{permissions.finance_digital_sign ? 'Authorized' : 'Unauthorized'}</p>
                                 </div>
-                                <div className={`p-4 rounded-xl shadow-inner ${permissions.lead_gender_match ? 'bg-green-50' : 'bg-red-50'}`}>
+                                <div className={`p-3 rounded-xl shadow-inner ${permissions.lead_gender_match ? 'bg-green-50' : 'bg-red-50'}`}>
                                     <p className="font-semibold">Lead Routing Logic</p>
                                     <p>Match Gender/Price: {permissions.lead_gender_match ? 'Active' : 'Inactive'}</p>
                                 </div>
-                                <div className={`p-4 rounded-xl shadow-inner ${permissions.store_manage_settings ? 'bg-green-50' : 'bg-red-50'}`}>
+                                <div className={`p-3 rounded-xl shadow-inner ${permissions.store_manage_settings ? 'bg-green-50' : 'bg-red-50'}`}>
                                     <p className="font-semibold">Store Settings</p>
                                     <p>{permissions.store_manage_settings ? 'Can Edit Settings' : 'Cannot Edit Settings'}</p>
                                 </div>
                             </div>
-                            <div className="p-4 bg-gray-100 rounded-xl text-sm text-gray-600">
-                                <p className="font-medium">Role Description:</p>
-                                <p>{MOCK_ROLES[selectedMember.role]}</p>
-                            </div>
+
                         </div>
                     </div>
                 );
             case 'leads':
                 return (
-                    <div className="space-y-6">
-                        <h4 className="text-xl font-bold text-gray-700 flex items-center border-b pb-2 mb-4"><BarChart2 className="w-5 h-5 mr-2 text-indigo-500"/> Lead Assignment ("Spearation") Rules</h4>
-                        <p className="text-gray-500">Define the automated criteria for assigning new leads to this team member based on lead characteristics.</p>
-                        
+                    <div className="space-y-3">
+                        <h4 className="text-md font-bold text-gray-700 flex items-center border-b pb-2 mb-1"><BarChart2 className="w-5 h-5 mr-2 text-indigo-500" /> Lead Assignment ("Spearation") Rules</h4>
+                        <p className="text-gray-500 text-sm m-0">Define the automated criteria for assigning new leads to this team member based on lead characteristics.</p>
+
                         <PermissionToggle
                             label="Gender-Based Routing"
                             name="lead_gender_match"
@@ -200,11 +204,11 @@ const TeamPage = () => {
                         />
 
                         {/* Dropdown for Price/Value Assignment */}
-                        <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-200">
-                            <label htmlFor="price_range" className="text-base font-semibold text-gray-800 flex items-center mb-1">
+                        <div className="p-4 bg-white">
+                            <label htmlFor="price_range" className="text-[0.875rem] font-semibold text-gray-800 flex items-center mb-1">
                                 <DollarSign className="w-5 h-5 mr-3 text-indigo-500" /> Assign Leads by Deal Value
                             </label>
-                            <p className="text-sm text-gray-500 mb-3">Filter leads based on expected deal size (price/value criteria).</p>
+                            <p className="text-[0.8rem] text-gray-500 mb-3">Filter leads based on expected deal size (price/value criteria).</p>
                             <select
                                 id="price_range"
                                 name="lead_price_range_assign"
@@ -219,13 +223,13 @@ const TeamPage = () => {
                                 <option value="30000_plus">$30,001 and Above (High Value)</option>
                             </select>
                         </div>
-                        
+
                         {/* Tags and Categories (Simplified) */}
-                        <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-200">
-                            <label className="text-base font-semibold text-gray-800 flex items-center mb-1">
+                        <div className="p-4 mt-1 bg-white shadow-sm border rounded-xl">
+                            <label className="text-[0.875rem] font-semibold text-gray-800 flex items-center mb-1">
                                 <Tag className="w-5 h-5 mr-3 text-indigo-500" /> Category & Tag Priority
                             </label>
-                            <p className="text-sm text-gray-500 mb-3">Leads with these categories/tags will be prioritized for this member.</p>
+                            <p className="text-[0.8rem] text-gray-500 mb-3">Leads with these categories/tags will be prioritized for this member.</p>
                             <div className="flex flex-wrap gap-2">
                                 {['Industrial Machinery', 'Electronics', 'Raw Materials', 'Consulting'].map(tag => (
                                     <button
@@ -239,11 +243,10 @@ const TeamPage = () => {
                                             handlePermissionChange('lead_category_priority', newArray);
                                         }}
                                         disabled={isSaving}
-                                        className={`px-3 py-1 text-xs font-medium rounded-full transition duration-150 ${
-                                            permissions.lead_category_priority.includes(tag)
-                                                ? 'bg-indigo-600 text-white shadow-md'
-                                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                        }`}
+                                        className={`px-3 py-1 text-xs font-medium rounded-full transition duration-150 ${permissions.lead_category_priority.includes(tag)
+                                            ? 'bg-indigo-600 text-white shadow-md'
+                                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                            }`}
                                     >
                                         {tag}
                                     </button>
@@ -254,48 +257,48 @@ const TeamPage = () => {
                 );
             case 'products':
                 return (
-                    <div className="space-y-6">
-                        <h4 className="text-xl font-bold text-gray-700 flex items-center border-b pb-2 mb-4"><Package className="w-5 h-5 mr-2 text-indigo-500"/> Product Management Permissions</h4>
-                        <p className="text-gray-500">Control who can modify product listings in the catalogue (CRUD operations).</p>
-                        
+                    <div className="space-y-3">
+                        <h4 className="text-md font-bold text-gray-700 flex items-center border-b pb-2 mb-1"><Package className="w-5 h-5 mr-2 text-indigo-500" /> Product Management Permissions</h4>
+                        <p className="text-gray-500 text-sm">Control who can modify product listings in the catalogue (CRUD operations).</p>
+
                         <PermissionToggle label="Can Add New Products" name="product_add" icon={ClipboardList} description="Ability to create new listings from scratch." />
                         <PermissionToggle label="Can Edit Existing Products" name="product_edit" icon={Edit} description="Ability to change price, description, and images of existing items." />
                         <PermissionToggle label="Can Delete Products" name="product_delete" icon={Trash2} description="High-level permission to permanently remove products from the catalog." />
                         <PermissionToggle label="Can Add Additional Data" name="product_add_additional_data" icon={FileText} description="Ability to upload certificates, compliance documents, or detailed specification sheets." />
-                        <PermissionToggle label="Can Toggle Availability" name="product_toggle_availability" icon={Truck} description="Ability to mark a product offline/unavailable or available in the store front." />
+                        <PermissionToggle hide_border={true} label="Can Toggle Availability" name="product_toggle_availability" icon={Truck} description="Ability to mark a product offline/unavailable or available in the store front." />
                     </div>
                 );
             case 'finance':
                 return (
-                    <div className="space-y-6">
-                        <h4 className="text-xl font-bold text-gray-700 flex items-center border-b pb-2 mb-4"><DollarSign className="w-5 h-5 mr-2 text-indigo-500"/> Financial & Transaction Powers</h4>
-                        <p className="text-gray-500">Permissions related to money handling, contracts, and official transaction documents.</p>
-                        
+                    <div className="space-y-3">
+                        <h4 className="text-md font-bold text-gray-700 flex items-center border-b pb-2 mb-1"><DollarSign className="w-5 h-5 mr-2 text-indigo-500" /> Financial & Transaction Powers</h4>
+                        <p className="text-gray-500 text-sm">Permissions related to money handling, contracts, and official transaction documents.</p>
+
                         <PermissionToggle label="Initiate Lease / Flex Payments" name="finance_initiate_lease" icon={Percent} description="Allows the member to submit buyer details for approval of flexible payment terms." />
                         <PermissionToggle label="Access Digital Signature Feature" name="finance_digital_sign" icon={Shield} description="Grants access to apply the store's digital signature on behalf of the organization for contracts." />
-                        <PermissionToggle label="Generate Official Receipts" name="finance_generate_receipt" icon={CheckCircle} description="Allows the member to generate and issue final, official sales receipts." />
+                        <PermissionToggle hide_border={true} label="Generate Official Receipts" name="finance_generate_receipt" icon={CheckCircle} description="Allows the member to generate and issue final, official sales receipts." />
                     </div>
                 );
             case 'store_settings':
                 return (
-                    <div className="space-y-6">
-                        <h4 className="text-xl font-bold text-gray-700 flex items-center border-b pb-2 mb-4"><Settings className="w-5 h-5 mr-2 text-indigo-500"/> Store & Feature Settings</h4>
-                        <p className="text-gray-500">Control access to high-level system configurations and feature activation.</p>
-                        
+                    <div className="space-y-3">
+                        <h4 className="text-md font-bold text-gray-700 flex items-center border-b pb-2 mb-1"><Settings className="w-5 h-5 mr-2 text-indigo-500" /> Store & Feature Settings</h4>
+                        <p className="text-gray-500 text-sm">Control access to high-level system configurations and feature activation.</p>
+
                         <PermissionToggle label="Manage Global Store Settings" name="store_manage_settings" icon={Zap} description="Change currency, tax rules, shipping methods, and contact information." />
-                        <PermissionToggle label="Manage Feature Activation" name="store_manage_features" icon={Briefcase} description="Toggle experimental or premium store features (e.g., A/B testing, new payment gateways)." />
+                        <PermissionToggle hide_border={true} label="Manage Feature Activation" name="store_manage_features" icon={Briefcase} description="Toggle experimental or premium store features (e.g., A/B testing, new payment gateways)." />
                     </div>
                 );
             case 'forms':
                 return (
-                    <div className="space-y-6">
-                        <h4 className="text-xl font-bold text-gray-700 flex items-center border-b pb-2 mb-4"><ClipboardList className="w-5 h-5 mr-2 text-indigo-500"/> Form Management & Processing</h4>
-                        <p className="text-gray-500">Permissions for creating, processing, and handling custom data collection forms.</p>
-                        
+                    <div className="space-y-3">
+                        <h4 className="text-md font-bold text-gray-700 flex items-center border-b pb-2 mb-1"><ClipboardList className="w-5 h-5 mr-2 text-indigo-500" /> Form Management & Processing</h4>
+                        <p className="text-gray-500 text-sm">Permissions for creating, processing, and handling custom data collection forms.</p>
+
                         <PermissionToggle label="Can Create New Form Templates" name="form_create" icon={Edit} description="Ability to design and publish new internal or customer-facing forms." />
                         <PermissionToggle label="Can Fill Existing Forms" name="form_fill_existing" icon={FileText} description="Ability to input data into any published internal form." />
                         <PermissionToggle label="Can Validate Forms" name="form_validate" icon={CheckCircle} description="Ability to review and officially validate submitted form data for correctness." />
-                        <PermissionToggle label="Can Receive & Submit Forms" name="form_receive_and_submit" icon={Truck} description="Ability to receive submitted customer forms and finalize their submission to the database." />
+                        <PermissionToggle hide_border={true} label="Can Receive & Submit Forms" name="form_receive_and_submit" icon={Truck} description="Ability to receive submitted customer forms and finalize their submission to the database." />
                     </div>
                 );
             default:
@@ -305,98 +308,118 @@ const TeamPage = () => {
 
     // --- RENDER ---
     return (
-    <>
-            <Seller_Page_Header  pageTitle="Team"/>
-        <div className="flex bg-gray-50 min-h-screen font-sans">
-            {/* Sidebar (Team List) */}
-            <div className="w-full sm:w-64 bg-white border-r border-gray-200 p-4 shadow-xl flex-shrink-0">
-                <div className="flex items-center space-x-2 mb-6">
-                    <Users className="w-6 h-6 text-indigo-600" />
-                    <h2 className="text-xl font-bold text-gray-900">Team Members</h2>
-                </div>
-                <div className="space-y-2">
-                    {MOCK_TEAM.map(member => (
-                        <button
-                            key={member.id}
-                            onClick={() => {
-                                setSelectedMemberId(member.id);
-                                setActiveTab('summary'); // Reset to summary on member change
-                                // In a real app, you would fetch and load new permissions here
-                            }}
-                            className={`flex items-center w-full p-3 rounded-xl transition duration-200 text-left ${
-                                selectedMemberId === member.id
-                                    ? 'bg-indigo-100 text-indigo-800 font-semibold border-l-4 border-indigo-600'
-                                    : 'hover:bg-gray-100 text-gray-700'
-                            }`}
-                        >
-                            <img src={member.avatar} alt={member.name} className="w-8 h-8 rounded-full mr-3 border border-gray-200" />
-                            <div className="flex-1 min-w-0">
-                                <p className="text-sm truncate">{member.name}</p>
-                                <p className="text-xs text-gray-500 truncate">{member.role}</p>
+        <>
+            <div className="h-screen font-sans oh df fd-c">
+                <Seller_Page_Header pageTitle="Team" />
+                <div className="flex bg-gray-50 fx1 oh">
+                    {/* Sidebar (Team List) */}
+                    <div className="w-full sm:w-64 bg-white border-r border-gray-200 flex-shrink-0">
+            {/* Search */}
+            <div className="p-1.5 border-b border-gray-200 df aic jcsb gap1">
+              <div className="relative fx1">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Find colleague or vendor..."
+                  className="w-full bg-gray-100 border border-gray-300 rounded-full py-1 pl-10 pr-4 text-xs focus:outline-none focus:ring-1 focus:ring-red-500"
+                //   value={searchQuery}
+                //   onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <Group size={20} />
+            </div>
+                        <div className="space-y-2">
+                            {MOCK_TEAM.map(member => (
+                                <button
+                                    key={member.id}
+                                    onClick={() => {
+                                        setSelectedMemberId(member.id);
+                                        setActiveTab('summary'); // Reset to summary on member change
+                                        // In a real app, you would fetch and load new permissions here
+                                    }}
+                                    className={`flex items-center w-full transition duration-200 text-left ${selectedMemberId === member.id
+                                        ? 'border-r-2 border-[#607d8b]'
+                                        : 'hover:bg-gray-100 text-gray-700'
+                                        }`}
+                                >
+                                    <img src={member.avatar} alt={member.name} className="w-8 h-8 rounded-full mr-3 border border-gray-200" />
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-[0.750rem] font-semibold  truncate">{member.name}</p>
+                                        <p className="text-[0.725rem] text-gray-500 truncate">{member.role}</p>
+                                    </div>
+                                    <ChevronRight className={`w-4 h-4 transition-transform ${selectedMemberId === member.id ? 'transform rotate-90' : ''}`} />
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Main Content Area */}
+                    <main className="flex-grow p-4 md:p-2 overflow-y-auto sbn">
+                        <div className="df mb-6">
+                            <Shield className="w-7 h-7 mr-3 text-indigo-600" />
+
+                            <div className="df fd-c gap-1">
+                                <h1 className="text-lg font-bold text-gray-900  flex items-center">
+                                    Permissions Management
+                                </h1>
+
+                                <DropDown_1 className="" d="l" title={`${selectedMember.name.split(" ")[0]} Permissions`} flowData={<div className="df fd-c gap-1.5">
+                                    <TabButton icon={User} title="Summary" name="summary" />
+                                    <TabButton icon={BarChart2} title="Lead Assignment Rules" name="leads" />
+                                    <TabButton icon={Package} title="Product Management" name="products" />
+                                    <TabButton icon={DollarSign} title="Financial Powers" name="finance" />
+                                    <TabButton icon={Settings} title="Store Settings" name="store_settings" />
+                                    <TabButton icon={ClipboardList} title="Form Management" name="forms" /></div>} />
                             </div>
-                            <ChevronRight className={`w-4 h-4 transition-transform ${selectedMemberId === member.id ? 'transform rotate-90' : ''}`} />
-                        </button>
-                    ))}
+                        </div>
+
+                        {/* Alert/Message Display */}
+                        {message && (
+                            <div className={`p-4 mb-6 rounded-xl font-medium flex items-center border-l-4 shadow-md ${message.type === 'success' ? 'bg-green-50 text-green-800 border-green-500' : 'bg-red-50 text-red-800 border-red-500'}`}>
+                                <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" />
+                                {message.text}
+                            </div>
+                        )}
+
+                        {/* Tab Navigation */}
+
+                        <div className="flexl dn ox gap-2 p-3 bg-[transparent] mb-8" style={{ scrollbarWidth: 'thin', scrollbarColor: 'royalblue none' }}>
+
+                        </div>
+
+                        {/* Permissions Content Area */}
+                        <div className="p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
+                            <RenderContent />
+                        </div>
+
+                        {/* Save Button */}
+                        <div className="mt-8 pt-6 border-t border-gray-200 flexl dn justify-end">
+                            <button
+                                onClick={handleSave}
+                                disabled={isSaving}
+                                className={`px-8 py-3 text-lg font-bold rounded-xl transition duration-300 ease-in-out shadow-lg transform active:scale-[0.98] text-white
+                            ${isSaving
+                                        ? 'bg-indigo-700 cursor-not-allowed opacity-80'
+                                        : 'bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-70'
+                                    }`
+                                }
+                            >
+                                {isSaving ? (
+                                    <>
+                                        <Loader className="animate-spin w-6 h-6 mr-3 inline-block" />
+                                        Saving Permissions...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Save className="w-6 h-6 mr-3 inline-block" />
+                                        Save Permissions for {selectedMember?.name || 'Member'}
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </main>
                 </div>
             </div>
-
-            {/* Main Content Area */}
-            <main className="flex-grow p-4 md:p-8 overflow-y-auto">
-                <h1 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-                    <Shield className="w-7 h-7 mr-3 text-indigo-600" /> Permissions Management
-                </h1>
-                
-                {/* Alert/Message Display */}
-                {message && (
-                    <div className={`p-4 mb-6 rounded-xl font-medium flex items-center border-l-4 shadow-md ${message.type === 'success' ? 'bg-green-50 text-green-800 border-green-500' : 'bg-red-50 text-red-800 border-red-500'}`}>
-                        <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" />
-                        {message.text}
-                    </div>
-                )}
-
-                {/* Tab Navigation */}
-                <div className="flex flex-wrap gap-2 p-3 bg-white rounded-xl shadow-lg mb-8 border border-gray-200">
-                    <TabButton icon={User} title="Summary" name="summary" />
-                    <TabButton icon={BarChart2} title="Lead Assignment Rules" name="leads" />
-                    <TabButton icon={Package} title="Product Management" name="products" />
-                    <TabButton icon={DollarSign} title="Financial Powers" name="finance" />
-                    <TabButton icon={Settings} title="Store Settings" name="store_settings" />
-                    <TabButton icon={ClipboardList} title="Form Management" name="forms" />
-                </div>
-
-                {/* Permissions Content Area */}
-                <div className="p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
-                    <RenderContent />
-                </div>
-
-                {/* Save Button */}
-                <div className="mt-8 pt-6 border-t border-gray-200 flex justify-end">
-                    <button
-                        onClick={handleSave}
-                        disabled={isSaving}
-                        className={`px-8 py-3 text-lg font-bold rounded-xl transition duration-300 ease-in-out shadow-lg transform active:scale-[0.98] text-white
-                            ${
-                                isSaving
-                                    ? 'bg-indigo-700 cursor-not-allowed opacity-80'
-                                    : 'bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-70'
-                            }`
-                        }
-                    >
-                        {isSaving ? (
-                            <>
-                                <Loader className="animate-spin w-6 h-6 mr-3 inline-block" />
-                                Saving Permissions...
-                            </>
-                        ) : (
-                            <>
-                                <Save className="w-6 h-6 mr-3 inline-block" />
-                                Save Permissions for {selectedMember?.name || 'Member'}
-                            </>
-                        )}
-                    </button>
-                </div>
-            </main>
-        </div>
         </>
     );
 };

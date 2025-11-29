@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, Send, Clock, User, HardHat, Truck, Briefcase, ChevronLeft } from 'lucide-react';
+import { Search, Send, Clock, User, HardHat, Truck, Briefcase, ChevronLeft, Group, Image, File, Archive, LucideTimer, OctagonAlert, Video, PhoneCall, MoreVertical, RefreshCw, Paperclip, SendHorizonal } from 'lucide-react';
 import Seller_Page_Header from '@/components/seller-cpmt/header';
 // --- DUMMY DATA ---
 const contactData = [
@@ -45,7 +45,7 @@ const ContactListItem = ({ contact, isActive, setActiveChat }) => {
   return (
     <div
       onClick={() => setActiveChat(contact.id)}
-      className={`flex items-center px-2 py-3.5 border-b border-gray-200 cursor-pointer transition duration-150 ${isActive ? 'bg-[#fffef6] border-r-4 border-red-600' : 'hover:bg-gray-100'
+      className={`flex items-center px-2 py-2.5 border-gray-200 cursor-pointer transition duration-150 ${isActive ? 'bg-blue-100 rounded-md border-gray-500' : 'hover:bg-gray-50 rounded-sm'
         }`}
     >
       <div className="relative mr-4">
@@ -54,10 +54,10 @@ const ContactListItem = ({ contact, isActive, setActiveChat }) => {
       </div>
       <div className="flex-1 overflow-hidden">
         <div className="flex justify-between items-center">
-          <p className="font-semibold text-[0.750rem] text-gray-800 truncate">{contact.name}</p>
-          <span className="text-[0.625rem] text-gray-400">{contact.time}</span>
+          <p className="font500 text-sm text-gray-800 truncate">{contact.name}</p>
+          <span className="text-xs text-gray-400">{contact.time}</span>
         </div>
-        <p className="text-[0.725rem] text-gray-500 truncate">{contact.lastMessage}</p>
+        <p className="text-xs text-gray-500 truncate">{contact.lastMessage}</p>
       </div>
     </div>
   );
@@ -69,12 +69,12 @@ const MessageBubble = ({ message }) => {
     <div className={`flex mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div
         className={`max-w-xs sm:max-w-md p-3 rounded-xl shadow-md ${isUser
-            ? 'bg-[#37474F] text-white rounded-br-none'
-            : 'bg-white text-gray-800 rounded-tl-none border border-gray-200'
+          ? 'bg-white text-gray-800 rounded-br-none'
+          : 'bg-white text-gray-800 rounded-tl-none border border-gray-200'
           }`}
       >
-        <p className="text-[0.775rem] break-words">{message.text}</p>
-        <span className={`block mt-1 text-right text-xs ${isUser ? 'text-red-200' : 'text-gray-400'}`}>
+        <p className="text-sm break-words">{message.text}</p>
+        <span className={`block mt-1 text-right text-xs ${isUser ? 'text-gray-600' : 'text-gray-800'}`}>
           {message.timestamp}
         </span>
       </div>
@@ -121,51 +121,67 @@ const ChatArea = ({ activeContact, messages, sendMessage, setActiveChat }) => {
   const Icon = activeContact.icon || User;
 
   return (
-    <div className="flex flex-col h-full bg-white wfp">
+    <div className="flex flex-col h-full wfp  border_">
       {/* Header */}
-      <div className="flex items-center p-2 border-b border-gray-200 shadow-sm bg-white">
+      <div className="flex items-center p-2 border-b border-gray-200 bg-white oh
+      ">
         <button className="sm:hidden mr-3 text-gray-600 hover:text-red-600" onClick={() => setActiveChat(null)}>
           <ChevronLeft className="w-6 h-6" />
         </button>
-        <Icon className="w-8 h-8 text-gray-700 mr-3" />
+        <Icon className="w-8 h-8 text-gray-700 mr-3 bg-gray-100" />
         <div className="flex-1">
-          <h2 className="text-sm font-bold text-gray-800">{activeContact.name}</h2>
+          <h2 className="text-md font500 text-gray-800">{activeContact.name}</h2>
           <div className="flex items-center text-xs text-gray-500">
-            <span className={`w-2 h-2 rounded-full mr-2 ${getStatusColor(activeContact.status)}`}></span>
+            <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${getStatusColor(activeContact.status)}`}></span>
             {activeContact.status}
           </div>
         </div>
+        <div className="df gap-3 aic">
+          <div className="df aic gap-1 px-2 rounded-full bg-orangered-600 border border-orangered-600">
+            <PhoneCall stroke='orangered' size={16} />
+            <span className='text-sm text-[orangered]'>Dial</span>
+          </div>
+          {/* <Video fill='cadetblue' size={18} /> */}
+          <MoreVertical fill='cadetblue' size={18} />
+        </div>
+
       </div>
 
       {/* Message History */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-        {messages.map((msg, index) => (
-          <MessageBubble key={index} message={msg} />
-        ))}
-        <div ref={messageEndRef} />
-      </div>
+      <div className="flex-1  oh df fd-c bg-gray-50">
+        <div className="p-4 overflow-y-auto fx1 ">
+          {messages.map((msg, index) => (
+            <MessageBubble key={index} message={msg} />
+          ))}
+          <div ref={messageEndRef} />
+        </div>
+        {/* Input Area */}
+        <div className="df aic py-3 bg-white border-t px-4 gap-2">
 
-      {/* Input Area */}
-      <div className="p-1 border-t border-gray-200 bg-white">
-        <div className="flex items-center border border-gray-300 rounded-xl overflow-hidden shadow-inner">
-          <textarea
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyDown={handleKeyPress}
-            placeholder="Type a new operational message..."
-            rows="1"
-            className="flex-1 resize-none p-3 text-sm text-gray-800 border-none focus:ring-0 focus:outline-none bg-white"
-            style={{ maxHeight: '100px' }}
-          />
-          <button
-            onClick={handleSend}
-            className="p-3 bg-red-600 text-white hover:bg-red-700 transition duration-150 disabled:bg-red-300"
-            disabled={!inputText.trim()}
-          >
-            <Send className="w-5 h-5" />
-          </button>
+
+          <div className="fx1 flex bg-white items-center border border-gray-400 pl-2 rounded-md overflow-hidden py-1">
+            <textarea
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onKeyDown={handleKeyPress}
+              placeholder="Type a new operational message..."
+              rows="1"
+              className="flex-1 resize-none text-sm text-gray-800 focus:ring-0 focus:outline-none bg-white"
+              style={{ maxHeight: '100px' }}
+            />
+            <span className="px-1 py-1 text-gray-800 bg-gray-100 rounded-full"><Paperclip className="w-4 h-4 text-gray-600" /></span>
+            <button
+              onClick={handleSend}
+              className="p-1_ df aic transition duration-150 disabled:text-gray-300"
+              disabled={!inputText.trim()}
+            >
+              <SendHorizonal className="w-5 h-5" />
+            </button>
+          </div>
+
         </div>
       </div>
+
     </div>
   );
 };
@@ -205,38 +221,35 @@ export function MessagePage() {
 
 
   return (
-    <div className="min-h-screen h-screen w-full bg-gray-50 df fd-c bg-[lightgray] font-sans ">
-      <Seller_Page_Header pageTitle="Message"/>
-      <div className="fx1 w-full mx-auto max-w-7xl bg-white shadow-2xl overflow-hidden border border-gray-100">
+    <div className="min-h-screen h-screen w-full df fd-c font-sans ">
+      {/* <Seller_Page_Header pageTitle="Message" toolBar={false} /> */}
+      <div className="fx1 w-full mx-auto max-w-7xl overflow-hidden">
         <div className="flex h-full">
 
           {/* Left Pane (Contacts Sidebar) - Hidden on mobile if a chat is active */}
-                    <div className={`w-full sm:w-80 border-r border-gray-200 flex-col ${activeChatId ? 'hidden sm:flex' : 'flex'}`}>
-
-            {/* Header */}
-            <div className="p-2 border-b border-gray-200 bg-white">
-              <h1 className="text-md font-extrabold text-gray-800 flex items-center">
-                <Clock className="w-5 h-5 mr-2 text-red-600" />
-                Inbox
-              </h1>
-            </div>
+          <div className={`w-full sm:w-80 border-r border-gray-200 flex-col bg-[#fbfbfb]_ ${activeChatId ? 'hidden sm:flex' : 'flex'}`}>
 
             {/* Search */}
-            <div className="p-2 border-b border-gray-200 pdx08 dn">
-              <div className="relative">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <div className="p-1.5 border-gray-200 df aic jcsb gap1 border-b_ mb-3">
+              <div className="mr-5 text-lg fx1 df aic gap-1">Message<RefreshCw size={14} /></div>
+              <div className="relative fx1 dn">
+                <Search className="w-4 h-4 absolute left-1 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Find colleague or vendor..."
-                  className="w-full bg-gray-100 border border-gray-300 rounded-full py-1 pl-10 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-red-500"
+                  className="w-full bg-gray-100 border border-gray-300 rounded-lg py-1 pl-6 pr-1 text-xs focus:outline-none focus:ring-1 focus:ring-red-500"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
+              <Search size={18} />
+              {/* <Group size={18} />
+              <Archive size={18} /> */}
+              <MoreVertical size={18} />
             </div>
 
             {/* Contact List */}
-            <div className="flex-1 overflow-y-auto bg-white">
+            <div className="flex-1 overflow-y-auto mx-2">
               {filteredContacts.map((contact) => (
                 <ContactListItem
                   key={contact.id}
