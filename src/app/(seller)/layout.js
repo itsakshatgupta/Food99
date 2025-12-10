@@ -4,7 +4,7 @@ import Link from "next/link";
 import "../globals.css"
 import "../../../public/style/xnay.css";
 import "../../../public/style/UI_Responsive.css";
-import { Boxes, Database, FileBox, LayoutDashboard, MessageSquare, Settings, Settings2, Table } from "lucide-react";
+import { Boxes, CircleDollarSign, Compass, Database, DollarSign, FileBox, Handshake, LayoutDashboard, LucideFilePenLine, MessageSquare, Settings, Settings2, Table } from "lucide-react";
 import { Inter } from 'next/font/google';
 const inter = Inter({
   subsets: ['latin'],
@@ -17,11 +17,12 @@ export default function SellerLayout({ children }) {
 
   const menu = [
     {icon:<LayoutDashboard size={18}/>,  name: "Dashboard", path: "/sellers/seller_dsbd" },
+    {icon:<DollarSign size={18}/>,  name: "Trades", path: "/sellers/seller_trdes" },
+    {icon:<Compass size={18}/>,  name: "Search", path: "/sellers/seller_scrh" },
     {icon:<FileBox size={18}/>,  name: "Products", path: "/sellers/seller_prod" },
     {icon:<Table size={18}/>,  name: "Leads", path: "/sellers/seller_lead" },
     {icon:<MessageSquare size={18}/>,  name: "Messages", path: "/sellers/seller_msg" },
-    {icon:<Boxes size={18}/>,  name: "Stock", path: "/seller/stock" },
-    {icon:<Settings size={18}/>,  name: "Tools", path: "/seller/tools" },
+    {icon:<LucideFilePenLine size={18}/>,  name: "Forms", path: "/sellers/seller_form" },
     {icon:<Settings2 size={18}/>,  name: "Settings", path: "/sellers/seller_stng" },
   ];
 
@@ -32,12 +33,12 @@ export default function SellerLayout({ children }) {
 
     <div className="flex h-screen">
       {/* Sidebar */}
-      <aside className="w-64 flex flex-col border-r">
-        <div className="p-4 dfl dn gap03 item-end text-[larger] text-white font-bold border-b border-[black] bg-[#263238]">
-          Yggimy <span className="text-[#90A4AE] text-[medium] df aic">Seller</span>
-        </div>
-        <h1 className="mg1">Menu</h1>
-        <nav className="flex-1 mt-4 space-y-1 pdx05 text-md font500">
+      <aside className="w-[220px] flex flex-col border-r border-[#e2d2ff] bg-[#fbfbfb]">
+        <h1 className="p-4 mb-5 pb-0 df aic text-[larger] text-gray-800 font-bold">
+          Trade<span className="text-purple-600">B2B</span>
+        </h1>
+        <h1 className="pdx07 text-sm text-gray-600 mb-1">Menu</h1>
+        <nav className="flex-1 space-y-1 pdx05 text-[0.925rem]">
           {menu.map((item) => (
             <Link
               key={item.path}

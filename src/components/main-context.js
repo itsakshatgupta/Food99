@@ -173,7 +173,7 @@ export default function MainContext({ device, children }) {
             }])
         }
     }
-
+console.log("E", pathname)
     return (
         <>
             {device === 'pcl' &&
@@ -200,17 +200,16 @@ export default function MainContext({ device, children }) {
             }
 
 
-            {device && <>
+            {device && <div className="df fd-c hfp">
                 <menu_.Provider value={{ menu___i }}>
                     <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option, user }}>
 
-{device==='pc'&& <Topbar_ topbar={<Topbar />} />}
-                        <div className="hfp wfp df fd-c" style={{ alignContent: 'space-between' }}>
+{device==='pc'&&["/messages","/form"].every(v=>v!==pathname)&& <Topbar_ topbar={<Topbar />} />}
+                        <div className="wfp df fd-c fx1 oh" style={{ alignContent: 'space-between' }}>
 
-                            <main className="main fx1" ref={mainRef} >
-                                <div className="hfp oy1 oh1" >
+                            <main className="main_ fx1 oy" ref={mainRef} >
                                     {children}
-                                </div>
+                              
                             </main>
 
                             <div className="wfp" style={{ position: 'fixed', bottom: 0, zIndex: 1 }} ref={floaterRef}>
@@ -248,7 +247,7 @@ export default function MainContext({ device, children }) {
 
                     </dynamic_.Provider>
                 </menu_.Provider>
-            </>
+            </div>
             }
         </>
 

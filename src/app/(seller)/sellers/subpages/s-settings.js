@@ -1,7 +1,8 @@
 'use client'
 import React, { useState } from 'react';
-import { Settings, Clock, Store, Users, ShoppingBag, Truck, Mail, Check, X, ChevronDown, ListPlus, ToggleRight, Loader2 } from 'lucide-react';
+import { Settings, Clock, Store, Users, ShoppingBag, Truck, Mail, Check, X, ChevronDown, ListPlus, ToggleRight, Loader2, Star, Table, AlertOctagon, Box, Settings2 } from 'lucide-react';
 import Seller_Page_Header from '@/components/seller-cpmt/header';
+import MainSideNav, { MainSideNavButtons } from '@/components/seller-cpmt/main-side-nav';
 
 // --- Reusable UI Components ---
 
@@ -9,8 +10,8 @@ import Seller_Page_Header from '@/components/seller-cpmt/header';
 const ToggleSwitch = ({ label, description, enabled, onChange, name }) => (
   <div className="flex justify-between items-start py-4 border-b border-gray-100 last:border-b-0">
     <div>
-      <span className="text-gray-900 text-sm font-semibold_">{label}</span>
-      <p className="text-sm text-gray-500 mt-1">{description}</p>
+      <span className="text-gray-800 text-sm font-semibold">{label}</span>
+      <p className="text-sm text-gray-700 mt-1">{description}</p>
     </div>
     <button
       onClick={() => onChange(name, !enabled)}
@@ -28,16 +29,16 @@ const ToggleSwitch = ({ label, description, enabled, onChange, name }) => (
 // Input Field Component (Modern Style)
 const InputField = ({ label, value, type = 'text', onChange, name, placeholder, helperText }) => (
   <div className="mb-4">
-    <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <label className="block text-sm font-medium text-gray-800 mb-1">{label}</label>
     <input
       type={type}
       name={name}
       value={value}
       placeholder={placeholder}
-      className="w-full py-1.5 px-4 text-[0.8rem] rounded-xl border border-gray-300 focus:outline-none focus:border-gray-500 focus:ring-2 focus:ring-gray-100 transition duration-150 bg-white shadow-sm"
+      className="w-full py-1.5 px-2 text-[0.8rem] rounded-sm border border-gray-400 focus:outline-none focus:border-blue-700 transition duration-150 bg-white shadow-sm_"
       onChange={(e) => onChange(name, e.target.value)}
     />
-    {helperText && <p className="mt-1 text-xs text-gray-500">{helperText}</p>}
+    {helperText && <p className="mt-1 ml-1 text-xs text-blue-800">{helperText}</p>}
   </div>
 );
 
@@ -87,8 +88,8 @@ const initialSettings = {
 // --- Main Application Component ---
 
 const SettingsCard = ({ title, icon: Icon, children }) => (
-  <div className="bg-white p-6  border_ border-gray-100 transition duration-300">
-    <h2 className="text-md font-bold text-gray-800 mb-2 flex items-center pb-1 border-b border-red-50">
+  <div className="bg-white px-3 py-5  border_ border-gray-100 transition duration-300">
+    <h2 className="text-md font-bold text-gray-900 mb-2 flex items-center pb-1 border-b border-red-50">
       <Icon className="w-6 h-6 mr-2 text-black" /> <span className="pt-0.5">{title}</span>
     </h2>
     {children}
@@ -98,7 +99,7 @@ const SettingsCard = ({ title, icon: Icon, children }) => (
 
 export default function SellerSettingPage() {
   const [settings, setSettings] = useState(initialSettings);
-  const [activeTab, setActiveTab] = useState('profile');
+  const [view, setView] = useState('Store');
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(null);
 
@@ -204,7 +205,7 @@ export default function SellerSettingPage() {
           onChange={handleChange}
         />
         <div className="pt-4">
-          <button className="text-sm text-green-700 flex items-center hover:underline bg-green-50 p-1.5 rounded-lg border border-green-200">
+          <button className="text-sm font-semibold text-green-700 flex items-center hover:underline bg-green-50 p-1.5 rounded-lg border border-green-200">
             <ListPlus className="w-3 h-3 mr-2" /> Manage Product Visibility Rules
           </button>
         </div>
@@ -286,25 +287,10 @@ const lang__ = [
 ]
 
   return (
-    <div className="h-screen df fd-c bg-gray-50 font-sans">
+    <div className="h-screen df fd-c bg-gray-50_ font-sans_">
 
       {/* Header and Save Status */}
-      <Seller_Page_Header pageTitle="Setting" buttons={
-        [<div className="pR  group cursor-pointer">
-          <span className="df aic gap01 " style={{ borderRadius: '5px' }}>En<ChevronDown size={14} />
-          </span>
-
-          {/* Mega Menu Dropdown */}
-          <div className="pA left-[calc(100%-180px)]">
-            <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
-              {lang__.map((item, subIndex) => (
-                <span key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
-                  {item}
-                </span>
-              ))}
-            </div></div>
-        </div>]
-      } />
+      <Seller_Page_Header pageTitle="Setting" />
       <div className="flexl dn flex-col sm:flex-row items-start sm:items-center justify-between border-b border-gray-200 pb-6">
         <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight flex items-center">
           <Settings className="w-8 h-8 mr-3 text-red-600" />
@@ -321,33 +307,17 @@ const lang__ = [
       {/* Main Content Layout */}
       <div className="df fx1 oh">
 
-        {/* Navigation Tabs (Left/Sticky) */}
-        <div className="hfp border-r bg-white ">
-          <nav className="py-2 pr-4 pl-1 w-[15rem]">
-            <h1 className="text-xs font-semibold text-gray-800 UPPERCASE mb-3 px-1">Navigations</h1>
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`w-full text-left flex items-center px-2 py-2 mb-2 rounded-xl transition duration-300 font-semibold_ text-sm 
-                  ${activeTab === tab.id
-                    ? 'bg-gray-100'
-                    : 'text-black-500 hover:bg-blue-50/50'
-                  }`}
-              >
-                <tab.icon className="w-4 h-4 mr-3" />
-                {tab.name}
-              </button>
-
-            ))}
-          </nav>
-        </div>
+                    <MainSideNav>
+                      <MainSideNavButtons icon={<Store size={20} />} name="Store" controller={{ control: view, setController: setView }} />
+                      <MainSideNavButtons icon={<Box size={20} />} name="Products" controller={{ control: view, setController: setView }} />
+                      <MainSideNavButtons icon={<Settings2 size={20} />} name="Control" controller={{ control: view, setController: setView }} />
+                    </MainSideNav>
 
         {/* Settings Content & Action Bar */}
         <div className="fx1 bg-white oy p-2_">
-          {activeTab === 'profile' && renderProfileSettings()}
-          {activeTab === 'products' && renderProductSettings()}
-          {activeTab === 'operations' && renderOperationalSettings()}
+          {view === 'Store' && renderProfileSettings()}
+          {view === 'Products' && renderProductSettings()}
+          {view === 'Control' && renderOperationalSettings()}
 
           {/* Action Buttons (Sticky Footer) */}
           <div className="mt-12 flex justify-end gap-4 p-4 pS" style={{ bottom: 0 }}>

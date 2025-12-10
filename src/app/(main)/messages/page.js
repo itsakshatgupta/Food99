@@ -1,9 +1,11 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, Send, Clock, User, HardHat, Truck, Briefcase, ChevronLeft, Group, Image, File, Archive, LucideTimer, OctagonAlert, Video, PhoneCall, MoreVertical, RefreshCw, Paperclip, SendHorizonal, LucideFileText, Box, Info, BadgeInfoIcon, MessageCircleOff, BellOff, Flag, Phone, UserRoundSearchIcon, Users2, History } from 'lucide-react';
+import { Search, Send, Clock, User, HardHat, Truck, Briefcase, ChevronLeft, Group, Image, File, Archive, LucideTimer, OctagonAlert, Video, PhoneCall, MoreVertical, RefreshCw, Paperclip, SendHorizonal, LucideFileText, Box, Info, BadgeInfoIcon, MessageCircleOff, BellOff, Flag, Phone, UserRoundSearchIcon, Users2, History, ArrowLeft } from 'lucide-react';
 import Seller_Page_Header from '@/components/seller-cpmt/header';
 import DropDown_1, { MoreOptions } from '@/components/seller-cpmt/widget';
 import MainSideNav, { MainSideNavButtons } from '@/components/seller-cpmt/main-side-nav';
+import { PageHeader } from '@/components/buyer-cpmt/page';
+import { useRouter } from 'next/navigation';
 // --- DUMMY DATA ---
 const contactData = [
   { id: 'eng-1', name: 'Alice (Lead Engineer)', status: 'Online', role: 'Engineer', icon: HardHat, lastMessage: 'Confirmed batch specs for Actuator.', time: '10:30 AM' },
@@ -47,7 +49,7 @@ const ContactListItem = ({ contact, isActive, setActiveChat }) => {
   return (
     <div
       onClick={() => setActiveChat(contact.id)}
-      className={`flex items-center px-2 py-2.5 border-gray-200 cursor-pointer transition duration-150 ${isActive ? 'bg-[honeydew] rounded-md border-gray-500' : 'hover:bg-gray-50'
+      className={`flex items-center px-2 py-2.5 border-gray-200 cursor-pointer transition duration-150 ${isActive ? 'bg-[lightcyan] rounded-md border-gray-500' : 'hover:bg-gray-50'
         }`}
     >
       <div className="relative mr-4">
@@ -71,8 +73,8 @@ const MessageBubble = ({ message }) => {
     <div className={`flex mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div
         className={`max-w-xs sm:max-w-md p-3 rounded-xl shadow-sm ${isUser
-          ? 'bg-white rounded-br-none border-gray-200 border'
-          : 'bg-gray-100  rounded-tl-none border border-gray-300'
+          ? 'bg-white rounded-br-none border-gray-100 border'
+          : 'bg-[lightcyan]  rounded-tl-none border border-gray-100'
           }`}
       >
         <p className="text-sm break-words">{message.text}</p>
@@ -123,9 +125,9 @@ const ChatArea = ({ activeContact, messages, sendMessage, setActiveChat }) => {
   const Icon = activeContact.icon || User;
 
   return (
-    <div className="flex flex-col h-full wfp bg-white">
+    <div className="flex flex-col h-full oh wfp bg-white">
       {/* Header */}
-      <div className="flex items-center px-2 pt-2 pb-1 border-b bg-white
+      <div className="flex items-center px-2 py-1 border-b_ bg-white shadow-sm pR
       ">
         <button className="sm:hidden mr-3 text-gray-800 hover:text-red-600" onClick={() => setActiveChat(null)}>
           <ChevronLeft className="w-6 h-6" />
@@ -160,23 +162,14 @@ const ChatArea = ({ activeContact, messages, sendMessage, setActiveChat }) => {
 
       {/* Message History */}
       <div className="flex-1  oh df fd-c">
-        <div className="p-4 overflow-y-auto fx1 bg-[#fcfcfc]_ bg-white text-black">
+        <div className="p-4 overflow-y-auto fx1 hfp bg-[#fcfcfc]_ bg-[#fbffff] text-black">
           {messages.map((msg, index) => (
             <MessageBubble key={index} message={msg} />
           ))}
           <div ref={messageEndRef} />
         </div>
         {/* Input Area */}
-        <div className="df fd-c aic_ pb-3 pt-2 bg-[#f5f5f5]_ bg-[#fafafa] border-t px-4 gap-2">
-          <div className="df aic gap-2">
-            <span className="text-sm text-gray-600">Send:</span>
-            <span className="p-1 text-xs df aic gap-1 cursor-pointer hover:bg-[#fbfbfb] border-gray-300"><File size={14} className="text-purple-600" />Form</span>
-            <span className="p-1 text-xs df aic gap-1 cursor-pointer hover:bg-[#fbfbfb] border-gray-300"><LucideFileText size={14} className="text-green-600" />Trade Report</span>
-            <span className="p-1 text-xs df aic gap-1 cursor-pointer hover:bg-[#fbfbfb] border-gray-300"><Box size={14} className="text-orange-600" />Products</span>
-            <span className="p-1 text-xs df aic gap-1 cursor-pointer hover:bg-[#fbfbfb] border-gray-300"><Info size={14} className="text-blue-600" />Business Information</span>
-
-          </div>
-
+        <div className="df fd-c aic_ pb-3 pt-2 bg-[#f5f5f5]_ bg-gray-50_ border-t px-4 gap-2">
           <div className="fx1 flex shadow-sm bg-white items-center border border-gray-400 pl-2 rounded-md overflow-hidden py-1">
             <textarea
               value={inputText}
@@ -210,11 +203,11 @@ export function MessagePage() {
   const [activeChatId, setActiveChatId] = useState(contactData[0].id); // Default to the first contact
   const [messages, setMessages] = useState(messageData);
   const [searchQuery, setSearchQuery] = useState('');
-  const [view, setView] = useState('Buy');
+  const [view, setView] = useState('All');
 
   const activeContact = contacts.find(c => c.id === activeChatId);
   const activeMessages = messages[activeChatId] || [];
-
+  const r_ = useRouter();
   const sendMessage = (chatId, text) => {
     const newMessage = {
       sender: 'user',
@@ -241,42 +234,41 @@ export function MessagePage() {
 
   return (
     <div className="h-full w-full df fd-c font-sans bg-white">
-      <div className="fx1 w-full mx-auto max-w-7xl overflow-hidden bg-[#fbfbfb]_">
+      <PageHeader links={[{ e: "Channels", href_: "/channels" }, { e: "Responses", href_: "/responses" }]} />
+      <div className="fx1 w-full mx-auto max-w-7xl overflow-hidden bg-gray-100">
         <div className="flex h-full">
-
-
-
           {/* Left Pane (Contacts Sidebar) - Hidden on mobile if a chat is active */}
-          <div className={`w-fit-content df fd-c border-r border-gray-200 flex-col bg-[#fbfbfb]_ ml-3_ ${activeChatId ? 'hidden sm:flex' : 'flex'} pR bg-white`}>
+          <div className={`w-[30rem] df fd-c border-r border-gray-200 flex-col bg-[#fbfbfb]_ ml-3_ ${activeChatId ? 'hidden sm:flex' : 'flex'} pR bg-white`}>
 
-
-              {/* Search */}
-              <div className="p-1.5 ml-1_ border-gray-200 df aic jcsb gap1 border-b">
-                <div className="mr-5 text-lg fx1">Messages</div>
-                <div className="relative fx1 dn">
-                  <Search className="w-4 h-4 absolute left-1 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Find colleague or vendor..."
-                    className="w-full bg-gray-100 border border-gray-300 rounded-lg py-1 pl-6 pr-1 text-xs focus:outline-none focus:ring-1 focus:ring-red-500"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </div>
-                <Search size={18} />
-                {/* <Group size={18} />
-              <Archive size={18} /> */}
-                <MoreVertical size={18} />
+            {/* Search */}
+            <div className="px-2 py-1 ml-1_ border-gray-200 df aic jcsb gap1 border-b">
+              <div className="mr-5 text-xl fx1 df aic gap-2"><ArrowLeft size={18} className="cursor-pointer" onClick={() => r_.back()} /> Messages</div>
+              <div className="relative fx1 dn">
+                <Search className="w-4 h-4 absolute left-1 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Find colleague or vendor..."
+                  className="w-full bg-gray-100 border border-gray-300 rounded-lg py-1 pl-6 pr-1 text-xs focus:outline-none focus:ring-1 focus:ring-red-500"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
               </div>
+              <Search size={20} />
+              {/* <Group size={18} />
+              <Archive size={18} /> */}
+              <MoreVertical size={18} />
+            </div>
+
             <div className="df fx1">
-            <MainSideNav>
-              <MainSideNavButtons icon={<History size={20} />} name="Recent" controller={{ control: view, setController: setView }} />
-              <MainSideNavButtons icon={<User size={20} />} name="Users" controller={{ control: view, setController: setView }} />
-              <MainSideNavButtons icon={<Users2 size={20} />} name="B2Bs" controller={{ control: view, setController: setView }} />
-            </MainSideNav>
-            
+              <MainSideNav center={false}>
+                <MainSideNavButtons vertical={false} icon={<History size={18} />} name="All" controller={{ control: view, setController: setView }} />
+                <MainSideNavButtons vertical={false} icon={<User size={18} />} name="Responses" controller={{ control: view, setController: setView }} />
+                <MainSideNavButtons vertical={false} icon={<Users2 size={18} />} name="Channels" controller={{ control: view, setController: setView }} />
+              </MainSideNav>
+
               {/* Contact List */}
-              <div className="flex-1 overflow-y-auto">
+              <div className="flex-1 overflow-y-auto  mx-2">
+                <h1 className="text-lg mt-1">{view}</h1> 
                 {filteredContacts.map((contact) => (
                   <ContactListItem
                     key={contact.id}

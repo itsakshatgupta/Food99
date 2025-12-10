@@ -18,6 +18,7 @@ import { mutate } from 'swr';
 import { menu, menu_dummy } from '@/components/dummy_data';
 import dynamic from 'next/dynamic';
 import { Feeder } from '@/components/home_page_feeder';
+import { Footer } from './form/page';
 
 
 
@@ -67,7 +68,7 @@ export default function branches() {
         // setSections(prev => [...prev, ...data.results]);
         // setHasMore(!!data.next);
         setSections(res)
-        console.log('res:', res)
+        // console.log('res:', res)
     };
 
     useEffect(() => { fetchSections()},[]);
@@ -1488,9 +1489,9 @@ export default function branches() {
 
         {device && menu___i ?
             <>
-            {console.log(user)}
-                <div className='df fd-c xbg pR' style={{ zIndex: 1 }}>
-                    <div className="df fd-c gap1 pdy1 xfg bdBrds oh pdt05" id="m-container-user-focus-stuffs-1">
+            {/* {console.log(user)} */}
+                <div className='df fd-c bg-white pR' style={{ zIndex: 1 }}>
+                    <div className="df fd-c gap1 py-1 xfg oh pdt05 border-b" id="m-container-user-focus-stuffs-1">
                         <div className="df gap05 fx1 ox pdx05 sbn">
                             <span className="df fd-c aic gap02 font08 pdx05 pdy03">
                                 <Image
@@ -1658,7 +1659,7 @@ export default function branches() {
                 loop
                 autoplay
             /></span><span className='font600' style={{ color: '#8a8a8a' }}>Loading...</span></div></div>}
-
+    <Footer/>
 
     </>)
 }

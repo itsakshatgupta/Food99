@@ -15,7 +15,7 @@ import Link from "next/link";
 import { Icon } from "../lib/icons";
 import Image from "next/image";
 export default function Topbar_() {
-    const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr , user} = useContext(dynamic_);
+    const { device, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, cart_, usr, user } = useContext(dynamic_);
     const [search_mode, set_search_mode] = useState(false)
     const [top_bar_, set_top_bar_] = useState(null)
     const pathname = usePathname()
@@ -417,12 +417,12 @@ export default function Topbar_() {
     ]
 
     const Mystore__ = [
-       {name:"Todays's Leads", path:"sellers/seller_lead"},
-       {name:"Messages", path:"sellers/seller_msg"},
-       {name:"Stocks", path:"sellers/seller_lead"},
-       {name:"Enquires", path:"sellers/seller_lead"},
-       {name:"Products", path:"sellers/seller_prod"},
-       {name:"Manage", path:"sellers/seller_dsbd"},
+        { name: "Todays's Leads", path: "sellers/seller_lead" },
+        { name: "Messages", path: "sellers/seller_msg" },
+        { name: "Stocks", path: "sellers/seller_lead" },
+        { name: "Enquires", path: "sellers/seller_lead" },
+        { name: "Products", path: "sellers/seller_prod" },
+        { name: "Manage", path: "sellers/seller_dsbd" },
     ]
 
     useEffect(() => {
@@ -499,107 +499,136 @@ export default function Topbar_() {
 
             {device === "pc" &&
 
-                <header className="bg-[#0F172A] text-white font-['Inter', sans-serif] border-b border-gray-700/50 shadow-xl pS z-[500]" style={{ top: 0 }}>
+                <header className="font-['Inter', sans-serif] border-b pS z-[500]" style={{ top: 0, background: 'linear-gradient(45deg, #3F51B5, #673AB7)' }}>
 
                     {/* Top Row - Brand, Search, Actions */}
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4 md:px-6">
 
                         {/* Brand */}
-                        <div className="text-2xl font-black tracking-wider text-[#F97316] hover:text-[#FF9900] transition duration-200">
-                            Yggimy
+                        <div className="text-2xl font-black tracking-wider_ text-white hover:text-[#FF9900] transition duration-200">
+                            Trade<span className="text-[aqua]">B2B</span>
                         </div>
 
                         {/* Search Box: Bright White for High Visibility */}
-                        <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR ${search_mode && 'bdTrds xbg_'} `}>
-                            <div className={`df oh xbg $ ${search_mode ? ' bdTrds ' : 'shadow-md rounded-lg '}`}>
-                                <span className={`df aic pdx07 text-black transition duration-100 gap-1 ${search_mode ? '' : 'bg-[chocolate]'}`}>
-                                    {!search_mode ? <>
-                                        <Search size={20} />
-                                        <span className={`bg-[; text-xs font500 transition duration-100 ${search_mode && 'bg-[black] text-[white] pdy02'}`} style={{
-                                            paddingInline: search_mode && '10px',
-                                            borderRadius: '5px'
-                                        }}
-                                        >All</span>
-                                    </> : <Search size={20} stroke="orangered" />
-                                    }
+                        <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR bg-white border border-purple-400 rounded-lg`}>
+
+                            <div className={`df`}>
+
+                                <span className={`df aic gap-1 px-2 text-black  border-r transition duration-100 ${search_mode ? '' : 'bg-[chocolate]_'} rounded-l-lg`}>
+
+
+                                    <span className={`text-sm font500 transition duration-100 `}
+                                    >All</span>
+                                    <ChevronDown size={14} />
+
                                 </span>
-                                <div className={`flex items-center gap-2.5 p-2.5 fx1 ${search_mode && 'pdl0'}`} >
-                                    <input
-                                        placeholder="Search sellers • products • distributors"
-                                        className="border-none bg-transparent text-gray-900 fx1 outline-none placeholder-gray-500 text-sm"
-                                        id="search-input_main"
-                                        onChange={(e) => { set_searchText(e.target.value) }}
-                                    />
-                                    <div className="df aic gap-4 mgr02 text-[#414141ff]">
-                                        <span className="df bdrds pd01 hover:bg-gray-200" style={{ visibility: searchText === "" && 'hidden' }} onClick={(e) => { document.querySelector('#search-input_main').value = ""; set_searchText("") }}><Icon.close s={20} fill="#414141ff" /></span>
-                                        <div className="df aic gap-3 text-[#414141ff] bdrds pdy02 pdx05 bg-[aliceblue]">
-                                            <span className="df aic hover:text-[#F97316]" ><Mic size={22} className="mgx05_" fill="currentcolor" stroke="aliceblue" /></span><span className="df aic hover:text-[#F97316]" ><Camera size={22} fill="currentcolor" stroke="aliceblue" /></span>
+
+                                <div className="df fd-c fx1">
+
+                                    <div className={`flex items-center gap-2.5 p-2 pl-0 ml-2 fx1 pR`} >
+                                        <Search size={20} className="text-gray-800" />
+                                        <input
+                                            placeholder="Search sellers • products • distributors"
+                                            className="border-none bg-transparent text-gray-900 fx1 outline-none placeholder-gray-500 text-sm"
+                                            id="search-input_main"
+                                            onChange={(e) => { set_searchText(e.target.value) }}
+                                        />
+                                        <div className="df aic gap-4 mgr02 text-[#414141ff]">
+                                            <span className="df bdrds pd01 hover:bg-gray-200" style={{ visibility: searchText === "" && 'hidden' }} onClick={(e) => { document.querySelector('#search-input_main').value = ""; set_searchText("") }}><Icon.close s={20} fill="#414141ff" /></span>
+                                            <div className="df aic gap-3 text-[#414141ff] bdrds pdy02 pdx05 bg-[aliceblue]">
+                                                <span className="df aic hover:text-[#F97316]" ><Mic size={22} className="mgx05_" fill="currentcolor" stroke="aliceblue" /></span><span className="df aic hover:text-[#F97316]" ><Camera size={22} fill="currentcolor" stroke="aliceblue" /></span>
+                                            </div>
                                         </div>
+
                                     </div>
-                                </div>
-                            </div>
-                            {search_mode &&
-                                <div className="pA w-full  z-[1000] oh text-black xbg z-50 bdBrds shadow-md">
-                                    <div className="pR dropdowneffect">
-                                        <div className="fd fd-c w-full pR text-sm pdb03 pdx04 dropdowneffect_ bdBrds" >
-                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                                <div className="df gap05"><span><Search size={18} /></span><span>{searchText}</span></div>
+                                    <div className="pR">
+
+                                        {search_mode &&
+                                            <div className="pA w-full top-[-5px] oh text-black xbg z-50 bdBrds shadow-md">
+                                                <div className="pR mt-1 text-sm">
+                                                    <div className="fd fd-c w-full pR text-sm pdb03 pdx04" >
+                                                        <div className="df jcsb px-3 py-1 hover:bg-gray-100 hover:text-black rounded-md">
+                                                            <div className="df gap05"><span>{searchText}</span></div>
+                                                        </div>
+                                                        <div className="df jcsb px-3 py-1 hover:bg-gray-100 hover:text-black rounded-md">
+                                                            <div className="df gap05"><span>Helsd</span></div>
+                                                        </div>
+                                                        <div className="df jcsb px-3 py-1 hover:bg-gray-100 hover:text-black rounded-md">
+                                                            <div className="df gap05"><span>Helsd</span></div>
+                                                        </div>
+                                                        <div className="df jcsb px-3 py-1 hover:bg-gray-100 hover:text-black rounded-md">
+                                                            <div className="df gap05"><span>Helsd</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="df aic jcsb bdt pdx08 pdy05 font08">
+                                                        <span className="text-gray-500"><i>Categories:</i><span className={`mgl03 font07 font500 transition duration-100 text-[black] ${search_mode && 'bg-gray-300 pdy01'}`} style={{
+                                                            paddingInline: search_mode && '6px',
+                                                            borderRadius: '5px'
+                                                        }}
+                                                        >All</span></span>
+                                                        <span className="text-xs text-gray-400"><i>**Search Suggestions</i></span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                                <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
-                                            </div>
-                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                                <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
-                                            </div>
-                                            <div className="df jcsb pd05 hover:bg-gray-100 hover:text-black bdrds">
-                                                <div className="df gap05"><span><ExternalLink size={18} /></span><span>Helsd</span></div>
-                                            </div>
-                                        </div>
-                                        <div className="df aic jcsb bdt pdx08 pdy05 font08">
-                                            <span className="text-gray-500"><i>Categories:</i><span className={`mgl03 font07 font500 transition duration-100 text-[black] ${search_mode && 'bg-gray-300 pdy01'}`} style={{
-                                                paddingInline: search_mode && '6px',
-                                                borderRadius: '5px'
-                                            }}
-                                            >All</span></span>
-                                            <span className="text-xs text-gray-400"><i>**Search Suggestions</i></span>
-                                        </div>
+
+                                        }
                                     </div>
                                 </div>
 
-                            }
+                            </div>
+
                         </div>
 
                         {/* Actions: Utility Links & Primary CTAs */}
-                        <div className="flex items-center gap-3 flex-wrap justify-center md:justify-end">
+
+                        <div className="flex items-center gap-2 flex-wrap justify-center md:justify-end">
 
                             {/* Utility Links (Track Shipment, RFQ, Messages) */}
-                            {['track Shipment', 'RFQ', 'Messages'].map((b, i) => (
-                                <button key={i} className="text-gray-300 transition-colors hover:text-[#F97316] text-sm font-medium whitespace-nowrap px-2 py-1">
-                                    {b}
-                                </button>
+                            {[{ e: <span className="border rounded-full p-1 df border-[aqua]_ text-black_ bg-white_"><Bell size={18} /></span>, href_: '#' }, { e: 'Events', href_: '#' }, { e: 'Messages', href_: 'messages' }].map((b, i) => (
+                                <Link href={b.href_} key={i} className="text-gray-200 transition-colors hover:text-[#F97316] text-sm font-medium whitespace-nowrap px-2 py-1">
+                                    {b.e}
+                                </Link>
                             ))}
 
                             {/* Primary CTA: Cart (Vibrant Orange Background) */}
-                            <button className="flex items-center bg-[#F97316] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-[#FF9900] shadow-lg whitespace-nowrap">
+                            <button className="flex items-center bg-[#F97316] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-[#FF9900] shadow-lg_ whitespace-nowrap">
                                 <ShoppingCartIcon />
                                 Cart
                             </button>
 
                             {/* Secondary CTA: Account (Bordered White) */}
-                            <button className="bg-[dimgray] flex items-center border border-white/30 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-white/10 whitespace-nowrap">
+                            <Link className="bg-blue-800 flex items-center border border-white/30 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-blue-600 whitespace-nowrap" href={user?.username?"#":"login"}>
                                 <UserIcon />
                                 Account
-                            </button>
+                            </Link>
                         </div>
-                    </div>
+                        </div>
+
 
                     {/* Categories Bar (Mega Menu) */}
-                    <div className="df jcsb aic bg-[#1E293B] md:gap-2 px-4 md:px-6 py-1 border-t border-gray-700/50 text-sm">
-                        <div className=" flex flex-wrap justify-center md:justify-start gap-4  ">
+                    {pathname === '/' && <div className="df jcsb aic_ bg-[#1E293B]_ bg-white md:gap-2 px-4 md:px-2 py-1 border-t border-gray-700/50 text-sm">
+                        <div className="fx1 overflow-x-auto flex sbt justify-center md:justify-start gap-4 text-sm ">
                             {categories.map((cat, index) => (
                                 // Group container for hover effect
-                                <div key={index} className="group relative py-1 px-1 cursor-pointer">
-                                    <div className="opacity-95 transition-all group-hover:opacity-100 group-hover:text-[#F97316] text-xs font500">
+                                <div key={index} className="group relative py-1_ px-1 cursor-pointer">
+                                    <div className="opacity-95 transition-all group-hover:opacity-100 group-hover:text-[#F97316] font500 text-sm">
+                                        {cat.name}
+                                    </div>
+
+                                    {/* Mega Menu Dropdown */}
+                                    <div className="mega absolute top-full pt-2 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 hidden group-hover:block bg-[#1E293B] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
+                                        {cat.sub.map((item, subIndex) => (
+                                            <span key={subIndex} className="block text-gray-300 py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                            {categories.map((cat, index) => (
+                                // Group container for hover effect
+                                <div key={index} className="group relative py-1_ px-1 cursor-pointer">
+                                    <div className="opacity-95 transition-all group-hover:opacity-100 group-hover:text-[#F97316] font500 text-sm">
                                         {cat.name}
                                     </div>
 
@@ -614,9 +643,10 @@ export default function Topbar_() {
                                 </div>
                             ))}
                         </div>
-{user&&                      <div className="df aic gap05">
-                            <span className="cursor-pointer bg-[#2a3549] pdx05 pdy01 hover:bg-[#37474F]" style={{ borderRadius: '5px' }}>Hi, {user.username}</span>
-                            {user.user_type==='seller'&&<div className="pR  group cursor-pointer bg-[#05487d] text-white pdx05 pdy01 hover:bg-[#37474F]">
+                        {user && <div className="df aic gap-3 pl-2 border-l">
+                            <span className="cursor-pointer pdy01 hover:bg-[#37474F]_" style={{ borderRadius: '5px' }}>Hi, {user.username}</span>
+
+                            {user.user_type === 'seller' && <div className="pR  group cursor-pointer bg-[#05487d] text-white pdx05 pdy01 hover:bg-[#37474F]_">
                                 <Link href="/sellers/seller_dsbd" className="df aic gap01 " style={{ borderRadius: '5px' }}>My Store<ChevronDown size={14} />
                                 </Link>
 
@@ -624,13 +654,14 @@ export default function Topbar_() {
                                 <div className="pA left-[calc(100%-180px)]">
                                     <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
                                         {Mystore__.map((item, subIndex) => (
-                                            <Link href={`/${item.path}`}key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-100 text-[0.85rem] font-normal">
+                                            <Link href={`/${item.path}`} key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-100 text-[0.85rem] font-normal">
                                                 {item.name}
                                             </Link>
                                         ))}
                                     </div></div>
                             </div>}
-                            <div className="pR  group cursor-pointer bg-[#2a3549] pdx05 pdy01 hover:bg-[#37474F]">
+
+                            <div className="pR  group cursor-pointer pdy01 hover:bg-[#37474F]_">
                                 <span className="df aic gap01 " style={{ borderRadius: '5px' }}>En<ChevronDown size={14} />
                                 </span>
 
@@ -646,7 +677,7 @@ export default function Topbar_() {
                             </div>
 
                         </div>}
-                    </div>
+                    </div>}
                 </header>
             }
         </>

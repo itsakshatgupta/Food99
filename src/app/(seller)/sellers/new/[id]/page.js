@@ -1,3 +1,4 @@
+import FormNewPage from "../new-subpages/form";
 import ProductNewPage from "../new-subpages/product";
 
 export default async function OrderDetail({ params }) {
@@ -6,6 +7,9 @@ export default async function OrderDetail({ params }) {
         switch (id) {
             case 'product':
                 return (<ProductNewPage />);
+
+            case 'form':
+                return (<FormNewPage />);
         }
     }
 

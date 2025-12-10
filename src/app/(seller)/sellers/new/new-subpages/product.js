@@ -451,7 +451,7 @@ const ProductUploadPage = () => {
 
             </div>
 
-            <Seller_Page_Header pageTitle="Upload" pageSubTitle="Submit comprehensive data for efficient supply chain integration." />
+            <Seller_Page_Header pageTitle="Upload" icon={<UploadCloud/>} pageSubTitle="Submit comprehensive data for efficient supply chain integration." />
             {/* Response Message (Refined Look) */}
             {response && (
                 <div
@@ -504,7 +504,7 @@ const ProductUploadPage = () => {
                         </div>
 
                         <div className="w-[14rem] hfp oy">
-                            <div className='p-1.5 fx1 bg-white border rounded-xl'>
+                            <div className='p-1.5 fx1 bg-white border rounded-md'>
 
                                 <h1 className="text-md mb-1 font-semibold border-b">Product Overview</h1>
                                 <div className='text-sm m-1.5 space-y-2 text-black/95'>

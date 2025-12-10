@@ -133,7 +133,7 @@ export default function ViewCustomer() {
     return (
         <>
             <div className="df fd-c hfp">
-                <Seller_Page_Header pageTitle="Engaged Buyers" />
+                {/* <Seller_Page_Header pageTitle="Engaged Buyers" /> */}
                 {/* Header: Customer Name and Actions */}
                 <div className="fx1 oy bg-white font-sans">
                 <header className="flex flex-wrap justify-between items-center px-3 py-2.5 border-b bg-[#ededff] border-gray-200">
@@ -153,7 +153,7 @@ export default function ViewCustomer() {
                         </button>
                     </div>
                 </header>
-                <div className="hfp p-4 md:p-8">
+                <div className="hfp p-1 md:p-8">
 
                     {/* Top Section: Financial Stats (Full Width) */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -188,7 +188,7 @@ export default function ViewCustomer() {
                     </div>
 
                     {/* Main Content Layout: Two Scrolling Columns */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1_ lg:grid-cols-3_ gap-8">
 
                         {/* Left Column (Main Scrollable Content - 2/3 width) */}
                         <div className="lg:col-span-2 space-y-8">

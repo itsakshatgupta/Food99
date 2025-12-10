@@ -36,7 +36,7 @@ export function Search_suggestion({ data, title, col }) {
     const { device } = useContext(dynamic_);
 
     return (
-        <div className=" pdt1 pdb2 pdx05" style={{ background: 'aliceblue', borderBlock: '4px solid lightgray' }}>
+        <div className=" pdt1 pdb2 pdx05 border-y-2 border-blue-200" style={{ background: 'aliceblue', borderBlock: '4px_ solid lightgray_' }}>
             <h2 className="text-xl font-semibold mb-3">{title}</h2>
 
             <div className={`grid gap-${col <= 2 ? 4 : 1} pdt05`} style={{ gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem) , 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))' }}>
@@ -54,12 +54,12 @@ export function Search_suggestion({ data, title, col }) {
 // components/CategoryGrid.jsx
 export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
     const { device } = useContext(dynamic_);
-    console.log('c__:', c__, c__.c_palette_name);
+    // console.log('c__:', c__, c__.c_palette_name);
 
     return (
-        <section className={`w-full pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
+        <section className={`w-full border-y-4 border-white pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
             borderBlock: overflow_x && '4px solid lightgray',
-            background: c__.c_palette.sec_bg
+            background: c__.c_palette.sec_bg_||"#f2f9ff"
         }}>
 
             {title &&
@@ -67,31 +67,32 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                     <h2 className="text-xl font-semibold pdx02">{title}</h2>
                     <span className={`bdrds ${overflow_x ? 'pd05' : 'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x ? 'black' : 'white', borderRadius: overflow_x && "100%", background: overflow_x ? 'ghostwhite' : 'black', border: overflow_x && "1px solid royalblue" }}><ArrowRight size="1.2rem" /></span>
                 </div>}
-            <div className={`grid ${col <= 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-4`}
+            <div className={`grid ${col <= 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-2`}
             //  style={{
             //     gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             // }}
             ><>
                     {data.map((item, i) => (
-                        <div className={`${i} shadow-md rounded-xl ${device === 'pc' && overflow_x && "xfg"} pd05 df fd-c`} style={{
+                        <div className={`${i} bg-white shadow-sm_ rounded-md border pd05 df fd-c`} style={{
                             background: c__.c_palette.sec_card_bg
                         }} key={i}>
-                            <div>{item.sub_cat}</div>
-                            <div className={`${device === 'pc' && item.items.length === 3 ? 'grid grid-cols-3 grid-rows-1' : 'grid grid-cols-3 '} gap01 p-2 oh fx1 ${device === 'pc' && overflow_x ? "bdrds" : "mgt03"}  wfp xbg`}>
+
+                            <div className="text-[md] font-semibold">{item.sub_cat}</div>
+                            <div className={`border_ rounded-sm ${device === 'pc' && item.items.length === 3 ? 'grid grid-cols-3 grid-rows-1' : 'grid grid-cols-3 '} gap-1_ p-2 oh fx1 xbg_`}>
                                 {item.items.map((sI, i) => (
                                     <div
                                         key={i}
-                                        className={`${col ? col <= 2 ? "p-4" : "p-1" : ""} bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
-              `} style={{ border: overflow_x && '1px solid #0a0606ff', minWidth: "fit-content" }}
+                                        className={`${col ? col <= 2 ? "p-4" : "p-1_" : ""} bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
+              `} style={{ border: overflow_x && '1px solid #0a0606ff', minWidth: "max-content" }}
                                     >
                                         <div className="mgx04 pdt04 pR">
-                                            <div className={`pA w-full h-full`} style={{ background: '#c7c7c717' }}></div>
+                                            <div className={`pA w-full h-full`} style={{ background: '#dee2ff17' }}></div>
                                             <Image
                                                 src={sI.image}
                                                 alt={sI.name}
                                                 height={col ? col <= 2 ? 150 : 100 : 140}
                                                 width={100}
-                                                className={`min-w-[110px] h-[120px] object-contain rounded-lg`}
+                                                className={`min-w-[60px] h-[100px] object-contain rounded-lg`}
                                             />
                                             <p className="mt-2 font-medium md:text-sm">{sI.name}</p>
                                         </div>
@@ -102,8 +103,8 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                                                     <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
                                                 </div>
                                                 <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
-                                                    <div style={{ fontSize: '0.475em' }}>₹</div>
-                                                    <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
+                                                    <div style={{ fontSize: '0.675em' }}>₹</div>
+                                                    <h1 style={{ fontSize: '1.1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
                                                 </div>
                                             </div>
                                             {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 md:text-500 df gap03 sm:text-sm md:text-xs`} style={{ background: 'aliceblue' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>
@@ -126,9 +127,8 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
 export function ProductGrid({ data, title, col, overflow_x, bbb }) {
     const { device } = useContext(dynamic_);
     return (
-        <section className={`w-full pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
-            borderBlock: overflow_x && '4px solid lightgray',
-            background: overflow_x && 'white'
+        <section className={`w-full pdy1 border-y ${overflow_x&&"bg-white"} ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
+            borderBlock: overflow_x && '4px solid lightgray_',
         }}>
 
             {title &&
@@ -137,20 +137,20 @@ export function ProductGrid({ data, title, col, overflow_x, bbb }) {
                     <span className={`bdrds ${overflow_x ? 'pd05' : 'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x ? 'black' : 'white', borderRadius: overflow_x && "100%", background: overflow_x ? 'ghostwhite' : 'black', border: overflow_x && "1px solid royalblue" }}><ArrowRight size="1.2rem" /></span>
                 </div>}
             <div className={`
-            ${overflow_x ? "df aic ox pd1" : col === 2 ? 'grid grid-cols-[repeat(auto-fill,minmax(21rem,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]'} gap-${!device === 'pc' && overflow_x ? col <= 2 ? 4 : 1 : 2}
+            ${overflow_x ? "df aic ox pd1" : col === 2 ? 'grid grid-cols-[repeat(auto-fill,minmax(21rem,1fr))]' : 'grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]'} gap-${!device === 'pc' && overflow_x ? col <= 2 ? 4 : 1 : 3}
             `}
             //  style={{
             //     gridTemplateColumns: col === 2 ? 'repeat(auto-fit, minmax(calc(50% - 1rem), 1fr))' : 'repeat(auto-fit,  minmax(calc(33.33% - 0.25rem), 1fr))'
             // }}
             >
                 {data.map((item, i_) => (
-                    <div className={`pd05 `} key={i_}>
+                    <div className={`border border-gray-300 rounded-sm oh shadow-sm hover:shadow-md min-w-[fit-content]`} key={i_}>
 
 
 
                         <div
 
-                            className={`"p-4 bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : "rounded-xl shadow-sm hover:shadow-md"} transition 
+                            className={`"bg-white transition 
               `}
                         >
                             <div className="mgx04 pdt04 pR">
@@ -277,14 +277,14 @@ export function TrendingSection({ items, col }) {
 }
 
 export function Feeder({ section, borderBlockBooleans }) {
-    console.log(2256565484, borderBlockBooleans)
+    // console.log(2256565484, borderBlockBooleans)
     let c = cdt();
     let color__ = [
-        { c_palette_name: 'focus vibe', c_palette: { sec_bg: '#eefee5', sec_card_bg: '#C5E1A5 ' } },
-        { c_palette_name: 'fresh vibe', c_palette: { sec_bg: '#f2f9ff', sec_card_bg: '#c9f9ffff ' } },
-        { c_palette_name: 'discover vibe', c_palette: { sec_bg: '#fffcebff', sec_card_bg: '#FFE082 ' } },
-        { c_palette_name: 'woman fav', c_palette: { sec_bg: '#FFEBEE', sec_card_bg: '#F48FB1 ' } },
-        { c_palette_name: 'default', c_palette: { sec_bg: '#ffffffff', sec_card_bg: '#fffae9ff ' } },
+        { c_palette_name: 'focus vibe', c_palette: { sec_bg: '#eefee5', sec_card_bg: '#C5E1A5_' } },
+        { c_palette_name: 'fresh vibe', c_palette: { sec_bg: '#f2f9ff', sec_card_bg: '#c9f9ffff_' } },
+        { c_palette_name: 'discover vibe', c_palette: { sec_bg: '#fffcebff ', sec_card_bg: '#FFE082_' } },
+        { c_palette_name: 'woman fav', c_palette: { sec_bg: '#FFEBEE', sec_card_bg: '#F48FB1_' } },
+        { c_palette_name: 'default', c_palette: { sec_bg: '#ffffffff', sec_card_bg: '#fffae9ff_ ' } },
     ]
     const key = Object.hasOwn(section, 'color_theme_name')
         ? section.color_theme_name

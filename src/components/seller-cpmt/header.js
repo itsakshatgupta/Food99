@@ -16,13 +16,14 @@ export const lang__ = [
 ]
 
 
-export default function Seller_Page_Header({ pageTitle, pageSubTitle, toolBar, buttons, subButtons, back=null }) {
+export default function Seller_Page_Header({ pageTitle, icon,  pageSubTitle, bg, newRow_, newRow__, buttons, subButtons, back=null }) {
 const r_ = useRouter();
     return (
-        <div className="bg-white text-black border-b">
-            <div className="pdr1 pdl08 df jcsb text-lg font500 bdb border-[black] py-2.5 ">
-                <div className="df gap-2 aic">{back&&<span className="p-1 bg-gray-100 df rounded-full cursor-pointer" onClick={()=>r_.back()}><ArrowLeftIcon size={20} /></span>}<div className=""><span>{pageTitle}</span>{pageSubTitle&&<div  className="text-xs">{pageSubTitle}</div>}</div>
+        <div className={`bg-[#4527A0]_ ${bg?bg:"bg-white"} text-black border-b`}>
+            <div className="pdr1 pdl08 df jcsb text-lg font500 bdb border-[black] py-1.5 ">
+                <div className="df gap-2 aic">{back&&<span className="p-1 bg-gray-100 df rounded-full cursor-pointer" onClick={()=>r_.back()}><ArrowLeftIcon size={20} /></span>}<div className=""><span className="df aic gap-1">{icon&&icon}{pageTitle}</span>{pageSubTitle&&<div className="text-xs">{pageSubTitle}</div>}</div>
                 </div>
+                {newRow__&&<div className="fx1">{newRow__}</div>}
                 <div className="df aic hfc_ gap1 text-sm">
                     {buttons&&buttons.map((v, i)=><span key={i} className="hover:text-orange-500 cursor-pointer">{v}</span>)}
 
@@ -33,46 +34,27 @@ const r_ = useRouter();
               ))}</div>}/>
                 </div>
             </div>
-            {toolBar&&<div className="df dn aic jcsb text-xs font500 p-1 bg-[#fafafa]">
-                {pageTitle&&<h1 className="text-[0.825rem] font600 m-0">{pageTitle}</h1>}
-                <div className="df aic gap08 text-[0.7rem]">
-                     
-                {subButtons&&subButtons.map(v=><span className=" border-blue-900">{v}</span>)}
-               <Settings size={14} fill="white"/>
-                <Info size={14} stroke="dodgerblue"/>
-                    </div>
-                <div className="dfl dn aic">
-                    <div className="df aic gap03 py-1 cursor-pointer transition px-2 bg-[#2d3d41]l text-green-500">
-
-                        <Wifi size={14} />
-                        Broadcast Message
-                    </div>
-                    <div className="df aic gap03 py-1 cursor-pointer hover:bg-[#546e7a] transition px-2 bg-[#2d3d41]l">
-                        <span className="df">
-                            Subscribers:
-                        </span>
-                        12
-                    </div>
-                    <div className="pR  group cursor-pointer pdx05 pdy01 hover:bg-[#37474F]">
-                        <span className="df aic gap01 " style={{ borderRadius: '5px' }}>En<ChevronDown size={14} />
-                        </span>
-
-                        {/* Mega Menu Dropdown */}
-                        <div className="pA left-[calc(100%-180px)]">
-                            <div className=" pR top-full mt-3    md:translate-x-0 hidden group-hover:block bg-[white] p-3 rounded-xl border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
-                                {lang__.map((item, subIndex) => (
-                                    <span key={subIndex} className="block text-[black] py-1 px-2 rounded-lg transition-colors hover:text-[#F97316] hover:bg-gray-700 text-[0.85rem] font-normal">
-                                        {item}
-                                    </span>
-                                ))}
-                            </div></div>
-                    </div>
-                </div>
-            </div>}
+            {newRow_&&newRow_}
         </div>
     );
 }
 
 export function Seller_Page_Top_Bar({children}){
     return(<div className="df aic gap-6 bg-white text-black">{children}</div>)
+}
+
+export function Basic_Page_Header({ pageTitle, icon, pageSubTitle, bg, newRow__, buttons, back=null }) {
+const r_ = useRouter();
+    return (
+        <div className={`bg-[#4527A0]_ ${bg?bg:"bg-white"} text-black border-b`}>
+            <div className="pdr1 pl-2 df jcsb text-md font500 bdb border-[black] py-1 ">
+                <div className="df gap-2 aic">{back&&<span className="p-1 bg-gray-100 df rounded-full cursor-pointer" onClick={()=>r_.back()}><ArrowLeftIcon size={20} /></span>}<div className=""><span className="df aic gap-1">{icon&&icon}{pageTitle}</span>{pageSubTitle&&<div className="text-xs">{pageSubTitle}</div>}</div>
+                </div>
+                {newRow__&&<div className="fx1">{newRow__}</div>}
+                <div className="df aic hfc_ gap1 text-sm">
+                    {buttons&&buttons.map((v, i)=><span key={i} className="hover:text-orange-500 cursor-pointer">{v}</span>)}
+                </div>
+            </div>
+        </div>
+    );
 }

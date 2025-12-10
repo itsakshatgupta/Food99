@@ -1,10 +1,12 @@
 'use client'
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Mail, Search, Filter, Clock, MapPin, Tag, Hash, Calendar, Layers, ChevronDown, User, Group, Archive, Download, ArrowLeftIcon, MessageCirclePlus, MoreVerticalIcon, MoreVertical, PictureInPicture, Eye, Stars, Info, PhoneCall, MessageCircle, Dot, BookMarked, Bookmark, Carrot, Handshake, CircleArrowUp, LucideRouteOff, EyeOff } from 'lucide-react';
+import { Mail, Search, Filter, Clock, MapPin, Tag, Hash, Calendar, Layers, ChevronDown, User, Group, Archive, Download, ArrowLeftIcon, MessageCirclePlus, MoreVerticalIcon, MoreVertical, PictureInPicture, Eye, Stars, Info, PhoneCall, MessageCircle, Dot, BookMarked, Bookmark, Carrot, Handshake, CircleArrowUp, LucideRouteOff, EyeOff, Star, Table, AlertOctagon, Binoculars, Settings, ReplyAll } from 'lucide-react';
 import Seller_Page_Header, { Seller_Page_Top_Bar } from '@/components/seller-cpmt/header';
-import { Send, HardHat, Truck, Briefcase, ChevronLeft, Image, File, Video } from 'lucide-react';
+import { Send, HardHat, Truck, Briefcase, ChevronLeft, Image as Img, File, Video } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-
+import MainSideNav, { MainSideNavButtons } from '@/components/seller-cpmt/main-side-nav';
+import { MoreOptions, SearchBox } from '@/components/seller-cpmt/widget';
+import Image from 'next/image';
 // --- DUMMY DATA ---
 const contactData = [
   { id: 'eng-1', name: 'Alice (Lead Engineer)', status: 'Online', role: 'Engineer', icon: HardHat, lastMessage: 'Confirmed batch specs for Actuator.', time: '10:30 AM' },
@@ -47,8 +49,8 @@ const initialLeads = [
     priority: 'High',
     location: 'Houston, TX',
     daysActive: 1,
-    comment:'buyer said to call on earlier morning',
-    last_update:'11-23-20',
+    comment: 'buyer said to call on earlier morning',
+    last_update: '11-23-20',
 
     // when multi users manage leads.
     // updated_by:'',
@@ -58,14 +60,14 @@ const initialLeads = [
     search_rank: '22/100+',
     email: 'demo@demostore.com'
   },
-  { id: 102, buyer: 'Apex Manufacturing', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'CNC Precision Router', query: 'What is the lead time for 2 units?', date: '2025-11-09', status: 'Contacted', priority: 'Medium', location: 'Chicago, IL', daysActive: 2, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
-  { id: 103, buyer: 'Global Constructors', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Industrial Grade Steel Beam', query: 'Looking for distributor partnership in EU.', date: '2025-11-08', status: 'Follow-up', priority: 'Medium', location: 'London, UK', daysActive: 3, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
-  { id: 104, buyer: 'Tech Solutions Inc.', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Advanced Sensor Array Kit', query: 'Compatibility with Siemens PLCs?', date: '2025-11-05', status: 'New', priority: 'High', location: 'San Jose, CA', daysActive: 6, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
-  { id: 105, buyer: 'HydroPump Systems', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Hydraulic Piston Set (Medium)', query: 'Inquiry on maintenance requirements.', date: '2025-11-01', status: 'Closed', priority: 'Low', location: 'Miami, FL', daysActive: 10, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
-  { id: 106, buyer: 'Eastern Fabrication', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Reinforced Concrete Mix', query: 'Price list for pallet quantities.', date: '2025-10-25', status: 'Follow-up', priority: 'Low', location: 'New York, NY', daysActive: 17, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
-  { id: 107, buyer: 'Midwest Tools', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Heavy Duty Lathe Machine', query: 'Requesting a demo schedule.', date: '2025-10-20', status: 'New', priority: 'Medium', location: 'Kansas City, MO', daysActive: 22, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
-  { id: 108, buyer: 'Midwest Tools', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Heavy Duty Lathe Machine', query: 'Requesting a demo schedule.', date: '2025-10-20', status: 'New', priority: 'Medium', location: 'Kansas City, MO', daysActive: 22, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
-  { id: 109, buyer: 'Midwest Tools', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Heavy Duty Lathe Machine', query: 'Requesting a demo schedule.', date: '2025-10-20', status: 'New', priority: 'Medium', location: 'Kansas City, MO', daysActive: 22, comment:'buyer said to call on earlier morning', last_update:'11-23-20' },
+  { id: 102, buyer: 'Apex Manufacturing', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'CNC Precision Router', query: 'What is the lead time for 2 units?', date: '2025-11-09', status: 'Contacted', priority: 'Medium', location: 'Chicago, IL', daysActive: 2, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
+  { id: 103, buyer: 'Global Constructors', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Industrial Grade Steel Beam', query: 'Looking for distributor partnership in EU.', date: '2025-11-08', status: 'Follow-up', priority: 'Medium', location: 'London, UK', daysActive: 3, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
+  { id: 104, buyer: 'Tech Solutions Inc.', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Advanced Sensor Array Kit', query: 'Compatibility with Siemens PLCs?', date: '2025-11-05', status: 'New', priority: 'High', location: 'San Jose, CA', daysActive: 6, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
+  { id: 105, buyer: 'HydroPump Systems', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Hydraulic Piston Set (Medium)', query: 'Inquiry on maintenance requirements.', date: '2025-11-01', status: 'Closed', priority: 'Low', location: 'Miami, FL', daysActive: 10, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
+  { id: 106, buyer: 'Eastern Fabrication', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Reinforced Concrete Mix', query: 'Price list for pallet quantities.', date: '2025-10-25', status: 'Follow-up', priority: 'Low', location: 'New York, NY', daysActive: 17, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
+  { id: 107, buyer: 'Midwest Tools', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Heavy Duty Lathe Machine', query: 'Requesting a demo schedule.', date: '2025-10-20', status: 'New', priority: 'Medium', location: 'Kansas City, MO', daysActive: 22, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
+  { id: 108, buyer: 'Midwest Tools', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Heavy Duty Lathe Machine', query: 'Requesting a demo schedule.', date: '2025-10-20', status: 'New', priority: 'Medium', location: 'Kansas City, MO', daysActive: 22, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
+  { id: 109, buyer: 'Midwest Tools', email: 'demo@demodomain.com', phone: '+91-888-131-6612', product: 'Heavy Duty Lathe Machine', query: 'Requesting a demo schedule.', date: '2025-10-20', status: 'New', priority: 'Medium', location: 'Kansas City, MO', daysActive: 22, comment: 'buyer said to call on earlier morning', last_update: '11-23-20' },
 ];
 
 const STATUS_OPTIONS = ['All', 'New', 'Contacted', 'Follow-up', 'Closed'];
@@ -84,21 +86,22 @@ const getStatusColor = (status) => {
 const getStatusIcon = (status) => {
   switch (status) {
     // Using light background colors with distinct dark text for high readability
-    case 'New': return <Stars size={14}/>;
-    case 'Contacted': return <Handshake size={14}/>;
-    case 'Follow-up': return <CircleArrowUp size={14}/>;
-    case 'Closed': return <EyeOff size={14}/>;
-    default: return <Stars size={14}/>;}
+    case 'New': return <Stars size={14} />;
+    case 'Contacted': return <Handshake size={14} />;
+    case 'Follow-up': return <CircleArrowUp size={14} />;
+    case 'Closed': return <EyeOff size={14} />;
+    default: return <Stars size={14} />;
+  }
 };
 
 
 const getPriorityColor = (priority) => {
   // Using darker shades of red, yellow, and green for visibility against a light background
   switch (priority) {
-    case 'High': return 'bg-red-300 px-[1px]';
-    case 'Medium': return 'bg-yellow-300 px-[1px]';
-    case 'Low': return 'bg-green-300 px-[1px]';
-    default: return 'bg-gray-300 px-[1px]';
+    case 'High': return 'text-red-600';
+    case 'Medium': return 'text-yellow-600';
+    case 'Low': return 'text-green-600';
+    default: return 'text-gray-600';
   }
 };
 
@@ -262,10 +265,10 @@ const SpecificLead = ({ lead }) => {
             <div className="bg-gray-100_ df fd-c jcsb px-2 py-1 aic_ border text-xs rounded-md gap02">
               <div className="df gap-1 aic"><span>{lead.date}</span><Dot /><span>{lead.status}</span>
               </div>
-            <div className="mx-1_ rounded-md df">
-              <h1 className="text-sm mb-1 text-[#42464d]">Comment:</h1>
-              <p className="text-sm mx-1">buyer said to call on earlier morning.</p>
-            </div>
+              <div className="mx-1_ rounded-md df">
+                <h1 className="text-sm mb-1 text-[#42464d]">Comment:</h1>
+                <p className="text-sm mx-1">buyer said to call on earlier morning.</p>
+              </div>
             </div>
             <div>
               <h1 className="text-sm mb-1">User Profile</h1>
@@ -347,6 +350,7 @@ export default function LeadsManager() {
   const [selectleads, setSelectLeads] = useState(null);
   const [filterStatus, setFilterStatus] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [view, setView] = useState('All Leads');
 
   const filteredLeads = useMemo(() => {
     return leads.filter(lead => {
@@ -384,6 +388,145 @@ export default function LeadsManager() {
     setSelectLeads(initialLeads.find(v => v.id === parseInt(l_id)))
   }, [l_id])
 
+  const AllLeads = () => {
+    return (
+      <div className="df fd-c fx1 hfp oh">
+        <div className="p-2 border-b">
+          <div className="df aic gap-5 mb-2">
+            <h1 className="text-md">{view}</h1>
+            <SearchBox placeholder="Search lead by No, Location ..." />
+            <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Binoculars size={14} />Advance View</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
+          </div>
+          <div className="df aic_ gap-2 text-sm">
+            <span className="df aic gap-1 px-3_ py-0.5 rounded-xl text-gray-800 bg-gray-900_ text-sm"><MapPin size={14} /> Locations:</span>
+            <div className="fx1 overflow-x-auto whitespace-nowrap df aic gap-3 sbt" style={{ scrollbarColor: "#ecececff white" }}>
+              {["Location B", "Location B", "Location C", "Location D", "Location E", "Location F", "Location G"].map(l => (
+                <span className="px-2 py-0.5 rounded-lg bg-gray-50">{l}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="fx1 hfp oh">
+          <div className="hfp overflow-x-auto oy">
+            <table className="text-left whitespace-nowrap ">
+
+              <thead className="pS bg-white" style={{ top: 0 }}><tr className="text-sm font-bold_ uppercase_ border-b">
+
+                <th className="px-3 py-1 text-left flex items-center">ID</th>
+                <th className="px-3 _border-l py-1 text-left">Buyer</th>
+                <th className="px-3 _border-l py-1 text-left"><Layers className="w-3.5 h-3.5 mr-1 inline" /> Product</th>
+                <th className="px-3 _border-l py-1 text-left">Status</th>
+                <th className="px-3 _border-l py-1 text-left">Enquiry Date</th>
+                <th className="px-3 _border-l py-1 text-left">Priority</th>
+                <th className="px-3 _border-l py-1 text-left">Comment</th>
+
+              </tr>
+              </thead>
+
+              <tbody className="divide-gray-200">{filteredLeads.map((lead, i) => (
+                <tr key={i} className="cursor-pointer hover:bg-gray-50 hover:text-gray-600 transition duration-150 group  transition border-b" onClick={() => r_.push(`?lead=${lead.id}`)}>
+                  <td className="p-2.5 font-mono text-sm text-gray-500  transition border-r group-hover:text-gray-800 border-l-2 border-l-white group-hover:border-l-gray-600">{lead.id}</td>
+                  <td className="p-2.5 text-sm text-gray-800  transition border-l_ group-hover:text-gray-800">
+                    <div>Name: <span className="text-blue-600">{lead.buyer}</span></div>
+                    <div className="">Phone No. <span className="text-green-600">{lead.phone}</span></div>
+                    <div>Location: {lead.location}</div>
+                  </td>
+                  <td className="p-2.5 text-sm text-cyan-700  transition border-l_ group-hover:text-gray-800 ">{lead.product}</td>
+                  <td className="p-2  transition border-l_">
+                    <span className={`inline-flex gap-1 aic text-xs font-semibold_ px-[8px] py-[1px] rounded-md  transition border ${getStatusColor(lead.status)}`}>
+                      {getStatusIcon(lead.status)}
+                      {lead.status}
+                    </span>
+                  </td>
+                  <td className="p-2.5 text-sm font-mono text-gray-800  transition border-l_ group-hover:text-gray-800 ">5-10-12</td>
+                  <td className=" p-2.5 text-sm transition border-l_">
+                    <span className={`${getPriorityColor(lead.priority)} group-hover:text-gray-800`}>{lead.priority}</span>
+                  </td>
+                  <td className="p-2.5 text-sm  transition border-l_ group-hover:text-gray-800 ">{lead.comment}</td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+          {filteredLeads.length === 0 && (
+            <div className="text-center py-10 text-gray-500 text-lg">
+              No leads found matching the current filters.
+            </div>
+          )}
+        </div>
+      </div>
+
+    )
+  }
+
+  const FreshLeads = () => {
+    return (
+      <div className="df fd-c fx1 hfp oh">
+        <div className="p-2 border-b">
+          <div className="df aic gap-5">
+            <h1 className="text-md">{view}</h1>
+            <SearchBox placeholder="Search lead by No, Location ..." />
+            <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
+          </div>
+        </div>
+        <div className="fx1 hfp oh">
+          <div className="fx1 hfp overflow-x-auto oy divide-y-2 mx-10_">
+
+
+            {filteredLeads.map((lead, i) => (
+              <div key={i} className="df fd-c h-[10rem]_ p-3 m-3_" onClick={() => r_.push(`?lead=${lead.id}`)}>
+                <div className="text-md mb-1 df jcsb">
+                  <h1 className="df aic items-start gap-1 text-blue-600 mb-1">
+                    <span className="rounded-full bg-black oh w-[32px] h-[32px] pR"><Image alt={lead.buyer} src="/p-2.png" fill /></span>
+                    <div className="">
+                      <div className=" font-semibold hover:cursor-pointer ">{lead.buyer}</div>
+                      <div className="text-xs mt-[-3px] hover:cursor-pointer ">{lead.location}</div>
+                    </div>
+                  </h1>
+                  <MoreOptions y={false} />
+                </div>
+
+                <div className="df gap-3 fx1 mx-1">
+
+                  <div className="fx1 text-sm oh">
+                    <h1 className="text-sm">
+                      Product: <span className="text-green-600 underline hover:cursor-pointer ">{lead.product}</span>
+                    </h1>
+
+                    <div className="bg-gray-50 rounded-lg py-1 px-2 min-h-[5rem] max-h-[8rem] df fd-c mb-2 oh">
+                      <div className="text-gray-800">Message</div>
+                      <div className="fx1 px-1 oy" style={{ overflowWrap: "anywhere" }}>
+                        {lead.comment}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="w-[5rem] text-blue-600 border-purple-300 rounded-md h-auto">
+                    <div className="text-sm rounded-md mb-1 df fd-c aic jcc hfp hover:cursor-pointer ">
+                      <ReplyAll />
+                      <span className="text-sm">Reply</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div className="text-sm h-10_ rounded-md bg-gray-50_ mb-1">
+                  {lead.date}
+                </div>
+              </div>
+            ))}
+
+          </div>
+          {filteredLeads.length === 0 && (
+            <div className="text-center py-10 text-gray-500 text-lg">
+              No leads found matching the current filters.
+            </div>
+          )}
+        </div>
+      </div>
+
+    )
+  }
   return (
     <>
       <div className="df fd-c hfp">
@@ -393,79 +536,15 @@ export default function LeadsManager() {
 
           {selectleads && <SpecificLead lead={selectleads} />}
 
-          <div className="fx1 hfp oh df fd-c">
-            {/* Lead Table */}
-            <div className="fx1 overflow-x-auto max-h-full oy border-r">
-              <table className="w-full text-left whitespace-nowrap">
+          <div className="fx1 hfp oh df">
+            <MainSideNav>
+              <MainSideNavButtons icon={<Star size={20} />} name="Fresh Leads" controller={{ control: view, setController: setView }} />
+              <MainSideNavButtons icon={<Table size={20} />} name="All Leads" controller={{ control: view, setController: setView }} />
+              <MainSideNavButtons icon={<AlertOctagon size={20} />} name="Spams" controller={{ control: view, setController: setView }} />
+            </MainSideNav>
 
-                <thead className="pS" style={{ top: 0 }}><tr className="text-sm font-bold_ uppercase_ border-b">
-
-                  <th className="px-3 py-1 text-left flex items-center"><Hash className="w-3.5 h-3.5 mr-1" /> ID</th>
-                  <th className="px-3 _border-l py-1 text-left"><Layers className="w-3.5 h-3.5 mr-1 inline" /> Product</th>
-                  <th className="px-3 _border-l py-1 text-left"><User className="w-3.5 h-3.5 mr-1 inline" /> Buyer</th>
-                  <th className="px-3 _border-l py-1 text-left"><MapPin className="w-3.5 h-3.5 mr-1 inline" /> Location</th>
-                  <th className="px-3 _border-l py-1 text-left"><Clock className="w-3.5 h-3.5 mr-1 inline" /> Status</th>
-                  <th className="px-3 _border-l py-1 text-left"><Calendar className="w-3.5 h-3.5 mr-1 inline" /> Date</th>
-                  <th className="px-3 _border-l py-1 text-left"><Tag className="w-3.5 h-3.5 mr-1 inline" /> Priority</th>
-                  <th className="px-3 _border-l py-1 text-left"><Calendar className="w-3.5 h-3.5 mr-1 inline" /> Contact No.</th>
-                  <th className="px-3 _border-l py-1 text-left"><Calendar className="w-3.5 h-3.5 mr-1 inline" /> Days Active</th>
-                  <th className="px-3 _border-l py-1 text-left"><Calendar className="w-3.5 h-3.5 mr-1 inline" />Last Update</th>
-                  <th className="px-3 _border-l py-1 text-left"><Calendar className="w-3.5 h-3.5 mr-1 inline" />Comment</th>
-                  {/* <th className="px-3 py-1.5 text-left text-center _border-l">Action</th> */}
-                </tr>
-                </thead>
-
-                <tbody className="divide-gray-200">{filteredLeads.map((lead, i) => (
-                  <tr key={i} className="cursor-pointer hover:bg-blue-50 hover:text-gray-600 transition duration-150 group  transition border-b" onClick={() => r_.push(`?lead=${lead.id}`)}>
-                    <td className="p-2.5 font-mono text-sm text-gray-500  transition border-r group-hover:text-gray-800 border-l-2 border-l-white group-hover:border-l-gray-600">{lead.id}</td>
-                    <td className="p-2.5 text-sm text-cyan-700  transition border-l_ group-hover:text-gray-800 ">{lead.product}</td>
-                    <td className="p-2.5 text-sm text-gray-800  transition border-l_ group-hover:text-gray-800">{lead.buyer}
-                    </td>
-                      <td className="p-2.5 text-sm text-gray-800  transition border-l_ group-hover:text-gray-800 "><MapPin className="w-3 h-3 mr-0 inline" /> {lead.location}</td>
-                    <td className="p-2  transition border-l_">
-                      <span className={`inline-flex gap-1 aic text-xs font-semibold_ px-[8px] py-[1px] rounded-md  transition border ${getStatusColor(lead.status)}`}>
-                        {getStatusIcon(lead.status)}
-                        {lead.status}
-                      </span>
-                    </td>
-                    <td className="p-2.5 text-sm font-mono text-gray-600  transition border-l_ group-hover:text-gray-800 ">5-10-12</td>
-                    <td className=" p-2.5 text-sm transition border-l_">
-                      <span className={`${getPriorityColor(lead.priority)} group-hover:text-gray-800`}>{lead.priority}</span>
-                    </td>
-                    <td className="p-2.5 text-sm text-cyan-700  transition border-l_ group-hover:text-gray-800 ">{lead.phone}</td>
-                    <td className="p-2.5 text-sm font-mono text-gray-700  transition border-l_ group-hover:text-gray-800 ">{lead.daysActive}</td>
-                    <td className="p-2.5 text-sm font-mono text-gray-600  transition border-l_ group-hover:text-gray-800 ">{lead.last_update}</td>
-                    <td className="p-2.5 text-sm  transition border-l_ group-hover:text-gray-800 ">{lead.comment}</td>
-
-                    {/* <td className="p-2.5 text-center  transition border-l group-hover:text-blue-600">
-                      <select
-                        value={lead.status}
-                        onChange={(e) => updateStatus(lead.id, e.target.value)}
-                        className={`bg-gray-100 text-gray-800 text-xs px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-400 cursor-pointer appearance-none transition duration-150`}
-                      >
-                        {STATUS_OPTIONS.filter(s => s !== 'All').map(s => (
-                          <option
-                            key={s}
-                            value={s}
-                            className="bg-white text-gray-900"
-                          >
-                            Move to {s}
-                          </option>
-                        ))}
-                      </select>
-                    </td> */}
-                  </tr>
-                ))}</tbody>
-              </table>
-              {filteredLeads.length === 0 && (
-                <div className="text-center py-10 text-gray-500 text-lg">
-                  No leads found matching the current filters.
-                </div>
-              )}
-            </div>
-            <div className="text-xs text-gray-500 border-x border-t p-1.5">
-              Displaying {filteredLeads.length} of {totalLeads} Total Leads.
-            </div>
+            {view === "All Leads" && AllLeads()}
+            {view === "Fresh Leads" && FreshLeads()}
           </div>
 
 
