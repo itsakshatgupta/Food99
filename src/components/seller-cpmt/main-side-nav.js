@@ -17,6 +17,5 @@ export default function MainSideNav({center=true, children, title, className, ba
             <h1 className="text-lg df aic gap-3">{backBtn&&<ArrowLeft size={20} onClick={()=>router.back()} className="cursor-pointer"/>}{title}</h1>
             {children}
             </div>
-            
     )
 }
