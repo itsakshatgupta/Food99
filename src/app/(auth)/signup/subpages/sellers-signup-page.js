@@ -142,10 +142,12 @@
 //   );
 // }
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchAPI } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
-import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box } from 'lucide-react';
+import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box, Twitter, Facebook } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 
 // --- Header Component ---
@@ -154,9 +156,9 @@ const Header = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
       {/* Logo and Brand Name */}
       <div className="flex items-center space-x-2">
-        <Zap className="w-7 h-7 text-indigo-600" />
-        <span className="text-xl font-extrabold text-gray-900 tracking-tighter">
-          Synergy<span className="text-indigo-600">Link</span>
+        {/* <Zap className="w-7 h-7 text-indigo-600" /> */}
+        <span className="text-2xl font-extrabold text-gray-900 tracking-tighter">
+          Trade<span className="text-purple-600">B2B</span>
         </span>
       </div>
       {/* Navigation (Hidden on Mobile, simplified for login page) */}
@@ -164,7 +166,6 @@ const Header = () => (
         <a href="#" className="text-indigo-600 hover:text-indigo-800 transition flex items-center"><Home className="w-4 h-4 mr-1" /> Home</a>
         <a href="#" className="text-gray-600 hover:text-indigo-600 transition flex items-center"><Briefcase className="w-4 h-4 mr-1" /> Features</a>
         <a href="#" className="text-gray-600 hover:text-indigo-600 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Support</a>
-        <a href="#" className="text-gray-600 hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Signup</a>
       </nav>
     </div>
   </header>
@@ -178,7 +179,7 @@ const Footer = () => (
 
         {/* Widget 1: Company Info */}
         <div>
-          <h3 className="text-lg font-semibold mb-3 text-indigo-400">SynergyLink</h3>
+          <h3 className="text-lg font-semibold mb-3 text-indigo-400">TradeB2B</h3>
           <p className="text-sm text-gray-400">
             The definitive B2B commerce platform connecting manufacturers and global distributors efficiently.
           </p>
@@ -218,7 +219,7 @@ const Footer = () => (
       {/* Copyright Row */}
       <div className="flex justify-center items-center pt-4 text-sm text-gray-500">
         <Globe className="w-4 h-4 mr-2" />
-        &copy; {new Date().getFullYear()} SynergyLink. All rights reserved.
+        &copy; {new Date().getFullYear()} TradeB2B. All rights reserved.
       </div>
     </div>
   </footer>
@@ -234,9 +235,15 @@ export default function SellerSignupPage() {
     user_type: "seller",
     phone: "",
   });
+
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+  const [self_verify, setSelf_verify] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const p__ = useParams();
+  const p___ = useSearchParams();
+
 
 
   async function handleSubmit(e) {
@@ -264,6 +271,36 @@ export default function SellerSignupPage() {
     }
   }
 
+  useEffect(() => {
+
+    if (p___.has('verify')) {
+      alert(p___.get('verify'))
+      setSelf_verify(true);
+      
+      async function Requesting_UserAsSeller(id) {
+        setIsLoading(true);
+        setError("");
+
+        try {
+
+
+          const res = await fetchAPI("register/"+user.id, "PATCH", {user_type:"seller"}, true);
+          // router.push("/login");
+          console.log("MMMV:". res)
+        } catch (err) {
+          console.error("Register error:", err);
+          setError(err.message || "Something went wrong");
+        } finally {
+          setIsLoading(false);
+        }
+      }
+
+      Requesting_UserAsSeller(p___.get('verify'))
+    }
+    console.log('M:', p___.get('verify'))
+
+  }, [p___])
+
 
 
   // Feature list for the Context Panel
@@ -272,10 +309,14 @@ export default function SellerSignupPage() {
     { icon: Handshake, title: "Secure Transactions", description: "Blockchain-verified contracts and escrow services." },
     { icon: Box, title: "Optimized Logistics", description: "Integrated shipping and inventory management tools." },
   ];
+  useEffect(() => {
+    const u = localStorage.getItem("user");
+    if (u) setUser(JSON.parse(u));
+  }, []);
 
   return (
     // Updated background for a richer look
-    <div className="min-h-screen flex flex-col font-sans bg-gray-100/50" style={{ background: 'linear-gradient(45deg, #f8f8f8f5, #fdfdffff)' }}>
+    <div className="min-h-screen flex flex-col font-sans bg-gray-100/50_ bg-white" style={{ background: 'linear-gradient(45deg, #f8f8f8f5, #fdfdffff)_' }}>
 
       {/* 1. Header */}
       <Header />
@@ -285,7 +326,7 @@ export default function SellerSignupPage() {
       {/* 2. Main Content Area (Login Form + Context Panel) */}
       {/* The main background uses a subtle gradient for depth */}
       <main className="flex-grow flex items-center justify-center p-4 py-5 md:py-5" >
-        <div className="max-w-6xl pR w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        {!self_verify ? <div className="max-w-6xl pR w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="220"
@@ -328,7 +369,7 @@ export default function SellerSignupPage() {
               <span className="text-indigo-600">Powering</span> the Next Generation of B2B Commerce.
             </h2>
             <p className="text-gray-600 text-md">
-              SynergyLink is designed for high-volume transactions, providing unparalleled transparency and efficiency for manufacturers, suppliers, and buyers worldwide.
+              TradeB2B is designed for high-volume transactions, providing unparalleled transparency and efficiency for manufacturers, suppliers, and buyers worldwide.
             </p>
 
             <div className="space-y-6 pt-4">
@@ -345,13 +386,13 @@ export default function SellerSignupPage() {
           </div>
 
           {/* Login Form Card (Existing) */}
-          <div className="w-full max-w-[25rem]  mx-auto bg-white p-8 sm:p-6 rounded-xl shadow-2xl border border-gray-300">
+          <div className="w-full max-w-[25rem]  mx-auto bg-white p-8 sm:p-6 rounded-xl shadow-md_ border border-gray-200">
 
             {/* Header */}
             <div className="text-center mb-8">
               <LogIn className="w-10 h-10 mx-auto text-indigo-600 mb-3" />
               <h1 className="text-lg font-extrabold text-gray-900 tracking-tight">
-                Sign In to SynergyLink Seller
+                Sign Up to TradeB2B Seller
               </h1>
               <p className="text-sm text-gray-500 mt-1">
                 Your gateway to B2B global commerce.
@@ -366,8 +407,19 @@ export default function SellerSignupPage() {
               </div>
             )}
 
+            {user && <div className="p-2 tac bg-black rounded-sm text-sm text-white mb-3 hover:bg-black/80 cursor-pointer" onClick={() => router.push("?verify=" + user.id)}>
+              Continue with Exsisting TradeB2B Account
+
+            </div>}
+
+            <div className="border dn px-2 py-2">
+              <div className="text-sm df items-center gap-2">Signup With : 
+                <div className="df aic gap-3"><span><Twitter/></span><span><Facebook/></span><span><svg width="24px" height="24px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"/><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"/><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"/><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"/></svg></span></div>
+              </div>
+            </div>
+
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-6 text-sm">
+            <form onSubmit={handleSubmit} className="space-y-6  dn text-sm">
               {/* User type */}
               <div className="dn">
                 <label className="block mb-1 text-sm font-semibold text-gray-600">
@@ -392,7 +444,7 @@ export default function SellerSignupPage() {
                   name="username"
                   value={form.username}
                   onChange={(e) => setForm({ ...form, username: e.target.value })}
-                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition"
                   disabled={isLoading}
                   required
                 />
@@ -408,7 +460,7 @@ export default function SellerSignupPage() {
                   name="username"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition"
                   disabled={isLoading}
                   required
                 />
@@ -424,7 +476,7 @@ export default function SellerSignupPage() {
                   name="password"
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
-                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition"
                   disabled={isLoading}
                   required
                 />
@@ -439,7 +491,7 @@ export default function SellerSignupPage() {
                   name="Phone"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition"
+                  className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition"
                   disabled={isLoading}
                   required
                 />
@@ -455,21 +507,21 @@ export default function SellerSignupPage() {
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                 ) : (
                   <>
-                    Secure Login
+                    Proceed
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </>
                 )}
               </button>
             </form>
 
-            <div id="login-status" className="text-center text-xs text-gray-400 mt-4">
-              Try username: **demo**, password: **password**
+            <div id="login-status" className="text-center text-xs dn text-gray-400 mt-4">
+
             </div>
           </div>
 
 
 
-        </div>
+        </div> : <div>Verifying you {user.username} ...</div>}
       </main>
 
       {/* 3. Footer */}

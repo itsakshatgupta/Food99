@@ -19,7 +19,7 @@ export function PageHeader({ title, links = [{ e: null, href_: null }] }) {
     },[searchText])
 
     return (
-        <header className="font-['Inter', sans-serif] border-b pS z-[500]" style={{ top: 0, background: 'linear-gradient(45deg, #3F51B5, #673AB7)' }}>
+        <header className="font-['Inter', sans-serif] border-b_ pS z-[500] bg-black" style={{ top: 0, background: 'linear-gradient(45deg, #3F51B5, #673AB7)_' }}>
 
             {/* Top Row - Brand, Search, Actions */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-2 md:px-6">

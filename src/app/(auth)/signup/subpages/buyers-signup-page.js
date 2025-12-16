@@ -145,26 +145,24 @@
 import React, { useState } from 'react';
 import { fetchAPI } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
-import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box } from 'lucide-react';
+import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box, Twitter, Facebook } from 'lucide-react';
 
 
 // --- Header Component ---
 const Header = () => (
   <header className="">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-2 flex justify-between items-center bg-black text-white">
       {/* Logo and Brand Name */}
       <div className="flex items-center space-x-2">
-        <Zap className="w-7 h-7 text-indigo-600" />
-        <span className="text-xl font-extrabold text-gray-900 tracking-tighter">
-          Synergy<span className="text-indigo-600">Link</span>
+        {/* <Zap className="w-7 h-7" /> */}
+        <span className="text-2xl font-extrabold tracking-tighter">
+          Trade<span className="text-[aqua]">B2B</span>
         </span>
       </div>
       {/* Navigation (Hidden on Mobile, simplified for login page) */}
       <nav className="hidden sm:flex space-x-8 text-sm font-medium">
-        <a href="#" className="text-indigo-600 hover:text-indigo-800 transition flex items-center"><Home className="w-4 h-4 mr-1" /> Home</a>
-        <a href="#" className="text-gray-600 hover:text-indigo-600 transition flex items-center"><Briefcase className="w-4 h-4 mr-1" /> Features</a>
-        <a href="#" className="text-gray-600 hover:text-indigo-600 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Support</a>
-        <a href="#" className="text-gray-600 hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Signup</a>
+        <a href="#" className="hover:text-indigo-600 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Support</a>
+        <a href="#" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Signup</a>
       </nav>
     </div>
   </header>
@@ -275,7 +273,7 @@ export default function BuyerSignupPage() {
 
   return (
     // Updated background for a richer look
-    <div className="min-h-screen flex flex-col font-sans bg-gray-100/50" style={{ background: 'linear-gradient(45deg, #f8f8f8f5, #fdfdffff)' }}>
+    <div className="min-h-screen flex flex-col font-sans bg-gray-100/50_  bg-gray-50" style={{ background: 'linear-gradient(45deg, #f8f8f8f5, #fdfdffff)_' }}>
 
       {/* 1. Header */}
       <Header />
@@ -285,77 +283,19 @@ export default function BuyerSignupPage() {
       {/* 2. Main Content Area (Login Form + Context Panel) */}
       {/* The main background uses a subtle gradient for depth */}
       <main className="flex-grow flex items-center justify-center p-4 py-5 md:py-5" >
-        <div className="max-w-6xl pR w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="220"
-            height="220"
-            viewBox="0 0 220 220"
-            style={{
-              position: "absolute",
-              top: 0,
-            }}
-          >
-            <g>
-              {/* Row 1 */}
-              <circle
-                className="dot"
-                cx={50}
-                cy={50}
-                r={100}
-                fill="#3730a30d"
-                style={{
-                  stroke: "#3730a30d",
-                }}
-              />
-
-              {/* Row 2 */}
-              <circle
-                className="dot"
-                cx={144}
-                cy={10}
-                r={35}
-                style={{
-                  fill: "#d3d1f1",
-                }}
-              />
-            </g>
-          </svg>
-          {/* Contextual Background Panel (Visible on Large Screens) */}
-          <div className="space-y-8 p-8 rounded-2xl bg-white_ shadow-xl_ border_ border-indigo-100/70">
-
-            <h2 className="text-3xl font-extrabold text-indigo-800 tracking-tight leading-snug">
-              <span className="text-indigo-600">Powering</span> the Next Generation of B2B Commerce.
-            </h2>
-            <p className="text-gray-600 text-md">
-              SynergyLink is designed for high-volume transactions, providing unparalleled transparency and efficiency for manufacturers, suppliers, and buyers worldwide.
-            </p>
-
-            <div className="space-y-6 pt-4">
-              {features.map((feature) => (
-                <div key={feature.title} className="flex items-start space-x-4">
-                  <feature.icon className="w-6 h-6 text-indigo-500 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-800">{feature.title}</h4>
-                    <p className="text-gray-500 text-base">{feature.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="max-w-6xl wfp">
+                        <p className="text-2xl font-bold tac text-gray-800 mb-3">
+                Your gateway to B2B global commerce.
+              </p>
 
           {/* Login Form Card (Existing) */}
-          <div className="w-full max-w-[25rem]  mx-auto bg-white p-8 sm:p-6 rounded-xl shadow-2xl border border-gray-300">
+          <div className="w-full max-w-[50rem]  mx-auto bg-white p-8 sm:p-6 rounded-md border border-gray-300">
 
             {/* Header */}
-            <div className="text-center mb-8">
-              <LogIn className="w-10 h-10 mx-auto text-indigo-600 mb-3" />
+            <div className="text-center_ mb-3">
               <h1 className="text-lg font-extrabold text-gray-900 tracking-tight">
                 Sign In to SynergyLink
               </h1>
-              <p className="text-sm text-gray-500 mt-1">
-                Your gateway to B2B global commerce.
-              </p>
             </div>
 
             {/* Error Message */}
@@ -366,8 +306,14 @@ export default function BuyerSignupPage() {
               </div>
             )}
 
+            <div className="border_ px-2 py-2">
+              <div className="text-sm df items-center gap-2">Signup With :
+                 <div className="df aic gap-3"><span><Twitter/></span><span><Facebook/></span><span><svg width="24px" height="24px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"/><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"/><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"/><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"/></svg></span></div>
+              </div>
+            </div>
+
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-6 text-sm">
+            <form onSubmit={handleSubmit} className="space-y-4 text-sm">
               {/* User type */}
               <div className="dn">
                 <label className="block mb-1 text-sm font-semibold text-gray-600">
@@ -448,7 +394,7 @@ export default function BuyerSignupPage() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full flex justify-center items-center py-2 px-3 border border-transparent rounded-lg shadow-md text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-75 transition duration-200"
+                className="w-full_ flex justify-self-end items-center py-2 px-3 border border-transparent rounded-lg shadow-md text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-75 transition duration-200"
                 disabled={isLoading}
               >
                 {isLoading ? (

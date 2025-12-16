@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Search, TruckElectric } from "lucide-react";
 import Link from "next/link";
 import { dynamic_ } from "./main-context";
+import { useRouter } from "next/navigation";
 
 function cdt() {
     const { device } = useContext(dynamic_);
@@ -55,11 +56,12 @@ export function Search_suggestion({ data, title, col }) {
 export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
     const { device } = useContext(dynamic_);
     // console.log('c__:', c__, c__.c_palette_name);
+    const router = useRouter();
 
     return (
         <section className={`w-full border-y-4 border-white pdy1 ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
             borderBlock: overflow_x && '4px solid lightgray',
-            background: c__.c_palette.sec_bg_||"#f2f9ff"
+            background: c__.c_palette.sec_bg_ || "#f7f7f7ff"
         }}>
 
             {title &&
@@ -78,15 +80,15 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                         }} key={i}>
 
                             <div className="text-[md] font-semibold">{item.sub_cat}</div>
-                            <div className={`border_ rounded-sm ${device === 'pc' && item.items.length === 3 ? 'grid grid-cols-3 grid-rows-1' : 'grid grid-cols-3 '} gap-1_ p-2 oh fx1 xbg_`}>
+                            <div className={`border_ rounded-sm ${device === 'pc' && item.items.length === 3 ? 'grid grid-cols-3 grid-rows-1' : 'grid grid-cols-3 '} gap-1 p-1 oh fx1 xbg_`}>
                                 {item.items.map((sI, i) => (
                                     <div
                                         key={i}
-                                        className={`${col ? col <= 2 ? "p-4" : "p-1_" : ""} bg-white  oh ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
-              `} style={{ border: overflow_x && '1px solid #0a0606ff', minWidth: "max-content" }}
-                                    >
+                                        className={`${col ? col <= 2 ? "p-4" : "p-1_" : ""} bg-white  oh  min-w-[110px] cursor-pointer group  hover:border-gray-200/80 border border-white transition px-1 rounded-md ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
+              `} style={{ border: overflow_x && '1px solid #0a0606ff'}}
+                                    onClick={()=>router.push("product_view")}>
                                         <div className="mgx04 pdt04 pR">
-                                            <div className={`pA w-full h-full`} style={{ background: '#dee2ff17' }}></div>
+                                            <div className={`pA w-full h-full   group-hover:bg-gray-400/5 bg-[#dee2ff17]`}></div>
                                             <Image
                                                 src={sI.image}
                                                 alt={sI.name}
@@ -94,11 +96,14 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                                                 width={100}
                                                 className={`min-w-[60px] h-[100px] object-contain rounded-lg`}
                                             />
+                                        </div>
+                                        <div>
                                             <p className="mt-2 font-medium md:text-sm">{sI.name}</p>
+                                            <p className="font-medium_ md:text-sm  whitespace-nowrap oh text-gray-900" style={{ textOverflow: "ellipsis" }}>Italian flavored with huang sauce and much more</p>
                                         </div>
                                         <div className="oh">
                                             <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
-                                                <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
+                                                <div className={`df mt-1 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
                                                     <div style={{ fontSize: '0.675em' }}>₹</div>
                                                     <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
                                                 </div>
@@ -127,7 +132,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
 export function ProductGrid({ data, title, col, overflow_x, bbb }) {
     const { device } = useContext(dynamic_);
     return (
-        <section className={`w-full pdy1 border-y ${overflow_x&&"bg-white"} ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
+        <section className={`w-full pdy1 border-y ${overflow_x && "bg-white"} ${col ? "pdx05" : "bdy3 "} ${bbb.bb && "bdb"} ${bbb.bt && "bdt"}`} style={{
             borderBlock: overflow_x && '4px solid lightgray_',
         }}>
 
@@ -144,7 +149,7 @@ export function ProductGrid({ data, title, col, overflow_x, bbb }) {
             // }}
             >
                 {data.map((item, i_) => (
-                    <div className={`border border-gray-300 rounded-sm oh shadow-sm hover:shadow-md min-w-[fit-content]`} key={i_}>
+                    <div className={`border border-gray-300_ cursor-pointer rounded-sm oh shadow-sm_ hover:shadow-sm min-w-[fit-content]`} key={i_}>
 
 
 
@@ -153,7 +158,7 @@ export function ProductGrid({ data, title, col, overflow_x, bbb }) {
                             className={`"bg-white transition 
               `}
                         >
-                            <div className="mgx04 pdt04 pR">
+                            <div className="mgx04_ pdt04_ pR">
                                 <div className={`pA h-full w-full`} style={{ background: '#c7c7c717' }}></div>
                                 <Image
                                     src={item.image}
@@ -162,17 +167,19 @@ export function ProductGrid({ data, title, col, overflow_x, bbb }) {
                                     width={100}
                                     className={` ${!device === 'pc' && overflow_x ? col ? col <= 2 ? "h-[170px] min-w-[150px]" : "w-full h-[100px]" : "h-[160px] min-w-[170px] " : " min-w-[150px] min-h-[170px]"} object-contain rounded-lg`}
                                 />
-                                <p className="mt-2 font-medium md:text-sm">{item.name}</p>
                             </div>
                             <div className="oh">
-                                <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
-                                    <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
-                                        <div style={{ fontSize: '0.675em' }}>₹</div>
-                                        <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
-                                    </div>
-                                    <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
-                                        <div style={{ fontSize: '0.475em' }}>₹</div>
-                                        <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
+                                <div className={`${overflow_x && "pdx05"}`}>
+                                    <p className="mt-2 font-medium md:text-sm">{item.name}</p>
+                                    <div className={`df aic gap03`}>
+                                        <div className={`df mt-2 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
+                                            <div style={{ fontSize: '0.675em' }}>₹</div>
+                                            <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
+                                        </div>
+                                        <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
+                                            <div style={{ fontSize: '0.475em' }}>₹</div>
+                                            <h1 style={{ fontSize: '1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.475em' }}>00</span>
+                                        </div>
                                     </div>
                                 </div>
                                 {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 md:text-500 df gap03 sm:text-sm md:text-xs`} style={{ background: 'aliceblue' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>

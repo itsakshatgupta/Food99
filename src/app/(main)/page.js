@@ -1644,7 +1644,7 @@ export default function branches() {
 
                     </div> */}
 
-                        <h1>hi {user?.username}</h1>
+                        {/* <h1>hi {user?.username}</h1> */}
                     {sections.map((section, i) => (
                         <Feeder key={i} section={section} borderBlockBooleans={true} />
                     ))}

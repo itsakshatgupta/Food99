@@ -73,8 +73,8 @@ const MessageBubble = ({ message }) => {
     <div className={`flex mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div
         className={`max-w-xs sm:max-w-md p-3 rounded-xl shadow-sm ${isUser
-          ? 'bg-white rounded-br-none border-gray-100 border'
-          : 'bg-[lightcyan]  rounded-tl-none border border-gray-100'
+          ? 'bg-white rounded-br-none border-gray-200 border'
+          : 'bg-[lightcyan]/80  rounded-tl-none border border-gray-200'
           }`}
       >
         <p className="text-sm break-words">{message.text}</p>
@@ -127,22 +127,22 @@ const ChatArea = ({ activeContact, messages, sendMessage, setActiveChat }) => {
   return (
     <div className="flex flex-col h-full oh wfp bg-white">
       {/* Header */}
-      <div className="flex items-center px-2 py-1 border-b_ bg-white shadow-sm pR
+      <div className="flex items-center px-2 py-1 border-b_ bg-white bg-green-800_ bg-black_ shadow-sm pR border-b
       ">
-        <button className="sm:hidden mr-3 text-gray-800 hover:text-red-600" onClick={() => setActiveChat(null)}>
+        <button className="sm:hidden mr-3 text-black hover:text-red-600" onClick={() => setActiveChat(null)}>
           <ChevronLeft className="w-6 h-6" />
         </button>
-        <Icon className="w-8 h-8 text-gray-700 mr-3 bg-gray-100 rounded-full" />
+        <Icon className="w-8 h-8 text-black mr-3 bg-black rounded-full" />
         <div className="flex-1">
-          <h2 className="text-md font500 text-gray-800">{activeContact.name}</h2>
-          <div className="flex items-center text-xs text-gray-800">
+          <h2 className="text-md font500 text-black">{activeContact.name}</h2>
+          <div className="flex items-center text-xs text-black">
             <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${getStatusColor(activeContact.status)}`}></span>
             {activeContact.status}
           </div>
         </div>
-        <div className="df gap-3 aic">
+        <div className="df gap-3 aic text-black">
           <UserRoundSearchIcon size={16} />
-          <div className="df aic gap-1 px-2 rounded-full border text-blue-800">
+          <div className="df aic gap-1 px-2 rounded-full border text-blue-600">
             <Phone size={14} />
             <span className='text-sm'>Connect</span>
           </div>
@@ -162,14 +162,14 @@ const ChatArea = ({ activeContact, messages, sendMessage, setActiveChat }) => {
 
       {/* Message History */}
       <div className="flex-1  oh df fd-c">
-        <div className="p-4 overflow-y-auto fx1 hfp bg-[#fcfcfc]_ bg-[#fbffff] text-black">
+        <div className="p-4 overflow-y-auto fx1 hfp bg-[#fcfcfc]_ bg-[#fbffff]_ text-black">
           {messages.map((msg, index) => (
             <MessageBubble key={index} message={msg} />
           ))}
           <div ref={messageEndRef} />
         </div>
         {/* Input Area */}
-        <div className="df fd-c aic_ pb-3 pt-2 bg-[#f5f5f5]_ bg-gray-50_ border-t px-4 gap-2">
+        <div className="df fd-c aic_ pb-3 pt-2 bg-[#f5f5f5]_ bg-gray-200 border-t border-gray-300 px-4 gap-2">
           <div className="fx1 flex shadow-sm bg-white items-center border border-gray-400 pl-2 rounded-md overflow-hidden py-1">
             <textarea
               value={inputText}
@@ -233,15 +233,26 @@ export function MessagePage() {
 
 
   return (
-    <div className="h-full w-full df fd-c font-sans bg-white">
+    <div className="h-[100vh] w-full df fd-c font-sans bg-white">
       <PageHeader links={[{ e: "Channels", href_: "/channels" }, { e: "Responses", href_: "/responses" }]} />
       <div className="fx1 w-full mx-auto max-w-7xl overflow-hidden bg-gray-100">
         <div className="flex h-full">
+
+            <div className="df">
+              <MainSideNav center={false} title={<div className="mr-5 text-xl fx1 df aic gap-2"><ArrowLeft size={18} className="cursor-pointer" onClick={() => r_.back()} /> Messages</div>}>
+                <MainSideNavButtons vertical={false} icon={<History size={18} />} name="All" controller={{ control: view, setController: setView }} />
+                <MainSideNavButtons vertical={false} icon={<User size={18} />} name="Responses" controller={{ control: view, setController: setView }} />
+                <MainSideNavButtons vertical={false} icon={<Users2 size={18} />} name="Channels" controller={{ control: view, setController: setView }} />
+              </MainSideNav>
+
+
+            </div>
+<div className="bg-gray-100 p-3_ df fx1">
           {/* Left Pane (Contacts Sidebar) - Hidden on mobile if a chat is active */}
-          <div className={`w-[30rem] df fd-c border-r border-gray-200 flex-col bg-[#fbfbfb]_ ml-3_ ${activeChatId ? 'hidden sm:flex' : 'flex'} pR bg-white`}>
+          <div className={`w-[20rem] df fd-c border-r border-gray-200 flex-col bg-[#fbfbfb]_ ml-3_ ${activeChatId ? 'hidden sm:flex' : 'flex'} pR bg-white`}>
 
             {/* Search */}
-            <div className="px-2 py-1 ml-1_ border-gray-200 df aic jcsb gap1 border-b">
+            <div className="px-2 py-1 ml-1_ border-gray-200 dfl dn aic jcsb gap1 border-b">
               <div className="mr-5 text-xl fx1 df aic gap-2"><ArrowLeft size={18} className="cursor-pointer" onClick={() => r_.back()} /> Messages</div>
               <div className="relative fx1 dn">
                 <Search className="w-4 h-4 absolute left-1 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -259,37 +270,50 @@ export function MessagePage() {
               <MoreVertical size={18} />
             </div>
 
-            <div className="df fx1">
-              <MainSideNav center={false}>
-                <MainSideNavButtons vertical={false} icon={<History size={18} />} name="All" controller={{ control: view, setController: setView }} />
-                <MainSideNavButtons vertical={false} icon={<User size={18} />} name="Responses" controller={{ control: view, setController: setView }} />
-                <MainSideNavButtons vertical={false} icon={<Users2 size={18} />} name="Channels" controller={{ control: view, setController: setView }} />
-              </MainSideNav>
 
               {/* Contact List */}
-              <div className="flex-1 overflow-y-auto  mx-2">
-                <h1 className="text-lg mt-1">{view}</h1> 
-                {filteredContacts.map((contact) => (
-                  <ContactListItem
-                    key={contact.id}
-                    contact={contact}
-                    isActive={contact.id === activeChatId}
-                    setActiveChat={setActiveChatId}
-                  />
-                ))}
-                {filteredContacts.length === 0 && (
-                  <div className="text-center p-6 text-gray-500 text-xs">No contacts matched your search.</div>
-                )}
+              <div className="flex-1 overflow-y-auto">
+                <h1 className="text-white bg-green-800 tac text-sm border-t">Inbox</h1>
+                {/* Search */}
+                <div className="px-2 py-1 ml-1_ border-gray-200 df aic jcsb gap1 border-b_">
+                  <div className="mr-5 text-xl fx1">{view}</div>
+                  <div className="relative fx1 dn">
+                    <Search className="w-4 h-4 absolute left-1 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Find colleague or vendor..."
+                      className="w-full bg-gray-100 border border-gray-300 rounded-lg py-1 pl-6 pr-1 text-xs focus:outline-none focus:ring-1 focus:ring-red-500"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+                  <Search size={20} />
+                  {/* <Group size={18} />
+              <Archive size={18} /> */}
+                  <MoreVertical size={18} />
+                </div>
+                <div className="  mx-2">
+
+                  {/* <h1 className="text-md mt-1">{view}</h1> */}
+                  {filteredContacts.map((contact) => (
+                    <ContactListItem
+                      key={contact.id}
+                      contact={contact}
+                      isActive={contact.id === activeChatId}
+                      setActiveChat={setActiveChatId}
+                    />
+                  ))}
+                  {filteredContacts.length === 0 && (
+                    <div className="text-center p-6 text-gray-500 text-xs">No contacts matched your search.</div>
+                  )}
+                </div>
               </div>
-
-            </div>
-
           </div>
 
 
 
           {/* Right Pane (Chat Area) */}
-          <div className={`flex-1 ${activeChatId ? 'flex' : 'hidden sm:flex'} border-4_ border-t-0_ border-[#f5f5f5] rounded-lg_ oh m-3_ shadow-md_ m-3_`}>
+          <div className={`flex-1 ${activeChatId ? 'flex' : 'hidden sm:flex'} border-4_ border-t-0_ border-[#f5f5f5] rounded-lg_ oh m-3_ shadow-md_ m-1_`}>
             <ChatArea
               activeContact={activeContact}
               messages={activeMessages}
@@ -297,7 +321,7 @@ export function MessagePage() {
               setActiveChat={setActiveChatId}
             />
           </div>
-
+</div>
         </div>
       </div>
     </div>

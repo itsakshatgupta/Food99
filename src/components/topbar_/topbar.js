@@ -1,7 +1,7 @@
 'use client';
 import Topbar from "../topbar/bar"
 import { useContext, useEffect, useState } from "react";
-import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, ShoppingBag, Bell, UserCircle, UserCircle2, SearchIcon, MessageSquare, Camera, ArrowDownNarrowWide } from 'lucide-react';
+import { Search, Mic, ChevronDown, House, ArrowLeft, Filter, TrendingUp, ExternalLink, LucideHistory, ShoppingBag, Bell, UserCircle, UserCircle2, SearchIcon, MessageSquare, Camera, ArrowDownNarrowWide, MessageCircleIcon, Store } from 'lucide-react';
 import { dynamic_ } from "../main-context";
 import dynamic from "next/dynamic";
 
@@ -499,10 +499,10 @@ export default function Topbar_() {
 
             {device === "pc" &&
 
-                <header className="font-['Inter', sans-serif] border-b pS z-[500]" style={{ top: 0, background: 'linear-gradient(45deg, #3F51B5, #673AB7)' }}>
+                <header className="font-['Inter', sans-serif] border-b pS z-[500] bg-black" style={{ top: 0, background: 'linear-gradient(45deg, #3F51B5, #673AB7)_' }}>
 
                     {/* Top Row - Brand, Search, Actions */}
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4 md:px-6">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-2 md:px-5">
 
                         {/* Brand */}
                         <div className="text-2xl font-black tracking-wider_ text-white hover:text-[#FF9900] transition duration-200">
@@ -525,7 +525,7 @@ export default function Topbar_() {
 
                                 <div className="df fd-c fx1">
 
-                                    <div className={`flex items-center gap-2.5 p-2 pl-0 ml-2 fx1 pR`} >
+                                    <div className={`flex items-center gap-2.5 p-1 pl-0 ml-2 fx1 pR`} >
                                         <Search size={20} className="text-gray-800" />
                                         <input
                                             placeholder="Search sellers • products • distributors"
@@ -584,29 +584,29 @@ export default function Topbar_() {
                         <div className="flex items-center gap-2 flex-wrap justify-center md:justify-end">
 
                             {/* Utility Links (Track Shipment, RFQ, Messages) */}
-                            {[{ e: <span className="border rounded-full p-1 df border-[aqua]_ text-black_ bg-white_"><Bell size={18} /></span>, href_: '#' }, { e: 'Events', href_: '#' }, { e: 'Messages', href_: 'messages' }].map((b, i) => (
+                            {[{ e: <span className="border rounded-full p-1 df border-[aqua]_ text-black_ bg-white_"><Bell size={18} /></span>, href_: '#' }, { e: 'Events', href_: '#' }, { e: <span className="df gap-1 aic"><MessageCircleIcon size={20} />Messages</span>, href_: 'messages' }].map((b, i) => (
                                 <Link href={b.href_} key={i} className="text-gray-200 transition-colors hover:text-[#F97316] text-sm font-medium whitespace-nowrap px-2 py-1">
                                     {b.e}
                                 </Link>
                             ))}
 
                             {/* Primary CTA: Cart (Vibrant Orange Background) */}
-                            <button className="flex items-center bg-[#F97316] text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-[#FF9900] shadow-lg_ whitespace-nowrap">
+                            <Link className="flex items-center bg-[#F97316]_ text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-[#FF9900] shadow-lg_ whitespace-nowrap" href={user?.username ? "/cart" : "login"}>
                                 <ShoppingCartIcon />
                                 Cart
-                            </button>
+                            </Link>
 
                             {/* Secondary CTA: Account (Bordered White) */}
-                            <Link className="bg-blue-800 flex items-center border border-white/30 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-blue-600 whitespace-nowrap" href={user?.username?"#":"login"}>
+                            <Link className="bg-blue-800 flex items-center border border-white/30 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors hover:bg-blue-600 whitespace-nowrap" href={user?.username ? "/account" : "login"}>
                                 <UserIcon />
                                 Account
                             </Link>
                         </div>
-                        </div>
+                    </div>
 
 
                     {/* Categories Bar (Mega Menu) */}
-                    {pathname === '/' && <div className="df jcsb aic_ bg-[#1E293B]_ bg-white md:gap-2 px-4 md:px-2 py-1 border-t border-gray-700/50 text-sm">
+                   <div className="df jcsb aic_ bg-white/10 text-white bg-white_ md:gap-2 px-4 md:px-2 py-1 border-t border-gray-700/50 text-sm">
                         <div className="fx1 overflow-x-auto flex sbt justify-center md:justify-start gap-4 text-sm ">
                             {categories.map((cat, index) => (
                                 // Group container for hover effect
@@ -646,7 +646,7 @@ export default function Topbar_() {
                         {user && <div className="df aic gap-3 pl-2 border-l">
                             <span className="cursor-pointer pdy01 hover:bg-[#37474F]_" style={{ borderRadius: '5px' }}>Hi, {user.username}</span>
 
-                            {user.user_type === 'seller' && <div className="pR  group cursor-pointer bg-[#05487d] text-white pdx05 pdy01 hover:bg-[#37474F]_">
+                            {user.user_type === 'seller' ? <div className="pR  group cursor-pointer bg-[#05487d] text-white pdx05 pdy01 hover:bg-[#37474F]_">
                                 <Link href="/sellers/seller_dsbd" className="df aic gap01 " style={{ borderRadius: '5px' }}>My Store<ChevronDown size={14} />
                                 </Link>
 
@@ -659,7 +659,8 @@ export default function Topbar_() {
                                             </Link>
                                         ))}
                                     </div></div>
-                            </div>}
+                            </div> :
+                                <Link href="signup/X1_unq"><span className="df aic gap-1"><Store size={16} />Become a Seller</span></Link>}
 
                             <div className="pR  group cursor-pointer pdy01 hover:bg-[#37474F]_">
                                 <span className="df aic gap01 " style={{ borderRadius: '5px' }}>En<ChevronDown size={14} />
@@ -677,7 +678,7 @@ export default function Topbar_() {
                             </div>
 
                         </div>}
-                    </div>}
+                    </div>
                 </header>
             }
         </>

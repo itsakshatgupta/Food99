@@ -1,7 +1,7 @@
 'use client'
 // import "./globals.css";
 import { createContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Box, Home, Shapes, UserCircle2, UserCircle2Icon } from 'lucide-react';
+import { Box, Globe, Home, Shapes, UserCircle2, UserCircle2Icon } from 'lucide-react';
 import SettingsPanel from '@/components/setting/settingPannel';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -13,14 +13,15 @@ import Topbar_ from '@/components/topbar_/topbar';
 import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
 import useSWR from "swr";
-import { fetchAPI
- } from '@/app/(api)/api';
+import {
+    fetchAPI
+} from '@/app/(api)/api';
 import { menu_dummy, cart, cart__ } from './dummy_data';
 
 // ✅ one shared fetcher
 const fetcher = async (url) => {
     const res = await fetchAPI
-(url);
+        (url);
     const res_status = 111;
     const res_json = res.json();
     // const ready = res_json.push({status:res_status})
@@ -81,12 +82,12 @@ export default function MainContext({ device, children }) {
     const panel = searchParams.get('panel');
     console.log(searchParams.get('page'), typeof (searchParams.get('page')), searchParams.get('page') in ['login', 'signup'], noLayoutOnPages)
 
-        const [user, setUser] = useState(null);
-    
-      useEffect(() => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
         const u = localStorage.getItem("user");
         if (u) setUser(JSON.parse(u));
-      }, []);
+    }, []);
 
 
     // const { data: usr, error: usrError } = useSWR("/api/me/", fetcher, {
@@ -173,7 +174,7 @@ export default function MainContext({ device, children }) {
             }])
         }
     }
-console.log("E", pathname)
+    console.log("E", pathname)
     return (
         <>
             {device === 'pcl' &&
@@ -200,18 +201,23 @@ console.log("E", pathname)
             }
 
 
-            {device && <div className="df fd-c hfp">
+            {device && <div className="df fd-c hfp_">
                 <menu_.Provider value={{ menu___i }}>
                     <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option, user }}>
 
-{device==='pc'&&["/messages","/form"].every(v=>v!==pathname)&& <Topbar_ topbar={<Topbar />} />}
-                        <div className="wfp df fd-c fx1 oh" style={{ alignContent: 'space-between' }}>
+                        {device === 'pc' && ["/messages", "/form"].every(v => v !== pathname) && <Topbar_ topbar={<Topbar />} />}
+
+                            <main className="" ref={mainRef} >
+                                {children}
+
+                            </main>
+                        <div className="wfp dfl dn fd-c fx1 oh" style={{ alignContent: 'space-between' }}>
 
                             <main className="main_ fx1 oy" ref={mainRef} >
-                                    {children}
-                              
-                            </main>
+                                {children}
 
+                                {/* {pathname==="/"&&<Footer />} */}
+                            </main>
                             <div className="wfp" style={{ position: 'fixed', bottom: 0, zIndex: 1 }} ref={floaterRef}>
 
                                 <div className='containers-area pR' >
@@ -228,7 +234,7 @@ console.log("E", pathname)
                                     }
                                 </div>
 
-                                <lowscreen-nav className="flex md:hidden bdt pR z-50" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem',  ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
+                                <lowscreen-nav className="flex md:hidden bdt pR z-50" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
                                     {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
                                     <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
                                         <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="df  fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>

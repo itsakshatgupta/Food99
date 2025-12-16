@@ -6,6 +6,7 @@ import { Star, ArrowLeft, Mic, Search, Verified, PhoneCall, MessageCircle, Messa
 import { useEffect, useState, useContext } from "react";
 import { Icon } from "@/components/lib/icons";
 import { dynamic_ } from "@/components/main-context";
+import { useRouter } from "next/navigation";
 
 // SAMPLE product data (replace with real props/fetch)
 const sampleProduct = {
@@ -100,7 +101,7 @@ function Price({ price, mrp, currency = "₹" }) {
     return (
         <div className="space-y-1">
             <div className="flex items-end gap-3">
-                <div className="text-3xl font-bold text-emerald-600">
+                <div className="text-3xl font-bold text-black ">
                     {currency}{price.toLocaleString()}
                 </div>
                 {mrp && (
@@ -120,6 +121,7 @@ export default function ProductPage({ product = sampleProduct }) {
     const { device, cart__i, set_dynamics_portal_main, usr, floaters, set_floaters, set_feature_option, set_dynamics_portal_ab } = useContext(dynamic_);
     const [mainIndex, setMainIndex] = useState(0);
     const [qty, setQty] = useState(1);
+    const router = useRouter();
 
     const addToCart = () => {
         // wire to your cart handler
@@ -140,23 +142,10 @@ export default function ProductPage({ product = sampleProduct }) {
     return (
         <>
 
-            <div className={`df aic jcsb pdx08 ${device==='pc'&& 'pdy01'} gap1 z-50  bg-[#EFEBE9] pS top-0`} style={{ boxShadow: device==='mobile'&&'0 0 5px 1px #f1f1f1ff' }}>
-
-                <span className="df aic font-medium font500 gap03"><ArrowLeft size="22px" className="font300" />Continue The Shopping</span>
-                {device==='pc'&&<div className=" ox  fx1 bg-[#fff8f5] pdx05" style={{
-    scrollbarWidth: 'thin',
-    scrollbarColor:' #efebe9 #80808000'
-}}><div className="c df gap1 pdy02" style={{
-    userSelect: 'none'
-}}>{['Microwave oven','Paint','Cement','Toys','Hand', 'bags','Clothes','Seeds','Fmcg','Bike Accesscories','Kicthen applications','Books','Fruits','Electronics','Hardware','Decorations'].map(v=><span className="text-sm font400 whitespace-nowrap">{v}</span>)}</div></div>}
-                <div className="df aic gap08">
-                    <span className="df aic pdx02 pdy02" ><Search /></span>
-                    <span className="df aic pdx02 pdy02" ><ShoppingBag /></span>
-
-                </div>
-
+            <div className={`bg-[#EFEBE9]_ m-2  pR`} style={{ boxShadow: device === 'mobile' && '0 0 5px 1px #f1f1f1ff' }}>
+                <span className="df aic font-medium font500 gap03"><ArrowLeft size="22px" className="font300" onClick={()=>router.back()}/>Continue The Shopping</span>
             </div>
-            <div className=" mx-auto py-6">
+            <div className=" mx-auto">
                 {/* Breadcrumb */}
                 <nav className="text-sm text-gray-600 mb-4 px-4" aria-label="Breadcrumb">
                     <Link href="/" className="text-blue-600 hover:underline">Home</Link>
@@ -189,16 +178,16 @@ export default function ProductPage({ product = sampleProduct }) {
                     <div className="df aic gap02 font-xs">{[1, 2, 3, 4, 5].map(i => <Star fill="gold" size="1rem" color="gold" />)} (432)</div>
                 </div>
 
-                <div className={`grid grid-cols-1 md:grid-cols-[max-content_1fr] gap-6 px-4`}>
+                <div className={`df gap-3 px-4 wfp`}>
                     {/* Media */}
-                    <div className="oh">
-                        <div className="bg-white rounded-lg border overflow-hidden">
+                    <div className="hfp pS top-[87.16px]">
+                        <div className="bg-white rounded-sm border overflow-hidden">
                             <div className="relative w-full h-[320px] bg-gray-50">
                                 <Image
                                     src={product.thumbnails[mainIndex]}
                                     alt={product.title}
                                     fill
-                                    className="object-contain"
+                                    className="object-contain w-[300px] px-10"
                                     priority
                                 />
                             </div>
@@ -212,30 +201,17 @@ export default function ProductPage({ product = sampleProduct }) {
                                         className={`inline-block rounded-md overflow-hidden border ${i === mainIndex ? "border-blue-500" : "border-transparent"}`}
                                         aria-label={`Show image ${i + 1}`}
                                     >
-                                        <div className="relative w-24 h-16">
+                                        <div className="relative w-[60px] h-[60px]">
                                             <Image src={t} fill className="object-cover" alt={`thumb-${i}`} />
                                         </div>
                                     </button>
                                 ))}
                             </div>
                         </div>
-                        {/* mini trust block */}
-                        {device === 'pc' && <div className="mt-4 p-4 bg-white rounded-lg border text-sm space-y-2 hfc">
-                            <div className="flex items-center gap-2">
-                                <span className="font-medium font600">{product.seller.name}</span>
-                                {product.seller.verified && <>•<span className="ml-1 px-1 py-0.5 rounded bg-emerald-600 text-white text-xs df aic gap01 font600"><Verified size="0.9rem" /> Verified</span></>}
-                            </div>
-                            <div className="text-xs font500 text-gray-600">Location: {product.seller.city}</div>
-                            <div className="text-xs font500 text-gray-600">Response time: {product.seller.responseTime}</div>
-                            <div className="mt-2 flex gap-2">
-                                <button onClick={enquireSeller} className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Enquire Now</button>
-                                <a href={`tel:${product.seller.phone}`} className="px-3 py-2 border rounded-md text-sm df aic gap03"><PhoneCall size="0.9rem" />Call</a>
-                            </div>
-                            <div className="mt-2 text-xs text-gray-500">View seller catalog or contact for bulk pricing.</div>
-                            <Link href={`/seller/${product.seller.id}`} className="mt-2 inline-block text-blue-600 hover:underline text-sm">View seller profile</Link>
-                        </div>}
+
+
                         {device === 'pc' &&
-                            <div className="bg-white rounded-lg border overflow-hidden pd1 mg1 ">
+                            <div className="bg-white rounded-lg border overflow-hidden pd1 mg1 pS   top-0">
                                 <div className="relative w-full h-[320px] bg-gray-50">
                                     <Image
                                         src={product.thumbnails[mainIndex]}
@@ -269,7 +245,7 @@ export default function ProductPage({ product = sampleProduct }) {
 
 
                     {/* Info */}
-                    <div className="oh">
+                    <div className="fx1 oh">
                         <h1 className="text-2xl font-semibold">{product.title}</h1>
 
                         <div className="mt-2 flex items-center gap-3 text-sm text-gray-600">
@@ -319,25 +295,33 @@ export default function ProductPage({ product = sampleProduct }) {
 
                             </div>
                             <div className="pdx03 wfp df gap1">
-                                <button
-                                    className="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-md font-medium wfp bdrds"
-                                    style={{ border: "2px solid orange" }}
-                                >
-                                    Add to Wishlist
-                                </button>
 
                                 <button
-                                    className="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-md font-medium wfp bdrds"
-                                    style={{
-                                        background: "none",
-                                        border: "2px solid orange",
-                                    }}
+                                    className="text-sm hover:bg-amber-600 text-black px-4 py-2 rounded-md font-medium wfp text-white bg-black"
                                 >
                                     Send Enquire
                                 </button>
+
+                                <button
+                                    className="text-sm bg-blue-900 text-white hover:bg-amber-600 text-black px-4 py-2 rounded-md font-medium wfp"
+                                >
+                                    Add to Wishlist
+                                </button>
                             </div>
                         </div>
-
+                        {/* mini trust block */}
+                        {device === 'pc' && <div className="mt-4 p-4 bg-white rounded-lg border text-sm space-y-2 hfc">
+                            <div className="flex items-center gap-2">
+                                <span className="font-medium font600">{product.seller.name}</span>
+                                {product.seller.verified && <>•<span className="ml-1 px-1 py-0.5 rounded bg-emerald-600 text-white text-xs df aic gap01 font600"><Verified size="0.9rem" /> Verified</span></>}
+                            </div>
+                            <div className="text-xs font500 text-gray-600">Location: {product.seller.city}</div>
+                            <div className="mt-2 flex gap-2">
+                                <button onClick={enquireSeller} className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Enquire Now</button>
+                                <a href={`tel:${product.seller.phone}`} className="px-3 py-2 border rounded-md text-sm df aic gap03"><PhoneCall size="0.9rem" />Call</a>
+                            </div>
+                            <Link href={`/seller/${product.seller.id}`} className="mt-2 inline-block text-blue-600 hover:underline text-sm">View seller profile</Link>
+                        </div>}
                         {/* Highlights */}
                         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
@@ -393,7 +377,7 @@ export default function ProductPage({ product = sampleProduct }) {
                             <div id="qa" className="py-6">
                                 <h4 className="font-semibold text-lg">Q & A</h4>
                                 <div className="text-sm text-gray-600">Buyers ask & sellers answer — integrate chat / email.</div>
-                                <div className="space-y-4">
+                                <div className="space-y-4 text-sm">
                                     {product.questions.map((qa, i) => (
                                         <div key={i} className="border rounded-xl p-4 bg-gray-50">
                                             <p className="font-semibold">Q: {qa.q}</p>
@@ -404,153 +388,155 @@ export default function ProductPage({ product = sampleProduct }) {
                                 <div class=" mgt1 bd bdrds pdy02 tac"> <span class="font600 font-sm text-[#1565C0]">See all questions</span></div>
                             </div>
 
-{device==='pc'&&<section className="mb-10">
-                    <div id="reviews" className="py-6">
-                        <h4 className="font-semibold text-lg ml-2 mb-3">Customer Reviews</h4>
-                        {/* Rating Overview Section */}
-                        <div className="flex flex md:flex-row items-center gap1 pd08" style={{ background: 'radial-gradient(#00ffcf33, transparent)', boxShadow: 'inset 0 10px 23px 1px #E3F2FD;' }}>
 
-                            {/* Left: Circular Rating Display */}
-                            <div className="df fd-c gap05 jcc aic pd06 bdrds xbg" style={{ boxShadow: '0 0 10px 1px #ddddddff' }}>
-                                <div className="relative w-32 h-32 flex items-center justify-center">
-                                    {/* Circle background */}
-                                    <svg className="absolute w-full h-full transform -rotate-90">
-                                        <circle
-                                            cx="64"
-                                            cy="64"
-                                            r="58"
-                                            stroke="#e5e7eb"
-                                            strokeWidth="10"
-                                            fill="none"
-                                        />
-                                        <circle
-                                            cx="64"
-                                            cy="64"
-                                            r="58"
-                                            stroke="#16a34a"
-                                            strokeWidth="10"
-                                            strokeLinecap="round"
-                                            fill="none"
-                                            strokeDasharray="364"
-                                            strokeDashoffset={364 - (4 / 5) * 364}
-                                            className="transition-all duration-700"
-                                        />
-                                    </svg>
-                                    <div className="absolute text-center">
-                                        <p className="text-3xl font-semibold text-gray-900">{4}</p>
-                                        <p className="text-sm text-gray-600">out of 5</p>
-                                    </div>
-                                </div>
-                                <span className="font08 font500">8656</span>
-                            </div>
 
-                            {/* Right: Rating Distribution Bars */}
-                            <div className="flex-1 w-full">
-                                {Array.from({ length: 5 }, (_, i) => {
-                                    const star = 5 - i;
-                                    const count = product.reviews.filter(r => r.rating === star).length;
-                                    const percentage = (count / product.reviews.length) * 100;
+                            {device === 'pc' && <section className="mb-10">
+                                <div id="reviews" className="py-6">
+                                    <h4 className="font-semibold text-lg ml-2 mb-2_">Customer Reviews</h4>
+                                    {/* Rating Overview Section */}
+                                    <div className="flex flex md:flex-row items-center gap-1">
 
-                                    return (
-                                        <div key={star} className="flex items-center gap-1 mb-2">
-                                            <span className="w-5_ text-sm font-medium text-gray-700" style={{ whiteSpace: 'nowrap' }}>
-                                                {star} ★
-                                            </span>
-                                            <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                                                <div
-                                                    className="h-full bg-green-500 rounded-full"
-                                                    style={{ width: `${percentage}%` }}
-                                                ></div>
-                                            </div>
-                                            <span className="text-sm text-gray-600 w-10 text-right">
-                                                {count}
-                                            </span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <div className="bdt oh">
-                            <div className="pdx05 pdt08 pdb03 text-medium font600 df aic jcsb ">Reviews Image <ArrowRight size="20px" /></div>
-                            <div className="df gap1 ox mgb1 mgt05 sbn mgx05">
-
-                                {product.reviews.map((d, i) =>
-                                    d.img.map(img =>
-
-                                        <div className="df aic pR z-0 bd oh min-w-[120px] h-[130px] rounded-[5px] oh">
-                                            <div className="pA wfp hfp" style={{ zIndex: 1, background: 'black' }}></div>
-                                            <Image
-                                                src={img}
-                                                fill
-                                                style={{ zIndex: 2 }}
-                                                className="object-cover"
-                                                priority
-
-                                            />
-                                        </div>
-                                    )
-                                )}
-                            </div>
-                        </div>
-
-                        {/* --- Reviews Section --- */}
-                        <div className="bdt mgt05">
-                            {product.reviews.map((r, i) => (
-                                <div key={i} className=" oh bg-white bdb pdt03 pdx02 mgt02">
-                                    {/* User image */}
-                                    <div className="flex items-center gap02">
-                                        <img
-                                            src={'/default_user.png'}
-                                            alt={r.user}
-                                            className="w-10 h-10 rounded-full object-cover"
-                                        />
-                                        <div>
-                                            <p className="font-semibold text-sm">{r.user}</p>
-                                            <div className="flex text-yellow-400">
-                                                {[...Array(5)].map((_, idx) => (
-                                                    <Star
-                                                        key={idx}
-                                                        size={14}
-                                                        fill={idx < r.rating ? "#fbbf24" : "none"}
-                                                        stroke="#fbbf24"
+                                        {/* Left: Circular Rating Display */}
+                                        <div className="df fd-c gap05 jcc aic pd06">
+                                            <div className="relative w-32 h-32 flex items-center justify-center">
+                                                {/* Circle background */}
+                                                <svg className="absolute w-full h-full transform -rotate-90">
+                                                    <circle
+                                                        cx="64"
+                                                        cy="64"
+                                                        r="49"
+                                                        stroke="#e5e7eb"
+                                                        strokeWidth="5"
+                                                        fill="none"
                                                     />
-                                                ))}
-                                                <span className="text-xs mgl02 font500" style={{ color: 'black' }}>• 9 days ago.</span>
+                                                    <circle
+                                                        cx="64"
+                                                        cy="64"
+                                                        r="49"
+                                                        stroke="#16a34a"
+                                                        strokeWidth="5"
+                                                        strokeLinecap="round"
+                                                        fill="none"
+                                                        strokeDasharray="364"
+                                                        strokeDashoffset={364 - (4 / 5) * 364}
+                                                        className="transition-all duration-700"
+                                                    />
+                                                </svg>
+                                                <div className="absolute text-center">
+                                                    <p className="text-lg font-semibold text-gray-900">{4}</p>
+                                                    <p className="text-sm text-gray-600">out of 5</p>
+                                                </div>
                                             </div>
+                                            <span className="text-sm font-semibold mt-[-15px]">8656</span>
+                                        </div>
+
+                                        {/* Right: Rating Distribution Bars */}
+                                        <div className="flex-1 w-full max-w-[max-content]_ mx-5 ">
+                                            {Array.from({ length: 5 }, (_, i) => {
+                                                const star = 5 - i;
+                                                const count = product.reviews.filter(r => r.rating === star).length;
+                                                const percentage = (count / product.reviews.length) * 100;
+
+                                                return (
+                                                    <div key={star} className="flex items-center gap-1 mb-2">
+                                                        <span className="w-5_ text-xs text-gray-700" style={{ whiteSpace: 'nowrap' }}>
+                                                            {star} ★
+                                                        </span>
+                                                        <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                                            <div
+                                                                className="h-full bg-green-500 rounded-full"
+                                                                style={{ width: `${percentage}%`, background: 'linear-gradient(45deg, #000000, #4CAF50)' }}
+                                                            ></div>
+                                                        </div>
+                                                        <span className="text-xs text-gray-600 w-10 ml-1">
+                                                            {count}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
-                                    <div className="wfp df xbg aic ox gap1 sbn pdy08 pdx05">
-                                        {r.img.map((img, i) => <div className="df aic pR z-0 bd oh min-w-[90px] h-[90px] bdArds">
-                                            <div className="pA wfp hfp" style={{ zIndex: 1, background: 'black' }}></div>
-                                            <Image
-                                                src={img}
-                                                fill
-                                                style={{ zIndex: 2 }}
-                                                className="object-cover"
-                                                priority
+                                    <div className="oh">
+                                        <div className="pdx05 pdt08 pdb03 text-medium font600 df aic jcsb ">Reviews Image <ArrowRight size="20px" /></div>
+                                        <div className="df gap1 ox mgb1 mgt05 sbn mgx05">
 
-                                            />
-                                        </div>)}
+                                            {product.reviews.map((d, i) =>
+                                                d.img.map(img =>
+
+                                                    <div className="df aic pR z-0 bd oh min-w-[110px] h-[120px] rounded-sm oh">
+                                                        <div className="pA wfp hfp" style={{ zIndex: 1, background: 'black' }}></div>
+                                                        <Image
+                                                            src={img}
+                                                            fill
+                                                            style={{ zIndex: 2 }}
+                                                            className="object-cover"
+                                                            priority
+
+                                                        />
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="pd05">
 
-                                        <p className="text-gray-800">{r.comment}</p>
-                                        <div className="df aic gap1 mgt1 mgb08 text-xs"><span className="pdx05 pdy02 bd bdrds oh df aic gap03 font500 xbg">Helpful <ThumbsUp size="12px" /></span></div>
+                                    {/* --- Reviews Section --- */}
+                                    <div className="mgt05 bdr_">
+                                        {product.reviews.map((r, i) => (
+                                            <div key={i} className=" oh bg-white bdb_ pdt03 pdx02_ mgt02">
+                                                {/* User image */}
+                                                <div className="flex items-center gap-0">
+                                                    <img
+                                                        src={'/default_user.png'}
+                                                        alt={r.user}
+                                                        className="w-[50px] h-[50px] rounded-full object-cover"
+                                                    />
+                                                    <div>
+                                                        <p className="font-semibold text-sm">{r.user}</p>
+                                                        <div className="flex text-yellow-400">
+                                                            {[...Array(5)].map((_, idx) => (
+                                                                <Star
+                                                                    key={idx}
+                                                                    size={14}
+                                                                    fill={idx < r.rating ? "#fbbf24" : "none"}
+                                                                    stroke="#fbbf24"
+                                                                />
+                                                            ))}
+                                                            <span className="text-xs mgl02 font500" style={{ color: 'black' }}>• 9 days ago.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="wfp df xbg aic ox gap-2 sbn mt-3 mb-2 pl-2">
+                                                    {r.img.map((img, i) => <div className="df aic pR z-0 border rounded-sm oh min-w-[80px] h-[80px] bdArds_">
+                                                        <div className="pA wfp hfp" style={{ zIndex: 1, background: 'black' }}></div>
+                                                        <Image
+                                                            src={img}
+                                                            fill
+                                                            style={{ zIndex: 2 }}
+                                                            className="object-cover"
+                                                            priority
+
+                                                        />
+                                                    </div>)}
+                                                </div>
+                                                <div className="pd05">
+
+                                                    <p className="text-gray-900 text-sm">{r.comment}</p>
+                                                    <div className="df aic gap1 mgt1 mgb08 text-xs"><span className="pdx05 pdy02 bd bdrds oh df aic gap03 font500 xbg">Helpful <ThumbsUp size="12px" /></span></div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                        <div className="tac mgt1"> <span className="pdx1 pdy05 font600 font-sm  bdArds" style={{ color: 'white', background: 'royalblue' }}>See all reviews</span></div>
                                     </div>
                                 </div>
-                            ))}
-                            <div className="tac mgt1"> <span className="pdx1 pdy05 font600 font-sm  bdArds" style={{ color: 'white', background: 'royalblue' }}>See all reviews</span></div>
-                        </div>
-                    </div>
-                </section>}
+                            </section>}
 
 
                         </div>
                     </div>
 
-                        
+
                 </div>
-               { device==='mobile'&&<section className="mb-10">
+                {device === 'mobile' && <section className="mb-10 dn">
                     <div id="reviews" className="py-6">
                         <h4 className="font-semibold text-lg ml-2 mb-3">Customer Reviews</h4>
                         {/* Rating Overview Section */}
