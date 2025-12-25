@@ -7,6 +7,7 @@ import { useEffect, useState, useContext } from "react";
 import { Icon } from "@/components/lib/icons";
 import { dynamic_ } from "@/components/main-context";
 import { useRouter } from "next/navigation";
+import { fetchAPI } from "@/app/(api)/api";
 
 // SAMPLE product data (replace with real props/fetch)
 const sampleProduct = {
@@ -133,6 +134,23 @@ export default function ProductPage({ product = sampleProduct }) {
         alert("Enquiry sent to seller (demo)");
     };
 
+    async function sendEnquire_() {
+        try {
+            const lead_body = {
+                product_id: 1,
+                seller_id: 4,
+                enquiry_text: "Test",
+                source: "Platform",
+                status: "new",
+            }
+            const res = fetchAPI("l/leads", "POST", lead_body, true, false, true)
+            console.log("lead_res:", res)
+        } catch (error) {
+            console.log("lead_error:", error)
+        }
+    }
+
+
 
 
 
@@ -143,7 +161,7 @@ export default function ProductPage({ product = sampleProduct }) {
         <>
 
             <div className={`bg-[#EFEBE9]_ m-2  pR`} style={{ boxShadow: device === 'mobile' && '0 0 5px 1px #f1f1f1ff' }}>
-                <span className="df aic font-medium font500 gap03"><ArrowLeft size="22px" className="font300" onClick={()=>router.back()}/>Continue The Shopping</span>
+                <span className="df aic font-medium font500 gap03"><ArrowLeft size="22px" className="font300" onClick={() => router.back()} />Continue The Shopping</span>
             </div>
             <div className=" mx-auto">
                 {/* Breadcrumb */}
@@ -298,6 +316,7 @@ export default function ProductPage({ product = sampleProduct }) {
 
                                 <button
                                     className="text-sm hover:bg-amber-600 text-black px-4 py-2 rounded-md font-medium wfp text-white bg-black"
+                                    onClick={() => sendEnquire_()}
                                 >
                                     Send Enquire
                                 </button>

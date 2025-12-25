@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import MainSideNav, { MainSideNavButtons } from '@/components/seller-cpmt/main-side-nav';
 import { MoreOptions, SearchBox } from '@/components/seller-cpmt/widget';
 import Image from 'next/image';
+import { fetchAPI } from '@/app/(api)/api';
 // --- DUMMY DATA ---
 const contactData = [
   { id: 'eng-1', name: 'Alice (Lead Engineer)', status: 'Online', role: 'Engineer', icon: HardHat, lastMessage: 'Confirmed batch specs for Actuator.', time: '10:30 AM' },
@@ -248,22 +249,17 @@ const SpecificLead = ({ lead }) => {
     ));
   };
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    contact.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())
-  );
   const r__ = useRouter();
   useEffect(() => { setFloating(false) }, [lead])
-  //  id: 101, buyer: 'Fusion Dynamics Co.', product: 'High-Torque Actuator Unit', query: 'Need technical drawing and bulk pricing (Qty 50).', date: '2025-11-10', status: 'New', priority: 'High', location: 'Houston, TX', daysActive: 1, stay:'2.86 min', search_rank:'22/100+', email:'demo@demostore.com'
   return (
     <>
-      {floating ? <div className="pA w-[14rem] h-[8rem] border rounded-xl bg-white text-sm text-black z-50 df fd-c aic jcc bottom-10 right-5 shadow-md">{lead.buyer}<PictureInPicture className="cursor-pointer" onClick={() => setFloating(false)} /><Carrot className="cursor-pointer" onClick={() => r__.push('?')} /></div> : <div className="pA wfp hfp bg-white z-50 p-2 df fd-c">
+      {floating ? <div className="pA w-[14rem] h-[8rem] border rounded-xl bg-white text-sm text-black z-50 df fd-c aic jcc bottom-10 right-5 shadow-md">{lead.buyer.name}<PictureInPicture className="cursor-pointer" onClick={() => setFloating(false)} /><Carrot className="cursor-pointer" onClick={() => r__.push('?')} /></div> : <div className="pA wfp hfp bg-white z-50 p-2 df fd-c">
         <div className="df jcsb wfp mb-3"><div className="df aic gap-3 whitespace-nowrap"><div className="wfp bg-gray-200 rounded-full p-1"><ArrowLeftIcon className="cursor-pointer" size={18} onClick={() => r__.push('?')} /></div><h1>Lead: #{lead.id}-258 ({lead.priority})</h1></div><div className="df aic gap-5"><PictureInPicture size={20} className="cursor-pointer" onClick={() => setFloating(true)} /><Download size={20} /><Bookmark size={20} /><MoreVertical size={20} /></div></div>
 
         <div className="fx1 df mx-1 oh gap-1">
           <div className="fx1 space-y-4 oy hfp" style={{ scrollbarWidth: 'thin', scrollbarColor: 'whitesmoke white' }}>
             <div className="bg-gray-100_ df fd-c jcsb px-2 py-1 aic_ border text-xs rounded-md gap02">
-              <div className="df gap-1 aic"><span>{lead.date}</span><Dot /><span>{lead.status}</span>
+              <div className="df gap-1 aic"><span>{lead.created_at.split("T")}</span><Dot /><span>{lead.status}</span>
               </div>
               <div className="mx-1_ rounded-md df">
                 <h1 className="text-sm mb-1 text-[#42464d]">Comment:</h1>
@@ -281,7 +277,6 @@ const SpecificLead = ({ lead }) => {
                       <h1 className="text-md text-white font-semibold tac ">Demo Shop</h1>
                       <div className="text-xs text-gray-500  tac">
                         <span className="bg-gray-100 mt-1 px-2 rounded-xl">Joined 5yr ago</span>
-
                       </div>
                     </div>
                   </div>
@@ -298,9 +293,9 @@ const SpecificLead = ({ lead }) => {
 
                 <div className="space-y-4">
                   <div className="text-sm mt-2 mx-1 divide-y-2 divide-gray-100 text-gray-800">
-                    <div className="px-1 df aic gap-1 py-1.5"><User size={16} /><div className="fx1">{lead.buyer}</div><span className="text-purple-600 text-xs">Owner</span></div>
-                    <div className="px-1 df aic gap-1 py-1.5"><Mail size={16} />{lead.email}</div>
-                    <span className="px-1 df aic gap-1 py-1.5"><MapPin size={16} /><div className="fx1">{lead.location}</div><span className="text-xs text-blue-600">Go to map</span></span>
+                    <div className="px-1 df aic gap-1 py-1.5"><User size={16} /><div className="fx1">{lead.buyer.name}</div><span className="text-purple-600 text-xs">Owner</span></div>
+                    <div className="px-1 df aic gap-1 py-1.5"><Mail size={16} />{lead.buyer.name}</div>
+                    <span className="px-1 df aic gap-1 py-1.5"><MapPin size={16} /><div className="fx1">{lead.buyer.location}</div><span className="text-xs text-blue-600">Go to map</span></span>
                   </div>
                 </div>
               </div>
@@ -309,7 +304,7 @@ const SpecificLead = ({ lead }) => {
             <div>
               <h1 className="text-sm mb-1 text-black">Product Viewed</h1>
               <div className="df aic gap-2 bg-gray-50 mx-1 p-2 pR">
-                <div className="w-[3rem] h-[3rem] border border-black rounded-md bg-white"></div><div className="text-sm fx1">{lead.product}<div className="text-xs font-mono_ mb-2 text-gray-700">Via Search Result</div></div>
+                <div className="w-[3rem] h-[3rem] border border-black rounded-md bg-white"></div><div className="text-sm fx1">{lead.product.name}<div className="text-xs font-mono_ mb-2 text-gray-700">Via Search Result</div></div>
                 <span className="text-sm text-blue-600 underline mr-3 cursor-pointer">View</span>
               </div>
             </div>
@@ -318,7 +313,7 @@ const SpecificLead = ({ lead }) => {
               <div className="df aic gap-2">
                 <div className="border-r text-sm tac py-1 px-8  border rounded-xl"><div className="df aic gap-1 "><Clock size={16} />Stay</div><div className="text-sm tac">{lead.stay}</div></div>
                 <div className="border-r text-sm tac py-1 px-8  border rounded-xl"><div className="df aic gap-1 "><Eye size={16} />Watch Media</div><div className="text-sm tac">80%</div></div>
-                <div className="border-r text-sm tac py-1 px-8  border rounded-xl"><div className="df aic gap-1 "><Stars size={16} />Your Rank <Info size={12} className="ml-2" /></div><div className="text-sm tac">{lead.search_rank}</div></div>
+                <div className="border-r text-sm tac py-1 px-8  border rounded-xl"><div className="df aic gap-1 "><Stars size={16} />Your Rank <Info size={12} className="ml-2" /></div><div className="text-sm tac">{lead.id}</div></div>
                 <div></div></div>
             </div>
 
@@ -345,188 +340,188 @@ const SpecificLead = ({ lead }) => {
     </>
   )
 }
-export default function LeadsManager() {
-  const [leads, setLeads] = useState(initialLeads);
+
+function FreshLead({ view }) {
+
+  const [lead_, setLead] = useState(null)
+
+  useEffect(() => {
+    async function getting_freshlead() {
+      const res = await fetchAPI("l/leads/n_/F_", "GET", false, true)
+      setLead(res)
+    }
+    getting_freshlead()
+  }, [])
+
+  return (
+    <div className="df fd-c fx1 hfp oh">
+      <div className="p-2 border-b">
+        <div className="df aic gap-5">
+          <h1 className="text-md">{view}</h1>
+          <SearchBox placeholder="Search lead by No, Location ..." />
+          <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
+        </div>
+      </div>
+      <div className="fx1 hfp oh">
+        <div className="fx1 hfp overflow-x-auto oy divide-y-2 mx-10_">
+
+          {lead_?.map((l, i) => (
+            <div key={i} className="df fd-c h-[10rem]_ p-3 m-3_" onClick={() => r_.push(`?l=${l.id}`)}>
+              <div className="text-md mb-1 df jcsb">
+                <h1 className="df aic items-start gap-1 text-blue-600 mb-1">
+                  <span className="rounded-full bg-black oh w-[32px] h-[32px] pR"><Image alt={l.buyer} src="/p-2.png" fill /></span>
+                  <div className="">
+                    <div className=" font-semibold hover:cursor-pointer ">{l.buyer.name}</div>
+                    <div className="text-xs mt-[-3px] hover:cursor-pointer ">{l.buyer.location}</div>
+                  </div>
+                </h1>
+                <MoreOptions y={false} />
+              </div>
+
+              <div className="df gap-3 fx1 mx-1">
+                <div className="fx1 text-sm oh">
+                  <h1 className="text-sm">
+                    Product: <span className="text-green-600 underline hover:cursor-pointer ">{l.product.name}</span>
+                  </h1>
+
+                  <div className="bg-gray-50 rounded-lg py-1 px-2 min-h-[5rem] max-h-[8rem] df fd-c mb-2 oh">
+                    <div className="text-gray-800">Message</div>
+                    <div className="fx1 px-1 oy" style={{ overflowWrap: "anywhere" }}>
+                      {l.enquiry_text}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-[5rem] text-blue-600 border-purple-300 rounded-md h-auto">
+                  <div className="text-sm rounded-md mb-1 df fd-c aic jcc hfp hover:cursor-pointer ">
+                    <ReplyAll />
+                    <span className="text-sm">Reply</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="text-sm h-10_ rounded-md bg-gray-50_ mb-1">
+                {l.date}
+              </div>
+            </div>
+          ))}
+
+        </div>
+        {lead_?.length === 0 && (
+          <div className="text-center py-10 text-gray-500 text-lg">
+            No leads found matching the current filters.
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function AllLeads({view}) {
+  const [leads, setLeads] = useState(null);
   const [selectleads, setSelectLeads] = useState(null);
+  const searchParams = useSearchParams()
+  const r_ = useRouter()
+  const l_id = searchParams.get('lead')
+
+  useEffect(() => {
+    async function fetch_lead() {
+      const res = await fetchAPI("l/leads", "GET", false, true)
+      setLeads(res)
+    }
+
+    fetch_lead()
+  }, [])
+
+  useEffect(() => {
+    if (l_id) {
+      async function getting_leadById() {
+        const res = await fetchAPI("l/leads/" + parseInt(l_id), "GET", false, true)
+        setSelectLeads(res)
+      }
+      getting_leadById()
+      console.log("HIIII")
+    } else { setSelectLeads(null) }
+  }, [l_id])
+  return (
+    <div className="df fd-c fx1 hfp oh pR">
+      {selectleads && <SpecificLead lead={selectleads} />}
+
+      <div className="p-2 border-b">
+        <div className="df aic gap-5 mb-2">
+          <h1 className="text-md">{view}</h1>
+          <SearchBox placeholder="Search lead by No, Location ..." />
+          <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Binoculars size={14} />Advance View</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
+        </div>
+        <div className="df aic_ gap-2 text-sm">
+          <span className="df aic gap-1 px-3_ py-0.5 rounded-xl text-gray-800 bg-gray-900_ text-sm"><MapPin size={14} /> Locations:</span>
+          <div className="fx1 overflow-x-auto whitespace-nowrap df aic gap-3 sbt" style={{ scrollbarColor: "#ecececff white" }}>
+            {["Location B", "Location B", "Location C", "Location D", "Location E", "Location F", "Location G"].map((l, i) => (
+              <span className="px-2 py-0.5 rounded-lg bg-gray-50" key={i}>{l}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="fx1 hfp oh">
+        <div className="hfp overflow-x-auto oy">
+          <table className="text-left whitespace-nowrap wfp">
+
+            <thead className="pS bg-white" style={{ top: 0 }}><tr className="text-sm font-bold_ uppercase_ border-b">
+
+              <th className="px-3 py-1 text-left flex items-center">ID</th>
+              <th className="px-3 _border-l py-1 text-left">Buyer</th>
+              <th className="px-3 _border-l py-1 text-left"><Layers className="w-3.5 h-3.5 mr-1 inline" /> Product</th>
+              <th className="px-3 _border-l py-1 text-left">Status</th>
+              <th className="px-3 _border-l py-1 text-left">Enquiry Date</th>
+              <th className="px-3 _border-l py-1 text-left">Priority</th>
+              <th className="px-3 _border-l py-1 text-left">Comment</th>
+
+            </tr>
+            </thead>
+
+            <tbody className="divide-gray-200">{leads?.map((lead, i) => (
+              <tr key={i} className="cursor-pointer hover:bg-gray-50 hover:text-gray-600 transition duration-150 group  transition border-b" onClick={() => r_.push(`?lead=${lead.id}`)}>
+                <td className="p-2.5 font-mono text-sm text-gray-500  transition border-r group-hover:text-gray-800 border-l-2 border-l-white group-hover:border-l-gray-600">{lead.id}</td>
+                <td className="p-2.5 text-sm text-gray-800  transition border-l_ group-hover:text-gray-800">
+                  <div>Name: <span className="text-blue-600">{lead.buyer.name}</span></div>
+                  <div className="">Phone No. <span className="text-green-600">{lead.buyer.connect}</span></div>
+                  <div>Location: {lead.buyer.location}</div>
+                </td>
+                <td className="p-2.5 text-sm text-cyan-700  transition border-l_ group-hover:text-gray-800 ">{lead.product.name}</td>
+                <td className="p-2  transition border-l_">
+                  <span className={`inline-flex gap-1 aic text-xs font-semibold_ px-[8px] py-[1px] rounded-md  transition border ${getStatusColor(lead.status)}`}>
+                    {getStatusIcon(lead.status)}
+                    {lead.status}
+                  </span>
+                </td>
+                <td className="p-2.5 text-sm font-mono text-gray-800  transition border-l_ group-hover:text-gray-800 ">{lead.created_at.split("T")[0]}</td>
+                <td className=" p-2.5 text-sm transition border-l_">
+                  <span className={`${getPriorityColor(lead.priority)} group-hover:text-gray-800`}>{lead.priority}</span>
+                </td>
+                <td className="p-2.5 text-sm  transition border-l_ group-hover:text-gray-800 ">{lead.enquiry_text}</td>
+              </tr>
+            ))}</tbody>
+          </table>
+        </div>
+        {leads?.length === 0 && (
+          <div className="text-center py-10 text-gray-500 text-lg">
+            No leads found matching the current filters.
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default function LeadsManager() {
+
   const [filterStatus, setFilterStatus] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [view, setView] = useState('All Leads');
 
-  const filteredLeads = useMemo(() => {
-    return leads.filter(lead => {
-      // Filter by Status
-      const statusMatch = filterStatus === 'All' || lead.status === filterStatus;
 
-      // Filter by Search Term (Buyer, Product, or Query)
-      const searchLower = searchTerm.toLowerCase();
-      const searchMatch = lead.buyer.toLowerCase().includes(searchLower) ||
-        lead.product.toLowerCase().includes(searchLower) ||
-        lead.query.toLowerCase().includes(searchLower);
-
-      return statusMatch && searchMatch;
-    }).sort((a, b) => b.daysActive - a.daysActive); // Sort by days active (oldest first)
-  }, [leads, filterStatus, searchTerm]);
-
-
-  const totalLeads = leads.length;
-  const newLeadsCount = leads.filter(l => l.status === 'New').length;
-
-
-  // Placeholder action: Update lead status
-  const updateStatus = (id, newStatus) => {
-    setLeads(prev => prev.map(lead =>
-      lead.id === id ? { ...lead, status: newStatus } : lead
-    ));
-    console.log(`Lead ${id} status updated to: ${newStatus}`);
-  };
-
-  const searchParams = useSearchParams()
-  const r_ = useRouter()
-  const l_id = searchParams.get('lead')
-  useEffect(() => {
-    console.log('l_id:', l_id, initialLeads.find(v => v.id === l_id))
-    setSelectLeads(initialLeads.find(v => v.id === parseInt(l_id)))
-  }, [l_id])
-
-  const AllLeads = () => {
-    return (
-      <div className="df fd-c fx1 hfp oh">
-        <div className="p-2 border-b">
-          <div className="df aic gap-5 mb-2">
-            <h1 className="text-md">{view}</h1>
-            <SearchBox placeholder="Search lead by No, Location ..." />
-            <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Binoculars size={14} />Advance View</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
-          </div>
-          <div className="df aic_ gap-2 text-sm">
-            <span className="df aic gap-1 px-3_ py-0.5 rounded-xl text-gray-800 bg-gray-900_ text-sm"><MapPin size={14} /> Locations:</span>
-            <div className="fx1 overflow-x-auto whitespace-nowrap df aic gap-3 sbt" style={{ scrollbarColor: "#ecececff white" }}>
-              {["Location B", "Location B", "Location C", "Location D", "Location E", "Location F", "Location G"].map(l => (
-                <span className="px-2 py-0.5 rounded-lg bg-gray-50">{l}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="fx1 hfp oh">
-          <div className="hfp overflow-x-auto oy">
-            <table className="text-left whitespace-nowrap ">
-
-              <thead className="pS bg-white" style={{ top: 0 }}><tr className="text-sm font-bold_ uppercase_ border-b">
-
-                <th className="px-3 py-1 text-left flex items-center">ID</th>
-                <th className="px-3 _border-l py-1 text-left">Buyer</th>
-                <th className="px-3 _border-l py-1 text-left"><Layers className="w-3.5 h-3.5 mr-1 inline" /> Product</th>
-                <th className="px-3 _border-l py-1 text-left">Status</th>
-                <th className="px-3 _border-l py-1 text-left">Enquiry Date</th>
-                <th className="px-3 _border-l py-1 text-left">Priority</th>
-                <th className="px-3 _border-l py-1 text-left">Comment</th>
-
-              </tr>
-              </thead>
-
-              <tbody className="divide-gray-200">{filteredLeads.map((lead, i) => (
-                <tr key={i} className="cursor-pointer hover:bg-gray-50 hover:text-gray-600 transition duration-150 group  transition border-b" onClick={() => r_.push(`?lead=${lead.id}`)}>
-                  <td className="p-2.5 font-mono text-sm text-gray-500  transition border-r group-hover:text-gray-800 border-l-2 border-l-white group-hover:border-l-gray-600">{lead.id}</td>
-                  <td className="p-2.5 text-sm text-gray-800  transition border-l_ group-hover:text-gray-800">
-                    <div>Name: <span className="text-blue-600">{lead.buyer}</span></div>
-                    <div className="">Phone No. <span className="text-green-600">{lead.phone}</span></div>
-                    <div>Location: {lead.location}</div>
-                  </td>
-                  <td className="p-2.5 text-sm text-cyan-700  transition border-l_ group-hover:text-gray-800 ">{lead.product}</td>
-                  <td className="p-2  transition border-l_">
-                    <span className={`inline-flex gap-1 aic text-xs font-semibold_ px-[8px] py-[1px] rounded-md  transition border ${getStatusColor(lead.status)}`}>
-                      {getStatusIcon(lead.status)}
-                      {lead.status}
-                    </span>
-                  </td>
-                  <td className="p-2.5 text-sm font-mono text-gray-800  transition border-l_ group-hover:text-gray-800 ">5-10-12</td>
-                  <td className=" p-2.5 text-sm transition border-l_">
-                    <span className={`${getPriorityColor(lead.priority)} group-hover:text-gray-800`}>{lead.priority}</span>
-                  </td>
-                  <td className="p-2.5 text-sm  transition border-l_ group-hover:text-gray-800 ">{lead.comment}</td>
-                </tr>
-              ))}</tbody>
-            </table>
-          </div>
-          {filteredLeads.length === 0 && (
-            <div className="text-center py-10 text-gray-500 text-lg">
-              No leads found matching the current filters.
-            </div>
-          )}
-        </div>
-      </div>
-
-    )
-  }
-
-  const FreshLeads = () => {
-    return (
-      <div className="df fd-c fx1 hfp oh">
-        <div className="p-2 border-b">
-          <div className="df aic gap-5">
-            <h1 className="text-md">{view}</h1>
-            <SearchBox placeholder="Search lead by No, Location ..." />
-            <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
-          </div>
-        </div>
-        <div className="fx1 hfp oh">
-          <div className="fx1 hfp overflow-x-auto oy divide-y-2 mx-10_">
-
-
-            {filteredLeads.map((lead, i) => (
-              <div key={i} className="df fd-c h-[10rem]_ p-3 m-3_" onClick={() => r_.push(`?lead=${lead.id}`)}>
-                <div className="text-md mb-1 df jcsb">
-                  <h1 className="df aic items-start gap-1 text-blue-600 mb-1">
-                    <span className="rounded-full bg-black oh w-[32px] h-[32px] pR"><Image alt={lead.buyer} src="/p-2.png" fill /></span>
-                    <div className="">
-                      <div className=" font-semibold hover:cursor-pointer ">{lead.buyer}</div>
-                      <div className="text-xs mt-[-3px] hover:cursor-pointer ">{lead.location}</div>
-                    </div>
-                  </h1>
-                  <MoreOptions y={false} />
-                </div>
-
-                <div className="df gap-3 fx1 mx-1">
-
-                  <div className="fx1 text-sm oh">
-                    <h1 className="text-sm">
-                      Product: <span className="text-green-600 underline hover:cursor-pointer ">{lead.product}</span>
-                    </h1>
-
-                    <div className="bg-gray-50 rounded-lg py-1 px-2 min-h-[5rem] max-h-[8rem] df fd-c mb-2 oh">
-                      <div className="text-gray-800">Message</div>
-                      <div className="fx1 px-1 oy" style={{ overflowWrap: "anywhere" }}>
-                        {lead.comment}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-[5rem] text-blue-600 border-purple-300 rounded-md h-auto">
-                    <div className="text-sm rounded-md mb-1 df fd-c aic jcc hfp hover:cursor-pointer ">
-                      <ReplyAll />
-                      <span className="text-sm">Reply</span>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div className="text-sm h-10_ rounded-md bg-gray-50_ mb-1">
-                  {lead.date}
-                </div>
-              </div>
-            ))}
-
-          </div>
-          {filteredLeads.length === 0 && (
-            <div className="text-center py-10 text-gray-500 text-lg">
-              No leads found matching the current filters.
-            </div>
-          )}
-        </div>
-      </div>
-
-    )
-  }
   return (
     <>
       <div className="df fd-c hfp">
@@ -534,20 +529,17 @@ export default function LeadsManager() {
         <Seller_Page_Header pageTitle={'Lead'} buttons={['Search Lead', 'Histroy']} />
         <div className="fx1 bg-gray-50_ text-gray-900 pR oh">
 
-          {selectleads && <SpecificLead lead={selectleads} />}
 
           <div className="fx1 hfp oh df">
-            <MainSideNav>
+            <MainSideNav functional={true}>
               <MainSideNavButtons icon={<Star size={20} />} name="Fresh Leads" controller={{ control: view, setController: setView }} />
               <MainSideNavButtons icon={<Table size={20} />} name="All Leads" controller={{ control: view, setController: setView }} />
               <MainSideNavButtons icon={<AlertOctagon size={20} />} name="Spams" controller={{ control: view, setController: setView }} />
             </MainSideNav>
 
-            {view === "All Leads" && AllLeads()}
-            {view === "Fresh Leads" && FreshLeads()}
+            {view === "All Leads" && <AllLeads view={view}/>}
+            {view === "Fresh Leads" && <FreshLead view={view} />}
           </div>
-
-
         </div>
       </div >
     </>

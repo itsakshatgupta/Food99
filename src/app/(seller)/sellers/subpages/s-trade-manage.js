@@ -172,7 +172,7 @@ export default function TradeManagePage() {
             // newRow__={<div className="df aic jcc gap-1"><Home/><ShoppingBag/></div>}
             />
             <div className="df fx1 oh">
-                <MainSideNav>
+                <MainSideNav functional>
                     <MainSideNavButtons icon={<Home size={20} />} name="Home" controller={{ control: view, setController: setView }} />
                     <MainSideNavButtons icon={<ShoppingBag size={20} />} name="Orders" controller={{ control: view, setController: setView }} />
                     <MainSideNavButtons icon={<Users size={20} />} name="Partners" controller={{ control: view, setController: setView }} />

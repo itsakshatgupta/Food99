@@ -1,9 +1,9 @@
 // src/lib/api.js
 
-const API_URL = "https://food99api.onrender.com/api";
-// const API_URL = "http://127.0.0.1:8000/api";
+// const API_URL = "https://food99api.onrender.com/api";
+const API_URL = "http://127.0.0.1:8000/api";
 
-export async function fetchAPI(endpoint, method = "GET", body = null, auth_verify = false, c_type = false, hide_error=true) {
+export async function fetchAPI(endpoint, method = "GET", body = null, auth_verify = false, c_type = false, hide_error = true) {
   // 🔹 remove extra slash if user passes "/token"
   const cleanEndpoint = endpoint.replace(/^\/+/, "");
   const url = `${API_URL}/${cleanEndpoint}/`;
@@ -32,16 +32,20 @@ export async function fetchAPI(endpoint, method = "GET", body = null, auth_verif
 
     if (newAccess) {
       options.headers["Authorization"] = `Bearer ${newAccess}`;
-      res = await fetch(url, {
+      let res = await fetch(url, {
         method,
-        headers,
+        headers:{"Content-Type":"application/json"},
         body: body ? JSON.stringify(body) : null,
         cache: "no-store",
       });
+      if (res.ok) {
+        return res.json();
+
+      }
     }
   }
 
-  if (hide_error&&!res.ok) throw new Error(await res.text());
+  if (hide_error && !res.ok) throw new Error(await res.text());
   return res.json();
 
   // return res.json()

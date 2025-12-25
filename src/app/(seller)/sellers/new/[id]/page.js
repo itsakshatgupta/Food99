@@ -2,7 +2,7 @@ import FormNewPage from "../new-subpages/form";
 import ProductNewPage from "../new-subpages/product";
 
 export default async function OrderDetail({ params }) {
-    const { id } = params;
+    const { id } = await params;
     function check_id() {
         switch (id) {
             case 'product':

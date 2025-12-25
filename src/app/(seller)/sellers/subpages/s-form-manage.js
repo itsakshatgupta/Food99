@@ -193,7 +193,7 @@ export default function FormManagePage() {
             <Seller_Page_Header pageTitle={"Forms"} buttons={[<Link href="new/form" className="border-b-dashed df aic gap-1"><LucideExternalLink size={14} /> Create Form</Link>]} />
 
             <div className="fx1 df oy bg-white">
-                <MainSideNav>
+                <MainSideNav functional>
                     <MainSideNavButtons icon={<Files size={20} />} name="Posts" controller={{ control: view, setController: setView }} />
                     <MainSideNavButtons icon={<File size={20} />} name="All Forms" controller={{ control: view, setController: setView }} />
                     <MainSideNavButtons icon={<L size={20} />} name="Shares" controller={{ control: view, setController: setView }} />

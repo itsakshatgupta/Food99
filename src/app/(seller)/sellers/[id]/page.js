@@ -10,36 +10,34 @@ import SearchManagePage from "../subpages/s-search.js";
 
 
 export default async function ProductDetail({ params }) {
-    const { id } = params;
-    function check_id() {
-        switch (id) {
-            case 'seller_dsbd':
-                return (<SellerDashboard />);
+    const { id } = await params;
+    console.log("ID:", id)
+    switch (id) {
+        case 'seller_dsbd':
+            return (<SellerDashboard />);
 
-            case 'seller_prod':
-                return (<ProductManager />);
+        case 'seller_prod':
+            return (<ProductManager />);
 
-            case 'seller_lead':
-                return (<LeadsManager />);
+        case 'seller_lead':
+            return (<LeadsManager />);
 
-            case 'seller_msg':
-                return (<MessagePage />);
+        case 'seller_msg':
+            return (<MessagePage />);
 
-            case 'seller_stng':
-                return (<SellerSettingPage />);
+        case 'seller_stng':
+            return (<SellerSettingPage />);
 
-            case 'seller_form':
-                return (<FormManagePage />);
+        case 'seller_form':
+            return (<FormManagePage />);
 
-            case 'seller_trdes':
-                return (<TradeManagePage />);
-                
-            case 'seller_scrh':
-                return (<SearchManagePage />);
-        }
+        case 'seller_trdes':
+            return (<TradeManagePage />);
+            
+        case 'seller_scrh':
+            return (<SearchManagePage />);
+            
+        default:
+            return (<SellerDashboard />);
     }
-
-    return (
-        check_id()
-    )
 }

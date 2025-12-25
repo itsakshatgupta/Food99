@@ -1,8 +1,6 @@
 'use client'
 // import "./globals.css";
-import { createContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Box, Globe, Home, Shapes, UserCircle2, UserCircle2Icon } from 'lucide-react';
-import SettingsPanel from '@/components/setting/settingPannel';
+import { createContext, useLayoutEffect, useRef, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import "../app/globals.css"
@@ -12,11 +10,9 @@ import Topbar from '@/components/topbar/bar';
 import Topbar_ from '@/components/topbar_/topbar';
 import Link from 'next/link';
 import { Icon } from '@/components/lib/icons';
-import useSWR from "swr";
 import {
     fetchAPI
 } from '@/app/(api)/api';
-import { menu_dummy, cart, cart__ } from './dummy_data';
 
 // ✅ one shared fetcher
 const fetcher = async (url) => {
@@ -35,8 +31,7 @@ const fetcher = async (url) => {
 };
 
 export const dynamic_ = createContext();
-export const floaters_ = createContext();
-export const menu_ = createContext();
+
 export const Menu = [
     {
         menu_ctg_: 'Pizza', list_: [
@@ -63,30 +58,21 @@ export const Menu = [
     }];
 
 export default function MainContext({ device, children }) {
-    const [dynamic_portal_main, set_dynamics_portal_main] = useState(null)
-
-    const [dynamic_portal_ab, set_dynamics_portal_ab] = useState(null)
-    // const [cart__i, set_cart__i] = useState(null);
-    const [floaters, set_floaters] = useState([]);
-    const [feature_option, set_feature_option] = useState(null);
-
-
-    const noLayoutOnPages = ['loginl', 'signup']
-
-    const floaterRef = useRef(null);
     const mainRef = useRef(null);
 
     const pathname = usePathname()
     const router = useRouter(); // Place near top of your component
     const searchParams = useSearchParams();
-    const panel = searchParams.get('panel');
-    console.log(searchParams.get('page'), typeof (searchParams.get('page')), searchParams.get('page') in ['login', 'signup'], noLayoutOnPages)
 
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const u = localStorage.getItem("user");
-        if (u) setUser(JSON.parse(u));
+        async function gettingUser() {
+            const res = await fetchAPI("users", "GET", false, true)
+            if (res) setUser(res[0])
+        }
+        if (u) gettingUser();
     }, []);
 
 
@@ -113,146 +99,26 @@ export default function MainContext({ device, children }) {
     // });
 
 
-    const usr = true
-    const menu___i = menu_dummy
-    const cart__i = cart
-
-
-
-
-    useEffect(() => {
-        function check_floaters() {
-            if (mainRef.current) {
-                const floaterHeight = floaterRef.current?.offsetHeight || 0;
-                mainRef.current.style.paddingBottom = `${floaterHeight}px`;
-            }
-        }
-        check_floaters();
-    }, [floaters]);
-
-    function display_menu_list(e) {
-        if (e.target.textContent === "X Close") {
-            e.target.textContent = "Menu"
-            set_floaters((prev) => prev.filter((v, i) => v.name !== 'menu'));
-        } else {
-            e.target.textContent = "X Close"
-            set_floaters((prev) => [...prev, {
-                name: 'menu', child: <>
-                    <style>{`
-        lowscreen-nav{
-        border-top:none !important;
-        }
-        #lsn-1{
-        border-top:1px solid #f8f8f8;
-        }
-        `}</style>
-                    <style>{`    .menu_list{width: 70vw;
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    height: 40vh;
-    box-shadow: 0 0 12px 1px #b2b2b2;
-    animation:menu_ani 0.8s linear;
-    z-index:1;
-    }
-
-    @keyframes menu_ani {
-    0% {
-        height:0;
-        width:0;
-        opacity: 0.8;
-    }
-    100% {
-        opacity: 1;
-    }
-            }
-    `}</style>
-                    <div className="df fd-c aic padx1 pdy1 menu_list bdTrds bdBrds xfg gap08 oy" style={{ background: 'black', color: 'white' }}>
-                        {menu___i && menu___i.map((v, i) => <div className="bdy df aic jcsb wfp pdx1 pdy03" key={i}><div className="df aic gap05"><span className="font600">{v.name}</span></div><span>{v.items.length}</span></div>)}
-                    </div>
-                </>
-            }])
-        }
-    }
-    console.log("E", pathname)
     return (
         <>
-            {device === 'pcl' &&
-                <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab }}>
-
-                    <div className="df fd-c hfp wfp">
-
-                        {/* <style>{`main.fx1.oh{width:100%;max-width:2200px;align-self:center;}`}</style> */}
-
-                        <Topbar_ topbar={<Topbar />} />
-
-                        <main className="pR oh fx1">
-                            <div className="hfp oy" style={{ scrollbarWidth: 'none' }}>
-                                {children}
-                            </div>
-                            {dynamic_portal_ab}
-                        </main>
-
-                        {device === 'mobile' && <lowscreen-nav className="df z-50 jcsb aic gap05 xfg font-sm pdy05 bdt" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', paddingInline: 'calc(1rem + 3vmin)' }}>
-                            <Link href='/' className="df fd-c aic gap02"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02"><Icon.Catagories /><span>Orders</span></Link><Link href='/cart' className="df fd-c aic gap02"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02"><Icon.Account /><span>Account</span></Link></lowscreen-nav>}
-
-                    </div>
-                </dynamic_.Provider>
-            }
-
-
             {device && <div className="df fd-c hfp_">
-                <menu_.Provider value={{ menu___i }}>
-                    <dynamic_.Provider value={{ device, dynamic_portal_main, set_dynamics_portal_main, dynamic_portal_ab, set_dynamics_portal_ab, menu___i, cart__i, usr, floaters, set_floaters, set_feature_option, user }}>
 
-                        {device === 'pc' && ["/messages", "/form"].every(v => v !== pathname) && <Topbar_ topbar={<Topbar />} />}
+                <dynamic_.Provider value={{ device, user }}>
 
-                            <main className="" ref={mainRef} >
-                                {children}
+                    {device === 'pc' && ["/messages", "/form"].every(v => v !== pathname) && <Topbar_ topbar={<Topbar />} />}
 
-                            </main>
-                        <div className="wfp dfl dn fd-c fx1 oh" style={{ alignContent: 'space-between' }}>
+                    <main className="" ref={mainRef} >
+                        {children}
+                    </main>
 
-                            <main className="main_ fx1 oy" ref={mainRef} >
-                                {children}
-
-                                {/* {pathname==="/"&&<Footer />} */}
-                            </main>
-                            <div className="wfp" style={{ position: 'fixed', bottom: 0, zIndex: 1 }} ref={floaterRef}>
-
-                                <div className='containers-area pR' >
-                                    <div className="pA wfp" style={{ bottom: 0, zIndex: 1 }}>{dynamic_portal_main}
-                                    </div>
-                                    {feature_option &&
-                                        feature_option
-                                    }
-                                    {floaters &&
-                                        <div className='floater-container'>
-                                            {console.log(floaters)}
-                                            {floaters.map((v, k) => <div className="pR" key={k}>{v.child}</div>)}
-                                        </div>
-                                    }
-                                </div>
-
-                                <lowscreen-nav className="flex md:hidden bdt pR z-50" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', ...(feature_option ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
-                                    {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
-                                    <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
-                                        <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="df  fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
-                                    </div>
-                                </lowscreen-nav>
-
-
-                            </div>
+                    <lowscreen-nav className="flex md:hidden bdt pR z-50" id="topbar" style={{ background: '#fafafa', fontSize: '0.75rem', ...(false ? { paddingInlineStart: 'calc(0.5rem + 1vmin)' } : { paddingInline: 'calc(0.5rem + 1vmin)' }) }}>
+                        {/* lowscreen-nav's earlier paddingInline: 'calc(1rem + 3vmin)' */}
+                        <div className="df jcsb aic xbg pdy05 bdr fx1" id="lsn-1">
+                            <Link href='/' className="df fd-c aic gap02 fx1 pdy02" id="home"><Icon.Home /><span>Home</span></Link><Link href='/cart' className="df fd-c aic gap02 fx1" id="categories"><Icon.Catagories /><span>Categories</span></Link><Link href='/order' className="df fd-c aic gap02 fx1" id="orders"><Icon.Orders /><span>Orders</span></Link><Link href='/cart' className="df  fd-c aic gap02 fx1" id="cart"><Icon.Cart_ /><span>Cart</span></Link><Link href='/account' className="df fd-c aic gap02 fx1" id="account"><Icon.Account /><span>Account</span></Link>
                         </div>
-                        {device === 'mobile' && dynamic_portal_ab !== null ? <div className='pA xbg wfp oh' style={{
-                            top: 0,
-                            zIndex: 100,
-                            height: '100vh',
-                            // maxHeight:'fit-content' 
-                        }}>{dynamic_portal_ab}</div> : null}
+                    </lowscreen-nav>
 
-                    </dynamic_.Provider>
-                </menu_.Provider>
+                </dynamic_.Provider>
             </div>
             }
         </>

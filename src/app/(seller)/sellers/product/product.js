@@ -164,7 +164,7 @@ const ProductUploadPage = ({ productId }) => {
                 formData.append(key, productToUpdate[key]);
             }
 
-            const result = await fetchAPI("products/" + productId, "PATCH", formData, true, 'FormData');
+            const result = await fetchAPI("s/products" + productId, "PATCH", formData, true, 'FormData');
 
             setResponse({
                 status: "success",

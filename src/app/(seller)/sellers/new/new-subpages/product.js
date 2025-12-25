@@ -131,7 +131,7 @@ const ProductUploadPage = () => {
                 formData.append(key, product[key]);
             }
 
-            const result = await fetchAPI("products", "POST", formData, true, 'FormData');
+            const result = await fetchAPI("s/products", "POST", formData, true, 'FormData');
 
             setResponse({
                 status: "success",
