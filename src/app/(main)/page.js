@@ -333,7 +333,7 @@ export default function branches() {
         {device ?
             <>
             {/* {console.log(user)} */}
-                <div className='df fd-c bg-white pR' style={{ zIndex: 1 }}>
+                <div className='df fd-c bg-white pR min-fullscreen' style={{ zIndex: 1 }}>
                     <div className="df fd-c gap1 py-1 xfg oh pdt05 border-b" id="m-container-user-focus-stuffs-1">
                         <div className="df gap05 fx1 ox pdx05 sbn">
                             <span className="df fd-c aic gap02 font08 pdx05 pdy03">
