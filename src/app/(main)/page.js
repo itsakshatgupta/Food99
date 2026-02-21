@@ -502,7 +502,6 @@ export default function branches() {
                 loop
                 autoplay
             /></span><span className='font600' style={{ color: '#8a8a8a' }}>Loading...</span></div></div>}
-    <Footer/>
 
     </>)
 }
