@@ -60,18 +60,18 @@ console.log("P_", pathname)
           <userContext.Provider value={{ user, r_ }}>
             <div className="flex h-screen">
               {/* Sidebar */}
-              <aside className="w-[220px] flex flex-col border-r border-[#e2d2ff] bg-[#fbfbfb]">
-                <h1 className="p-4 mb-5 pb-0 df aic text-[larger] text-gray-800 font-bold">
+              <aside className="w-[220px] flex flex-col border-r border-[#e2d2ff] bg-[#301442] text-white">
+                <h1 className="p-4 mb-5 pb-0 df aic text-[larger] text-white font-bold">
                   Trade<span className="text-purple-600">B2B</span>
                 </h1>
-                <span>{user?.username}-{user?.user_type}</span>
-                <h1 className="pdx07 text-sm text-gray-600 mb-1">Menu</h1>
+                {/* <span>{user?.username}-{user?.user_type}</span> */}
+                <h1 className="pdx07 text-sm text-gray-200 mb-1">Menu</h1>
                 <nav className="flex-1 space-y-1 pdx05 text-[0.925rem]">
                   {menu.map((item) => (
                     <Link
                       key={item.path}
                       href={item.path}
-                      className={`block px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[royalblue] transition ${pathname === item.path ? "bg-[#fafafa] py-1 border border-[dodgerblue]" : ""
+                      className={`block px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[royalblue] transition ${pathname === item.path ? "bg-[#fafafa] text-black py-1 border border-[dodgerblue]" : ""
                         }`}
                       onClick={()=>pathname!==item.path&&setR_(prev=>({...prev, loading:true}))}
                     >

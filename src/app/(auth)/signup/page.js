@@ -162,7 +162,7 @@ const Header = () => (
       {/* Navigation (Hidden on Mobile, simplified for login page) */}
       <nav className="hidden sm:flex space-x-8 text-sm font-medium">
         <a href="#" className="hover:text-indigo-600 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Support</a>
-        <a href="#" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Signup</a>
+        <a href="/login" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Login</a>
       </nav>
     </div>
   </header>

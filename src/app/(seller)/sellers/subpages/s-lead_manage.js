@@ -343,29 +343,41 @@ const SpecificLead = ({ lead }) => {
 
 function FreshLead({ view }) {
 
-  const [lead_, setLead] = useState(null)
+  const [lead_, setLead] = useState(null);
+  const [searchleads, setSearchLeads] = useState(null);
+  const [filteredleads, setFilteredLeads] = useState(null);
+
+
 
   useEffect(() => {
     async function getting_freshlead() {
-      const res = await fetchAPI("l/leads/n_/F_", "GET", false, true)
+      const res = await fetchAPI("l/leads/?status=new", "GET", false, true)
       setLead(res)
     }
     getting_freshlead()
   }, [])
+
+  async function onChangeHandle(e){
+    console.log(e)
+    const value = e.target.value;
+    setSearchLeads(value)
+        const res = await fetchAPI("l/leads/?search="+value+"&filter=new", "GET", false, true)
+        setFilteredLeads(res)
+  }
 
   return (
     <div className="df fd-c fx1 hfp oh">
       <div className="p-2 border-b">
         <div className="df aic gap-5">
           <h1 className="text-md">{view}</h1>
-          <SearchBox placeholder="Search lead by No, Location ..." />
+          <SearchBox placeholder="Search lead by No, Location ..." onChangeHandle={onChangeHandle}/>
           <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
         </div>
       </div>
       <div className="fx1 hfp oh">
         <div className="fx1 hfp overflow-x-auto oy divide-y-2 mx-10_">
 
-          {lead_?.map((l, i) => (
+          {lead_?!filteredleads?lead_.map((l, i) => (
             <div key={i} className="df fd-c h-[10rem]_ p-3 m-3_" onClick={() => r_.push(`?l=${l.id}`)}>
               <div className="text-md mb-1 df jcsb">
                 <h1 className="df aic items-start gap-1 text-blue-600 mb-1">
@@ -405,14 +417,57 @@ function FreshLead({ view }) {
                 {l.date}
               </div>
             </div>
-          ))}
+          )):filteredleads.map((l, i) => (
+            <div key={i} className="df fd-c h-[10rem]_ p-3 m-3_" onClick={() => r_.push(`?l=${l.id}`)}>
+              <div className="text-md mb-1 df jcsb">
+                <h1 className="df aic items-start gap-1 text-blue-600 mb-1">
+                  <span className="rounded-full bg-black oh w-[32px] h-[32px] pR"><Image alt={l.buyer} src="/p-2.png" fill /></span>
+                  <div className="">
+                    <div className=" font-semibold hover:cursor-pointer ">{l.buyer.name}</div>
+                    <div className="text-xs mt-[-3px] hover:cursor-pointer ">{l.buyer.location}</div>
+                  </div>
+                </h1>
+                <MoreOptions y={false} />
+              </div>
 
-        </div>
+              <div className="df gap-3 fx1 mx-1">
+                <div className="fx1 text-sm oh">
+                  <h1 className="text-sm">
+                    Product: <span className="text-green-600 underline hover:cursor-pointer ">{l.product.name}</span>
+                  </h1>
+
+                  <div className="bg-gray-50 rounded-lg py-1 px-2 min-h-[5rem] max-h-[8rem] df fd-c mb-2 oh">
+                    <div className="text-gray-800">Message</div>
+                    <div className="fx1 px-1 oy" style={{ overflowWrap: "anywhere" }}>
+                      {l.enquiry_text}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-[5rem] text-blue-600 border-purple-300 rounded-md h-auto">
+                  <div className="text-sm rounded-md mb-1 df fd-c aic jcc hfp hover:cursor-pointer ">
+                    <ReplyAll />
+                    <span className="text-sm">Reply</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="text-sm h-10_ rounded-md bg-gray-50_ mb-1">
+                {l.date}
+              </div>
+            </div>
+          )):null}
+
         {lead_?.length === 0 && (
           <div className="text-center py-10 text-gray-500 text-lg">
             No leads found matching the current filters.
           </div>
         )}
+                {filteredleads?.length===0&&<div className="text-center py-10 text-gray-500 text-lg">
+            No leads found matching the search ({searchleads}).
+          </div>}
+        </div>
       </div>
     </div>
   )
@@ -420,7 +475,9 @@ function FreshLead({ view }) {
 
 function AllLeads({view}) {
   const [leads, setLeads] = useState(null);
+  const [filteredleads, setFilteredLeads] = useState(null);
   const [selectleads, setSelectLeads] = useState(null);
+  const [searchleads, setSearchLeads] = useState(null);
   const searchParams = useSearchParams()
   const r_ = useRouter()
   const l_id = searchParams.get('lead')
@@ -432,7 +489,7 @@ function AllLeads({view}) {
     }
 
     fetch_lead()
-  }, [])
+  }, [!filteredleads])
 
   useEffect(() => {
     if (l_id) {
@@ -444,6 +501,14 @@ function AllLeads({view}) {
       console.log("HIIII")
     } else { setSelectLeads(null) }
   }, [l_id])
+
+  async function onChangeHandle(e){
+    console.log(e)
+    const value = e.target.value;
+    setSearchLeads(value)
+        const res = await fetchAPI("l/leads/?search="+value, "GET", false, true)
+        setFilteredLeads(res)
+  }
   return (
     <div className="df fd-c fx1 hfp oh pR">
       {selectleads && <SpecificLead lead={selectleads} />}
@@ -451,7 +516,7 @@ function AllLeads({view}) {
       <div className="p-2 border-b">
         <div className="df aic gap-5 mb-2">
           <h1 className="text-md">{view}</h1>
-          <SearchBox placeholder="Search lead by No, Location ..." />
+          <SearchBox placeholder="Search lead by No, Location ..." onChangeHandle={onChangeHandle}/>
           <div className="fx1 text-sm df aic gap-5 justify-end"><span className="df aic gap-1"><Filter size={14} />Filter</span><span className="df aic gap-1"><Binoculars size={14} />Advance View</span><span className="df aic gap-1"><Settings size={14} />Lead Setting</span></div>
         </div>
         <div className="df aic_ gap-2 text-sm">
@@ -481,7 +546,8 @@ function AllLeads({view}) {
             </tr>
             </thead>
 
-            <tbody className="divide-gray-200">{leads?.map((lead, i) => (
+            <tbody className="divide-gray-200">
+              {leads?!filteredleads?leads.map((lead, i) => (
               <tr key={i} className="cursor-pointer hover:bg-gray-50 hover:text-gray-600 transition duration-150 group  transition border-b" onClick={() => r_.push(`?lead=${lead.id}`)}>
                 <td className="p-2.5 font-mono text-sm text-gray-500  transition border-r group-hover:text-gray-800 border-l-2 border-l-white group-hover:border-l-gray-600">{lead.id}</td>
                 <td className="p-2.5 text-sm text-gray-800  transition border-l_ group-hover:text-gray-800">
@@ -502,14 +568,39 @@ function AllLeads({view}) {
                 </td>
                 <td className="p-2.5 text-sm  transition border-l_ group-hover:text-gray-800 ">{lead.enquiry_text}</td>
               </tr>
-            ))}</tbody>
+            )):filteredleads.length>0&&filteredleads.map((lead, i) => (
+              <tr key={i} className="cursor-pointer hover:bg-gray-50 hover:text-gray-600 transition duration-150 group  transition border-b" onClick={() => r_.push(`?lead=${lead.id}`)}>
+                <td className="p-2.5 font-mono text-sm text-gray-500  transition border-r group-hover:text-gray-800 border-l-2 border-l-white group-hover:border-l-gray-600">{lead.id}</td>
+                <td className="p-2.5 text-sm text-gray-800  transition border-l_ group-hover:text-gray-800">
+                  <div>Name: <span className="text-blue-600">{lead.buyer.name}</span></div>
+                  <div className="">Phone No. <span className="text-green-600">{lead.buyer.connect}</span></div>
+                  <div>Location: {lead.buyer.location}</div>
+                </td>
+                <td className="p-2.5 text-sm text-cyan-700  transition border-l_ group-hover:text-gray-800 ">{lead.product.name}</td>
+                <td className="p-2  transition border-l_">
+                  <span className={`inline-flex gap-1 aic text-xs font-semibold_ px-[8px] py-[1px] rounded-md  transition border ${getStatusColor(lead.status)}`}>
+                    {getStatusIcon(lead.status)}
+                    {lead.status}
+                  </span>
+                </td>
+                <td className="p-2.5 text-sm font-mono text-gray-800  transition border-l_ group-hover:text-gray-800 ">{lead.created_at.split("T")[0]}</td>
+                <td className=" p-2.5 text-sm transition border-l_">
+                  <span className={`${getPriorityColor(lead.priority)} group-hover:text-gray-800`}>{lead.priority}</span>
+                </td>
+                <td className="p-2.5 text-sm  transition border-l_ group-hover:text-gray-800 ">{lead.enquiry_text}</td>
+              </tr>
+            )):null}
+            </tbody>
           </table>
-        </div>
-        {leads?.length === 0 && (
+        {!filteredleads&&leads?.length === 0 && (
           <div className="text-center py-10 text-gray-500 text-lg">
             No leads found matching the current filters.
           </div>
         )}
+        {filteredleads?.length===0&&<div className="text-center py-10 text-gray-500 text-lg">
+            No leads found matching the search ({searchleads}).
+          </div>}
+        </div>
       </div>
     </div>
   )
@@ -532,7 +623,7 @@ export default function LeadsManager() {
 
           <div className="fx1 hfp oh df">
             <MainSideNav functional={true}>
-              <MainSideNavButtons icon={<Star size={20} />} name="Fresh Leads" controller={{ control: view, setController: setView }} />
+              <MainSideNavButtons icon={<Star size={20} />} name="Fresh Leads" controller={{ control: view, setController: setView }} notify_path="l/leads/?status=new"/>
               <MainSideNavButtons icon={<Table size={20} />} name="All Leads" controller={{ control: view, setController: setView }} />
               <MainSideNavButtons icon={<AlertOctagon size={20} />} name="Spams" controller={{ control: view, setController: setView }} />
             </MainSideNav>

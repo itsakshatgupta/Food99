@@ -68,8 +68,8 @@ export function ToggleSwitch({ label, description, enabled, onChange, name }) {
     );
 }
 
-export function SearchBox({placeholder}) {
+export function SearchBox({placeholder, onChangeHandle}) {
     return (
-        <div className="df aic gap-1  text-sm text-gray-600 border py-0.5 pl-1 pr-3 rounded-md"><Search size={18} />{placeholder}</div>
+        <div className="df aic gap-1 focus-within:border-gray-600 focus-within:shadow-sm border-2 transition text-sm text-gray-600 py-0.5 pl-1 pr-3 rounded-md"><Search size={18} />{<input type="text" className="focus:outline-none" placeholder={placeholder} onChange={onChangeHandle} />}</div>
     )
 }
