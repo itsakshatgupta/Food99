@@ -250,10 +250,11 @@ export default function BuyerSignupPage() {
 
       const res = await fetchAPI("register", "POST", form);
       // Store tokens and user data (using localStorage here to match original prompt)
-      localStorage.setItem("refresh", res.refresh);
-      localStorage.setItem("access", res.access);
-      localStorage.setItem("user", JSON.stringify(res.user));
-      router.push("/login");
+      // localStorage.setItem("refresh", res.refresh);
+      localStorage.setItem("verfiy-email", form.email);
+      // localStorage.setItem("user", JSON.stringify(res.user));
+      // router.push("/login");
+      router.push("/otp-verify/?auth-token="+res.otp_uuid+"&email="+form.email); // Redirect to OTP verification page after registration
     } catch (err) {
       console.error("Register error:", err);
       setError(err.message || "Something went wrong");
@@ -401,7 +402,7 @@ export default function BuyerSignupPage() {
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                 ) : (
                   <>
-                    Secure Login
+                    Create Account
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </>
                 )}

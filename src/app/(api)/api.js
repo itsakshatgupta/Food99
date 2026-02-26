@@ -46,7 +46,7 @@ export async function fetchAPI(endpoint, method = "GET", body = null, auth_verif
   }
 
   if (hide_error && !res.ok) throw new Error(await res.text());
-  return res.json();
+  return !hide_error ? res : res.json();
 
   // return res.json()
 }
