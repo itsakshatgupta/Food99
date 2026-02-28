@@ -13,8 +13,7 @@ export default function branches() {
     const [sections, setSections] = useState([]);
 
     const fetchSections = async () => {
-        if (!hasMore) return;
-        const res = await fetchAPI(`/home-sections`);
+        const res = await fetchAPI(`home-sections`, "GET");
         setSections(res);
     };
 

@@ -103,7 +103,7 @@ export default function Topbar_() {
                                }
                                `}</style>
             {device === "mobile" &&
-            <div className="p-1 bg-black">
+            <div className="p-2 pt-4 px-4 bg-black">
 
 
                 <Topbar
@@ -150,7 +150,7 @@ export default function Topbar_() {
                     }
                 />
 
-                <div className="df fd-c pdy09 pdx09 gap1"
+                <div className="df fd-c mt-1 pdy09 pdx01 gap1"
                 // style={{ background: '#b1261cff', color:'white' }}  
                 >
                     <div className="df aic gap03 pdy04 bdArds pdl05 xbg oh pdy02" onClick={() => set_searchText(true)} style={{ display: 'hidden', color: 'black', background: 'whitesmoke', borderRadius: '1rem', border: '2px solid #d8d8d8ff' }}>
