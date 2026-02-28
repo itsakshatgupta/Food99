@@ -153,7 +153,6 @@ export default function Topbar_() {
                 <div className="df fd-c pdy09 pdx09 gap1"
                 // style={{ background: '#b1261cff', color:'white' }}  
                 >
-                    <Topbar_ />
                     <div className="df aic gap03 pdy04 bdArds pdl05 xbg oh pdy02" onClick={() => set_searchText(true)} style={{ display: 'hidden', color: 'black', background: 'whitesmoke', borderRadius: '1rem', border: '2px solid #d8d8d8ff' }}>
                         <span className="df aic pdx02 pdy02" ><Search color='#4056d4ff' /></span>
                         <style>{`.search-animation-container {

@@ -2,7 +2,6 @@
 import { dynamic_ } from '@/components/main-context';
 import { useContext, useEffect, useState, useRef } from "react"
 import Image from 'next/image';
-import { Search, Mic, TrendingUp, Verified, Star, ForkKnife, ThumbsUp, Clock3 } from 'lucide-react';
 import { fetchAPI } from '../(api)/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Feeder } from '@/components/home_page_feeder';
@@ -11,19 +10,7 @@ export default function branches() {
     const { device, user } = useContext(dynamic_);
 
     const top_header = useRef(null);
-    const filter_bar = useRef(null);
-
-    const [search_mode, set_search_mode] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    const [food_filter, set_food_filter] = useState([]);
-    const [menu_filtered, set_menu_filtered] = useState(null);
-
-    const [searchText, set_searchText] = useState("");
-
     const [sections, setSections] = useState([]);
-    const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
 
     const fetchSections = async () => {
         if (!hasMore) return;
@@ -32,94 +19,6 @@ export default function branches() {
     };
 
     useEffect(() => { fetchSections(); }, []);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && hasMore) {
-                setPage(p => p + 1);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [hasMore]);
-
-    const food_filter_data = [
-        { f_name: '5 min', f_logo: <Clock3 size="1.175rem" />, f_property: { f_type: 'tag', f_action: '5min' } },
-        { f_name: 'Recommended', f_logo: <Verified size="1.175rem" fill="white" />, f_property: { f_type: 'tag', f_action: 'recommended' } },
-        { f_name: 'Trending', f_logo: <TrendingUp size="1.175rem" fill="white" />, f_property: { f_type: 'tag', f_action: 'trending' } },
-        { f_name: 'Price < 150', f_logo: <Star size="1.175rem" fill="white" />, f_property: { f_type: 'price_range', f_action: 150 } },
-        { f_name: 'Chilly', f_logo: <ForkKnife size="1.175rem" fill="white" />, f_property: { f_type: 'tag', f_action: 'chilly' } },
-        { f_name: 'Chef Choice', f_logo: <ThumbsUp size="1.175rem" fill="white" />, f_property: { f_type: 'tag', f_action: 'chef choice' } },
-        { f_name: 'Rated 5+', f_logo: <Star size="1.175rem" fill="white" />, f_property: { f_type: 'ct', f_action: 'pizza' } },
-    ];
-
-    useEffect(() => {
-        if (filter_bar.current) {
-            const top_header_height = top_header.current?.offsetHeight;
-            filter_bar.current.style.top = `${top_header_height}px`;
-        }
-    }, [filter_bar, top_header]);
-
-    useEffect(() => {
-        if (food_filter.length === 0) return;
-
-        function filterMenuSmart({
-            menuData,
-            rawFilters,
-            activeFilters = [],
-            compareMap,
-            matchAll = true,
-        }) {
-            if (!activeFilters?.length) return menuData;
-            const active = activeFilters.map(i => rawFilters[i].f_property);
-
-            function deepCompare(value, filter, mapType) {
-                if (Array.isArray(value)) {
-                    return value.some(v => deepCompare(v, filter, mapType));
-                }
-                if (typeof value === "object" && value !== null) {
-                    return Object.entries(value).some(([k, v]) => {
-                        const expectedType = compareMap[k];
-                        return deepCompare(v, filter, expectedType);
-                    });
-                }
-                if (filter.f_type === mapType) {
-                    if (typeof value === "string") {
-                        return value.toLowerCase().includes(String(filter.f_action).toLowerCase());
-                    }
-                    if (typeof value === "number" && typeof filter.f_action === "number") {
-                        return value < filter.f_action;
-                    }
-                }
-                return false;
-            }
-
-            function isItemEligible(item) {
-                const results = active.map(filter =>
-                    Object.entries(compareMap).some(([key, type]) =>
-                        deepCompare(item[key], filter, type)
-                    )
-                );
-                return matchAll ? results.every(Boolean) : results.some(Boolean);
-            }
-
-            return menuData
-                .map(category => {
-                    const filteredItems = category.items.filter(isItemEligible);
-                    return { ...category, items: filteredItems };
-                })
-                .filter(cat => cat.items.length > 0);
-        }
-
-        const f = filterMenuSmart({
-            menuData: menu___i,
-            rawFilters: food_filter_data,
-            activeFilters: food_filter,
-            compareMap: { name: "ct", tags: "tag", price: "price_range", items: "ct" },
-            matchAll: true,
-        });
-        set_menu_filtered(f);
-    }, [food_filter]);
 
     return (
         <>
