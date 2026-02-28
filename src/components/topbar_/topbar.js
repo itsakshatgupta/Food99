@@ -103,7 +103,7 @@ export default function Topbar_() {
                                }
                                `}</style>
             {device === "mobile" &&
-            <>
+            <div className="p-1">
 
 
                 <Topbar
@@ -195,7 +195,7 @@ export default function Topbar_() {
                         <span className="df aic pdx05 pdy02 mgr02" ><Mic color='#4056d4ff' size={22} className="mgx05" /></span>
                     </div>
                 </div>
-            </>
+            </div>
             }
 
             {device === "pc" &&
