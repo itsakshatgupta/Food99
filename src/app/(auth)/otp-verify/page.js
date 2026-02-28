@@ -1,11 +1,12 @@
 "use client";
-export const dynamic = "force-dynamic";
+import { Suspense } from "react";
+
 import { useState, useRef } from "react";
 import { fetchAPI } from "@/app/(api)/api";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function VerifyOTP() {
+function OtpContent() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -114,5 +115,13 @@ export default function VerifyOTP() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OtpContent />
+    </Suspense>
   );
 }
