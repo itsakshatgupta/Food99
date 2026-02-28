@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = "force-dynamic";
 import { useState, useRef } from "react";
 import { fetchAPI } from "@/app/(api)/api";
 import { ArrowRight, Loader2 } from "lucide-react";
