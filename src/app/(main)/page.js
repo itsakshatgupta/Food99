@@ -15,6 +15,7 @@ import { Footer } from './form/page';
 
 export default function branches() {
 
+    
     const product = {
         name: "Sage Square Adjustable Strap Muzzle",
         price: 179,
@@ -24,7 +25,7 @@ export default function branches() {
         distributor: "Sage Square Distributors"
     }
 
-    const { device,  user } = useContext(dynamic_);
+    const { device, user } = useContext(dynamic_);
 
 
     const top_header = useRef(null);
@@ -40,7 +41,7 @@ export default function branches() {
 
     const [sections, setSections] = useState([]);
     const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);  
+    const [hasMore, setHasMore] = useState(true);
 
 
     const fetchSections = async () => {
@@ -52,7 +53,7 @@ export default function branches() {
         // console.log('res:', res)
     };
 
-    useEffect(() => { fetchSections()},[]);
+    useEffect(() => { fetchSections() }, []);
 
     // Infinite scroll logic
     useEffect(() => {
@@ -276,63 +277,12 @@ export default function branches() {
         </style>
         {/* {console.log(menu___i)} */}
 
-        {device === 'mobile' && <div className="pA wfp" style={{ height: '280px', background: 'linear-gradient(to bottom, #8ba1ffff, #d2afffff)', top: 0 }}></div>}
-
-        {device === 'mobile' && <div className={`${isScrolled && "xbg_ bdBrds bdb pdb01"} topbar-container pS `} id="m-container-1" style={{ top: 0, zIndex: 2, backdropFilter: 'blur(1px)', background: isScrolled ? 'white' : 'transparent', borderColor: '#e9f1ffff', transition: 'all 0.3s ease', boxShadow: isScrolled && '0 1px 5px 1px #ecececff' }} ref={top_header}>
-
-            <div className="df fd-c pdy09 pdx09 gap1"
-            // style={{ background: '#b1261cff', color:'white' }}  
-            >
-                <Topbar_ />
-                <div className="df aic gap03 pdy06 bdArds pdl05 xbg oh pdy02" onClick={() => set_search_mode(true)} style={{ display: 'hidden', color: 'black', background: 'whitesmoke', borderRadius: '1rem', border: '2px solid #d8d8d8ff' }}>
-                    <span className="df aic pdx02 pdy02" ><Search color='#4056d4ff' /></span>
-                    <style>{`.search-animation-container {
-                    
-                        overflow: hidden;
-                    }
-                    
-                    .search-animation-inner {
-                        height: 24px; /* adjust as needed */
-                    }
-                    
-                    .search-item {
-                        position: absolute;
-                        width: 100%;
-                        opacity: 0;
-                        transform: translateY(20px);
-                        transition: all 0.5s ease;
-                    }
-                    
-                    .search-item.active {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                    `}</style>
-                    <div className="fx1 df aic gap03 bdr" style={{ borderColor: '#323232' }}>
-                        <span>Search </span>
-
-                        <div className="search-animation-inner">
-                            {searchTexts.map((text, i) => (
-                                <div
-                                    key={i}
-                                    className={`search-item ${i === currentIndex ? 'active' : ''}`} style={{ color: '#5e5e5eff' }}
-                                >
-                                    <b>{text}</b>
-                                </div>
-                            ))}
-                        </div>
-
-                    </div>
-                    <span className="df aic pdx05 pdy02 mgr02" ><Mic color='#4056d4ff' size={22} className="mgx05" /></span>
-                </div>
-            </div>
-        </div>}
 
         {/* {device === 'mobile' && mobile_animation_promo} */}
 
         {device ?
             <>
-            {/* {console.log(user)} */}
+                {/* {console.log(user)} */}
                 <div className='df fd-c bg-white pR min-fullscreen' style={{ zIndex: 1 }}>
                     <div className="df fd-c gap1 py-1 xfg oh pdt05 border-b" id="m-container-user-focus-stuffs-1">
                         <div className="df gap05 fx1 ox pdx05 sbn">
@@ -487,7 +437,7 @@ export default function branches() {
 
                     </div> */}
 
-                        {/* <h1>hi {user?.username}</h1> */}
+                    {/* <h1>hi {user?.username}</h1> */}
                     {sections.map((section, i) => (
                         <Feeder key={i} section={section} borderBlockBooleans={true} />
                     ))}
