@@ -103,7 +103,7 @@ export default function Topbar_() {
                                }
                                `}</style>
             {device === "mobile" &&
-            <div className="p-1">
+            <div className="p-1 bg-black">
 
 
                 <Topbar
