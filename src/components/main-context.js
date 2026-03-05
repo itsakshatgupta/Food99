@@ -101,7 +101,7 @@ export default function MainContext({ device, children }) {
 
     return (
         <>
-            {device && <div className="df fd-c hfp_">
+            {device && <div className="df fd-c hfp_ min-h-screen">
 
                 <dynamic_.Provider value={{ device, user }}>
 

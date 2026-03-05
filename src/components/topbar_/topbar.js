@@ -7,6 +7,8 @@ import { dynamic_ } from "../main-context";
 import Link from "next/link";
 import { Icon } from "../lib/icons";
 import Image from "next/image";
+import DropDown_1, { DropDown_2, MoreOptions } from "../seller-cpmt/widget";
+import { useSearchParams } from "next/navigation";
 
 export default function Topbar_() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,14 +69,20 @@ export default function Topbar_() {
         { name: "Manage", path: "sellers/seller_dsbd" },
     ]
 
-    useEffect(() => {
-        if (searchText.length > 0) {
-            set_search_mode(true);
-        } else {
-            set_search_mode(false);
-        }
+    const pathname = useSearchParams();
+    const p = pathname.get("p");
+    const f = pathname.get("f");
 
-    }, [searchText])
+
+    const [s_, set_s_] = useState(p ? p : "")
+
+    useEffect(() => {
+        if (p === searchText || searchText.length === 0) set_search_mode(false);
+        if (p !== searchText && searchText.length > 0) set_search_mode(true);
+        set_searchText(s_);
+
+
+    }, [searchText, s_])
 
     //     useEffect(() => {
     //     const interval = setInterval(() => {
@@ -83,6 +91,13 @@ export default function Topbar_() {
 
     //     return () => clearInterval(interval);
     // }, [device==="mobile"]);
+
+    const [search_for, set_search_for] = useState('All')
+    useEffect(() => {
+        let a = document.getElementById('search-for')?.getAttribute('workingtitle')
+        console.log(a, search_for)
+    }, [search_for])
+
 
     return (
         <>
@@ -103,21 +118,21 @@ export default function Topbar_() {
                                }
                                `}</style>
             {device === "mobile" &&
-            <div className="p-2 pt-4 px-4 bg-black">
+                <div className="p-2 pt-3 px-4 bg-black">
 
 
-                <Topbar
-                    l={
-                        <div className="text-2xl font-black tracking-wider_ text-white hover:text-[#FF9900] transition duration-200">
-                            Trade<span className="text-[aqua]">B2B</span>
-                        </div>
-                    }
+                    <Topbar
+                        l={
+                            <div className="text-2xl font-black tracking-wider_ text-white hover:text-[#FF9900] transition duration-200">
+                                Trade<span className="text-[aqua]">B2B</span>
+                            </div>
+                        }
 
-                    r={
-                        <>
+                        r={
+                            <>
 
-                            <div className="df aic gap05 wfp">
-                                <style>{`
+                                <div className="df aic gap05 wfp">
+                                    <style>{`
                                     .dropdowneffect{
                                     overflow:hidden;
                                     transition:all 1s;
@@ -133,29 +148,29 @@ export default function Topbar_() {
                                     }
                                     `}</style>
 
-                                <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
-                                    {user ?
-                                        <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background: 'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
-                                            <span className="font900 font09 df aic"><House className="pdx01" size={18} fill="black" />Home<ChevronDown size={15} /></span> Sigra abc colony, Varanasi 221010
-                                        </Link>
+                                    <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
+                                        {user ?
+                                            <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background: 'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
+                                                <span className="font900 font09 df aic"><House className="pdx01" size={18} fill="black" />Home<ChevronDown size={15} /></span> Sigra abc colony, Varanasi 221010
+                                            </Link>
 
-                                        : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
-                                            color: '#673AB7',
-                                            background: '#EDE7F6'
-                                        }}>Login</Link>}
-                                    {user && <Link href="/account" className="df aic fd-c font07 font600 gap01"> <svg version="1.1" id="Capa_1" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.532 45.532" stroke="#000000ff" fill="black"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765 S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53 c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012 c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592 c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path> </g> </g></svg> You</Link>}
+                                            : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
+                                                color: '#673AB7',
+                                                background: '#EDE7F6'
+                                            }}>Login</Link>}
+                                        {user && <Link href="/account" className="df aic fd-c font07 font600 gap01"> <svg version="1.1" id="Capa_1" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.532 45.532" stroke="#000000ff" fill="black"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765 S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53 c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012 c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592 c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path> </g> </g></svg> You</Link>}
+                                    </div>
                                 </div>
-                            </div>
-                        </>
-                    }
-                />
+                            </>
+                        }
+                    />
 
-                <div className="df fd-c mt-1 pdy09 pdx01 gap1"
-                // style={{ background: '#b1261cff', color:'white' }}  
-                >
-                    <div className="df aic gap03 pdy04 bdArds pdl05 xbg oh pdy02" onClick={() => set_searchText(true)} style={{ display: 'hidden', color: 'black', background: 'whitesmoke', borderRadius: '1rem', border: '2px solid #d8d8d8ff' }}>
-                        <span className="df aic pdx02 pdy02" ><Search color='#4056d4ff' /></span>
-                        <style>{`.search-animation-container {
+                    <div className="df fd-c mt-3 mb-2 gap1"
+                    // style={{ background: '#b1261cff', color:'white' }}  
+                    >
+                        <div className="df aic gap03 pdy04 pdl05 xbg oh pdy02" onClick={() => set_searchText(true)} style={{ display: 'hidden', color: 'black', background: 'whitesmoke', borderRadius: '5px', border: '2px solid #d8d8d8ff' }}>
+                            <span className="df aic pdx02 pdy02" ><Search color='#4056d4ff' /></span>
+                            <style>{`.search-animation-container {
                     
                         overflow: hidden;
                     }
@@ -177,25 +192,25 @@ export default function Topbar_() {
                         transform: translateY(0);
                     }
                     `}</style>
-                        <div className="fx1 df aic gap03 bdr" style={{ borderColor: '#323232' }}>
-                            <span>Search </span>
+                            <div className="fx1 df aic gap03 bdr" style={{ borderColor: '#323232' }}>
+                                <span>Search </span>
 
-                            <div className="search-animation-inner">
-                                {['Chips', 'Applications', 'Cabinet'].map((text, i) => (
-                                    <div
-                                        key={i}
-                                        className={`search-item ${i === currentIndex ? 'active' : ''}`} style={{ color: '#5e5e5eff' }}
-                                    >
-                                        <b>{text}</b>
-                                    </div>
-                                ))}
+                                <div className="search-animation-inner pR">
+                                    {['Chips', 'Applications', 'Cabinet'].map((text, i) => (
+                                        <div
+                                            key={i}
+                                            className={`search-item ${i === currentIndex ? 'active' : ''}`} style={{ color: '#5e5e5eff' }}
+                                        >
+                                            <b>{text}</b>
+                                        </div>
+                                    ))}
+                                </div>
+
                             </div>
-
+                            <span className="df aic pdx05 pdy02 mgr02" ><Mic color='#4056d4ff' size={22} className="mgx05" /></span>
                         </div>
-                        <span className="df aic pdx05 pdy02 mgr02" ><Mic color='#4056d4ff' size={22} className="mgx05" /></span>
                     </div>
                 </div>
-            </div>
             }
 
             {device === "pc" &&
@@ -206,9 +221,9 @@ export default function Topbar_() {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-2 md:px-5">
 
                         {/* Brand */}
-                        <div className="text-2xl font-black tracking-wider_ text-white hover:text-[#FF9900] transition duration-200">
+                        <Link href="/"><div className="text-2xl font-black tracking-wider_ text-white">
                             Trade<span className="text-[aqua]">B2B</span>
-                        </div>
+                        </div></Link>
 
                         {/* Search Box: Bright White for High Visibility */}
                         <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR bg-white border border-purple-400 rounded-lg`}>
@@ -218,9 +233,8 @@ export default function Topbar_() {
                                 <span className={`df aic gap-1 px-2 text-black  border-r transition duration-100 ${search_mode ? '' : 'bg-[chocolate]_'} rounded-l-lg`}>
 
 
-                                    <span className={`text-sm font500 transition duration-100 `}
-                                    >All</span>
-                                    <ChevronDown size={14} />
+                                    <DropDown_2 static_title={true} title={'All'} flowData={['All', 'Electronics', 'Home Decors']} className={"text-sm font500 transition duration-100 "} id="search-for" call_update={set_search_for} />
+                                    {/* <ChevronDown size={14} /> */}
 
                                 </span>
 
@@ -232,12 +246,16 @@ export default function Topbar_() {
                                             placeholder="Search sellers • products • distributors"
                                             className="border-none bg-transparent text-gray-900 fx1 outline-none placeholder-gray-500 text-sm"
                                             id="search-input_main"
-                                            onChange={(e) => { set_searchText(e.target.value) }}
+                                            value={s_}
+                                            onChange={(e) => {
+                                                // set_searchText(e.target.value) 
+                                                set_s_(e.target.value)
+                                            }}
                                         />
                                         <div className="df aic gap-4 mgr02 text-[#414141ff]">
-                                            <span className="df bdrds pd01 hover:bg-gray-200" style={{ visibility: searchText === "" && 'hidden' }} onClick={(e) => { document.querySelector('#search-input_main').value = ""; set_searchText("") }}><Icon.close s={20} fill="#414141ff" /></span>
+                                            <span className="df cursor-pointer bdrds pd01 hover:bg-gray-200" style={{ visibility: searchText === "" && 'hidden' }} onClick={(e) => { document.querySelector('#search-input_main').value = ""; set_s_("") }}><Icon.close s={20} fill="#414141ff" /></span>
                                             <div className="df aic gap-3 text-[#414141ff] bdrds pdy02 pdx05 bg-[aliceblue]">
-                                                <span className="df aic hover:text-[#F97316]" ><Mic size={22} className="mgx05_" fill="currentcolor" stroke="aliceblue" /></span><span className="df aic hover:text-[#F97316]" ><Camera size={22} fill="currentcolor" stroke="aliceblue" /></span>
+                                                <span className="df aic cursor-pointer hover:text-[#F97316]" ><Mic size={22} className="mgx05_" fill="currentcolor" stroke="aliceblue" /></span><span className="df aic cursor-pointer hover:text-[#F97316]" ><Camera size={22} fill="currentcolor" stroke="aliceblue" /></span>
                                             </div>
                                         </div>
 
@@ -248,9 +266,12 @@ export default function Topbar_() {
                                             <div className="pA w-full top-[-5px] oh text-black xbg z-50 bdBrds shadow-md">
                                                 <div className="pR mt-1 text-sm">
                                                     <div className="fd fd-c w-full pR text-sm pdb03 pdx04" >
-                                                        <div className="df jcsb px-3 py-1 hover:bg-gray-100 hover:text-black rounded-md">
-                                                            <div className="df gap05"><span>{searchText}</span></div>
-                                                        </div>
+                                                        <Link href={`/s?p=${searchText}&tag=${"search"}&f=${search_for}&ref=${"tradeb2b-home"}`} onClick={() => set_search_mode(false)}>
+                                                            <div className="df jcsb px-3 py-1 hover:bg-gray-100 hover:text-black rounded-md">
+                                                                <div className="df gap05"><span>{searchText}</span></div>
+
+                                                            </div>
+                                                        </Link>
                                                         <div className="df jcsb px-3 py-1 hover:bg-gray-100 hover:text-black rounded-md">
                                                             <div className="df gap05"><span>Helsd</span></div>
                                                         </div>
@@ -266,7 +287,7 @@ export default function Topbar_() {
                                                             paddingInline: search_mode && '6px',
                                                             borderRadius: '5px'
                                                         }}
-                                                        >All</span></span>
+                                                        >{search_for}</span></span>
                                                         <span className="text-xs text-gray-400"><i>**Search Suggestions</i></span>
                                                     </div>
                                                 </div>

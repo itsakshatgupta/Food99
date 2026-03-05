@@ -2,84 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAPI } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
-import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box, Twitter, Facebook } from 'lucide-react';
-
-// --- Header Component ---
-const Header = () => (
-  <header className="bg-black text-white">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-2 flex justify-between items-center">
-      {/* Logo and Brand Name */}
-      <div className="flex items-center space-x-2">
-        {/* <Zap className="w-7 h-7" /> */}
-        <span className="text-2xl font-extrabold tracking-tighter">
-          Trade<span className="text-[aqua]">B2B</span>
-        </span>
-      </div>
-      {/* Navigation (Hidden on Mobile, simplified for login page) */}
-      <nav className="sm:flex space-x-8 text-sm font-medium">
-        <a href="#" className="hover:text-indigo-600 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Support</a>
-        <a href="signup" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><HelpCircle className="w-4 h-4 mr-1" /> Signup</a>
-      </nav>
-    </div>
-  </header>
-);
-
-// --- Footer Component (with common widgets) ---
-const Footer = () => (
-  <footer className="bg-gray-800 text-white pt-8 pb-4">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-6 mb-6">
-
-        {/* Widget 1: Company Info */}
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-indigo-400">SynergyLink</h3>
-          <p className="text-sm text-gray-400">
-            The definitive B2B commerce platform connecting manufacturers and global distributors efficiently.
-          </p>
-        </div>
-
-        {/* Widget 2: Quick Links */}
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-indigo-400">Quick Links</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="text-gray-300 hover:text-indigo-300 transition">About Us</a></li>
-            <li><a href="#" className="text-gray-300 hover:text-indigo-300 transition">Our Vision</a></li>
-            <li><a href="#" className="text-gray-300 hover:text-indigo-300 transition">Careers</a></li>
-          </ul>
-        </div>
-
-        {/* Widget 3: Legal */}
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-indigo-400">Legal</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="text-gray-300 hover:text-indigo-300 transition">Privacy Policy</a></li>
-            <li><a href="#" className="text-gray-300 hover:text-indigo-300 transition">Terms of Service</a></li>
-            <li><a href="#" className="text-gray-300 hover:text-indigo-300 transition">Security</a></li>
-          </ul>
-        </div>
-
-        {/* Widget 4: Contact/Support */}
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-indigo-400">Support</h3>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li>Email: support@syn.link</li>
-            <li>Phone: +1 (555) 123-4567</li>
-            <li><a href="#" className="text-gray-300 hover:text-indigo-300 transition">Help Center</a></li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Copyright Row */}
-      <div className="flex justify-center items-center pt-4 text-sm text-gray-500">
-        <Globe className="w-4 h-4 mr-2" />
-        &copy; {new Date().getFullYear()} SynergyLink. All rights reserved.
-      </div>
-    </div>
-  </footer>
-);
-
-
+import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box, Twitter, Facebook, UserPlus } from 'lucide-react';
+import Footer from '@/components/layout-cpmt/footer';
+import Header from '@/components/layout-cpmt/header';
 // --- Main Component: LoginPage ---
+
 export default function BuyerLoginPage() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
@@ -195,12 +122,12 @@ export default function BuyerLoginPage() {
       {/* Header */}
       <div className="text-center_ mb-3">
         <h1 className="text-lg font-extrabold text-gray-900 tracking-tight">
-          Sign In to SynergyLink
+          Sign In to TradeB2B
         </h1>
       </div>
       <div className="border_ py-2 mb-3">
         <div className="text-sm df_ items-center gap-2">
-          <div className="df aic gap-3"><span className="border rounded-sm px-2 py-1  df aic gap-1"><Twitter size={18}/>Twitter</span><span className="border rounded-sm px-2 py-1  df aic gap-1"><Facebook size={18}/>Facebook</span><span className="border rounded-sm px-2 py-1  df aic gap-1"><svg width="16px" height="16px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" /><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" /><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" /><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" /></svg>Google</span></div>
+          <div className="df aic gap-3"><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><Twitter size={18}/>Twitter</span><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><Facebook size={18}/>Facebook</span><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><svg width="16px" height="16px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" /><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" /><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" /><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" /></svg>Google</span></div>
         </div>
       </div>
 
@@ -265,7 +192,7 @@ export default function BuyerLoginPage() {
         </button>
       </form>
 
-      <div id="login-status" className="text-center text-xs text-gray-400 mt-4">
+      <div id="login-status" className="text-center text-xs text-gray-400 mt-4 dn">
         Try username: **demo**, password: **password**
       </div>
     </div>
@@ -277,14 +204,14 @@ export default function BuyerLoginPage() {
     <div className="min-h-screen flex flex-col font-sans bg-gray-100/50_ bg-white bg-gray-50_">
 
       {/* 1. Header */}
-      <Header />
+      <Header elements={[<a href="/signup" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><UserPlus className="w-4 h-4 mr-1" />Create Account</a>]}/>
       <style>{`body{background-image: url(/3072.jpg);
     background-repeat: repeat;
     background-size: 800px;}`}</style>
 
       {/* 2. Main Content Area (Login Form + Context Panel) */}
       {/* The main background uses a subtle gradient for depth */}
-      <main className="flex-grow flex items-center h-screen justify-center p-4 py-5 md:py-5" >
+      <main className="flex-grow flex items-center lg:h-screen justify-center p-4 py-5 md:py-5" >
         {isUser&&logout_()}
         {isUser===false&&login_()}
         {isUser===null&&<h1 className="df aic"> <Loader2 className="w-5 h-5 mr-2 animate-spin" />Loading...</h1>}

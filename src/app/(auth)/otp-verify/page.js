@@ -1,10 +1,11 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
 import { useState, useRef } from "react";
 import { fetchAPI } from "@/app/(api)/api";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Footer from "@/components/layout-cpmt/footer";
 
 function OtpContent() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -47,9 +48,9 @@ function OtpContent() {
       setLoading(true);
       setMessage("");
 
-      const res = await fetchAPI("verify-otp/"+authToken+"/"+authemail, "POST", { email: authemail, otp: finalOtp });
+      const res = await fetchAPI("verify-otp/" + authToken + "/" + authemail, "POST", { email: authemail, otp: finalOtp });
 
-      if (res==="success") {
+      if (res === "success") {
         setMessage("✅ OTP Verified Successfully!");
         router.push("/login");
       } else {
@@ -68,16 +69,17 @@ function OtpContent() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center">
-        
-        <h2 className="text-2xl font-bold mb-2">Verify OTP</h2>
-        <p className="text-gray-500 text-sm mb-6">
+    <div className="min-h-screen flex fd-c items-center p-5 justify-center bg-gray-100_">
+      <div className="bg-white shadow-sm border rounded-2xl p-5 w-full max-w-md text-center">
+
+        <h2 className="text-2xl font-bold mb-2">TradeB2B</h2>
+        <p className="text-gray-500 text-sm mb-2">
           Enter the 6 digit code sent to your email
         </p>
+        <div className="bdrds border border-black p-0.5 px-6 text-sm  mb-6 wfc justify-self-center">akshatguptanov@gmail.com</div>
 
         <form onSubmit={handleVerify}>
-          <div className="flex justify-between gap-2 mb-6">
+          <div className="flex justify-between gap-2 lg:mx-5 mb-6">
             {otp.map((data, index) => (
               <input
                 key={index}
@@ -87,7 +89,7 @@ function OtpContent() {
                 ref={(el) => (inputsRef.current[index] = el)}
                 onChange={(e) => handleChange(e.target, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
-                className="w-12 h-12 text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="min-w-8 w-12 h-12 text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             ))}
           </div>
@@ -97,7 +99,7 @@ function OtpContent() {
             disabled={loading}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-200"
           >
-            {message==="Success" ? "✅ OTP Verified Successfully!" : loading ? "Verifying..." : "Verify OTP"}
+            {message === "Success" ? "✅ OTP Verified Successfully!" : loading ? "Verifying..." : "Verify OTP"}
           </button>
         </form>
 
@@ -118,10 +120,38 @@ function OtpContent() {
   );
 }
 
+export function Page__() {
+  const pathname = useSearchParams()
+  const authToken = pathname.get("auth-token");
+  const authemail = pathname.get("email");
+  const router = useRouter();
+  const [view, setView] = useState(false);
+  useEffect(() => {
+    if (!authToken || !authemail) {
+      router.push('/')
+    }
+    async function chech_uuid() {
+      const bool = await fetchAPI("verify-otp/" + authToken + "/" + authemail, "GET", null, false, false, false)
+      if( bool.ok ){
+        setView(true);
+      }else{
+        router.push('/')
+      }
+    }
+    chech_uuid()
+  }, [])
+  return (
+    <>
+     {view&&<><OtpContent /><Footer/></>}
+     
+     </>
+  );
+}
+
 export default function Page() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <OtpContent />
+      <Page__ />
     </Suspense>
   );
 }

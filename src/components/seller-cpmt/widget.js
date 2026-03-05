@@ -1,5 +1,5 @@
 import { ChevronDown, MoreHorizontal, MoreVertical, Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function DropDown_1({ d, title, flowData, className }) {
 
@@ -18,7 +18,7 @@ export default function DropDown_1({ d, title, flowData, className }) {
     )
 }
 
-export function MoreOptions({ y, viewOnHover = false, d, children, className }) {
+export function MoreOptions({ y = false, viewOnHover = false, d, children, className }) {
     const [view, setView] = useState(false)
 
     function toggleView() {
@@ -68,8 +68,30 @@ export function ToggleSwitch({ label, description, enabled, onChange, name }) {
     );
 }
 
-export function SearchBox({placeholder, onChangeHandle}) {
+export function SearchBox({ placeholder, onChangeHandle }) {
     return (
         <div className="df aic gap-1 focus-within:border-gray-600 focus-within:shadow-sm border-2 transition text-sm text-gray-600 py-0.5 pl-1 pr-3 rounded-md"><Search size={18} />{<input type="text" className="focus:outline-none" placeholder={placeholder} onChange={onChangeHandle} />}</div>
+    )
+}
+
+export function DropDown_2({ d, title, flowData, className, static_title = true, id="", call_update }) {
+    const [view, setView] = useState(title)
+
+    useEffect(()=>{
+        call_update(view)
+    },[view])
+
+    return (
+        <div className={`pR  group cursor-pointer wfc ${className && className}`}>
+            <span id={id} className="df aic gap01 text-sm" style={{ borderRadius: '5px' }} workingtitle={view}>{view}<ChevronDown size={14} />
+            </span>
+
+            {/* Mega Menu Dropdown */}
+            <div className={`pA ${d === 'r' ? "left-[calc(100%-180px)]" : "right-[calc(100%-170px)]"}`}>
+                <div className=" pR top-full mt-2 md:translate-x-0 hidden group-hover:block bg-[white] p-2 rounded-sm border border-gray-600 min-w-[180px] shadow-2xl z-[60]">
+                    {flowData?.map(v => <div className="px-2 hover:bg-[dodgerblue] hover:text-white" key={v} onClick={()=>setView(v)}>{v}</div>)}
+                </div>
+            </div>
+        </div>
     )
 }

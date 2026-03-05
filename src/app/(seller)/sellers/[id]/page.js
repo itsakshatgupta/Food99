@@ -12,7 +12,8 @@ import SearchManagePage from "../subpages/s-search.js";
 export default async function ProductDetail({ params }) {
     const { id } = await params;
     console.log("ID:", id)
-    switch (id) {
+    function check_id(){
+        switch (id) {
         case 'seller_dsbd':
             return (<SellerDashboard />);
 
@@ -33,11 +34,12 @@ export default async function ProductDetail({ params }) {
 
         case 'seller_trdes':
             return (<TradeManagePage />);
-            
+
         case 'seller_scrh':
             return (<SearchManagePage />);
-            
+
         default:
             return (<SellerDashboard />);
-    }
+    } }
+    return( check_id())
 }

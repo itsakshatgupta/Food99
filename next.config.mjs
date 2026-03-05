@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  allowedDevOrigins:[
+   'http://10.176.89.2:3000'
+  ],
   images: {
     remotePatterns: [
       {
@@ -18,6 +21,10 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "127.0.0.1",
+      },
+      {
+        protocol: "http",
+        hostname: "10.176.89.2",
       },
       {
         protocol: "https",
