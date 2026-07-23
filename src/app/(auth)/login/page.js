@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAPI } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
-import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box, Twitter, Facebook, UserPlus } from 'lucide-react';
+import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box, Twitter, Facebook, UserPlus, Info } from 'lucide-react';
 import Footer from '@/components/layout-cpmt/footer';
 import Header from '@/components/layout-cpmt/header';
+import Image from 'next/image';
 // --- Main Component: LoginPage ---
 
 export default function BuyerLoginPage() {
@@ -86,13 +87,13 @@ export default function BuyerLoginPage() {
     }
   }, [error])
 
-  useEffect(()=> {
+  useEffect(() => {
     if (localStorage.getItem("user")) {
       setIsUser(true)
     } else {
       setIsUser(false)
     }
-  },[])
+  }, [])
   // Feature list for the Context Panel
   const features = [
     { icon: TrendingUp, title: "Global Reach", description: "Expand your market across 50+ countries instantly." },
@@ -114,20 +115,21 @@ export default function BuyerLoginPage() {
   </div>
 
   const login_ = () => <div className="max-w-6xl w-full">
-    <h1 className="text-2xl tac font-bold mb-3 text-gray-800 dn">Welcome Back!</h1>
+    <h1 className="text-2xl tac font-bold mb-5 text-gray-800 dn_">Welcome Back!</h1>
 
     {/* Login Form Card (Existing) */}
-    <div className="w-full max-w-[50rem]  mx-auto bg-white p-8 sm:p-6 rounded-sm shadow-2xl_ border_ border-gray-400">
+    <div className="w-full max-w-[50rem]  mx-auto bg-[white] p-8 sm:p-6 rounded-md shadow-md border border-[azure]">
 
       {/* Header */}
-      <div className="text-center_ mb-3">
+      <div className="text-center_ mb-3 flex gap-2 items-center">
+        <Image src="/T-light-v2.png" alt="TradeB2B Logo" width={50} height={50} />
         <h1 className="text-lg font-extrabold text-gray-900 tracking-tight">
           Sign In to TradeB2B
         </h1>
       </div>
       <div className="border_ py-2 mb-3">
         <div className="text-sm df_ items-center gap-2">
-          <div className="df aic gap-3"><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><Twitter size={18}/>Twitter</span><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><Facebook size={18}/>Facebook</span><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><svg width="16px" height="16px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" /><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" /><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" /><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" /></svg>Google</span></div>
+          <div className="df aic gap-3"><span className="bg-black text-[dodgerblue] border border-[royalblue] rounded-sm px-2 py-1  df aic gap-1"><Twitter size={18} />Twitter</span><span className="bg-[royalblue] text-white border border-[royalblue] rounded-sm px-2 py-1  df aic gap-1"><Facebook size={18} />Facebook</span><span className="bg-white border border-[royalblue] rounded-sm px-2 py-1  df aic gap-1"><svg width="16px" height="16px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" /><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" /><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" /><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" /></svg>Google</span></div>
         </div>
       </div>
 
@@ -172,7 +174,7 @@ export default function BuyerLoginPage() {
               required
             />
           </div>
-          <div className="text-[0.675rem] cursor-pointer text-end mt-1 font500 text-blue-800">Forget Password?</div>
+          <div className="text-[0.725rem] cursor-pointer text-end mt-1 font500 text-blue-800"><Info className="w-4 h-4 inline mr-1" />Forget Password?</div>
         </div>
 
         {/* Submit Button */}
@@ -204,17 +206,17 @@ export default function BuyerLoginPage() {
     <div className="min-h-screen flex flex-col font-sans bg-gray-100/50_ bg-white bg-gray-50_">
 
       {/* 1. Header */}
-      <Header elements={[<a href="/signup" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><UserPlus className="w-4 h-4 mr-1" />Create Account</a>]}/>
+      <Header elements={[<a href="/signup" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><UserPlus className="w-4 h-4 mr-1" />Create Account</a>]} />
       <style>{`body{background-image: url(/3072.jpg);
     background-repeat: repeat;
     background-size: 800px;}`}</style>
 
       {/* 2. Main Content Area (Login Form + Context Panel) */}
       {/* The main background uses a subtle gradient for depth */}
-      <main className="flex-grow flex items-center lg:h-screen justify-center p-4 py-5 md:py-5" >
-        {isUser&&logout_()}
-        {isUser===false&&login_()}
-        {isUser===null&&<h1 className="df aic"> <Loader2 className="w-5 h-5 mr-2 animate-spin" />Loading...</h1>}
+      <main className="flex-grow flex items-center lg:h-screen justify-center p-4 py-5 md:py-5"  style={{ background: 'linear-gradient(135deg, #f0f0f0, #ffffff)' }} >
+        {isUser && logout_()}
+        {isUser === false && login_()}
+        {isUser === null && <h1 className="df aic"> <Loader2 className="w-5 h-5 mr-2 animate-spin" />Loading...</h1>}
       </main>
 
       {/* 3. Footer */}

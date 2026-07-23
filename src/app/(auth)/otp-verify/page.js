@@ -14,7 +14,7 @@ function OtpContent() {
   const inputsRef = useRef([]);
   const pathname = useSearchParams()
   const authToken = pathname.get("auth-token");
-  const authemail = pathname.get("email");
+  const authUsername = pathname.get("username");
   const router = useRouter();
 
   const handleChange = (element, index) => {
@@ -48,7 +48,7 @@ function OtpContent() {
       setLoading(true);
       setMessage("");
 
-      const res = await fetchAPI("verify-otp/" + authToken + "/" + authemail, "POST", { email: authemail, otp: finalOtp });
+      const res = await fetchAPI("verify-otp/" + authToken + "/" + authUsername, "POST", { otp: finalOtp });
 
       if (res === "success") {
         setMessage("✅ OTP Verified Successfully!");
@@ -123,18 +123,23 @@ function OtpContent() {
 export function Page__() {
   const pathname = useSearchParams()
   const authToken = pathname.get("auth-token");
-  const authemail = pathname.get("email");
+  const authUsername = pathname.get("username");
   const router = useRouter();
   const [view, setView] = useState(false);
   useEffect(() => {
-    if (!authToken || !authemail) {
+    if (!authToken || !authUsername) {
       router.push('/')
     }
     async function chech_uuid() {
-      const bool = await fetchAPI("verify-otp/" + authToken + "/" + authemail, "GET", null, false, false, false)
+      const bool = await fetchAPI("verify-otp/" + authToken + "/" + authUsername, "GET", null, false, false, false)
+      console.log(bool)
       if( bool.ok ){
         setView(true);
+      console.log(1)
+
       }else{
+
+      console.log(0)
         router.push('/')
       }
     }

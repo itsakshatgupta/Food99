@@ -66,7 +66,7 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
 
             {title &&
                 <div className={`df aic jcsb mb-4  ${!col && "pdx05"}`}>
-                    <h2 className="text-xl font-semibold pdx02">{title}</h2>
+                    <h2 className="text-xl font-semibold pdx02">{title}hh</h2>
                     <span className={`bdrds ${overflow_x ? 'pd05' : 'pdy03 pdx1'} font600 font-sm mgr03`} style={{ color: overflow_x ? 'black' : 'white', borderRadius: overflow_x && "100%", background: overflow_x ? 'ghostwhite' : 'black', border: overflow_x && "1px solid royalblue" }}><ArrowRight size="1.2rem" /></span>
                 </div>}
             <div className={`grid ${col <= 2 ? 'grid-cols-2' : 'grid-cols-3'} gap-2`}
@@ -79,12 +79,12 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                             background: c__.c_palette.sec_card_bg
                         }} key={i}>
 
-                            <div className="text-[md] font-semibold">{item.sub_cat}</div>
-                            <div className={`border_ rounded-sm ${device === 'pc' && item.items.length === 3 ? 'grid grid-cols-3 grid-rows-1' : 'grid grid-cols-3 '} gap-1 p-1 oh fx1 xbg_`}>
+                            <div className="text-[md] font-semibold">{item.sub_cat}kk</div>
+                            <div className={`border_ grid rounded-sm ${device === 'pc' ? item.items.length === 3 ? 'grid-cols-3' : 'grid-cols-3  grid-rows-1':'grid-cols-2'} gap-1 p-1 oh fx1 xbg_`}>
                                 {item.items.map((sI, i) => (
                                     <div
                                         key={i}
-                                        className={`${col ? col <= 2 ? "p-4" : "p-1_" : ""} bg-white  oh  min-w-[110px] cursor-pointer group  hover:border-gray-200/80 border border-white transition px-1 rounded-md ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl shadow-sm hover:shadow-md"} transition 
+                                        className={`${col ? col <= 2 ? "p-4_" : "p-1_" : ""} bg-white  oh  min-w-auto cursor-pointer group  hover:border-gray-200/80 border border-white transition px-1 rounded-md ${device === 'pc' && overflow_x ? "hover:shadow-md" : col <= 2 && "rounded-xl hover:shadow-md"} transition 
               `} style={{ border: overflow_x && '1px solid #0a0606ff'}}
                                     onClick={()=>router.push("product_view")}>
                                         <div className="mgx04 pdt04 pR">
@@ -94,23 +94,23 @@ export function CategoryGrid({ data, title, col, overflow_x, bbb, c__ }) {
                                                 alt={sI.name}
                                                 height={col ? col <= 2 ? 150 : 100 : 140}
                                                 width={100}
-                                                className={`min-w-[60px] h-[100px] object-contain rounded-lg`}
+                                                className={`lg:w-[100px] w-[50px] h-[50px] lg:h-[100px] object-contain rounded-lg`}
                                             />
                                         </div>
                                         <div>
-                                            <p className="mt-2 font-medium md:text-sm">{sI.name}</p>
-                                            <p className="font-medium_ md:text-sm  whitespace-nowrap oh text-gray-900" style={{ textOverflow: "ellipsis" }}>Italian flavored with huang sauce and much more</p>
+                                            <p className="mt-2 font-medium  sm:text-xs md:text-sm">{sI.name}</p>
+                                            {col>2&&<p className="font-medium_ sm:text-xs md:text-sm  whitespace-nowrap oh text-gray-900" style={{ textOverflow: "ellipsis" }}>Italian flavored with huang sauce and much more</p>}
                                         </div>
                                         <div className="oh">
                                             <div className={`df aic gap03 ${overflow_x && "pdx05"}`}>
-                                                <div className={`df mt-1 text-center aic ${overflow_x ? "font600" : "font500"} ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
+                                                <div className={`df mt-1  sm:text-xs  text-sm text-center aic ${overflow_x ? "font600" : "font500"} `} style={{ overflowWrap: 'break-word', color: overflow_x && "#129d00ff" }}>
                                                     <div style={{ fontSize: '0.675em' }}>₹</div>
                                                     <span className="font-lg" style={{ fontSize: '1.2em' }}>{159}</span><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
                                                 </div>
-                                                <div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
+                                                {device==="pc"&&<div className={`df mt-2 text-center aic  ${col ? col > 2 ? 'font-sm' : "font-medium" : "md:text-sm"}`} style={{ overflowWrap: 'break-word', textDecoration: 'line-through', color: 'grey' }}>
                                                     <div style={{ fontSize: '0.675em' }}>₹</div>
                                                     <h1 style={{ fontSize: '1.1em' }}>{159 - 25}</h1><span style={{ alignSelf: 'flex-start', fontSize: '0.675em' }}>00</span>
-                                                </div>
+                                                </div>}
                                             </div>
                                             {overflow_x && <span className={`${overflow_x && "mgt1 bdt"} pd04 font600 md:text-500 df gap03 sm:text-sm md:text-xs`} style={{ background: 'aliceblue' }}><TruckElectric size="1rem" /> Deliver in 2 days</span>
                                             }

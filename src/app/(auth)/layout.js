@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import "../../../public/style/xnay.css";
 import "../../../public/style/UI_Responsive.css";
 import "../globals.css"
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,7 +28,11 @@ export default function RootLayout({ children }) {
           }
           `}
         </style>
-        {children}
+        <GoogleOAuthProvider
+          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+        >
+          {children}
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

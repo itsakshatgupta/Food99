@@ -117,108 +117,13 @@ export default function Topbar_() {
                                }
                                }
                                `}</style>
-            {device === "mobile" &&
-                <div className="p-2 pt-3 px-4 bg-black">
 
-
-                    <Topbar
-                        l={
-                            <div className="text-2xl font-black tracking-wider_ text-white hover:text-[#FF9900] transition duration-200">
-                                Trade<span className="text-[aqua]">B2B</span>
-                            </div>
-                        }
-
-                        r={
-                            <>
-
-                                <div className="df aic gap05 wfp">
-                                    <style>{`
-                                    .dropdowneffect{
-                                    overflow:hidden;
-                                    transition:all 1s;
-                                    animation:a_dropdowneffect 0.15s linear;
-                                    }
-                                    @keyframes a_dropdowneffect{
-                                    0%{
-                                    top:-50px;
-                                    }
-                                    100%{
-                                    top:0px;
-                                    }
-                                    }
-                                    `}</style>
-
-                                    <div className="df aic wfp gap05" style={{ justifyContent: 'flex-end' }}>
-                                        {user ?
-                                            <Link href="/account/address_book" className="oh bd bdArds pd04  font06 font600 df fd-c" style={{ width: '200px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', background: 'linear-gradient(45deg, #e8ebf7c0, #e9e9e9ff)' }}>
-                                                <span className="font900 font09 df aic"><House className="pdx01" size={18} fill="black" />Home<ChevronDown size={15} /></span> Sigra abc colony, Varanasi 221010
-                                            </Link>
-
-                                            : <Link href="/login" className="oh font600 font-md bdrds bd pdx08 pdy02 gap03" style={{
-                                                color: '#673AB7',
-                                                background: '#EDE7F6'
-                                            }}>Login</Link>}
-                                        {user && <Link href="/account" className="df aic fd-c font07 font600 gap01"> <svg version="1.1" id="Capa_1" width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.532 45.532" stroke="#000000ff" fill="black"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765 S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53 c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012 c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592 c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path> </g> </g></svg> You</Link>}
-                                    </div>
-                                </div>
-                            </>
-                        }
-                    />
-
-                    <div className="df fd-c mt-3 mb-2 gap1"
-                    // style={{ background: '#b1261cff', color:'white' }}  
-                    >
-                        <div className="df aic gap03 pdy04 pdl05 xbg oh pdy02" onClick={() => set_searchText(true)} style={{ display: 'hidden', color: 'black', background: 'whitesmoke', borderRadius: '5px', border: '2px solid #d8d8d8ff' }}>
-                            <span className="df aic pdx02 pdy02" ><Search color='#4056d4ff' /></span>
-                            <style>{`.search-animation-container {
-                    
-                        overflow: hidden;
-                    }
-                    
-                    .search-animation-inner {
-                        height: 24px; /* adjust as needed */
-                    }
-                    
-                    .search-item {
-                        position: absolute;
-                        width: 100%;
-                        opacity: 0;
-                        transform: translateY(20px);
-                        transition: all 0.5s ease;
-                    }
-                    
-                    .search-item.active {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                    `}</style>
-                            <div className="fx1 df aic gap03 bdr" style={{ borderColor: '#323232' }}>
-                                <span>Search </span>
-
-                                <div className="search-animation-inner pR">
-                                    {['Chips', 'Applications', 'Cabinet'].map((text, i) => (
-                                        <div
-                                            key={i}
-                                            className={`search-item ${i === currentIndex ? 'active' : ''}`} style={{ color: '#5e5e5eff' }}
-                                        >
-                                            <b>{text}</b>
-                                        </div>
-                                    ))}
-                                </div>
-
-                            </div>
-                            <span className="df aic pdx05 pdy02 mgr02" ><Mic color='#4056d4ff' size={22} className="mgx05" /></span>
-                        </div>
-                    </div>
-                </div>
-            }
-
-            {device === "pc" &&
+            {device &&
 
                 <header className="font-['Inter', sans-serif] border-b pS z-[500] bg-black" style={{ top: 0, background: 'linear-gradient(45deg, #3F51B5, #673AB7)_' }}>
 
                     {/* Top Row - Brand, Search, Actions */}
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-2 md:px-5">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-2 md:px-8 md:px-5">
 
                         {/* Brand */}
                         <Link href="/"><div className="text-2xl font-black tracking-wider_ text-white">
@@ -226,7 +131,7 @@ export default function Topbar_() {
                         </div></Link>
 
                         {/* Search Box: Bright White for High Visibility */}
-                        <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR bg-white border border-purple-400 rounded-lg`}>
+                        <div className={`flex-grow w-full md:w-auto md:min-w-[400px] lg:min-w-[500px] pR bg-white border border-purple-400 rounded-lg md:rounded-sm`}>
 
                             <div className={`df`}>
 
@@ -255,7 +160,7 @@ export default function Topbar_() {
                                         <div className="df aic gap-4 mgr02 text-[#414141ff]">
                                             <span className="df cursor-pointer bdrds pd01 hover:bg-gray-200" style={{ visibility: searchText === "" && 'hidden' }} onClick={(e) => { document.querySelector('#search-input_main').value = ""; set_s_("") }}><Icon.close s={20} fill="#414141ff" /></span>
                                             <div className="df aic gap-3 text-[#414141ff] bdrds pdy02 pdx05 bg-[aliceblue]">
-                                                <span className="df aic cursor-pointer hover:text-[#F97316]" ><Mic size={22} className="mgx05_" fill="currentcolor" stroke="aliceblue" /></span><span className="df aic cursor-pointer hover:text-[#F97316]" ><Camera size={22} fill="currentcolor" stroke="aliceblue" /></span>
+                                                <span className="df aic cursor-pointer hover:text-[#F97316]" ><Mic size={22} className="mgx05_" fill="currentcolor" stroke="aliceblue" /></span>
                                             </div>
                                         </div>
 
@@ -303,7 +208,7 @@ export default function Topbar_() {
 
                         {/* Actions: Utility Links & Primary CTAs */}
 
-                        <div className="flex items-center gap-2 flex-wrap justify-center md:justify-end">
+                        {device==="pc"&&<div className="flex items-center gap-2 flex-wrap justify-center md:justify-end">
 
                             {/* Utility Links (Track Shipment, RFQ, Messages) */}
                             {[{ e: <span className="border rounded-full p-1 df border-[aqua]_ text-black_ bg-white_"><Bell size={18} /></span>, href_: '#' }, { e: 'Events', href_: '#' }, { e: <span className="df gap-1 aic"><MessageCircleIcon size={20} />Messages</span>, href_: 'messages' }].map((b, i) => (
@@ -322,12 +227,12 @@ export default function Topbar_() {
                             <Link className={`bg-blue-800 flex items-center border border-white/30 text-white text-sm font-bold ${user?.username ? "px-4 py-2" : "px-3 py-1"} rounded-lg transition-colors hover:bg-blue-600 whitespace-nowrap`} href={user?.username ? "/account" : "login"}>
                                 {user?.username ? <><UserIcon />Account</> : <><LogIn size={20} className="mr-1" />Login</>}
                             </Link>
-                        </div>
+                        </div>}
                     </div>
 
 
                     {/* Categories Bar (Mega Menu) */}
-                    <div className="df jcsb aic_ bg-white/10 text-white bg-white_ md:gap-2 px-4 md:px-2 py-1 border-t border-gray-700/50 text-sm">
+                    <div className="df jcsb aic_ bg-white/10 text-white bg-white_ md:gap-2 px-4 md:px-2 py-1 border-t border-gray-700/50 text-sm mt-5">
                         <div className="fx1 overflow-x-auto flex sbt justify-center md:justify-start gap-4 text-sm ">
                             {categories.map((cat, index) => (
                                 // Group container for hover effect

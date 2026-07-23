@@ -148,6 +148,8 @@ import { useRouter } from "next/navigation";
 import { LogIn, User, Lock, Loader2, AlertTriangle, ArrowRight, Home, Zap, HelpCircle, Briefcase, Globe, TrendingUp, Handshake, Box, Twitter, Facebook, LogsIcon, LogInIcon } from 'lucide-react';
 import Footer from '@/components/layout-cpmt/footer';
 import Header from '@/components/layout-cpmt/header';
+import Image from 'next/image';
+import { GoogleLogin } from '@react-oauth/google';
 
 // --- Main Component: LoginPage ---
 export default function BuyerSignupPage() {
@@ -180,7 +182,7 @@ export default function BuyerSignupPage() {
       localStorage.setItem("verfiy-email", form.email);
       // localStorage.setItem("user", JSON.stringify(res.user));
       // router.push("/login");
-      router.push("/otp-verify/?auth-token="+res.otp_uuid+"&email="+form.email); // Redirect to OTP verification page after registration
+      router.push("/otp-verify/?auth-token=" + res.otp_uuid + "&username=" + form.username); // Redirect to OTP verification page after registration
     } catch (err) {
       console.error("Register error:", err);
       setError(err.message || "Something went wrong");
@@ -189,6 +191,58 @@ export default function BuyerSignupPage() {
     }
   }
 
+  const handleSuccess__ = async (credentialResponse) => {
+    const response = await fetch("http://127.0.0.1:8000/api/google-login/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: credentialResponse.credential,
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      // Store tokens and user data (using localStorage here to match original prompt)
+      localStorage.clear()
+
+      localStorage.setItem("refresh", data.refresh);
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("user", JSON.stringify(data.user));
+    }
+    console.log(data);
+
+  }
+
+
+
+  const xlogin = () => {
+
+    const clientId = process.env.NEXT_PUBLIC_X_CLIENT_ID;
+
+    const redirect =
+      "https://tadeb2b.online/auth_callback=X";
+
+    const state = crypto.randomUUID();
+
+    const codeVerifier = crypto.randomUUID();
+
+    localStorage.setItem("state", state);
+    localStorage.setItem("verifier", codeVerifier);
+
+    const url =
+      "https://twitter.com/i/oauth2/authorize"
+      + "?response_type=code"
+      + "&client_id=" + clientId
+      + "&redirect_uri=" + encodeURIComponent(redirect)
+      + "&scope=tweet.read users.read offline.access"
+      + "&state=" + state
+      + "&code_challenge=" + codeVerifier
+      + "&code_challenge_method=plain";
+
+    window.location.href = url;
+  };
 
 
   // Feature list for the Context Panel
@@ -203,23 +257,31 @@ export default function BuyerSignupPage() {
     <div className="lg:min-h-screen flex flex-col font-sans bg-gray-100/50_  bg-gray-50_ bg-white" style={{ background: 'linear-gradient(45deg, #f8f8f8f5, #fdfdffff)_' }}>
 
       {/* 1. Header */}
-      <Header elements={[ <a href="/login" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><LogInIcon className="w-4 h-4 mr-1" /> Login</a>]}/>
+      <Header elements={[<a href="/login" className="hover:bg-blue-600 bg-[royalblue] text-white px-2 py-1 transition flex items-center"><LogInIcon className="w-4 h-4 mr-1" /> Login</a>]} />
       <style>{`body{background-image: url(/3072.jpg);
     background-repeat: repeat;
     background-size: 800px;}`}</style>
       {/* 2. Main Content Area (Login Form + Context Panel) */}
       {/* The main background uses a subtle gradient for depth */}
-      <main className="flex-grow flex items-center justify-center_ p-4 py-5 md:py-5" >
-        <div className="max-w-6xl wfp">
+      <main className="flex-grow flex items-center justify-end p-4 py-5 md:py-5" style={{ background: 'linear-gradient(135deg, #f0f0f0, #ffffff)' }}>
+        <div className="flex-[0.5]">
+          <div className=" justify-self-center"><Image src="/ac_secure.jpg" alt="TradeB2B Logo" width={300} height={300} />
+          </div>
+          <div className="text-center text-gray-600 mt-4 mx-3">
+            Your information is secured over <b><font color="blue">TradeB2B</font></b> with Highly <b>End-to-End Encryption</b>.
+          </div>
+        </div>
+        <div className="max-w-6xl flex-1">
           <p className="text-2xl font-bold tac text-gray-800 mb-3 dn">
             Your gateway to B2B global commerce.
           </p>
 
           {/* Login Form Card (Existing) */}
-          <div className="w-full max-w-[50rem] my-5 mx-auto bg-white p-4 sm:p-4 rounded-sm border_ border-gray-300">
+          <div className="w-full max-w-[50rem] my-5 ml-auto p-8 sm:p-6 rounded-md shadow-lg border bg-white">
 
             {/* Header */}
-            <div className="text-center_ mb-3">
+            <div className="text-center_ mb-3 flex gap-2 items-center">
+              <Image src="/T-light-v2.png" alt="TradeB2B Logo" width={50} height={50} />
               <h1 className="text-lg font-extrabold text-gray-900 tracking-tight">
                 Create a TradeB2B Account
               </h1>
@@ -235,7 +297,10 @@ export default function BuyerSignupPage() {
 
             <div className="border_ py-2 mb-3">
               <div className="text-sm df_ items-center gap-2">
-                <div className="df aic gap-3"><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><Twitter size={18} />Twitter</span><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><Facebook size={18} />Facebook</span><span className="border border-[olive] rounded-sm px-2 py-1  df aic gap-1"><svg width="16px" height="16px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" /><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" /><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" /><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" /></svg>Google</span></div>
+                <div className="df aic gap-3"><span onClick={xlogin()} className="bg-black text-[dodgerblue] border border-[royalblue] rounded-sm px-2 py-1  df aic gap-1"><Twitter size={18} />Twitter</span><span className="bg-[royalblue] text-white border border-[royalblue] rounded-sm px-2 py-1  df aic gap-1"><Facebook size={18} />Facebook</span><span className="bg-white border border-[royalblue] rounded-sm px-2 py-1  df aic gap-1"><svg width="16px" height="16px" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" /><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" /><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" /><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" /></svg>    <GoogleLogin
+                  onSuccess={handleSuccess__}
+                  onError={() => console.log("Login Failed")}
+                />Google</span></div>
               </div>
             </div>
 
@@ -350,3 +415,4 @@ export default function BuyerSignupPage() {
     </div>
   );
 }
+
