@@ -1,3 +1,4 @@
+"use client";
 import { Inter } from 'next/font/google';
 import "../../../public/style/xnay.css";
 import "../../../public/style/UI_Responsive.css";
