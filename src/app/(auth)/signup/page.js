@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 // import { useState } from "react";
 // import { useRouter } from "next/navigation";
 // import { fetchAPI } from "@/app/(api)/api";
@@ -141,7 +141,7 @@
 
 //   );
 // }
-'use client'
+// 'use client'
 import React, { useState } from 'react';
 import { fetchAPI } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
