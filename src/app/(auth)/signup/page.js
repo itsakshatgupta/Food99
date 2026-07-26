@@ -73,53 +73,58 @@ export default function BuyerSignupPage() {
   }
 
 
-function generateRandomString(length = 64) {
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+  function generateRandomString(length = 64) {
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
 
-  const randomValues = new Uint8Array(length);
-  crypto.getRandomValues(randomValues);
+    const randomValues = new Uint8Array(length);
+    crypto.getRandomValues(randomValues);
 
-  return Array.from(randomValues)
-    .map((x) => chars[x % chars.length])
-    .join("");
-}
-async function generateCodeChallenge(verifier) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(verifier);
+    return Array.from(randomValues)
+      .map((x) => chars[x % chars.length])
+      .join("");
+  }
+  async function generateCodeChallenge(verifier) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(verifier);
 
-  const digest = await crypto.subtle.digest("SHA-256", data);
+    const digest = await crypto.subtle.digest("SHA-256", data);
 
-  return btoa(String.fromCharCode(...new Uint8Array(digest)))
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
-const xlogin = async () => {
-  const clientId = process.env.NEXT_PUBLIC_X_CLIENT_ID;
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+  }
+  const xlogin = async () => {
+    const clientId = process.env.NEXT_PUBLIC_X_CLIENT_ID;
 
-  const redirect = "https://tadeb2b.online/auth_callback";
+    const redirect = "https://tadeb2b.online/auth_callback";
 
-  const state = crypto.randomUUID();
+    const state = crypto.randomUUID();
 
-  const codeVerifier = generateRandomString();
-  const codeChallenge = await generateCodeChallenge(codeVerifier);
+    const codeVerifier = generateRandomString();
+    const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-  localStorage.setItem("state", state);
-  localStorage.setItem("verifier", codeVerifier);
+    localStorage.setItem("state", state);
+    localStorage.setItem("verifier", codeVerifier);
 
-  const url =
-    "https://twitter.com/i/oauth2/authorize" +
-    "?response_type=code" +
-    "&client_id=" + clientId +
-    "&redirect_uri=" + encodeURIComponent(redirect) +
-    "&scope=users.read" +
-    "&state=" + state +
-    "&code_challenge=" + codeChallenge +
-    "&code_challenge_method=S256";
+    const url =
+      "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?"
 
-  window.location.href = url;
-};
+      + "client_id=" + YOUR_CLIENT_ID
+
+      + "&response_type=code"
+
+      + "&redirect_uri=https://tradeb2b.online/auth_callback"
+
+      + "&response_mode=query"
+
+      + "&scope=openid profile email User.Read"
+
+    "&state=" + state
+
+    window.location.href = url;
+  };
 
   // Feature list for the Context Panel
   const features = [
