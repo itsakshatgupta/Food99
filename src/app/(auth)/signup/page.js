@@ -95,30 +95,25 @@ export default function BuyerSignupPage() {
       .replace(/\//g, "_")
       .replace(/=+$/, "");
   }
-  const HandleMicrosoftLogin = async () => {
+const HandleMicrosoftLogin = async () => {
     const clientId = process.env.NEXT_PUBLIC_MICROSOFT_CLIENT_ID;
 
-    const redirect = "https://tadeb2b.online/auth_callback";
+    const redirect = "https://tradeb2b.online/auth_callback";
 
     const state = crypto.randomUUID();
 
     const url =
-      "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?"
+        "https://login.microsoftonline.com/common/oauth2/v2.0/authorize" +
+        "?client_id=" + encodeURIComponent(clientId) +
+        "&response_type=code" +
+        "&redirect_uri=" + encodeURIComponent(redirect) +
+        "&response_mode=query" +
+        "&scope=" + encodeURIComponent("openid profile email User.Read") +
+        "&state=" + encodeURIComponent(state);
 
-      + "client_id=" + clientId
-
-      + "&response_type=code"
-
-      + "&redirect_uri=https://tradeb2b.online/auth_callback"
-
-      + "&response_mode=query"
-
-      + "&scope=openid profile email User.Read"
-
-    "&state="+state
 
     window.location.href = url;
-  };
+};
 
   // Feature list for the Context Panel
   const features = [
