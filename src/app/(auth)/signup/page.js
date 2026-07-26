@@ -113,7 +113,7 @@ const xlogin = async () => {
     "?response_type=code" +
     "&client_id=" + clientId +
     "&redirect_uri=" + encodeURIComponent(redirect) +
-    "&scope=users.read offline.access" +
+    "&scope=users.read" +
     "&state=" + state +
     "&code_challenge=" + codeChallenge +
     "&code_challenge_method=S256";
