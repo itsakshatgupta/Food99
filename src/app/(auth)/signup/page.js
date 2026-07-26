@@ -73,7 +73,28 @@ export default function BuyerSignupPage() {
   }
 
 
+function generateRandomString(length = 64) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
 
+  const randomValues = new Uint8Array(length);
+  crypto.getRandomValues(randomValues);
+
+  return Array.from(randomValues)
+    .map((x) => chars[x % chars.length])
+    .join("");
+}
+async function generateCodeChallenge(verifier) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(verifier);
+
+  const digest = await crypto.subtle.digest("SHA-256", data);
+
+  return btoa(String.fromCharCode(...new Uint8Array(digest)))
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+}
 const xlogin = async () => {
   const clientId = process.env.NEXT_PUBLIC_X_CLIENT_ID;
 
