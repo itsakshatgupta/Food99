@@ -1,7 +1,7 @@
 // src/lib/api.js
 
-// const API_URL = "https://api.tradeb2b.online/api";
-const API_URL = "http://127.0.0.1:8000/api";
+const API_URL = "https://api.tradeb2b.online/api";
+// const API_URL = "http://127.0.0.1:8000/api";
 
 export async function fetchAPI(endpoint, method = "GET", body = null, auth_verify = false, c_type = false, hide_error = true) {
   // 🔹 remove extra slash if user passes "/token"

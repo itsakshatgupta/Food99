@@ -28,7 +28,7 @@ export default function AuthCallback() {
 
                 const data = await response.json();
 
-                console.log(data);
+                console.log("||||||||||||||||| :-", data);
 
                 // Example:
                 // localStorage.setItem("access", data.access);
