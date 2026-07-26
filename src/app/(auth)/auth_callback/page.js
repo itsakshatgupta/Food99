@@ -1,9 +1,19 @@
 "use client";
-
+import { Suspense } from "react";
+import AuthCallback from "./AuthCallback";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function AuthCallback() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <Page />
+        </Suspense>
+    );
+}
+
+
+function Page() {
     const params = useSearchParams();
 
     useEffect(() => {
@@ -42,5 +52,5 @@ export default function AuthCallback() {
 
     }, [params]);
 
-    return <>Loading...</>;
+    return <>Loading..."@"</>;
 }
