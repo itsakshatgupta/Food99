@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-export default function Callback({searchParams}) {
+export default function Callback() {
 
     const params = useSearchParams();
 
