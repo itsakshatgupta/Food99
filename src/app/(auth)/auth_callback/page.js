@@ -1,61 +1,46 @@
 "use client";
 
-
-
 import { useSearchParams } from "next/navigation";
-
 import { useEffect } from "react";
 
-
-
-export default function auth_callack() {
-
-
-
+export default function AuthCallback() {
     const params = useSearchParams();
 
-
-
     useEffect(() => {
-
-
-
         const code = params.get("code");
 
+        if (!code) return;
 
+        const login = async () => {
+            try {
+                const response = await fetch(
+                    "https://api.tradeb2b.online/api/x-login/",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            code,
+                        }),
+                    }
+                );
 
-        fetch("https://api.tradeb2b.online/api/x-login/", {
+                const data = await response.json();
 
+                console.log(data);
 
+                // Example:
+                // localStorage.setItem("access", data.access);
 
-            method: "POST",
+            } catch (error) {
+                console.error("X login failed:", error);
+            }
+        };
 
+        login();
 
+    }, [params]);
 
-            headers: {
-
-                "Content-Type": "application/json"
-
-            },
-
-
-
-            body: JSON.stringify({
-
-                code
-
-            })
-
-
-
-        });
-
-
-
-    }, []);
-
-
-
-    return( <>Loading...</>);
-
+    return <>Loading...</>;
 }
