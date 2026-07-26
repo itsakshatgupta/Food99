@@ -74,33 +74,31 @@ export default function BuyerSignupPage() {
 
 
 
-  const xlogin = () => {
+const xlogin = async () => {
+  const clientId = process.env.NEXT_PUBLIC_X_CLIENT_ID;
 
-    const clientId = process.env.NEXT_PUBLIC_X_CLIENT_ID;
+  const redirect = "https://tadeb2b.online/auth_callback";
 
-    const redirect =
-      "https://tadeb2b.online/auth_callback=X";
+  const state = crypto.randomUUID();
 
-    const state = crypto.randomUUID();
+  const codeVerifier = generateRandomString();
+  const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-    const codeVerifier = crypto.randomUUID();
+  localStorage.setItem("state", state);
+  localStorage.setItem("verifier", codeVerifier);
 
-    localStorage.setItem("state", state);
-    localStorage.setItem("verifier", codeVerifier);
+  const url =
+    "https://twitter.com/i/oauth2/authorize" +
+    "?response_type=code" +
+    "&client_id=" + clientId +
+    "&redirect_uri=" + encodeURIComponent(redirect) +
+    "&scope=users.read offline.access" +
+    "&state=" + state +
+    "&code_challenge=" + codeChallenge +
+    "&code_challenge_method=S256";
 
-    const url =
-      "https://twitter.com/i/oauth2/authorize"
-      + "?response_type=code"
-      + "&client_id=" + clientId
-      + "&redirect_uri=" + encodeURIComponent(redirect)
-      + "&scope=tweet.read users.read offline.access"
-      + "&state=" + state
-      + "&code_challenge=" + codeVerifier
-      + "&code_challenge_method=plain";
-
-    window.location.href = url;
-  };
-
+  window.location.href = url;
+};
 
   // Feature list for the Context Panel
   const features = [
