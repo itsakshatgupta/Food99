@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-export default function Callback() {
+export default function auth_callack() {
 
     const params = useSearchParams();
 
@@ -27,5 +27,5 @@ export default function Callback() {
 
     }, []);
 
-    return <>Loading...</>;
+    return( <>Loading...</>);
 }
