@@ -9,11 +9,11 @@ export default function Header({ elements, variant = "default" }) {
         {/* Logo and Brand Name */}
         <div className="flex items-center space-x-2">
           {/* <Zap className="w-7 h-7" /> */}
-          <Link href='/'>
+          {/* <Link href='/'>
             <span className="text-2xl font-extrabold tracking-tighter">
               Trade<span className={`text-[aqua] ${variant === "default" && "bg-black px-0.5"}`}>B2B</span>
             </span>
-          </Link>
+          </Link> */}
         </div>
         {/* Navigation (Hidden on Mobile, simplified for login page) */}
         <nav className="sm:flex space-x-8 text-sm font-medium">
